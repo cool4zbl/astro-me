@@ -1,0 +1,128 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import BlogCard from '../../components/BlogCard.astro';
+
+const allPosts = await getCollection('blog');
+const recentPosts = allPosts
+  .filter(post => !post.data.draft)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
+---
+
+<BaseLayout 
+  title="我的博客 - 全栈开发者与技术爱好者"
+  description="欢迎来到我的个人网站。我是一名专注于Java后端开发的全栈开发者，在这里分享我的项目、经验和见解。"
+>
+  <Header />
+  
+  <main class="flex-1">
+    <!-- Hero Section -->
+    <section class="section-padding bg-gradient-to-br from-background via-muted/20 to-background">
+      <div class="container-width text-center">
+        <div class="animate-fade-in">
+          <h1 class="text-4xl font-bold tracking-tight text-foreground sm:text-6xl lg:text-7xl">
+            <span class="gradient-text">全栈开发者</span>
+          </h1>
+          <p class="mx-auto mt-6 max-w-2xl text-lg leading-8 text-muted-foreground sm:text-xl">
+            热衷于使用Java构建可扩展的后端系统，打造优雅的前端体验，并通过代码和文字分享知识。
+          </p>
+          <div class="mt-10 flex items-center justify-center gap-x-6">
+            <a
+              href="/zh/projects"
+              class="rounded-md bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground shadow-sm hover:bg-primary/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary transition-all duration-200"
+            >
+              查看我的项目
+            </a>
+            <a
+              href="/zh/blog"
+              class="text-sm font-semibold leading-6 text-foreground hover:text-primary transition-colors"
+            >
+              阅读我的博客 <span aria-hidden="true">→</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Me Section -->
+    <section class="section-padding">
+      <div class="container-width">
+        <div class="grid gap-16 lg:grid-cols-2 lg:gap-24 items-center">
+          <div>
+            <h2 class="text-3xl font-bold tracking-tight text-foreground sm:text-4xl mb-6">
+              关于我
+            </h2>
+            <div class="space-y-4 text-muted-foreground leading-relaxed">
+              <p>
+                我是一名充满热情的全栈开发者，专注于使用Java和Spring生态系统进行后端开发。拥有多年构建可扩展Web应用程序的经验，我喜欢解决复杂的技术挑战并创造高效的解决方案。
+              </p>
+              <p>
+                我的专业技能涵盖现代Java框架、微服务架构、数据库设计和云技术。我相信编写干净、可维护的代码，并遵循最佳实践来交付强大的软件解决方案。
+              </p>
+              <p>
+                当我不在编程时，你会发现我在探索新技术、为开源项目做贡献，或通过技术写作和指导分享我的知识。
+              </p>
+            </div>
+            <div class="mt-8">
+              <a
+                href="/zh/experience"
+                class="inline-flex items-center text-primary hover:text-accent font-medium transition-colors"
+              >
+                查看我的经历
+                <svg class="ml-2 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+              </a>
+            </div>
+          </div>
+          <div class="relative">
+            <div class="aspect-square rounded-2xl bg-gradient-primary p-8 shadow-2xl">
+              <div class="h-full w-full rounded-xl bg-background/10 backdrop-blur-sm flex items-center justify-center">
+                <img 
+                  src="/placeholder.svg?height=300&width=300"
+                  alt="专业开发者肖像"
+                  class="rounded-xl shadow-lg"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Recent Posts Section -->
+    <section class="section-padding">
+      <div class="container-width">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl font-bold tracking-tight text-foreground sm:text-4xl mb-4">
+            最新文章
+          </h2>
+          <p class="text-lg text-muted-foreground max-w-2xl mx-auto">
+            关于软件开发、技术趋势和构建应用程序经验教训的最新思考。
+          </p>
+        </div>
+        <div class="space-y-20 lg:space-y-20">
+          {recentPosts.map((post) => (
+            <BlogCard post={post} />
+          ))}
+        </div>
+        <div class="text-center mt-12">
+          <a
+            href="/zh/blog"
+            class="inline-flex items-center rounded-md bg-secondary px-6 py-3 text-sm font-semibold text-secondary-foreground shadow-sm hover:bg-secondary/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary transition-all duration-200"
+          >
+            查看所有文章
+            <svg class="ml-2 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <Footer />
+</BaseLayout>

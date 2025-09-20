@@ -1,0 +1,371 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<BaseLayout 
+  title="Experience - My Professional Journey"
+  description="Explore my professional experience in full-stack development, backend systems, and team leadership across various industries and technologies."
+>
+  <Header />
+  
+  <main class="flex-1">
+    <!-- Hero Section -->
+    <section class="section-padding bg-gradient-to-br from-background via-muted/20 to-background">
+      <div class="container-width text-center">
+        <h1 class="text-4xl font-bold tracking-tight text-foreground sm:text-5xl lg:text-6xl mb-6">
+          My <span class="gradient-text">Experience</span>
+        </h1>
+        <p class="mx-auto max-w-2xl text-lg leading-8 text-muted-foreground sm:text-xl">
+          Over 5+ years of experience building scalable backend systems, leading development teams, and delivering enterprise-grade solutions across various industries.
+        </p>
+      </div>
+    </section>
+
+    <!-- Experience Timeline -->
+    <section class="section-padding">
+      <div class="container-width">
+        <div class="relative">
+          <!-- Timeline Line -->
+          <div class="absolute left-8 top-0 bottom-0 w-0.5 bg-border"></div>
+          
+          <div class="space-y-12">
+            <!-- Current Position -->
+            <div class="relative flex items-start space-x-8">
+              <div class="flex-shrink-0">
+                <div class="h-16 w-16 rounded-full bg-primary flex items-center justify-center shadow-lg">
+                  <svg class="h-8 w-8 text-primary-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                  </svg>
+                </div>
+              </div>
+              <div class="flex-1 min-w-0">
+                <div class="bg-card rounded-xl border p-8 shadow-sm">
+                  <div class="flex items-start justify-between mb-4">
+                    <div>
+                      <h3 class="text-2xl font-bold text-card-foreground">Senior Full-Stack Developer</h3>
+                      <p class="text-lg text-primary font-semibold">TechCorp Solutions</p>
+                    </div>
+                    <div class="text-right">
+                      <span class="inline-flex items-center rounded-full bg-primary/10 px-3 py-1 text-sm font-medium text-primary">
+                        Current
+                      </span>
+                      <p class="text-sm text-muted-foreground mt-1">2022 - Present</p>
+                    </div>
+                  </div>
+                  
+                  <p class="text-muted-foreground mb-6 leading-relaxed">
+                    Leading the development of enterprise-grade web applications and microservices architecture. Responsible for technical decision-making, code reviews, and mentoring junior developers while delivering high-quality solutions for Fortune 500 clients.
+                  </p>
+                  
+                  <div class="space-y-4 mb-6">
+                    <div>
+                      <h4 class="font-semibold text-card-foreground mb-2">Key Achievements:</h4>
+                      <ul class="text-muted-foreground space-y-2 text-sm">
+                        <li>• Architected and implemented microservices platform serving 1M+ daily users</li>
+                        <li>• Reduced system response time by 40% through performance optimization</li>
+                        <li>• Led migration from monolithic to microservices architecture</li>
+                        <li>• Mentored 5+ junior developers and established code review processes</li>
+                        <li>• Implemented CI/CD pipelines reducing deployment time by 60%</li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <div class="flex flex-wrap gap-2">
+                    <span class="inline-flex items-center rounded-full bg-primary/10 px-3 py-1 text-sm font-medium text-primary">Java</span>
+                    <span class="inline-flex items-center rounded-full bg-primary/10 px-3 py-1 text-sm font-medium text-primary">Spring Boot</span>
+                    <span class="inline-flex items-center rounded-full bg-primary/10 px-3 py-1 text-sm font-medium text-primary">React</span>
+                    <span class="inline-flex items-center rounded-full bg-primary/10 px-3 py-1 text-sm font-medium text-primary">AWS</span>
+                    <span class="inline-flex items-center rounded-full bg-primary/10 px-3 py-1 text-sm font-medium text-primary">Kubernetes</span>
+                    <span class="inline-flex items-center rounded-full bg-primary/10 px-3 py-1 text-sm font-medium text-primary">PostgreSQL</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Previous Position 1 -->
+            <div class="relative flex items-start space-x-8">
+              <div class="flex-shrink-0">
+                <div class="h-16 w-16 rounded-full bg-accent flex items-center justify-center shadow-lg">
+                  <svg class="h-8 w-8 text-accent-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+                  </svg>
+                </div>
+              </div>
+              <div class="flex-1 min-w-0">
+                <div class="bg-card rounded-xl border p-8 shadow-sm">
+                  <div class="flex items-start justify-between mb-4">
+                    <div>
+                      <h3 class="text-2xl font-bold text-card-foreground">Backend Developer</h3>
+                      <p class="text-lg text-accent font-semibold">InnovateTech Inc.</p>
+                    </div>
+                    <div class="text-right">
+                      <p class="text-sm text-muted-foreground">2020 - 2022</p>
+                    </div>
+                  </div>
+                  
+                  <p class="text-muted-foreground mb-6 leading-relaxed">
+                    Focused on backend development and API design for fintech applications. Worked closely with product teams to deliver secure, scalable solutions handling financial transactions and user data with strict compliance requirements.
+                  </p>
+                  
+                  <div class="space-y-4 mb-6">
+                    <div>
+                      <h4 class="font-semibold text-card-foreground mb-2">Key Contributions:</h4>
+                      <ul class="text-muted-foreground space-y-2 text-sm">
+                        <li>• Developed RESTful APIs processing 100K+ transactions daily</li>
+                        <li>• Implemented OAuth2 and JWT authentication systems</li>
+                        <li>• Built real-time notification system using WebSocket</li>
+                        <li>• Optimized database queries reducing response time by 50%</li>
+                        <li>• Ensured PCI DSS compliance for payment processing</li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <div class="flex flex-wrap gap-2">
+                    <span class="inline-flex items-center rounded-full bg-accent/10 px-3 py-1 text-sm font-medium text-accent">Spring Boot</span>
+                    <span class="inline-flex items-center rounded-full bg-accent/10 px-3 py-1 text-sm font-medium text-accent">MySQL</span>
+                    <span class="inline-flex items-center rounded-full bg-accent/10 px-3 py-1 text-sm font-medium text-accent">Redis</span>
+                    <span class="inline-flex items-center rounded-full bg-accent/10 px-3 py-1 text-sm font-medium text-accent">Docker</span>
+                    <span class="inline-flex items-center rounded-full bg-accent/10 px-3 py-1 text-sm font-medium text-accent">RabbitMQ</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Previous Position 2 -->
+            <div class="relative flex items-start space-x-8">
+              <div class="flex-shrink-0">
+                <div class="h-16 w-16 rounded-full bg-secondary flex items-center justify-center shadow-lg">
+                  <svg class="h-8 w-8 text-secondary-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                  </svg>
+                </div>
+              </div>
+              <div class="flex-1 min-w-0">
+                <div class="bg-card rounded-xl border p-8 shadow-sm">
+                  <div class="flex items-start justify-between mb-4">
+                    <div>
+                      <h3 class="text-2xl font-bold text-card-foreground">Java Developer</h3>
+                      <p class="text-lg text-secondary-foreground font-semibold">StartupXYZ</p>
+                    </div>
+                    <div class="text-right">
+                      <p class="text-sm text-muted-foreground">2019 - 2020</p>
+                    </div>
+                  </div>
+                  
+                  <p class="text-muted-foreground mb-6 leading-relaxed">
+                    Joined as one of the first developers in a fast-growing startup. Responsible for building the core platform from scratch, establishing development practices, and scaling the system to handle rapid user growth.
+                  </p>
+                  
+                  <div class="space-y-4 mb-6">
+                    <div>
+                      <h4 class="font-semibold text-card-foreground mb-2">Key Accomplishments:</h4>
+                      <ul class="text-muted-foreground space-y-2 text-sm">
+                        <li>• Built MVP from ground up serving 10K+ initial users</li>
+                        <li>• Established coding standards and development workflows</li>
+                        <li>• Implemented automated testing achieving 85% code coverage</li>
+                        <li>• Designed scalable database schema for rapid growth</li>
+                        <li>• Collaborated directly with founders on product strategy</li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <div class="flex flex-wrap gap-2">
+                    <span class="inline-flex items-center rounded-full bg-secondary/20 px-3 py-1 text-sm font-medium text-secondary-foreground">Java</span>
+                    <span class="inline-flex items-center rounded-full bg-secondary/20 px-3 py-1 text-sm font-medium text-secondary-foreground">Spring MVC</span>
+                    <span class="inline-flex items-center rounded-full bg-secondary/20 px-3 py-1 text-sm font-medium text-secondary-foreground">PostgreSQL</span>
+                    <span class="inline-flex items-center rounded-full bg-secondary/20 px-3 py-1 text-sm font-medium text-secondary-foreground">Angular</span>
+                    <span class="inline-flex items-center rounded-full bg-secondary/20 px-3 py-1 text-sm font-medium text-secondary-foreground">AWS</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Education -->
+            <div class="relative flex items-start space-x-8">
+              <div class="flex-shrink-0">
+                <div class="h-16 w-16 rounded-full bg-muted flex items-center justify-center shadow-lg">
+                  <svg class="h-8 w-8 text-muted-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
+                  </svg>
+                </div>
+              </div>
+              <div class="flex-1 min-w-0">
+                <div class="bg-card rounded-xl border p-8 shadow-sm">
+                  <div class="flex items-start justify-between mb-4">
+                    <div>
+                      <h3 class="text-2xl font-bold text-card-foreground">Bachelor of Computer Science</h3>
+                      <p class="text-lg text-muted-foreground font-semibold">University of Technology</p>
+                    </div>
+                    <div class="text-right">
+                      <p class="text-sm text-muted-foreground">2015 - 2019</p>
+                    </div>
+                  </div>
+                  
+                  <p class="text-muted-foreground mb-6 leading-relaxed">
+                    Graduated with honors, focusing on software engineering, algorithms, and database systems. Active in programming competitions and open source contributions during university years.
+                  </p>
+                  
+                  <div class="space-y-4 mb-6">
+                    <div>
+                      <h4 class="font-semibold text-card-foreground mb-2">Academic Highlights:</h4>
+                      <ul class="text-muted-foreground space-y-2 text-sm">
+                        <li>• GPA: 3.8/4.0, Dean's List for 3 consecutive semesters</li>
+                        <li>• Led university programming team to regional competition finals</li>
+                        <li>• Published research paper on distributed systems optimization</li>
+                        <li>• Teaching assistant for Data Structures and Algorithms course</li>
+                        <li>• Completed internship at major tech company</li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <div class="flex flex-wrap gap-2">
+                    <span class="inline-flex items-center rounded-full bg-muted/50 px-3 py-1 text-sm font-medium text-muted-foreground">Computer Science</span>
+                    <span class="inline-flex items-center rounded-full bg-muted/50 px-3 py-1 text-sm font-medium text-muted-foreground">Software Engineering</span>
+                    <span class="inline-flex items-center rounded-full bg-muted/50 px-3 py-1 text-sm font-medium text-muted-foreground">Algorithms</span>
+                    <span class="inline-flex items-center rounded-full bg-muted/50 px-3 py-1 text-sm font-medium text-muted-foreground">Database Systems</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="section-padding bg-muted/30">
+      <div class="container-width">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl font-bold tracking-tight text-foreground sm:text-4xl mb-4">
+            Technical Skills
+          </h2>
+          <p class="text-lg text-muted-foreground max-w-2xl mx-auto">
+            A comprehensive overview of my technical expertise across different domains and technologies.
+          </p>
+        </div>
+
+        <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          <!-- Backend Development -->
+          <div class="bg-card rounded-xl border p-6 shadow-sm">
+            <div class="flex items-center mb-4">
+              <div class="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center mr-3">
+                <svg class="h-6 w-6 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01" />
+                </svg>
+              </div>
+              <h3 class="text-lg font-semibold text-card-foreground">Backend Development</h3>
+            </div>
+            <div class="space-y-3">
+              <div class="flex justify-between items-center">
+                <span class="text-sm text-muted-foreground">Java & Spring</span>
+                <div class="w-24 bg-muted rounded-full h-2">
+                  <div class="bg-primary h-2 rounded-full" style="width: 95%"></div>
+                </div>
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="text-sm text-muted-foreground">Microservices</span>
+                <div class="w-24 bg-muted rounded-full h-2">
+                  <div class="bg-primary h-2 rounded-full" style="width: 90%"></div>
+                </div>
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="text-sm text-muted-foreground">REST APIs</span>
+                <div class="w-24 bg-muted rounded-full h-2">
+                  <div class="bg-primary h-2 rounded-full" style="width: 95%"></div>
+                </div>
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="text-sm text-muted-foreground">Database Design</span>
+                <div class="w-24 bg-muted rounded-full h-2">
+                  <div class="bg-primary h-2 rounded-full" style="width: 85%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Frontend Development -->
+          <div class="bg-card rounded-xl border p-6 shadow-sm">
+            <div class="flex items-center mb-4">
+              <div class="h-10 w-10 rounded-lg bg-accent/10 flex items-center justify-center mr-3">
+                <svg class="h-6 w-6 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+              </div>
+              <h3 class="text-lg font-semibold text-card-foreground">Frontend Development</h3>
+            </div>
+            <div class="space-y-3">
+              <div class="flex justify-between items-center">
+                <span class="text-sm text-muted-foreground">React & Vue.js</span>
+                <div class="w-24 bg-muted rounded-full h-2">
+                  <div class="bg-accent h-2 rounded-full" style="width: 85%"></div>
+                </div>
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="text-sm text-muted-foreground">TypeScript</span>
+                <div class="w-24 bg-muted rounded-full h-2">
+                  <div class="bg-accent h-2 rounded-full" style="width: 80%"></div>
+                </div>
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="text-sm text-muted-foreground">CSS & Tailwind</span>
+                <div class="w-24 bg-muted rounded-full h-2">
+                  <div class="bg-accent h-2 rounded-full" style="width: 90%"></div>
+                </div>
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="text-sm text-muted-foreground">Responsive Design</span>
+                <div class="w-24 bg-muted rounded-full h-2">
+                  <div class="bg-accent h-2 rounded-full" style="width: 85%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- DevOps & Cloud -->
+          <div class="bg-card rounded-xl border p-6 shadow-sm">
+            <div class="flex items-center mb-4">
+              <div class="h-10 w-10 rounded-lg bg-secondary/20 flex items-center justify-center mr-3">
+                <svg class="h-6 w-6 text-secondary-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
+                </svg>
+              </div>
+              <h3 class="text-lg font-semibold text-card-foreground">DevOps & Cloud</h3>
+            </div>
+            <div class="space-y-3">
+              <div class="flex justify-between items-center">
+                <span class="text-sm text-muted-foreground">AWS & Azure</span>
+                <div class="w-24 bg-muted rounded-full h-2">
+                  <div class="bg-secondary-foreground h-2 rounded-full" style="width: 80%"></div>
+                </div>
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="text-sm text-muted-foreground">Docker & K8s</span>
+                <div class="w-24 bg-muted rounded-full h-2">
+                  <div class="bg-secondary-foreground h-2 rounded-full" style="width: 85%"></div>
+                </div>
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="text-sm text-muted-foreground">CI/CD Pipelines</span>
+                <div class="w-24 bg-muted rounded-full h-2">
+                  <div class="bg-secondary-foreground h-2 rounded-full" style="width: 90%"></div>
+                </div>
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="text-sm text-muted-foreground">Infrastructure as Code</span>
+                <div class="w-24 bg-muted rounded-full h-2">
+                  <div class="bg-secondary-foreground h-2 rounded-full" style="width: 75%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <Footer />
+</BaseLayout>

@@ -1,13 +1,13 @@
 ---
 import { getCollection } from 'astro:content';
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import Header from '../../components/Header.astro';
-import Footer from '../../components/Footer.astro';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
 
 const allPosts = await getCollection('blog');
 const publishedPosts = allPosts.filter(post => !post.data.draft);
 
-// Count all tags and their article counts
+// 统计所有标签及其文章数量
 const tagCounts = {};
 publishedPosts.forEach(post => {
   post.data.tags.forEach(tag => {
@@ -15,15 +15,15 @@ publishedPosts.forEach(post => {
   });
 });
 
-// Sort tags by article count
+// 按文章数量排序标签
 const sortedTags = Object.entries(tagCounts)
   .sort(([,a], [,b]) => b - a)
   .map(([tag, count]) => ({ tag, count }));
 ---
 
 <BaseLayout 
-  title="Tags - My Blog"
-  description="Browse all article tags to find content by topic."
+  title="标签 - 我的博客"
+  description="浏览所有文章标签，按主题分类查找感兴趣的内容。"
 >
   <Header />
   
@@ -32,10 +32,10 @@ const sortedTags = Object.entries(tagCounts)
       <div class="mx-auto max-w-4xl">
         <header class="text-center mb-16">
           <h1 class="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
-            Article Tags
+            文章标签
           </h1>
           <p class="mt-2 text-lg leading-8 text-muted-foreground">
-            {sortedTags.length} tags, {publishedPosts.length} articles
+            共 {sortedTags.length} 个标签，{publishedPosts.length} 篇文章
           </p>
         </header>
         
@@ -43,7 +43,7 @@ const sortedTags = Object.entries(tagCounts)
           <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {sortedTags.map(({ tag, count }) => (
               <a
-                href={`/tags/${tag}/`}
+                href={`/zh/tags/${tag}/`}
                 class="group relative rounded-lg border bg-card p-6 hover:bg-accent transition-colors"
               >
                 <div class="flex items-center justify-between">
@@ -51,31 +51,31 @@ const sortedTags = Object.entries(tagCounts)
                     {tag}
                   </h3>
                   <span class="inline-flex items-center rounded-full bg-secondary px-2.5 py-0.5 text-xs font-medium text-secondary-foreground">
-                    {count} posts
+                    {count} 篇
                   </span>
                 </div>
                 <p class="mt-2 text-sm text-muted-foreground">
-                  View all articles about "{tag}"
+                  查看所有关于 "{tag}" 的文章
                 </p>
               </a>
             ))}
           </div>
         ) : (
           <div class="text-center py-16">
-            <p class="text-muted-foreground">No tags available</p>
+            <p class="text-muted-foreground">暂无标签</p>
           </div>
         )}
         
-        <!-- Tag Cloud -->
+        <!-- 标签云 -->
         <div class="mt-16 border-t pt-16">
-          <h2 class="text-2xl font-bold text-center mb-8">Tag Cloud</h2>
+          <h2 class="text-2xl font-bold text-center mb-8">标签云</h2>
           <div class="flex flex-wrap justify-center gap-2">
             {sortedTags.map(({ tag, count }) => {
-              // Calculate font size based on article count
+              // 根据文章数量计算字体大小
               const fontSize = Math.min(Math.max(count * 0.2 + 0.8, 0.8), 2);
               return (
                 <a
-                  href={`/tags/${tag}/`}
+                  href={`/zh/tags/${tag}/`}
                   class="inline-block px-3 py-1 rounded-full bg-secondary text-secondary-foreground hover:bg-secondary/80 transition-colors"
                   style={`font-size: ${fontSize}rem;`}
                 >

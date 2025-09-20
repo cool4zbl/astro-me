@@ -1,9 +1,9 @@
 ---
 import { getCollection } from 'astro:content';
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import Header from '../../components/Header.astro';
-import Footer from '../../components/Footer.astro';
-import BlogCard from '../../components/BlogCard.astro';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import BlogCard from '../../../components/BlogCard.astro';
 
 const allPosts = await getCollection('blog');
 const publishedPosts = allPosts
@@ -12,8 +12,8 @@ const publishedPosts = allPosts
 ---
 
 <BaseLayout 
-  title="Blog Posts - My Blog"
-  description="Browse all blog posts covering frontend technologies, programming experiences, and life insights."
+  title="博客文章 - 我的博客"
+  description="浏览所有博客文章，涵盖前端技术、编程经验和生活感悟。"
 >
   <Header />
   
@@ -22,10 +22,10 @@ const publishedPosts = allPosts
       <div class="mx-auto max-w-2xl lg:max-w-4xl">
         <header class="text-center">
           <h1 class="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
-            Blog Posts
+            博客文章
           </h1>
           <p class="mt-2 text-lg leading-8 text-muted-foreground">
-            {publishedPosts.length} posts in total
+            共 {publishedPosts.length} 篇文章
           </p>
         </header>
         
@@ -37,7 +37,7 @@ const publishedPosts = allPosts
         
         {publishedPosts.length === 0 && (
           <div class="text-center py-16">
-            <p class="text-muted-foreground">No posts published yet</p>
+            <p class="text-muted-foreground">暂无文章发布</p>
           </div>
         )}
       </div>

@@ -13,56 +13,343 @@ const recentPosts = allPosts
 ---
 
 <BaseLayout 
-  title="我的博客 - 分享技术与生活"
-  description="欢迎来到我的个人博客，这里分享前端技术、编程经验和生活感悟。"
+  title="My Blog - Full-Stack Developer & Tech Enthusiast"
+  description="Welcome to my personal website. I'm a full-stack developer specializing in Java backend development, sharing my projects, experiences, and insights."
 >
   <Header />
   
   <main class="flex-1">
     <!-- Hero Section -->
-    <section class="container mx-auto px-4 py-16 text-center">
-      <h1 class="text-4xl font-bold tracking-tight text-foreground sm:text-6xl">
-        欢迎来到我的博客
-      </h1>
-      <p class="mx-auto mt-6 max-w-2xl text-lg leading-8 text-muted-foreground">
-        在这里分享前端技术、编程经验和生活感悟。探索代码的艺术，记录成长的足迹。
-      </p>
-      <div class="mt-10 flex items-center justify-center gap-x-6">
-        <a
-          href="/blog"
-          class="rounded-md bg-primary px-3.5 py-2.5 text-sm font-semibold text-primary-foreground shadow-sm hover:bg-primary/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
-        >
-          阅读博客
-        </a>
-        <a
-          href="/tags"
-          class="text-sm font-semibold leading-6 text-foreground hover:text-primary"
-        >
-          浏览标签 <span aria-hidden="true">→</span>
-        </a>
+    <section class="section-padding bg-gradient-to-br from-background via-muted/20 to-background">
+      <div class="container-width text-center">
+        <div class="animate-fade-in">
+          <h1 class="text-4xl font-bold tracking-tight text-foreground sm:text-6xl lg:text-7xl">
+            <span class="gradient-text">Full-Stack Developer</span>
+          </h1>
+          <p class="mx-auto mt-6 max-w-2xl text-lg leading-8 text-muted-foreground sm:text-xl">
+            Passionate about building scalable backend systems with Java, crafting elegant frontend experiences, and sharing knowledge through code and writing.
+          </p>
+          <div class="mt-10 flex items-center justify-center gap-x-6">
+            <a
+              href="/projects"
+              class="rounded-md bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground shadow-sm hover:bg-primary/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary transition-all duration-200"
+            >
+              View My Projects
+            </a>
+            <a
+              href="/blog"
+              class="text-sm font-semibold leading-6 text-foreground hover:text-primary transition-colors"
+            >
+              Read My Blog <span aria-hidden="true">→</span>
+            </a>
+          </div>
+        </div>
       </div>
     </section>
 
-    <!-- Recent Posts -->
-    <section class="container mx-auto px-4 py-16">
-      <div class="mx-auto max-w-2xl lg:max-w-4xl">
-        <h2 class="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
-          最新文章
-        </h2>
-        <p class="mt-2 text-lg leading-8 text-muted-foreground">
-          了解最新的技术动态和个人思考
-        </p>
-        <div class="mt-16 space-y-20 lg:mt-20 lg:space-y-20">
+    <!-- About Me Section -->
+    <section class="section-padding">
+      <div class="container-width">
+        <div class="grid gap-16 lg:grid-cols-2 lg:gap-24 items-center">
+          <div>
+            <h2 class="text-3xl font-bold tracking-tight text-foreground sm:text-4xl mb-6">
+              About Me
+            </h2>
+            <div class="space-y-4 text-muted-foreground leading-relaxed">
+              <p>
+                I'm a passionate full-stack developer with a strong focus on backend development using Java and Spring ecosystem. With years of experience building scalable web applications, I enjoy tackling complex technical challenges and creating efficient solutions.
+              </p>
+              <p>
+                My expertise spans across modern Java frameworks, microservices architecture, database design, and cloud technologies. I believe in writing clean, maintainable code and following best practices to deliver robust software solutions.
+              </p>
+              <p>
+                When I'm not coding, you'll find me exploring new technologies, contributing to open source projects, or sharing my knowledge through technical writing and mentoring.
+              </p>
+            </div>
+            <div class="mt-8">
+              <a
+                href="/experience"
+                class="inline-flex items-center text-primary hover:text-accent font-medium transition-colors"
+              >
+                View My Experience
+                <svg class="ml-2 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+              </a>
+            </div>
+          </div>
+          <div class="relative">
+            <div class="aspect-square rounded-2xl bg-gradient-primary p-8 shadow-2xl">
+              <div class="h-full w-full rounded-xl bg-background/10 backdrop-blur-sm flex items-center justify-center">
+                <img 
+                  src="/placeholder.svg?height=300&width=300"
+                  alt="Professional developer portrait"
+                  class="rounded-xl shadow-lg"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Overview Section -->
+    <section class="section-padding bg-muted/30">
+      <div class="container-width">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl font-bold tracking-tight text-foreground sm:text-4xl mb-4">
+            Featured Projects
+          </h2>
+          <p class="text-lg text-muted-foreground max-w-2xl mx-auto">
+            A showcase of my recent work in full-stack development, from enterprise Java applications to modern web solutions.
+          </p>
+        </div>
+        
+        <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          <!-- Project 1 -->
+          <div class="group relative rounded-xl border bg-card p-6 shadow-sm hover:shadow-md transition-all duration-200">
+            <div class="aspect-video rounded-lg bg-muted mb-4 overflow-hidden">
+              <img 
+                src="/placeholder.svg?height=200&width=350"
+                alt="E-commerce Platform"
+                class="h-full w-full object-cover group-hover:scale-105 transition-transform duration-200"
+              />
+            </div>
+            <h3 class="text-xl font-semibold text-card-foreground mb-2">E-commerce Platform</h3>
+            <p class="text-muted-foreground text-sm mb-4">
+              Full-stack e-commerce solution built with Spring Boot, React, and PostgreSQL. Features include user authentication, payment processing, and admin dashboard.
+            </p>
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span class="inline-flex items-center rounded-full bg-primary/10 px-2 py-1 text-xs font-medium text-primary">Java</span>
+              <span class="inline-flex items-center rounded-full bg-primary/10 px-2 py-1 text-xs font-medium text-primary">Spring Boot</span>
+              <span class="inline-flex items-center rounded-full bg-primary/10 px-2 py-1 text-xs font-medium text-primary">React</span>
+            </div>
+          </div>
+
+          <!-- Project 2 -->
+          <div class="group relative rounded-xl border bg-card p-6 shadow-sm hover:shadow-md transition-all duration-200">
+            <div class="aspect-video rounded-lg bg-muted mb-4 overflow-hidden">
+              <img 
+                src="/placeholder.svg?height=200&width=350"
+                alt="Microservices API"
+                class="h-full w-full object-cover group-hover:scale-105 transition-transform duration-200"
+              />
+            </div>
+            <h3 class="text-xl font-semibold text-card-foreground mb-2">Microservices API</h3>
+            <p class="text-muted-foreground text-sm mb-4">
+              Scalable microservices architecture with Spring Cloud, Docker, and Kubernetes. Implements service discovery, load balancing, and distributed tracing.
+            </p>
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span class="inline-flex items-center rounded-full bg-primary/10 px-2 py-1 text-xs font-medium text-primary">Spring Cloud</span>
+              <span class="inline-flex items-center rounded-full bg-primary/10 px-2 py-1 text-xs font-medium text-primary">Docker</span>
+              <span class="inline-flex items-center rounded-full bg-primary/10 px-2 py-1 text-xs font-medium text-primary">Kubernetes</span>
+            </div>
+          </div>
+
+          <!-- Project 3 -->
+          <div class="group relative rounded-xl border bg-card p-6 shadow-sm hover:shadow-md transition-all duration-200">
+            <div class="aspect-video rounded-lg bg-muted mb-4 overflow-hidden">
+              <img 
+                src="/placeholder.svg?height=200&width=350"
+                alt="Analytics Dashboard"
+                class="h-full w-full object-cover group-hover:scale-105 transition-transform duration-200"
+              />
+            </div>
+            <h3 class="text-xl font-semibold text-card-foreground mb-2">Analytics Dashboard</h3>
+            <p class="text-muted-foreground text-sm mb-4">
+              Real-time analytics platform with data visualization, built using Spring WebFlux, Redis, and Chart.js for interactive reporting.
+            </p>
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span class="inline-flex items-center rounded-full bg-primary/10 px-2 py-1 text-xs font-medium text-primary">WebFlux</span>
+              <span class="inline-flex items-center rounded-full bg-primary/10 px-2 py-1 text-xs font-medium text-primary">Redis</span>
+              <span class="inline-flex items-center rounded-full bg-primary/10 px-2 py-1 text-xs font-medium text-primary">Chart.js</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="text-center mt-12">
+          <a
+            href="/projects"
+            class="inline-flex items-center rounded-md bg-secondary px-6 py-3 text-sm font-semibold text-secondary-foreground shadow-sm hover:bg-secondary/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary transition-all duration-200"
+          >
+            View All Projects
+            <svg class="ml-2 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- My Interests Section -->
+    <section class="section-padding">
+      <div class="container-width">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl font-bold tracking-tight text-foreground sm:text-4xl mb-4">
+            My Interests
+          </h2>
+          <p class="text-lg text-muted-foreground max-w-2xl mx-auto">
+            Beyond coding, I'm passionate about continuous learning and exploring new technologies that shape the future of software development.
+          </p>
+        </div>
+
+        <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+          <div class="text-center group">
+            <div class="mx-auto h-16 w-16 rounded-full bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
+              <svg class="h-8 w-8 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold text-foreground mb-2">Cloud Architecture</h3>
+            <p class="text-sm text-muted-foreground">Designing scalable and resilient cloud-native applications using AWS, Azure, and modern DevOps practices.</p>
+          </div>
+
+          <div class="text-center group">
+            <div class="mx-auto h-16 w-16 rounded-full bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
+              <svg class="h-8 w-8 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold text-foreground mb-2">Performance Optimization</h3>
+            <p class="text-sm text-muted-foreground">Passionate about optimizing application performance, from database queries to JVM tuning and caching strategies.</p>
+          </div>
+
+          <div class="text-center group">
+            <div class="mx-auto h-16 w-16 rounded-full bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
+              <svg class="h-8 w-8 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold text-foreground mb-2">Open Source</h3>
+            <p class="text-sm text-muted-foreground">Contributing to open source projects and building tools that help the developer community grow and thrive.</p>
+          </div>
+
+          <div class="text-center group">
+            <div class="mx-auto h-16 w-16 rounded-full bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
+              <svg class="h-8 w-8 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold text-foreground mb-2">Mentoring</h3>
+            <p class="text-sm text-muted-foreground">Helping junior developers grow their skills and sharing knowledge through code reviews and technical discussions.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Things I Believe Section -->
+    <section class="section-padding bg-muted/30">
+      <div class="container-width">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl font-bold tracking-tight text-foreground sm:text-4xl mb-4">
+            Things I Believe
+          </h2>
+          <p class="text-lg text-muted-foreground max-w-2xl mx-auto">
+            Core principles that guide my approach to software development and professional growth.
+          </p>
+        </div>
+
+        <div class="grid gap-8 md:grid-cols-2">
+          <div class="rounded-xl border bg-card p-8 shadow-sm">
+            <div class="flex items-start space-x-4">
+              <div class="flex-shrink-0">
+                <div class="h-8 w-8 rounded-full bg-primary/10 flex items-center justify-center">
+                  <svg class="h-5 w-5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                  </svg>
+                </div>
+              </div>
+              <div>
+                <h3 class="text-lg font-semibold text-card-foreground mb-2">Code is Communication</h3>
+                <p class="text-muted-foreground">
+                  Writing clean, readable code is not just about functionality—it's about communicating intent to future developers, including yourself. Good code tells a story.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="rounded-xl border bg-card p-8 shadow-sm">
+            <div class="flex items-start space-x-4">
+              <div class="flex-shrink-0">
+                <div class="h-8 w-8 rounded-full bg-primary/10 flex items-center justify-center">
+                  <svg class="h-5 w-5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                  </svg>
+                </div>
+              </div>
+              <div>
+                <h3 class="text-lg font-semibold text-card-foreground mb-2">Continuous Learning</h3>
+                <p class="text-muted-foreground">
+                  Technology evolves rapidly, and staying curious is essential. Every project is an opportunity to learn something new and improve existing skills.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="rounded-xl border bg-card p-8 shadow-sm">
+            <div class="flex items-start space-x-4">
+              <div class="flex-shrink-0">
+                <div class="h-8 w-8 rounded-full bg-primary/10 flex items-center justify-center">
+                  <svg class="h-5 w-5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z" />
+                  </svg>
+                </div>
+              </div>
+              <div>
+                <h3 class="text-lg font-semibold text-card-foreground mb-2">User-Centric Development</h3>
+                <p class="text-muted-foreground">
+                  The best technical solutions are meaningless if they don't solve real user problems. Always keep the end user's experience at the center of development decisions.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="rounded-xl border bg-card p-8 shadow-sm">
+            <div class="flex items-start space-x-4">
+              <div class="flex-shrink-0">
+                <div class="h-8 w-8 rounded-full bg-primary/10 flex items-center justify-center">
+                  <svg class="h-5 w-5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m8 6V9a2 2 0 00-2-2H10a2 2 0 00-2 2v3.1M16 20h4v-4h-4v4z" />
+                  </svg>
+                </div>
+              </div>
+              <div>
+                <h3 class="text-lg font-semibold text-card-foreground mb-2">Quality Over Speed</h3>
+                <p class="text-muted-foreground">
+                  While delivering quickly is important, building robust, maintainable solutions creates more value in the long run. Technical debt always comes due.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Recent Posts Section -->
+    <section class="section-padding">
+      <div class="container-width">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl font-bold tracking-tight text-foreground sm:text-4xl mb-4">
+            Latest Posts
+          </h2>
+          <p class="text-lg text-muted-foreground max-w-2xl mx-auto">
+            Recent thoughts on software development, technology trends, and lessons learned from building applications.
+          </p>
+        </div>
+        <div class="space-y-20 lg:space-y-20">
           {recentPosts.map((post) => (
             <BlogCard post={post} />
           ))}
         </div>
-        <div class="mt-16 text-center">
+        <div class="text-center mt-12">
           <a
             href="/blog"
-            class="rounded-md bg-secondary px-3.5 py-2.5 text-sm font-semibold text-secondary-foreground shadow-sm hover:bg-secondary/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary"
+            class="inline-flex items-center rounded-md bg-secondary px-6 py-3 text-sm font-semibold text-secondary-foreground shadow-sm hover:bg-secondary/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary transition-all duration-200"
           >
-            查看所有文章
+            View All Posts
+            <svg class="ml-2 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
           </a>
         </div>
       </div>

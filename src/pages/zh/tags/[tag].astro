@@ -1,15 +1,15 @@
 ---
 import { getCollection } from 'astro:content';
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import Header from '../../components/Header.astro';
-import Footer from '../../components/Footer.astro';
-import BlogCard from '../../components/BlogCard.astro';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import BlogCard from '../../../components/BlogCard.astro';
 
 export async function getStaticPaths() {
   const allPosts = await getCollection('blog');
   const publishedPosts = allPosts.filter(post => !post.data.draft);
   
-  // Get all unique tags
+  // 获取所有唯一标签
   const uniqueTags = [...new Set(publishedPosts.flatMap(post => post.data.tags))];
   
   return uniqueTags.map(tag => ({
@@ -27,8 +27,8 @@ const { posts } = Astro.props;
 ---
 
 <BaseLayout 
-  title={`Tag: ${tag} - My Blog`}
-  description={`Browse all articles tagged with "${tag}", ${posts.length} posts total.`}
+  title={`标签: ${tag} - 我的博客`}
+  description={`浏览所有标记为 "${tag}" 的文章，共 ${posts.length} 篇。`}
 >
   <Header />
   
@@ -37,20 +37,20 @@ const { posts } = Astro.props;
       <div class="mx-auto max-w-2xl lg:max-w-4xl">
         <header class="text-center mb-16">
           <div class="inline-flex items-center rounded-full bg-secondary px-4 py-2 text-sm font-medium text-secondary-foreground mb-4">
-            Tag
+            标签
           </div>
           <h1 class="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
             {tag}
           </h1>
           <p class="mt-2 text-lg leading-8 text-muted-foreground">
-            {posts.length} articles
+            共 {posts.length} 篇文章
           </p>
           <div class="mt-6">
             <a
-              href="/tags"
+              href="/zh/tags"
               class="text-sm font-medium text-primary hover:underline"
             >
-              ← Back to all tags
+              ← 返回所有标签
             </a>
           </div>
         </header>
@@ -63,7 +63,7 @@ const { posts } = Astro.props;
           </div>
         ) : (
           <div class="text-center py-16">
-            <p class="text-muted-foreground">No articles found for this tag</p>
+            <p class="text-muted-foreground">该标签下暂无文章</p>
           </div>
         )}
       </div>
