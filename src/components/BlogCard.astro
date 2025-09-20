@@ -2,17 +2,24 @@
 import { CollectionEntry } from 'astro:content';
 import FormattedDate from './FormattedDate.astro';
 import TagList from './TagList.astro';
+import OptimizedImage from './OptimizedImage.astro';
 
 const { post } = Astro.props;
+
+const heroSrc = post.data.heroImage || `/placeholder.svg?height=360&width=640&query=${encodeURIComponent(post.data.title)}`;
 ---
 
 <article class="relative isolate flex flex-col gap-8 lg:flex-row">
   <div class="relative aspect-[16/9] sm:aspect-[2/1] lg:aspect-square lg:w-64 lg:shrink-0">
-    <!-- 优化封面图片显示，支持 public/ 目录下的图片 -->
-    <img
-      src={post.data.heroImage || `/placeholder.svg?height=256&width=256&query=${encodeURIComponent(post.data.title)}`}
+    <OptimizedImage
+      src={heroSrc}
       alt={post.data.title}
+      width={640}
+      height={360}
       class="absolute inset-0 h-full w-full rounded-2xl bg-muted object-cover"
+      sizes="(max-width: 1023px) 100vw, 256px"
+      loading="lazy"
+      format="webp"
     />
     <div class="absolute inset-0 rounded-2xl ring-1 ring-inset ring-border"></div>
   </div>

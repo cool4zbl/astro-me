@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import FormattedDate from './FormattedDate.astro';
+import OptimizedImage from './OptimizedImage.astro';
 
 const { currentSlug, currentTags, lang = 'zh' } = Astro.props;
 
@@ -54,10 +55,15 @@ const t = texts[lang];
         <article class="group bg-card border rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-200">
           {post.data.heroImage && (
             <div class="aspect-video overflow-hidden">
-              <img
-                src={post.data.heroImage || "/placeholder.svg"}
+              <OptimizedImage
+                src={post.data.heroImage}
                 alt={post.data.title}
-                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-200"
+                width={640}
+                height={360}
+                class="w-full h-full object-cover transition-transform duration-200 group-hover:scale-105"
+                sizes="(max-width: 1024px) 100vw, 320px"
+                format="webp"
+                loading="lazy"
               />
             </div>
           )}

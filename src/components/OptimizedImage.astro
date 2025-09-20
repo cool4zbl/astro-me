@@ -1,0 +1,48 @@
+---
+import { Image } from 'astro:assets';
+
+const {
+  src,
+  alt,
+  width,
+  height,
+  widths,
+  sizes,
+  format,
+  fit,
+  position,
+  loading = 'lazy',
+  class: className,
+  priority = false,
+  quality,
+  ...rest
+} = Astro.props;
+
+const hasExplicitLoading = 'loading' in Astro.props;
+const finalLoading = hasExplicitLoading ? loading : priority ? 'eager' : 'lazy';
+
+if (!src) {
+  throw new Error('OptimizedImage requires a `src` prop.');
+}
+
+if (alt == null) {
+  throw new Error('OptimizedImage requires an `alt` description.');
+}
+---
+
+<Image
+  src={src}
+  alt={alt}
+  width={width}
+  height={height}
+  widths={widths}
+  sizes={sizes}
+  format={format}
+  fit={fit}
+  position={position}
+  loading={finalLoading}
+  class={className}
+  priority={priority}
+  quality={quality}
+  {...rest}
+/>

@@ -8,6 +8,7 @@ import TagList from '../../components/TagList.astro';
 import Comments from '../../components/Comments.astro';
 import TableOfContents from '../../components/TableOfContents.astro';
 import RelatedPosts from '../../components/RelatedPosts.astro';
+import OptimizedImage from '../../components/OptimizedImage.astro';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
@@ -61,10 +62,15 @@ const { Content, headings } = await post.render();
 
           {post.data.heroImage && (
             <div class="mb-8 overflow-hidden rounded-xl border bg-muted/40">
-              <img
-                src={post.data.heroImage || "/placeholder.svg"}
+              <OptimizedImage
+                src={post.data.heroImage}
                 alt={post.data.title}
+                width={1280}
+                height={720}
                 class="h-full w-full max-h-80 object-cover"
+                sizes="(max-width: 1024px) 100vw, 768px"
+                format="webp"
+                priority={true}
               />
             </div>
           )}

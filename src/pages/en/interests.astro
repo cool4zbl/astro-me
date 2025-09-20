@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
+import OptimizedImage from '../../components/OptimizedImage.astro';
 
 const bookshelf = [
   {
@@ -147,7 +148,7 @@ const hobbyPhotos = [
         <div class="grid gap-6 md:grid-cols-3">
           {hobbyPhotos.map((photo) => (
             <figure class="overflow-hidden rounded-2xl border bg-card/70 shadow-sm">
-              <img src={photo.src} alt={photo.alt} class="h-48 w-full object-cover" />
+              <OptimizedImage src={photo.src} alt={photo.alt} width={320} height={220} class="h-48 w-full object-cover" loading="lazy" />
               <figcaption class="space-y-2 p-4 text-sm text-muted-foreground">
                 <p class="font-semibold text-foreground">{photo.alt}</p>
                 <p class="leading-relaxed">{photo.caption}</p>
