@@ -18,7 +18,7 @@ const {
   publishedTime,
   modifiedTime,
   tags = [],
-  author = '博主'
+  author = 'Blog Author'
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
@@ -39,7 +39,7 @@ const structuredData = {
     },
     "publisher": {
       "@type": "Organization",
-      "name": "我的博客",
+      "name": "My Blog",
       "logo": {
         "@type": "ImageObject",
         "url": new URL('/favicon.jpg', Astro.site).toString()
@@ -65,8 +65,8 @@ const structuredData = {
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
 <meta property="og:image" content={imageURL} />
-<meta property="og:site_name" content="我的博客" />
-<meta property="og:locale" content="zh_CN" />
+<meta property="og:site_name" content="My Blog" />
+<meta property="og:locale" content="en_US" />
 
 {article && publishedTime && (
   <meta property="article:published_time" content={publishedTime.toISOString()} />

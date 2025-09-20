@@ -1,23 +1,24 @@
 ---
-title: 'Astro 的强大功能'
-description: '探索 Astro 框架的核心特性和优势，了解为什么它是构建现代网站的绝佳选择。'
+title: 'Powerful Features of Astro'
+description: 'Explore the core features and advantages of the Astro framework, and understand why it is an excellent choice for building modern websites.'
 pubDate: 2024-01-02
-tags: ['Astro', '技术', '前端']
+tags: ['astro', 'technology', 'frontend']
+heroImage: '/covers/astro-features.jpg'
 ---
 
-# Astro 的强大功能
+# Powerful Features of Astro
 
-Astro 是一个现代化的静态站点生成器，专为构建快速、内容驱动的网站而设计。
+Astro is a modern static site generator designed for building fast, content-driven websites.
 
-## 核心特性
+## Core Features
 
-### 1. 岛屿架构 (Islands Architecture)
+### 1. Islands Architecture
 
-Astro 使用独特的岛屿架构，只在需要时加载 JavaScript：
+Astro uses a unique islands architecture that only loads JavaScript when needed:
 
 \`\`\`astro
 ---
-// 服务器端代码
+// Server-side code
 const posts = await getCollection('blog');
 ---
 
@@ -31,9 +32,9 @@ const posts = await getCollection('blog');
 </div>
 \`\`\`
 
-### 2. 多框架支持
+### 2. Multi-Framework Support
 
-可以在同一个项目中使用不同的 UI 框架：
+You can use different UI frameworks in the same project:
 
 - React
 - Vue
@@ -41,9 +42,9 @@ const posts = await getCollection('blog');
 - Solid
 - Preact
 
-### 3. 内容集合
+### 3. Content Collections
 
-强大的内容管理系统，支持类型安全：
+Powerful content management system with type safety:
 
 \`\`\`ts
 const blog = defineCollection({
@@ -57,16 +58,16 @@ const blog = defineCollection({
 });
 \`\`\`
 
-## 性能优势
+## Performance Advantages
 
-- **零 JavaScript**: 默认情况下不发送 JavaScript 到浏览器
-- **按需加载**: 只有交互组件才会加载 JavaScript
-- **优化构建**: 自动优化图片、CSS 和 JavaScript
+- **Zero JavaScript**: No JavaScript sent to browser by default
+- **On-demand Loading**: Only interactive components load JavaScript
+- **Optimized Builds**: Automatic optimization of images, CSS, and JavaScript
 
-## 开发体验
+## Developer Experience
 
-- **快速热重载**: 开发时的即时更新
-- **TypeScript 支持**: 内置 TypeScript 支持
-- **丰富的集成**: 大量官方和社区集成
+- **Fast Hot Reload**: Instant updates during development
+- **TypeScript Support**: Built-in TypeScript support
+- **Rich Integrations**: Numerous official and community integrations
 
-Astro 让我们能够构建既快速又现代的网站！
+Astro enables us to build websites that are both fast and modern!

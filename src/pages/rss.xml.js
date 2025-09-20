@@ -8,8 +8,8 @@ export async function GET(context) {
     .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
 
   return rss({
-    title: "我的博客",
-    description: "分享前端技术、编程经验和生活感悟的个人博客",
+    title: "My Blog",
+    description: "A personal blog sharing frontend technologies, programming experiences, and life insights",
     site: context.site,
     items: publishedPosts.map((post) => ({
       title: post.data.title,
@@ -19,6 +19,6 @@ export async function GET(context) {
       content: post.body,
       categories: post.data.tags,
     })),
-    customData: `<language>zh-CN</language>`,
+    customData: `<language>en-US</language>`,
   })
 }

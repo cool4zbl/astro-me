@@ -8,6 +8,7 @@ const { post } = Astro.props;
 
 <article class="relative isolate flex flex-col gap-8 lg:flex-row">
   <div class="relative aspect-[16/9] sm:aspect-[2/1] lg:aspect-square lg:w-64 lg:shrink-0">
+    <!-- 优化封面图片显示，支持 public/ 目录下的图片 -->
     <img
       src={post.data.heroImage || `/placeholder.svg?height=256&width=256&query=${encodeURIComponent(post.data.title)}`}
       alt={post.data.title}
@@ -38,7 +39,8 @@ const { post } = Astro.props;
         <div class="text-sm leading-6">
           <p class="font-semibold text-foreground">
             <a href={`/blog/${post.slug}/`} class="hover:text-primary">
-              阅读全文
+              <!-- 移除硬编码的中文文本，让组件更通用 -->
+              Read more
             </a>
           </p>
           <p class="text-muted-foreground">

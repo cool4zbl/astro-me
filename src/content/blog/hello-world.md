@@ -1,47 +1,48 @@
 ---
-title: '欢迎来到我的博客'
-description: '这是我的第一篇博客文章，介绍了这个博客的功能和特色。'
+title: 'Welcome to My Blog'
+description: 'This is my first blog post, introducing the features and highlights of this blog.'
 pubDate: 2024-01-01
-tags: ['欢迎', '介绍', 'Astro']
+tags: ['welcome', 'introduction', 'astro']
+heroImage: '/covers/welcome.jpg'
 ---
 
-# 欢迎来到我的博客！
+# Welcome to My Blog!
 
-这是一个使用 Astro 构建的现代化个人博客，具有以下特色功能：
+This is a modern personal blog built with Astro, featuring the following capabilities:
 
-## 主要功能
+## Key Features
 
-- **内容集合**: 使用 Markdown 和 MDX 编写文章
-- **标签系统**: 按标签分类和筛选文章
-- **站内搜索**: 基于 MiniSearch 的纯前端搜索
-- **评论系统**: 集成 Giscus 评论
-- **RSS 订阅**: 自动生成 RSS feed
-- **SEO 优化**: 完整的 meta 标签和结构化数据
-- **暗黑模式**: 支持明暗主题切换
-- **响应式设计**: 适配各种设备屏幕
+- **Content Collections**: Write articles using Markdown and MDX
+- **Tag System**: Categorize and filter articles by tags
+- **Site Search**: Pure frontend search powered by MiniSearch
+- **Comment System**: Integrated Giscus comments
+- **RSS Feed**: Automatically generated RSS feed
+- **SEO Optimized**: Complete meta tags and structured data
+- **Dark Mode**: Support for light/dark theme switching
+- **Responsive Design**: Adapts to various device screens
 
-## 技术栈
+## Tech Stack
 
-- **框架**: Astro
-- **样式**: Tailwind CSS
-- **内容**: Markdown/MDX
-- **搜索**: MiniSearch
-- **评论**: Giscus
-- **部署**: Vercel (零成本)
+- **Framework**: Astro
+- **Styling**: Tailwind CSS
+- **Content**: Markdown/MDX
+- **Search**: MiniSearch
+- **Comments**: Giscus
+- **Deployment**: Vercel (zero cost)
 
-## 开始使用
+## Getting Started
 
-这个博客模板可以直接部署到 Vercel、Netlify 等平台，无需后端服务器。
+This blog template can be directly deployed to platforms like Vercel, Netlify without needing a backend server.
 
 \`\`\`bash
-# 安装依赖
+# Install dependencies
 npm install
 
-# 开发模式
+# Development mode
 npm run dev
 
-# 构建
+# Build
 npm run build
 \`\`\`
 
-享受写作的乐趣吧！
+Enjoy the joy of writing!
