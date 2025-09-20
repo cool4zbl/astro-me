@@ -4,64 +4,70 @@
 
 @layer base {
   :root {
-    /* Updated color palette to use #25c2a0 as primary theme color */
-    --background: 0 0% 100%; /* Pure white background */
-    --foreground: 215 25% 27%; /* Slate gray for text */
-    --card: 210 40% 96%; /* Light gray for cards */
-    --card-foreground: 215 25% 27%; /* Card text color */
-    --popover: 0 0% 100%; /* Popover background */
-    --popover-foreground: 215 25% 27%; /* Popover text */
-    --primary: 174 64% 47%; /* #25c2a0 converted to HSL */
-    --primary-foreground: 0 0% 100%; /* White text on primary */
-    --secondary: 210 40% 96%; /* Light gray secondary */
-    --secondary-foreground: 215 25% 27%; /* Secondary text */
-    --muted: 200 50% 98%; /* Very light cyan for muted elements */
-    --muted-foreground: 215 25% 27%; /* Muted text */
-    --accent: 174 64% 52%; /* Lighter variant of #25c2a0 */
-    --accent-foreground: 0 0% 100%; /* White text on accent */
-    --destructive: 0 84.2% 60.2%; /* Red for destructive actions */
-    --destructive-foreground: 0 0% 100%; /* White text on destructive */
-    --border: 220 13% 91%; /* Light border color */
-    --input: 210 40% 98%; /* Input field background */
-    --ring: 174 64% 47% / 0.5; /* Focus ring with #25c2a0 */
-    --radius: 0.5rem; /* Corner rounding */
+    /* Updated to use exact color values provided by user */
+    --ifm-color-primary: #25c2a0;
+    --ifm-color-primary-dark: #21af90;
+    --ifm-color-primary-darker: #1fa588;
+    --ifm-color-primary-darkest: #1a8870;
+    --ifm-color-primary-light: #29d5b0;
+    --ifm-color-primary-lighter: #32d8b4;
+    --ifm-color-primary-lightest: #4fddbf;
 
-    /* Updated chart colors to use #25c2a0 theme */
-    --chart-1: 174 64% 47%; /* Primary #25c2a0 */
-    --chart-2: 174 64% 52%; /* Accent variant */
-    --chart-3: 215 25% 27%; /* Dark gray */
-    --chart-4: 215 16% 47%; /* Medium gray */
-    --chart-5: 262 83% 58%; /* Purple accent */
+    /* Updated color palette using exact #25c2a0 values */
+    --background: 0 0% 100%;
+    --foreground: 215 25% 27%;
+    --card: 210 40% 96%;
+    --card-foreground: 215 25% 27%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 215 25% 27%;
+    --primary: 174 64% 47%; /* #25c2a0 */
+    --primary-foreground: 0 0% 100%;
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 215 25% 27%;
+    --muted: 200 50% 98%;
+    --muted-foreground: 215 25% 27%;
+    --accent: 174 69% 52%; /* #29d5b0 */
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 220 13% 91%;
+    --input: 210 40% 98%;
+    --ring: 174 64% 47% / 0.5;
+    --radius: 0.5rem;
+
+    --chart-1: 174 64% 47%; /* #25c2a0 */
+    --chart-2: 174 69% 52%; /* #29d5b0 */
+    --chart-3: 174 72% 56%; /* #32d8b4 */
+    --chart-4: 174 77% 62%; /* #4fddbf */
+    --chart-5: 262 83% 58%;
   }
 
   .dark {
-    /* Updated dark mode colors to complement #25c2a0 theme */
-    --background: 215 28% 17%; /* Dark background */
-    --foreground: 210 40% 98%; /* Light text */
-    --card: 215 28% 17%; /* Dark card background */
-    --card-foreground: 210 40% 98%; /* Light card text */
-    --popover: 215 28% 17%; /* Dark popover */
-    --popover-foreground: 210 40% 98%; /* Light popover text */
-    --primary: 174 64% 52%; /* Brighter #25c2a0 variant for dark mode */
-    --primary-foreground: 215 28% 17%; /* Dark text on primary */
-    --secondary: 215 28% 25%; /* Darker secondary */
-    --secondary-foreground: 210 40% 98%; /* Light secondary text */
-    --muted: 215 28% 25%; /* Dark muted */
-    --muted-foreground: 215 20% 65%; /* Muted text */
-    --accent: 174 64% 57%; /* Bright #25c2a0 accent */
-    --accent-foreground: 215 28% 17%; /* Dark text on accent */
-    --destructive: 0 63% 31%; /* Darker red for dark mode */
-    --destructive-foreground: 210 40% 98%; /* Light text on destructive */
-    --border: 215 28% 25%; /* Dark border */
-    --input: 215 28% 25%; /* Dark input background */
-    --ring: 174 64% 52% / 0.5; /* Bright #25c2a0 focus ring */
+    --background: 215 28% 17%;
+    --foreground: 210 40% 98%;
+    --card: 215 28% 17%;
+    --card-foreground: 210 40% 98%;
+    --popover: 215 28% 17%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 174 69% 52%; /* #29d5b0 for dark mode */
+    --primary-foreground: 215 28% 17%;
+    --secondary: 215 28% 25%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 215 28% 25%;
+    --muted-foreground: 215 20% 65%;
+    --accent: 174 72% 56%; /* #32d8b4 for dark mode */
+    --accent-foreground: 215 28% 17%;
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 215 28% 25%;
+    --input: 215 28% 25%;
+    --ring: 174 69% 52% / 0.5;
 
-    /* Dark mode chart colors with #25c2a0 theme */
-    --chart-1: 174 64% 52%; /* Bright #25c2a0 */
-    --chart-2: 174 64% 57%; /* Lighter variant */
-    --chart-3: 210 40% 98%; /* Light gray */
-    --chart-4: 215 20% 65%; /* Medium gray */
-    --chart-5: 262 83% 68%; /* Brighter purple */
+    --chart-1: 174 69% 52%;
+    --chart-2: 174 72% 56%;
+    --chart-3: 174 77% 62%;
+    --chart-4: 210 40% 98%;
+    --chart-5: 262 83% 68%;
   }
 
   * {
@@ -70,10 +76,8 @@
 
   body {
     @apply bg-background text-foreground font-sans;
-    /* Added font-sans class for consistent typography */
   }
 
-  /* Added typography improvements */
   h1,
   h2,
   h3,
@@ -88,20 +92,19 @@
   }
 }
 
-/* Enhanced code block styles with #25c2a0 theme */
+/* Reduced spacing for more compact design */
 pre {
-  @apply rounded-lg border bg-muted/50 p-4 overflow-x-auto backdrop-blur-sm;
+  @apply rounded-lg border bg-muted/50 p-3 overflow-x-auto backdrop-blur-sm;
 }
 
 code {
-  @apply bg-muted/50 px-2 py-1 rounded text-sm font-mono;
+  @apply bg-muted/50 px-1.5 py-0.5 rounded text-sm font-mono;
 }
 
 pre code {
   @apply bg-transparent p-0;
 }
 
-/* Improved article content styles */
 .prose {
   @apply max-w-none;
 }
@@ -116,19 +119,19 @@ pre code {
 }
 
 .prose h1 {
-  @apply text-3xl sm:text-4xl mb-6;
+  @apply text-2xl sm:text-3xl mb-4;
 }
 
 .prose h2 {
-  @apply text-2xl sm:text-3xl mb-4 mt-8;
-}
-
-.prose h3 {
   @apply text-xl sm:text-2xl mb-3 mt-6;
 }
 
+.prose h3 {
+  @apply text-lg sm:text-xl mb-2 mt-4;
+}
+
 .prose p {
-  @apply text-muted-foreground leading-relaxed mb-4;
+  @apply text-muted-foreground leading-relaxed mb-3;
 }
 
 .prose a {
@@ -136,12 +139,12 @@ pre code {
 }
 
 .prose blockquote {
-  @apply border-l-4 border-primary/30 pl-6 py-2 italic text-muted-foreground bg-muted/30 rounded-r-lg my-6;
+  @apply border-l-4 border-primary/30 pl-4 py-2 italic text-muted-foreground bg-muted/30 rounded-r-lg my-4;
 }
 
 .prose ul,
 .prose ol {
-  @apply text-muted-foreground space-y-2 mb-4;
+  @apply text-muted-foreground space-y-1 mb-3;
 }
 
 .prose li {
@@ -152,34 +155,32 @@ pre code {
   @apply text-foreground font-semibold;
 }
 
+/* Smaller image sizes for blog content */
 .prose img {
-  @apply rounded-lg shadow-sm border;
+  @apply rounded-lg shadow-sm border max-w-md mx-auto;
 }
 
-/* Added smooth transitions for interactive elements */
 .prose a,
 button,
 [role="button"] {
   @apply transition-colors duration-200;
 }
 
-/* Added focus styles for accessibility */
 .prose a:focus,
 button:focus,
 [role="button"]:focus {
   @apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-background;
 }
 
-/* Added utility classes for consistent spacing */
+/* Reduced section padding for more compact layout */
 .section-padding {
-  @apply py-16 px-4;
+  @apply py-8 px-4;
 }
 
 .container-width {
   @apply mx-auto max-w-4xl;
 }
 
-/* Added animation utilities */
 @keyframes fade-in {
   from {
     opacity: 0;
@@ -195,13 +196,12 @@ button:focus,
   animation: fade-in 0.5s ease-out;
 }
 
-/* Updated gradient utilities to use #25c2a0 */
 .gradient-primary {
-  background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--accent)) 100%);
+  background: linear-gradient(135deg, var(--ifm-color-primary) 0%, var(--ifm-color-primary-light) 100%);
 }
 
 .gradient-text {
-  background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--accent)) 100%);
+  background: linear-gradient(135deg, var(--ifm-color-primary) 0%, var(--ifm-color-primary-light) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
