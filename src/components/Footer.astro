@@ -1,41 +1,129 @@
 ---
+import SocialLinks from './SocialLinks.astro';
+import { getLangFromUrl, getTranslations, getLocalizedPath } from '../i18n/config';
+
 const currentYear = new Date().getFullYear();
+const lang = getLangFromUrl(Astro.url);
+const t = getTranslations(lang);
+
+const footerLinks = {
+  navigation: [
+    { key: 'home', href: getLocalizedPath('/', lang) },
+    { key: 'blog', href: getLocalizedPath('/blog', lang) },
+    { key: 'projects', href: getLocalizedPath('/projects', lang) },
+    { key: 'experience', href: getLocalizedPath('/experience', lang) }
+  ],
+  resources: [
+    { 
+      name: 'RSS', 
+      href: '/rss.xml',
+      external: true
+    },
+    { 
+      name: 'Sitemap', 
+      href: '/sitemap-index.xml',
+      external: true
+    },
+    {
+      name: lang === 'zh' ? '标签' : 'Tags',
+      href: getLocalizedPath('/tags', lang)
+    },
+    {
+      name: lang === 'zh' ? '搜索' : 'Search',
+      href: getLocalizedPath('/search', lang)
+    }
+  ]
+};
 ---
 
-<footer class="border-t bg-background">
-  <div class="container mx-auto px-4 py-8">
-    <div class="flex flex-col items-center justify-between gap-4 md:flex-row">
-      <div class="flex flex-col items-center gap-4 px-8 md:flex-row md:gap-2 md:px-0">
-        <p class="text-center text-sm leading-loose text-muted-foreground md:text-left">
-          © {currentYear} 我的博客. 使用 
-          <a
-            href="https://astro.build"
-            target="_blank"
-            rel="noreferrer"
-            class="font-medium underline underline-offset-4"
-          >
-            Astro
-          </a>
-          构建.
+<footer class="border-t bg-muted/30">
+  <div class="container mx-auto px-4 py-12">
+    <!-- 重新设计Footer布局 -->
+    <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+      <!-- 品牌信息 -->
+      <div class="lg:col-span-2">
+        <div class="flex items-center space-x-2 mb-4">
+          <div class="h-8 w-8 rounded-lg bg-gradient-primary flex items-center justify-center">
+            <span class="text-primary-foreground font-bold text-sm">MB</span>
+          </div>
+          <span class="text-xl font-bold">
+            {lang === 'zh' ? '我的博客' : 'My Blog'}
+          </span>
+        </div>
+        <p class="text-muted-foreground mb-6 max-w-md">
+          {lang === 'zh' 
+            ? '分享技术见解、开发经验和个人思考的地方。专注于全栈开发、后端架构和现代Web技术。'
+            : 'A place to share technical insights, development experiences, and personal thoughts. Focused on full-stack development, backend architecture, and modern web technologies.'
+          }
         </p>
+        <SocialLinks size="md" lang={lang} />
       </div>
-      <div class="flex items-center space-x-4">
+      
+      <!-- 导航链接 -->
+      <div>
+        <h3 class="font-semibold text-foreground mb-4">
+          {lang === 'zh' ? '导航' : 'Navigation'}
+        </h3>
+        <ul class="space-y-2">
+          {footerLinks.navigation.map((link) => (
+            <li>
+              <a 
+                href={link.href}
+                class="text-sm text-muted-foreground hover:text-primary transition-colors"
+              >
+                {t(`nav.${link.key}`)}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+      
+      <!-- 资源链接 -->
+      <div>
+        <h3 class="font-semibold text-foreground mb-4">
+          {lang === 'zh' ? '资源' : 'Resources'}
+        </h3>
+        <ul class="space-y-2">
+          {footerLinks.resources.map((link) => (
+            <li>
+              <a 
+                href={link.href}
+                class="text-sm text-muted-foreground hover:text-primary transition-colors"
+                target={link.external ? "_blank" : undefined}
+                rel={link.external ? "noreferrer" : undefined}
+              >
+                {link.name}
+                {link.external && (
+                  <svg class="inline ml-1 h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                  </svg>
+                )}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+    
+    <!-- 改进版权信息 -->
+    <div class="mt-8 pt-8 border-t flex flex-col md:flex-row items-center justify-between gap-4">
+      <p class="text-sm text-muted-foreground">
+        © {currentYear} {lang === 'zh' ? '我的博客' : 'My Blog'}. 
+        {lang === 'zh' ? '使用' : 'Built with'} 
         <a
-          href="/rss.xml"
-          class="text-sm text-muted-foreground hover:text-foreground"
+          href="https://astro.build"
           target="_blank"
           rel="noreferrer"
+          class="font-medium text-primary hover:text-accent underline underline-offset-4 transition-colors"
         >
-          RSS
+          Astro
         </a>
-        <a
-          href="/sitemap-index.xml"
-          class="text-sm text-muted-foreground hover:text-foreground"
-          target="_blank"
-          rel="noreferrer"
-        >
-          Sitemap
-        </a>
+        {lang === 'zh' ? '构建' : ''}.
+      </p>
+      <div class="flex items-center gap-4 text-xs text-muted-foreground">
+        <span>{lang === 'zh' ? '主题色' : 'Theme'}: #25c2a0</span>
+        <span>•</span>
+        <span>{lang === 'zh' ? '响应式设计' : 'Responsive Design'}</span>
       </div>
     </div>
   </div>

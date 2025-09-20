@@ -1,0 +1,371 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+---
+
+<BaseLayout 
+  title="工作经历 - 我的职业历程"
+  description="探索我在全栈开发、后端系统和团队领导方面的专业经验，涵盖各个行业和技术。"
+>
+  <Header />
+  
+  <main class="flex-1">
+    <!-- Hero Section -->
+    <section class="section-padding bg-gradient-to-br from-background via-muted/20 to-background">
+      <div class="container-width text-center">
+        <h1 class="text-4xl font-bold tracking-tight text-foreground sm:text-5xl lg:text-6xl mb-6">
+          我的<span class="gradient-text">经历</span>
+        </h1>
+        <p class="mx-auto max-w-2xl text-lg leading-8 text-muted-foreground sm:text-xl">
+          超过5年构建可扩展后端系统、领导开发团队和在各个行业交付企业级解决方案的经验。
+        </p>
+      </div>
+    </section>
+
+    <!-- Experience Timeline -->
+    <section class="section-padding">
+      <div class="container-width">
+        <div class="relative">
+          <!-- Timeline Line -->
+          <div class="absolute left-8 top-0 bottom-0 w-0.5 bg-border"></div>
+          
+          <div class="space-y-12">
+            <!-- Current Position -->
+            <div class="relative flex items-start space-x-8">
+              <div class="flex-shrink-0">
+                <div class="h-16 w-16 rounded-full bg-primary flex items-center justify-center shadow-lg">
+                  <svg class="h-8 w-8 text-primary-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                  </svg>
+                </div>
+              </div>
+              <div class="flex-1 min-w-0">
+                <div class="bg-card rounded-xl border p-8 shadow-sm">
+                  <div class="flex items-start justify-between mb-4">
+                    <div>
+                      <h3 class="text-2xl font-bold text-card-foreground">高级全栈开发工程师</h3>
+                      <p class="text-lg text-primary font-semibold">科技解决方案公司</p>
+                    </div>
+                    <div class="text-right">
+                      <span class="inline-flex items-center rounded-full bg-primary/10 px-3 py-1 text-sm font-medium text-primary">
+                        当前
+                      </span>
+                      <p class="text-sm text-muted-foreground mt-1">2022 - 至今</p>
+                    </div>
+                  </div>
+                  
+                  <p class="text-muted-foreground mb-6 leading-relaxed">
+                    领导企业级Web应用程序和微服务架构的开发。负责技术决策、代码审查和指导初级开发人员，同时为财富500强客户提供高质量解决方案。
+                  </p>
+                  
+                  <div class="space-y-4 mb-6">
+                    <div>
+                      <h4 class="font-semibold text-card-foreground mb-2">主要成就：</h4>
+                      <ul class="text-muted-foreground space-y-2 text-sm">
+                        <li>• 架构并实施服务于100万+日活用户的微服务平台</li>
+                        <li>• 通过性能优化将系统响应时间减少40%</li>
+                        <li>• 领导从单体架构到微服务架构的迁移</li>
+                        <li>• 指导5+名初级开发人员并建立代码审查流程</li>
+                        <li>• 实施CI/CD管道，将部署时间减少60%</li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <div class="flex flex-wrap gap-2">
+                    <span class="inline-flex items-center rounded-full bg-primary/10 px-3 py-1 text-sm font-medium text-primary">Java</span>
+                    <span class="inline-flex items-center rounded-full bg-primary/10 px-3 py-1 text-sm font-medium text-primary">Spring Boot</span>
+                    <span class="inline-flex items-center rounded-full bg-primary/10 px-3 py-1 text-sm font-medium text-primary">React</span>
+                    <span class="inline-flex items-center rounded-full bg-primary/10 px-3 py-1 text-sm font-medium text-primary">AWS</span>
+                    <span class="inline-flex items-center rounded-full bg-primary/10 px-3 py-1 text-sm font-medium text-primary">Kubernetes</span>
+                    <span class="inline-flex items-center rounded-full bg-primary/10 px-3 py-1 text-sm font-medium text-primary">PostgreSQL</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Previous Position 1 -->
+            <div class="relative flex items-start space-x-8">
+              <div class="flex-shrink-0">
+                <div class="h-16 w-16 rounded-full bg-accent flex items-center justify-center shadow-lg">
+                  <svg class="h-8 w-8 text-accent-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+                  </svg>
+                </div>
+              </div>
+              <div class="flex-1 min-w-0">
+                <div class="bg-card rounded-xl border p-8 shadow-sm">
+                  <div class="flex items-start justify-between mb-4">
+                    <div>
+                      <h3 class="text-2xl font-bold text-card-foreground">后端开发工程师</h3>
+                      <p class="text-lg text-accent font-semibold">创新科技有限公司</p>
+                    </div>
+                    <div class="text-right">
+                      <p class="text-sm text-muted-foreground">2020 - 2022</p>
+                    </div>
+                  </div>
+                  
+                  <p class="text-muted-foreground mb-6 leading-relaxed">
+                    专注于金融科技应用的后端开发和API设计。与产品团队密切合作，提供处理金融交易和用户数据的安全、可扩展解决方案，严格遵守合规要求。
+                  </p>
+                  
+                  <div class="space-y-4 mb-6">
+                    <div>
+                      <h4 class="font-semibold text-card-foreground mb-2">主要贡献：</h4>
+                      <ul class="text-muted-foreground space-y-2 text-sm">
+                        <li>• 开发处理每日10万+交易的RESTful API</li>
+                        <li>• 实施OAuth2和JWT身份验证系统</li>
+                        <li>• 使用WebSocket构建实时通知系统</li>
+                        <li>• 优化数据库查询，响应时间减少50%</li>
+                        <li>• 确保支付处理的PCI DSS合规性</li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <div class="flex flex-wrap gap-2">
+                    <span class="inline-flex items-center rounded-full bg-accent/10 px-3 py-1 text-sm font-medium text-accent">Spring Boot</span>
+                    <span class="inline-flex items-center rounded-full bg-accent/10 px-3 py-1 text-sm font-medium text-accent">MySQL</span>
+                    <span class="inline-flex items-center rounded-full bg-accent/10 px-3 py-1 text-sm font-medium text-accent">Redis</span>
+                    <span class="inline-flex items-center rounded-full bg-accent/10 px-3 py-1 text-sm font-medium text-accent">Docker</span>
+                    <span class="inline-flex items-center rounded-full bg-accent/10 px-3 py-1 text-sm font-medium text-accent">RabbitMQ</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Previous Position 2 -->
+            <div class="relative flex items-start space-x-8">
+              <div class="flex-shrink-0">
+                <div class="h-16 w-16 rounded-full bg-secondary flex items-center justify-center shadow-lg">
+                  <svg class="h-8 w-8 text-secondary-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                  </svg>
+                </div>
+              </div>
+              <div class="flex-1 min-w-0">
+                <div class="bg-card rounded-xl border p-8 shadow-sm">
+                  <div class="flex items-start justify-between mb-4">
+                    <div>
+                      <h3 class="text-2xl font-bold text-card-foreground">Java开发工程师</h3>
+                      <p class="text-lg text-secondary-foreground font-semibold">创业公司XYZ</p>
+                    </div>
+                    <div class="text-right">
+                      <p class="text-sm text-muted-foreground">2019 - 2020</p>
+                    </div>
+                  </div>
+                  
+                  <p class="text-muted-foreground mb-6 leading-relaxed">
+                    作为快速成长的创业公司的首批开发人员之一加入。负责从零开始构建核心平台，建立开发实践，并扩展系统以处理快速的用户增长。
+                  </p>
+                  
+                  <div class="space-y-4 mb-6">
+                    <div>
+                      <h4 class="font-semibold text-card-foreground mb-2">主要成就：</h4>
+                      <ul class="text-muted-foreground space-y-2 text-sm">
+                        <li>• 从零构建MVP，服务1万+初始用户</li>
+                        <li>• 建立编码标准和开发工作流程</li>
+                        <li>• 实施自动化测试，代码覆盖率达到85%</li>
+                        <li>• 为快速增长设计可扩展的数据库架构</li>
+                        <li>• 直接与创始人合作制定产品策略</li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <div class="flex flex-wrap gap-2">
+                    <span class="inline-flex items-center rounded-full bg-secondary/20 px-3 py-1 text-sm font-medium text-secondary-foreground">Java</span>
+                    <span class="inline-flex items-center rounded-full bg-secondary/20 px-3 py-1 text-sm font-medium text-secondary-foreground">Spring MVC</span>
+                    <span class="inline-flex items-center rounded-full bg-secondary/20 px-3 py-1 text-sm font-medium text-secondary-foreground">PostgreSQL</span>
+                    <span class="inline-flex items-center rounded-full bg-secondary/20 px-3 py-1 text-sm font-medium text-secondary-foreground">Angular</span>
+                    <span class="inline-flex items-center rounded-full bg-secondary/20 px-3 py-1 text-sm font-medium text-secondary-foreground">AWS</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Education -->
+            <div class="relative flex items-start space-x-8">
+              <div class="flex-shrink-0">
+                <div class="h-16 w-16 rounded-full bg-muted flex items-center justify-center shadow-lg">
+                  <svg class="h-8 w-8 text-muted-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
+                  </svg>
+                </div>
+              </div>
+              <div class="flex-1 min-w-0">
+                <div class="bg-card rounded-xl border p-8 shadow-sm">
+                  <div class="flex items-start justify-between mb-4">
+                    <div>
+                      <h3 class="text-2xl font-bold text-card-foreground">计算机科学学士</h3>
+                      <p class="text-lg text-muted-foreground font-semibold">科技大学</p>
+                    </div>
+                    <div class="text-right">
+                      <p class="text-sm text-muted-foreground">2015 - 2019</p>
+                    </div>
+                  </div>
+                  
+                  <p class="text-muted-foreground mb-6 leading-relaxed">
+                    以优异成绩毕业，专注于软件工程、算法和数据库系统。在大学期间积极参与编程竞赛和开源贡献。
+                  </p>
+                  
+                  <div class="space-y-4 mb-6">
+                    <div>
+                      <h4 class="font-semibold text-card-foreground mb-2">学术亮点：</h4>
+                      <ul class="text-muted-foreground space-y-2 text-sm">
+                        <li>• GPA：3.8/4.0，连续3个学期获得院长名单</li>
+                        <li>• 领导大学编程团队进入区域竞赛决赛</li>
+                        <li>• 发表关于分布式系统优化的研究论文</li>
+                        <li>• 担任数据结构与算法课程助教</li>
+                        <li>• 在大型科技公司完成实习</li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <div class="flex flex-wrap gap-2">
+                    <span class="inline-flex items-center rounded-full bg-muted/50 px-3 py-1 text-sm font-medium text-muted-foreground">计算机科学</span>
+                    <span class="inline-flex items-center rounded-full bg-muted/50 px-3 py-1 text-sm font-medium text-muted-foreground">软件工程</span>
+                    <span class="inline-flex items-center rounded-full bg-muted/50 px-3 py-1 text-sm font-medium text-muted-foreground">算法</span>
+                    <span class="inline-flex items-center rounded-full bg-muted/50 px-3 py-1 text-sm font-medium text-muted-foreground">数据库系统</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="section-padding bg-muted/30">
+      <div class="container-width">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl font-bold tracking-tight text-foreground sm:text-4xl mb-4">
+            技术技能
+          </h2>
+          <p class="text-lg text-muted-foreground max-w-2xl mx-auto">
+            我在不同领域和技术方面的技术专长的全面概述。
+          </p>
+        </div>
+
+        <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          <!-- Backend Development -->
+          <div class="bg-card rounded-xl border p-6 shadow-sm">
+            <div class="flex items-center mb-4">
+              <div class="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center mr-3">
+                <svg class="h-6 w-6 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01" />
+                </svg>
+              </div>
+              <h3 class="text-lg font-semibold text-card-foreground">后端开发</h3>
+            </div>
+            <div class="space-y-3">
+              <div class="flex justify-between items-center">
+                <span class="text-sm text-muted-foreground">Java & Spring</span>
+                <div class="w-24 bg-muted rounded-full h-2">
+                  <div class="bg-primary h-2 rounded-full" style="width: 95%"></div>
+                </div>
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="text-sm text-muted-foreground">微服务</span>
+                <div class="w-24 bg-muted rounded-full h-2">
+                  <div class="bg-primary h-2 rounded-full" style="width: 90%"></div>
+                </div>
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="text-sm text-muted-foreground">REST APIs</span>
+                <div class="w-24 bg-muted rounded-full h-2">
+                  <div class="bg-primary h-2 rounded-full" style="width: 95%"></div>
+                </div>
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="text-sm text-muted-foreground">数据库设计</span>
+                <div class="w-24 bg-muted rounded-full h-2">
+                  <div class="bg-primary h-2 rounded-full" style="width: 85%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Frontend Development -->
+          <div class="bg-card rounded-xl border p-6 shadow-sm">
+            <div class="flex items-center mb-4">
+              <div class="h-10 w-10 rounded-lg bg-accent/10 flex items-center justify-center mr-3">
+                <svg class="h-6 w-6 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+              </div>
+              <h3 class="text-lg font-semibold text-card-foreground">前端开发</h3>
+            </div>
+            <div class="space-y-3">
+              <div class="flex justify-between items-center">
+                <span class="text-sm text-muted-foreground">React & Vue.js</span>
+                <div class="w-24 bg-muted rounded-full h-2">
+                  <div class="bg-accent h-2 rounded-full" style="width: 85%"></div>
+                </div>
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="text-sm text-muted-foreground">TypeScript</span>
+                <div class="w-24 bg-muted rounded-full h-2">
+                  <div class="bg-accent h-2 rounded-full" style="width: 80%"></div>
+                </div>
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="text-sm text-muted-foreground">CSS & Tailwind</span>
+                <div class="w-24 bg-muted rounded-full h-2">
+                  <div class="bg-accent h-2 rounded-full" style="width: 90%"></div>
+                </div>
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="text-sm text-muted-foreground">响应式设计</span>
+                <div class="w-24 bg-muted rounded-full h-2">
+                  <div class="bg-accent h-2 rounded-full" style="width: 85%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- DevOps & Cloud -->
+          <div class="bg-card rounded-xl border p-6 shadow-sm">
+            <div class="flex items-center mb-4">
+              <div class="h-10 w-10 rounded-lg bg-secondary/20 flex items-center justify-center mr-3">
+                <svg class="h-6 w-6 text-secondary-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
+                </svg>
+              </div>
+              <h3 class="text-lg font-semibold text-card-foreground">DevOps & 云服务</h3>
+            </div>
+            <div class="space-y-3">
+              <div class="flex justify-between items-center">
+                <span class="text-sm text-muted-foreground">AWS & Azure</span>
+                <div class="w-24 bg-muted rounded-full h-2">
+                  <div class="bg-secondary-foreground h-2 rounded-full" style="width: 80%"></div>
+                </div>
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="text-sm text-muted-foreground">Docker & K8s</span>
+                <div class="w-24 bg-muted rounded-full h-2">
+                  <div class="bg-secondary-foreground h-2 rounded-full" style="width: 85%"></div>
+                </div>
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="text-sm text-muted-foreground">CI/CD 管道</span>
+                <div class="w-24 bg-muted rounded-full h-2">
+                  <div class="bg-secondary-foreground h-2 rounded-full" style="width: 90%"></div>
+                </div>
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="text-sm text-muted-foreground">基础设施即代码</span>
+                <div class="w-24 bg-muted rounded-full h-2">
+                  <div class="bg-secondary-foreground h-2 rounded-full" style="width: 75%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <Footer />
+</BaseLayout>

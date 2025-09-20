@@ -11,6 +11,8 @@ export const ui = {
   zh: {
     "nav.home": "首页",
     "nav.blog": "博客",
+    "nav.projects": "项目",
+    "nav.experience": "经历",
     "nav.tags": "标签",
     "nav.search": "搜索",
     "nav.about": "关于",
@@ -32,6 +34,8 @@ export const ui = {
   en: {
     "nav.home": "Home",
     "nav.blog": "Blog",
+    "nav.projects": "Projects",
+    "nav.experience": "Experience",
     "nav.tags": "Tags",
     "nav.search": "Search",
     "nav.about": "About",
