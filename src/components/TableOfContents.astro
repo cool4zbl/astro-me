@@ -17,23 +17,23 @@ const t = texts[lang];
 ---
 
 {tocHeadings.length > 0 && (
-  <div class="sticky top-8 bg-card border rounded-xl p-6 shadow-sm">
-    <h3 class="text-lg font-semibold text-card-foreground mb-4 flex items-center">
-      <svg class="mr-2 h-5 w-5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+  <div class="sticky top-6 rounded-xl border bg-card/80 p-4 shadow-sm backdrop-blur-sm lg:max-w-xs">
+    <h3 class="mb-3 flex items-center text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+      <svg class="mr-2 h-4 w-4 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16" />
       </svg>
       {t.title}
     </h3>
-    <nav class="space-y-2">
+    <nav class="space-y-1 text-sm leading-snug">
       {tocHeadings.map((heading) => (
         <a
           href={`#${heading.slug}`}
-          class={`block text-sm transition-colors hover:text-primary ${
+          class={`block rounded-md px-2 py-1 transition-colors hover:bg-primary/10 hover:text-primary ${
             heading.depth === 2 
-              ? 'text-foreground font-medium' 
+              ? 'pl-1 text-muted-foreground font-medium' 
               : heading.depth === 3 
-                ? 'text-muted-foreground pl-4' 
-                : 'text-muted-foreground pl-8'
+                ? 'pl-4 text-muted-foreground text-sm' 
+                : 'pl-6 text-muted-foreground text-xs'
           }`}
         >
           {heading.text}

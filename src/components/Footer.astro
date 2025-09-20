@@ -5,12 +5,15 @@ import { getLangFromUrl, getTranslations, getLocalizedPath } from '../i18n/confi
 const currentYear = new Date().getFullYear();
 const lang = getLangFromUrl(Astro.url);
 const t = getTranslations(lang);
+const pathname = Astro.url.pathname;
+const isHome = ['/', '/zh', '/zh/', '/en', '/en/'].includes(pathname);
 
 const footerLinks = {
   navigation: [
     { key: 'home', href: getLocalizedPath('/', lang) },
     { key: 'blog', href: getLocalizedPath('/blog', lang) },
     { key: 'projects', href: getLocalizedPath('/projects', lang) },
+    { key: 'interests', href: getLocalizedPath('/interests', lang) },
     { key: 'experience', href: getLocalizedPath('/experience', lang) }
   ],
   resources: [
@@ -34,97 +37,158 @@ const footerLinks = {
     }
   ]
 };
+
+const mottoPool = [
+  {
+    zh: '慢下来也能走得远，关键是保持持续的节奏。',
+    en: 'Going slower still gets you far when the rhythm is sustainable.'
+  },
+  {
+    zh: '写代码之前先想一想用户的感受，故事就会顺很多。',
+    en: 'When you picture the user first, the code tends to fall into place.'
+  },
+  {
+    zh: '记录比记忆可靠，哪怕只是三行札记。',
+    en: 'Notes beat memory—three lines today save hours later.'
+  },
+  {
+    zh: '保持好奇，工具会更新，方法也会。',
+    en: 'Stay curious—tools evolve, so can your approach.'
+  }
+];
+
+const mottoTexts = mottoPool.map((item) => item[lang]);
+const mottoId = `motto-${Math.random().toString(36).slice(2, 8)}`;
+const initialMotto = mottoTexts[0];
 ---
 
 <footer class="border-t bg-muted/30">
   <div class="container mx-auto px-4 py-12">
-    <!-- 重新设计Footer布局 -->
-    <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
-      <!-- 品牌信息 -->
-      <div class="lg:col-span-2">
-        <div class="flex items-center space-x-2 mb-4">
-          <div class="h-8 w-8 rounded-lg bg-gradient-primary flex items-center justify-center">
-            <span class="text-primary-foreground font-bold text-sm">MB</span>
+    {isHome ? (
+      <div class="space-y-10 text-center">
+        <div class="flex flex-col items-center gap-3">
+          <div class="flex items-center gap-2">
+            <div class="h-9 w-9 rounded-xl bg-gradient-primary flex items-center justify-center">
+              <span class="text-primary-foreground text-sm font-bold">MB</span>
+            </div>
+            <span class="text-xl font-semibold">{lang === 'zh' ? '我的网站' : 'My Space'}</span>
           </div>
-          <span class="text-xl font-bold">
-            {lang === 'zh' ? '我的博客' : 'My Blog'}
-          </span>
+          <div
+            id={mottoId}
+            data-mottos={JSON.stringify(mottoTexts)}
+            class="relative w-full overflow-hidden rounded-3xl bg-gradient-to-r from-primary via-primary/80 to-primary/60 p-[1px]"
+          >
+            <div class="rounded-3xl bg-background/95 p-6 text-left shadow-sm sm:p-8">
+              <p class="text-xs uppercase tracking-[0.3em] text-primary/70">
+                {lang === 'zh' ? '今日灵感' : 'inspiring motto'}
+              </p>
+              <p data-motto-text class="mt-4 text-base leading-relaxed text-foreground sm:text-lg">
+                {initialMotto}
+              </p>
+            </div>
+          </div>
+          <SocialLinks size="md" lang={lang} />
         </div>
-        <p class="text-muted-foreground mb-6 max-w-md">
-          {lang === 'zh' 
-            ? '分享技术见解、开发经验和个人思考的地方。专注于全栈开发、后端架构和现代Web技术。'
-            : 'A place to share technical insights, development experiences, and personal thoughts. Focused on full-stack development, backend architecture, and modern web technologies.'
-          }
-        </p>
-        <SocialLinks size="md" lang={lang} />
+        <div class="border-t pt-6 text-xs text-muted-foreground sm:text-sm">
+          © {currentYear} {lang === 'zh' ? '由 Astro 驱动 · 随笔与代码同行' : 'Built with Astro · Notes & code in balance'}
+        </div>
       </div>
-      
-      <!-- 导航链接 -->
-      <div>
-        <h3 class="font-semibold text-foreground mb-4">
-          {lang === 'zh' ? '导航' : 'Navigation'}
-        </h3>
-        <ul class="space-y-2">
-          {footerLinks.navigation.map((link) => (
-            <li>
-              <a 
-                href={link.href}
-                class="text-sm text-muted-foreground hover:text-primary transition-colors"
-              >
-                {t(`nav.${link.key}`)}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </div>
-      
-      <!-- 资源链接 -->
-      <div>
-        <h3 class="font-semibold text-foreground mb-4">
-          {lang === 'zh' ? '资源' : 'Resources'}
-        </h3>
-        <ul class="space-y-2">
-          {footerLinks.resources.map((link) => (
-            <li>
-              <a 
-                href={link.href}
-                class="text-sm text-muted-foreground hover:text-primary transition-colors"
-                target={link.external ? "_blank" : undefined}
-                rel={link.external ? "noreferrer" : undefined}
-              >
-                {link.name}
-                {link.external && (
-                  <svg class="inline ml-1 h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                  </svg>
-                )}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </div>
-    
-    <!-- 改进版权信息 -->
-    <div class="mt-8 pt-8 border-t flex flex-col md:flex-row items-center justify-between gap-4">
-      <p class="text-sm text-muted-foreground">
-        © {currentYear} {lang === 'zh' ? '我的博客' : 'My Blog'}. 
-        {lang === 'zh' ? '使用' : 'Built with'} 
-        <a
-          href="https://astro.build"
-          target="_blank"
-          rel="noreferrer"
-          class="font-medium text-primary hover:text-accent underline underline-offset-4 transition-colors"
-        >
-          Astro
-        </a>
-        {lang === 'zh' ? '构建' : ''}.
-      </p>
-      <div class="flex items-center gap-4 text-xs text-muted-foreground">
-        <span>{lang === 'zh' ? '主题色' : 'Theme'}: #25c2a0</span>
-        <span>•</span>
-        <span>{lang === 'zh' ? '响应式设计' : 'Responsive Design'}</span>
-      </div>
-    </div>
+    ) : (
+      <>
+        <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+          <div class="lg:col-span-2">
+            <div class="mb-4 flex items-center space-x-2">
+              <div class="h-8 w-8 rounded-lg bg-gradient-primary flex items-center justify-center">
+                <span class="text-primary-foreground font-bold text-sm">MB</span>
+              </div>
+              <span class="text-xl font-bold">
+                {lang === 'zh' ? '我的博客' : 'My Blog'}
+              </span>
+            </div>
+            <p class="mb-6 max-w-md text-sm leading-relaxed text-muted-foreground">
+              {lang === 'zh' 
+                ? '分享技术见解、开发经验和个人思考的地方。专注于全栈开发、后端架构和现代 Web 技术。'
+                : 'A place to share technical insights, development experiences, and personal thoughts. Focused on full-stack development, backend architecture, and modern web technologies.'
+              }
+            </p>
+            <SocialLinks size="md" lang={lang} />
+          </div>
+
+          <div>
+            <h3 class="mb-4 text-sm font-semibold text-foreground uppercase tracking-[0.2em]">
+              {lang === 'zh' ? '导航' : 'Navigation'}
+            </h3>
+            <ul class="space-y-2 text-sm text-muted-foreground">
+              {footerLinks.navigation.map((link) => (
+                <li>
+                  <a 
+                    href={link.href}
+                    class="transition-colors hover:text-primary"
+                  >
+                    {t(`nav.${link.key}`)}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h3 class="mb-4 text-sm font-semibold text-foreground uppercase tracking-[0.2em]">
+              {lang === 'zh' ? '资源' : 'Resources'}
+            </h3>
+            <ul class="space-y-2 text-sm text-muted-foreground">
+              {footerLinks.resources.map((link) => (
+                <li>
+                  <a 
+                    href={link.href}
+                    class="transition-colors hover:text-primary"
+                    target={link.external ? "_blank" : undefined}
+                    rel={link.external ? "noreferrer" : undefined}
+                  >
+                    {link.name}
+                    {link.external && (
+                      <svg class="ml-1 inline h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                      </svg>
+                    )}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        <div class="mt-8 flex flex-col gap-4 border-t pt-8 text-xs text-muted-foreground sm:flex-row sm:items-center sm:justify-between sm:text-sm">
+          <p>
+            © {currentYear} {lang === 'zh' ? '我的博客' : 'My Blog'}. 
+            {lang === 'zh' ? '使用 Astro 构建。' : 'Built with Astro.'}
+          </p>
+          <div class="flex items-center gap-4">
+            <span>{lang === 'zh' ? '主题色' : 'Theme'}: #25c2a0</span>
+            <span>•</span>
+            <span>{lang === 'zh' ? '响应式设计' : 'Responsive Design'}</span>
+          </div>
+        </div>
+      </>
+    )}
   </div>
+  {isHome && (
+    <script is:inline>
+      const mottoContainer = document.getElementById('{mottoId}');
+      if (mottoContainer) {
+        try {
+          const mottos = JSON.parse(mottoContainer.dataset.mottos || '[]');
+          if (Array.isArray(mottos) && mottos.length > 0) {
+            const pick = mottos[Math.floor(Math.random() * mottos.length)];
+            const textNode = mottoContainer.querySelector('[data-motto-text]');
+            if (pick && textNode) {
+              textNode.textContent = pick;
+            }
+          }
+        } catch (error) {
+          console.warn('Failed to parse motto list', error);
+        }
+      }
+    </script>
+  )}
 </footer>

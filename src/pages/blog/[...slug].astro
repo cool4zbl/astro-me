@@ -33,89 +33,81 @@ const { Content, headings } = await post.render();
   <Header />
   
   <main class="flex-1">
-    <article class="container mx-auto px-4 py-16">
-      <!-- 更新布局为两栏设计，左侧内容右侧TOC -->
-      <div class="mx-auto max-w-6xl">
-        <div class="grid gap-8 lg:grid-cols-4">
+    <article class="container mx-auto px-4 py-12 lg:py-16">
+      <div class="mx-auto flex max-w-5xl flex-col gap-12 lg:flex-row">
+        <div class="w-full lg:flex-1 lg:max-w-3xl">
           <!-- 主要内容区域 -->
-          <div class="lg:col-span-3">
-            <header class="mb-8">
-              <h1 class="text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
-                {post.data.title}
-              </h1>
-              <p class="mt-4 text-xl text-muted-foreground">
-                {post.data.description}
-              </p>
-              <div class="mt-6 flex items-center gap-4 text-sm text-muted-foreground">
-                <FormattedDate date={post.data.pubDate} />
-                {post.data.updatedDate && (
-                  <span>
-                    · 更新于 <FormattedDate date={post.data.updatedDate} />
-                  </span>
-                )}
-              </div>
-              {post.data.tags.length > 0 && (
-                <div class="mt-4">
-                  <TagList tags={post.data.tags} />
-                </div>
+          <header class="mb-6 space-y-4">
+            <h1 class="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+              {post.data.title}
+            </h1>
+            <p class="text-lg text-muted-foreground">
+              {post.data.description}
+            </p>
+            <div class="flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
+              <FormattedDate date={post.data.pubDate} />
+              {post.data.updatedDate && (
+                <span>
+                  · 更新于 <FormattedDate date={post.data.updatedDate} />
+                </span>
               )}
-            </header>
-            
-            {post.data.heroImage && (
-              <div class="mb-8">
-                <img
-                  src={post.data.heroImage || "/placeholder.svg"}
-                  alt={post.data.title}
-                  class="w-full rounded-lg border bg-muted"
-                />
+            </div>
+            {post.data.tags.length > 0 && (
+              <div>
+                <TagList tags={post.data.tags} />
               </div>
             )}
-            
-            <div class="prose prose-lg max-w-none dark:prose-invert">
-              <Content />
+          </header>
+
+          {post.data.heroImage && (
+            <div class="mb-8 overflow-hidden rounded-xl border bg-muted/40">
+              <img
+                src={post.data.heroImage || "/placeholder.svg"}
+                alt={post.data.title}
+                class="h-full w-full max-h-80 object-cover"
+              />
             </div>
-            
-            <footer class="mt-16 border-t pt-8">
-              <div class="flex items-center justify-between">
-                <div>
-                  <p class="text-sm text-muted-foreground">
-                    发布于 <FormattedDate date={post.data.pubDate} />
-                  </p>
-                  {post.data.tags.length > 0 && (
-                    <div class="mt-2">
-                      <TagList tags={post.data.tags} />
-                    </div>
-                  )}
-                </div>
-                <a
-                  href="/blog"
-                  class="text-sm font-medium text-primary hover:underline"
-                >
-                  ← 返回博客
-                </a>
+          )}
+
+          <div class="prose prose-lg mx-auto dark:prose-invert">
+            <Content />
+          </div>
+
+          <footer class="mt-12 border-t pt-8">
+            <div class="flex flex-col gap-4 text-sm text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
+              <div class="space-y-2">
+                <p>发布于 <FormattedDate date={post.data.pubDate} /></p>
+                {post.data.tags.length > 0 && (
+                  <TagList tags={post.data.tags} />
+                )}
               </div>
-            </footer>
-            
-            <!-- 在评论区前添加相关文章推荐 -->
+              <a
+                href="/blog"
+                class="inline-flex items-center text-sm font-medium text-primary hover:text-accent"
+              >
+                ← 返回博客
+              </a>
+            </div>
+          </footer>
+
+          <div class="mt-12">
             <RelatedPosts 
               currentSlug={post.slug} 
               currentTags={post.data.tags}
               lang="zh"
             />
-            
-            <!-- Comments Section -->
-            <div class="mt-16">
-              <Comments />
-            </div>
           </div>
-          
-          <!-- 右侧边栏添加目录 -->
-          <div class="lg:col-span-1">
-            <div class="lg:sticky lg:top-8">
-              <TableOfContents headings={headings} lang="zh" />
-            </div>
+
+          <div class="mt-16">
+            <Comments />
           </div>
         </div>
+
+        <aside class="w-full lg:w-64 lg:flex-none">
+          <div class="lg:sticky lg:top-6">
+            <TableOfContents headings={headings} lang="zh" />
+          </div>
+        </aside>
       </div>
     </article>
   </main>

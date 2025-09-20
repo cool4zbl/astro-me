@@ -4,64 +4,80 @@
 
 @layer base {
   :root {
-    /* Updated color palette to use #25c2a0 as primary theme color */
-    --background: 0 0% 100%; /* Pure white background */
-    --foreground: 215 25% 27%; /* Slate gray for text */
-    --card: 210 40% 96%; /* Light gray for cards */
-    --card-foreground: 215 25% 27%; /* Card text color */
-    --popover: 0 0% 100%; /* Popover background */
-    --popover-foreground: 215 25% 27%; /* Popover text */
-    --primary: 174 64% 47%; /* #25c2a0 converted to HSL */
-    --primary-foreground: 0 0% 100%; /* White text on primary */
-    --secondary: 210 40% 96%; /* Light gray secondary */
-    --secondary-foreground: 215 25% 27%; /* Secondary text */
-    --muted: 200 50% 98%; /* Very light cyan for muted elements */
-    --muted-foreground: 215 25% 27%; /* Muted text */
-    --accent: 174 64% 52%; /* Lighter variant of #25c2a0 */
-    --accent-foreground: 0 0% 100%; /* White text on accent */
-    --destructive: 0 84.2% 60.2%; /* Red for destructive actions */
-    --destructive-foreground: 0 0% 100%; /* White text on destructive */
-    --border: 220 13% 91%; /* Light border color */
-    --input: 210 40% 98%; /* Input field background */
-    --ring: 174 64% 47% / 0.5; /* Focus ring with #25c2a0 */
-    --radius: 0.5rem; /* Corner rounding */
+    --ifm-color-primary: #25c2a0;
+    --ifm-color-primary-dark: #21af90;
+    --ifm-color-primary-darker: #1fa588;
+    --ifm-color-primary-darkest: #1a8870;
+    --ifm-color-primary-light: #29d5b0;
+    --ifm-color-primary-lighter: #32d8b4;
+    --ifm-color-primary-lightest: #4fddbf;
 
-    /* Updated chart colors to use #25c2a0 theme */
-    --chart-1: 174 64% 47%; /* Primary #25c2a0 */
-    --chart-2: 174 64% 52%; /* Accent variant */
-    --chart-3: 215 25% 27%; /* Dark gray */
-    --chart-4: 215 16% 47%; /* Medium gray */
-    --chart-5: 262 83% 58%; /* Purple accent */
+    --background: 0 0% 100%;
+    --foreground: 215 25% 18%;
+    --card: 210 40% 96%;
+    --card-foreground: 215 25% 18%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 215 25% 18%;
+    --primary: 166.99 67.97% 45.29%;
+    --primary-foreground: 0 0% 100%;
+    --primary-dark: 166.9 68.27% 40.78%;
+    --primary-darker: 167.01 68.37% 38.43%;
+    --primary-darkest: 166.91 67.9% 31.76%;
+    --primary-light: 167.09 67.72% 49.8%;
+    --primary-lighter: 166.99 68.03% 52.16%;
+    --primary-lightest: 167.32 67.62% 58.82%;
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 215 25% 27%;
+    --muted: 165 24% 94%;
+    --muted-foreground: 215 20% 35%;
+    --accent: 166.99 68.03% 52.16%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 220 13% 91%;
+    --input: 210 40% 98%;
+    --ring: 166.99 67.97% 45.29% / 0.6;
+    --radius: 0.5rem;
+
+    --chart-1: 166.99 67.97% 45.29%;
+    --chart-2: 166.99 68.03% 52.16%;
+    --chart-3: 166.9 68.27% 40.78%;
+    --chart-4: 167.09 67.72% 49.8%;
+    --chart-5: 167.32 67.62% 58.82%;
   }
 
   .dark {
-    /* Updated dark mode colors to complement #25c2a0 theme */
-    --background: 215 28% 17%; /* Dark background */
-    --foreground: 210 40% 98%; /* Light text */
-    --card: 215 28% 17%; /* Dark card background */
-    --card-foreground: 210 40% 98%; /* Light card text */
-    --popover: 215 28% 17%; /* Dark popover */
-    --popover-foreground: 210 40% 98%; /* Light popover text */
-    --primary: 174 64% 52%; /* Brighter #25c2a0 variant for dark mode */
-    --primary-foreground: 215 28% 17%; /* Dark text on primary */
-    --secondary: 215 28% 25%; /* Darker secondary */
-    --secondary-foreground: 210 40% 98%; /* Light secondary text */
-    --muted: 215 28% 25%; /* Dark muted */
-    --muted-foreground: 215 20% 65%; /* Muted text */
-    --accent: 174 64% 57%; /* Bright #25c2a0 accent */
-    --accent-foreground: 215 28% 17%; /* Dark text on accent */
-    --destructive: 0 63% 31%; /* Darker red for dark mode */
-    --destructive-foreground: 210 40% 98%; /* Light text on destructive */
-    --border: 215 28% 25%; /* Dark border */
-    --input: 215 28% 25%; /* Dark input background */
-    --ring: 174 64% 52% / 0.5; /* Bright #25c2a0 focus ring */
+    --background: 215 28% 12%;
+    --foreground: 210 40% 98%;
+    --card: 215 28% 15%;
+    --card-foreground: 210 40% 98%;
+    --popover: 215 28% 15%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 166.99 68.03% 52.16%;
+    --primary-foreground: 215 28% 15%;
+    --primary-dark: 166.9 68.27% 40.78%;
+    --primary-darker: 167.01 68.37% 38.43%;
+    --primary-darkest: 166.91 67.9% 31.76%;
+    --primary-light: 167.09 67.72% 49.8%;
+    --primary-lighter: 166.99 68.03% 52.16%;
+    --primary-lightest: 167.32 67.62% 58.82%;
+    --secondary: 215 28% 24%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 215 28% 24%;
+    --muted-foreground: 215 20% 65%;
+    --accent: 166.99 68.03% 52.16%;
+    --accent-foreground: 215 28% 15%;
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 215 28% 24%;
+    --input: 215 28% 24%;
+    --ring: 166.99 68.03% 52.16% / 0.6;
 
-    /* Dark mode chart colors with #25c2a0 theme */
-    --chart-1: 174 64% 52%; /* Bright #25c2a0 */
-    --chart-2: 174 64% 57%; /* Lighter variant */
-    --chart-3: 210 40% 98%; /* Light gray */
-    --chart-4: 215 20% 65%; /* Medium gray */
-    --chart-5: 262 83% 68%; /* Brighter purple */
+    --chart-1: 166.99 68.03% 52.16%;
+    --chart-2: 167.32 67.62% 58.82%;
+    --chart-3: 166.9 68.27% 40.78%;
+    --chart-4: 167.09 67.72% 49.8%;
+    --chart-5: 167.01 68.37% 38.43%;
   }
 
   * {
@@ -73,7 +89,7 @@
     /* Added font-sans class for consistent typography */
   }
 
-  /* Added typography improvements */
+/* Added typography improvements */
   h1,
   h2,
   h3,
@@ -172,11 +188,11 @@ button:focus,
 
 /* Added utility classes for consistent spacing */
 .section-padding {
-  @apply py-16 px-4;
+  @apply px-4 py-12 sm:py-14;
 }
 
 .container-width {
-  @apply mx-auto max-w-4xl;
+  @apply mx-auto max-w-5xl;
 }
 
 /* Added animation utilities */

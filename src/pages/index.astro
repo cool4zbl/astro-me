@@ -10,6 +10,37 @@ const recentPosts = allPosts
   .filter(post => !post.data.draft)
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
   .slice(0, 3);
+
+const bookshelf = [
+  { title: '在读', items: ['《浪潮之巅》', 'Clean Architecture'] },
+  { title: '读过', items: ['《三体》', 'The Pragmatic Programmer'] },
+  { title: '想读', items: ['《刻意练习》', 'Designing Data-Intensive Applications'] }
+];
+
+const musicFavorites = [
+  'Nujabes - Luv(sic) Part 3',
+  'Bon Iver - Holocene',
+  '坂本龙一 - Merry Christmas Mr. Lawrence',
+  'The 1975 - About You'
+];
+
+const hobbyPhotos = [
+  {
+    src: '/placeholder.jpg',
+    alt: '晨跑和力量训练的瞬间',
+    caption: 'Workout · 追踪心率和配速的小目标'
+  },
+  {
+    src: '/placeholder-user.jpg',
+    alt: '厨房实验和家常菜',
+    caption: 'Cooking · 喜欢研究新的早餐和汤品'
+  },
+  {
+    src: '/placeholder.svg?height=220&width=320',
+    alt: '街头摄影和光影记录',
+    caption: 'Photography · 记录傍晚的光线与城市感'
+  }
+];
 ---
 
 <BaseLayout 
@@ -21,26 +52,29 @@ const recentPosts = allPosts
   <main class="flex-1">
     <!-- Hero Section -->
     <section class="section-padding bg-gradient-to-br from-background via-muted/20 to-background">
-      <div class="container-width text-center">
-        <div class="animate-fade-in">
-          <h1 class="text-4xl font-bold tracking-tight text-foreground sm:text-6xl lg:text-7xl">
-            <span class="gradient-text">Full-Stack Developer</span>
+      <div class="container-width">
+        <div class="animate-fade-in mx-auto max-w-3xl space-y-6 text-left sm:text-center">
+          <span class="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2 text-xs font-medium uppercase tracking-[0.25em] text-primary">
+            calm engineering · personal notes
+          </span>
+          <h1 class="text-4xl font-bold leading-tight text-foreground sm:text-5xl">
+            Building dependable backend systems and telling the stories behind them.
           </h1>
-          <p class="mx-auto mt-6 max-w-2xl text-lg leading-8 text-muted-foreground sm:text-xl">
-            Passionate about building scalable backend systems with Java, crafting elegant frontend experiences, and sharing knowledge through code and writing.
+          <p class="text-base leading-relaxed text-muted-foreground sm:text-lg">
+            I design Java-centric services, polish the tiny UX details, and document lessons so future-me—and maybe you—can move faster with a lighter mind.
           </p>
-          <div class="mt-10 flex items-center justify-center gap-x-6">
+          <div class="flex flex-wrap items-center gap-3 sm:justify-center">
             <a
               href="/projects"
-              class="rounded-md bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground shadow-sm hover:bg-primary/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary transition-all duration-200"
+              class="inline-flex items-center rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground shadow-sm transition hover:bg-primary/90"
             >
-              View My Projects
+              View Projects
             </a>
             <a
               href="/blog"
-              class="text-sm font-semibold leading-6 text-foreground hover:text-primary transition-colors"
+              class="inline-flex items-center rounded-full border border-primary/30 px-5 py-2.5 text-sm font-semibold text-primary transition hover:bg-primary/10"
             >
-              Read My Blog <span aria-hidden="true">→</span>
+              Read the Blog <span aria-hidden="true" class="ml-2">→</span>
             </a>
           </div>
         </div>
@@ -50,29 +84,29 @@ const recentPosts = allPosts
     <!-- About Me Section -->
     <section class="section-padding">
       <div class="container-width">
-        <div class="grid gap-16 lg:grid-cols-2 lg:gap-24 items-center">
+        <div class="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
           <div>
-            <h2 class="text-3xl font-bold tracking-tight text-foreground sm:text-4xl mb-6">
+            <h2 class="mb-5 text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
               About Me
             </h2>
-            <div class="space-y-4 text-muted-foreground leading-relaxed">
+            <div class="space-y-3 text-sm leading-relaxed text-muted-foreground sm:text-base">
               <p>
-                I'm a passionate full-stack developer with a strong focus on backend development using Java and Spring ecosystem. With years of experience building scalable web applications, I enjoy tackling complex technical challenges and creating efficient solutions.
+                I work across the stack with a soft spot for clean backend architecture. Most days you will find me fine-tuning Spring services, designing APIs, and adjusting the front-end details until they feel intuitive.
               </p>
               <p>
-                My expertise spans across modern Java frameworks, microservices architecture, database design, and cloud technologies. I believe in writing clean, maintainable code and following best practices to deliver robust software solutions.
+                Teams lean on me for calm execution: I document decisions, automate checks, and keep an eye on maintainability so we can move quickly without the hangover.
               </p>
               <p>
-                When I'm not coding, you'll find me exploring new technologies, contributing to open source projects, or sharing my knowledge through technical writing and mentoring.
+                Away from the keyboard, I am usually annotating a book, curating a playlist, or experimenting with a new workout plan—all habits that keep my curiosity running.
               </p>
             </div>
             <div class="mt-8">
               <a
                 href="/experience"
-                class="inline-flex items-center text-primary hover:text-accent font-medium transition-colors"
+                class="inline-flex items-center gap-2 text-sm font-medium text-primary transition hover:text-primary/80"
               >
                 View My Experience
-                <svg class="ml-2 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                 </svg>
               </a>
@@ -96,16 +130,16 @@ const recentPosts = allPosts
     <!-- Projects Overview Section -->
     <section class="section-padding bg-muted/30">
       <div class="container-width">
-        <div class="text-center mb-16">
-          <h2 class="text-3xl font-bold tracking-tight text-foreground sm:text-4xl mb-4">
+        <div class="mb-12 space-y-3 text-center">
+          <h2 class="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
             Featured Projects
           </h2>
-          <p class="text-lg text-muted-foreground max-w-2xl mx-auto">
-            A showcase of my recent work in full-stack development, from enterprise Java applications to modern web solutions.
+          <p class="mx-auto max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">
+            Highlights from recent client work and personal experiments—lean services, pragmatic integrations, and interfaces that feel comfortable.
           </p>
         </div>
         
-        <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           <!-- Project 1 -->
           <div class="group relative rounded-xl border bg-card p-6 shadow-sm hover:shadow-md transition-all duration-200">
             <div class="aspect-video rounded-lg bg-muted mb-4 overflow-hidden">
@@ -116,7 +150,7 @@ const recentPosts = allPosts
               />
             </div>
             <h3 class="text-xl font-semibold text-card-foreground mb-2">E-commerce Platform</h3>
-            <p class="text-muted-foreground text-sm mb-4">
+            <p class="mb-4 text-sm leading-relaxed text-muted-foreground">
               Full-stack e-commerce solution built with Spring Boot, React, and PostgreSQL. Features include user authentication, payment processing, and admin dashboard.
             </p>
             <div class="flex flex-wrap gap-2 mb-4">
@@ -136,7 +170,7 @@ const recentPosts = allPosts
               />
             </div>
             <h3 class="text-xl font-semibold text-card-foreground mb-2">Microservices API</h3>
-            <p class="text-muted-foreground text-sm mb-4">
+            <p class="mb-4 text-sm leading-relaxed text-muted-foreground">
               Scalable microservices architecture with Spring Cloud, Docker, and Kubernetes. Implements service discovery, load balancing, and distributed tracing.
             </p>
             <div class="flex flex-wrap gap-2 mb-4">
@@ -156,7 +190,7 @@ const recentPosts = allPosts
               />
             </div>
             <h3 class="text-xl font-semibold text-card-foreground mb-2">Analytics Dashboard</h3>
-            <p class="text-muted-foreground text-sm mb-4">
+            <p class="mb-4 text-sm leading-relaxed text-muted-foreground">
               Real-time analytics platform with data visualization, built using Spring WebFlux, Redis, and Chart.js for interactive reporting.
             </p>
             <div class="flex flex-wrap gap-2 mb-4">
@@ -167,10 +201,10 @@ const recentPosts = allPosts
           </div>
         </div>
 
-        <div class="text-center mt-12">
+        <div class="mt-10 text-center">
           <a
             href="/projects"
-            class="inline-flex items-center rounded-md bg-secondary px-6 py-3 text-sm font-semibold text-secondary-foreground shadow-sm hover:bg-secondary/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary transition-all duration-200"
+            class="inline-flex items-center rounded-full border border-secondary px-5 py-2.5 text-sm font-semibold text-secondary-foreground shadow-sm transition hover:bg-secondary"
           >
             View All Projects
             <svg class="ml-2 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -181,76 +215,20 @@ const recentPosts = allPosts
       </div>
     </section>
 
-    <!-- My Interests Section -->
-    <section class="section-padding">
-      <div class="container-width">
-        <div class="text-center mb-16">
-          <h2 class="text-3xl font-bold tracking-tight text-foreground sm:text-4xl mb-4">
-            My Interests
-          </h2>
-          <p class="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Beyond coding, I'm passionate about continuous learning and exploring new technologies that shape the future of software development.
-          </p>
-        </div>
-
-        <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
-          <div class="text-center group">
-            <div class="mx-auto h-16 w-16 rounded-full bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
-              <svg class="h-8 w-8 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
-              </svg>
-            </div>
-            <h3 class="text-lg font-semibold text-foreground mb-2">Cloud Architecture</h3>
-            <p class="text-sm text-muted-foreground">Designing scalable and resilient cloud-native applications using AWS, Azure, and modern DevOps practices.</p>
-          </div>
-
-          <div class="text-center group">
-            <div class="mx-auto h-16 w-16 rounded-full bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
-              <svg class="h-8 w-8 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-              </svg>
-            </div>
-            <h3 class="text-lg font-semibold text-foreground mb-2">Performance Optimization</h3>
-            <p class="text-sm text-muted-foreground">Passionate about optimizing application performance, from database queries to JVM tuning and caching strategies.</p>
-          </div>
-
-          <div class="text-center group">
-            <div class="mx-auto h-16 w-16 rounded-full bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
-              <svg class="h-8 w-8 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-              </svg>
-            </div>
-            <h3 class="text-lg font-semibold text-foreground mb-2">Open Source</h3>
-            <p class="text-sm text-muted-foreground">Contributing to open source projects and building tools that help the developer community grow and thrive.</p>
-          </div>
-
-          <div class="text-center group">
-            <div class="mx-auto h-16 w-16 rounded-full bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
-              <svg class="h-8 w-8 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-              </svg>
-            </div>
-            <h3 class="text-lg font-semibold text-foreground mb-2">Mentoring</h3>
-            <p class="text-sm text-muted-foreground">Helping junior developers grow their skills and sharing knowledge through code reviews and technical discussions.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <!-- Things I Believe Section -->
     <section class="section-padding bg-muted/30">
       <div class="container-width">
-        <div class="text-center mb-16">
-          <h2 class="text-3xl font-bold tracking-tight text-foreground sm:text-4xl mb-4">
+        <div class="mb-12 space-y-3 text-center">
+          <h2 class="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
             Things I Believe
           </h2>
-          <p class="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Core principles that guide my approach to software development and professional growth.
+          <p class="mx-auto max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">
+            A few reminders I return to when making decisions about code, teams, and the people who end up using the things we build.
           </p>
         </div>
 
-        <div class="grid gap-8 md:grid-cols-2">
-          <div class="rounded-xl border bg-card p-8 shadow-sm">
+        <div class="grid gap-6 md:grid-cols-2">
+          <div class="rounded-xl border bg-card p-6 shadow-sm">
             <div class="flex items-start space-x-4">
               <div class="flex-shrink-0">
                 <div class="h-8 w-8 rounded-full bg-primary/10 flex items-center justify-center">
@@ -268,7 +246,7 @@ const recentPosts = allPosts
             </div>
           </div>
 
-          <div class="rounded-xl border bg-card p-8 shadow-sm">
+          <div class="rounded-xl border bg-card p-6 shadow-sm">
             <div class="flex items-start space-x-4">
               <div class="flex-shrink-0">
                 <div class="h-8 w-8 rounded-full bg-primary/10 flex items-center justify-center">
@@ -286,7 +264,7 @@ const recentPosts = allPosts
             </div>
           </div>
 
-          <div class="rounded-xl border bg-card p-8 shadow-sm">
+          <div class="rounded-xl border bg-card p-6 shadow-sm">
             <div class="flex items-start space-x-4">
               <div class="flex-shrink-0">
                 <div class="h-8 w-8 rounded-full bg-primary/10 flex items-center justify-center">
@@ -304,7 +282,7 @@ const recentPosts = allPosts
             </div>
           </div>
 
-          <div class="rounded-xl border bg-card p-8 shadow-sm">
+          <div class="rounded-xl border bg-card p-6 shadow-sm">
             <div class="flex items-start space-x-4">
               <div class="flex-shrink-0">
                 <div class="h-8 w-8 rounded-full bg-primary/10 flex items-center justify-center">
@@ -325,26 +303,98 @@ const recentPosts = allPosts
       </div>
     </section>
 
+    <!-- Personal Interests Section -->
+    <section class="section-padding">
+      <div class="container-width space-y-12">
+        <div class="space-y-3 text-center">
+          <h2 class="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">读书 · 音乐 · 运动 · 拍照</h2>
+          <p class="mx-auto max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">
+            这些是工作之外最让我充电的几个角度：读书带来新视角，音乐控制节奏，运动让状态稳定，摄影把灵感留在日常。
+          </p>
+        </div>
+
+        <div class="grid gap-6 lg:grid-cols-3">
+          <div class="rounded-2xl border bg-card/80 p-6 shadow-sm">
+            <div class="flex items-center justify-between">
+              <h3 class="text-lg font-semibold text-foreground">Bookshelf</h3>
+              <span class="text-xs uppercase tracking-wide text-primary/70">notes</span>
+            </div>
+            <div class="mt-5 space-y-4 text-sm text-muted-foreground">
+              {bookshelf.map((shelf) => (
+                <div class="rounded-xl bg-muted/60 p-4">
+                  <p class="text-xs uppercase tracking-wide text-primary/80">{shelf.title}</p>
+                  <ul class="mt-2 space-y-1 text-foreground">
+                    {shelf.items.map((item) => (
+                      <li class="flex items-center gap-2 text-sm">
+                        <span class="h-1.5 w-1.5 rounded-full bg-primary"></span>
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div class="rounded-2xl border bg-card/80 p-6 shadow-sm">
+            <div class="flex items-center justify-between">
+              <h3 class="text-lg font-semibold text-foreground">Music</h3>
+              <span class="text-xs uppercase tracking-wide text-primary/70">daily vibe</span>
+            </div>
+            <p class="mt-4 text-sm text-muted-foreground">
+              喜欢可以循环播放的旋律，适配不同时间段的心情。
+            </p>
+            <ul class="mt-5 grid gap-3 text-sm text-foreground">
+              {musicFavorites.map((track) => (
+                <li class="flex items-center justify-between gap-3 rounded-full border border-primary/30 px-4 py-2">
+                  <span class="truncate">{track}</span>
+                  <span class="text-xs text-primary/70">loop</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div class="rounded-2xl border bg-card/80 p-6 shadow-sm">
+            <div class="flex items-center justify-between">
+              <h3 class="text-lg font-semibold text-foreground">Other Hobbies</h3>
+              <span class="text-xs uppercase tracking-wide text-primary/70">snapshots</span>
+            </div>
+            <div class="mt-5 space-y-4">
+              {hobbyPhotos.map((photo) => (
+                <figure class="overflow-hidden rounded-xl bg-muted/60">
+                  <img src={photo.src} alt={photo.alt} class="h-28 w-full object-cover" />
+                  <figcaption class="space-y-1 p-3">
+                    <p class="text-sm font-medium text-foreground">{photo.alt}</p>
+                    <p class="text-xs leading-relaxed text-muted-foreground">{photo.caption}</p>
+                  </figcaption>
+                </figure>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- Recent Posts Section -->
     <section class="section-padding">
       <div class="container-width">
-        <div class="text-center mb-16">
-          <h2 class="text-3xl font-bold tracking-tight text-foreground sm:text-4xl mb-4">
+        <div class="mb-12 space-y-3 text-center">
+          <h2 class="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
             Latest Posts
           </h2>
-          <p class="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Recent thoughts on software development, technology trends, and lessons learned from building applications.
+          <p class="mx-auto max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">
+            Notes on learning, architecture decisions, and experiments that actually made it to production.
           </p>
         </div>
-        <div class="space-y-20 lg:space-y-20">
+        <div class="space-y-16">
           {recentPosts.map((post) => (
             <BlogCard post={post} />
           ))}
         </div>
-        <div class="text-center mt-12">
+        <div class="mt-10 text-center">
           <a
             href="/blog"
-            class="inline-flex items-center rounded-md bg-secondary px-6 py-3 text-sm font-semibold text-secondary-foreground shadow-sm hover:bg-secondary/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary transition-all duration-200"
+            class="inline-flex items-center rounded-full border border-secondary px-5 py-2.5 text-sm font-semibold text-secondary-foreground shadow-sm transition hover:bg-secondary"
           >
             View All Posts
             <svg class="ml-2 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">

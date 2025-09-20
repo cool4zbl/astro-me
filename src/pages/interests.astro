@@ -1,0 +1,163 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const bookshelf = [
+  {
+    title: '在读',
+    items: [
+      { name: '《浪潮之巅》', note: '重温科技公司的兴衰史，提醒自己保持好奇。' },
+      { name: 'Clean Architecture', note: '实践结构化思维，让代码更耐看。' },
+    ],
+  },
+  {
+    title: '读过',
+    items: [
+      { name: '《三体》', note: '宏大的想象力，提醒我保持敬畏。' },
+      { name: 'The Pragmatic Programmer', note: '把成长拆成可操作的小练习。' },
+    ],
+  },
+  {
+    title: '想读',
+    items: [
+      { name: '《刻意练习》', note: '如何把热情变成节奏。' },
+      { name: 'Designing Data-Intensive Applications', note: '打磨系统设计的底层感知。' },
+    ],
+  },
+];
+
+const musicList = [
+  {
+    name: 'Luv(sic) Part 3',
+    artist: 'Nujabes',
+    vibe: '雨天配lofi，节奏慢下来。'
+  },
+  {
+    name: 'Holocene',
+    artist: 'Bon Iver',
+    vibe: '清晨的空气，总有人安静写歌。'
+  },
+  {
+    name: 'Merry Christmas Mr. Lawrence',
+    artist: '坂本龙一',
+    vibe: '旋律里的克制与情绪。'
+  },
+  {
+    name: 'About You',
+    artist: 'The 1975',
+    vibe: '夜跑的背景音乐。'
+  },
+];
+
+const hobbyPhotos = [
+  {
+    src: '/placeholder.jpg',
+    alt: '清晨跑步',
+    caption: 'Workout · 如果不记得跑了多久，就记住跑完的心情。'
+  },
+  {
+    src: '/placeholder-user.jpg',
+    alt: '厨房烹饪',
+    caption: 'Cooking · 把香味留在家里，也是陪伴的一种。'
+  },
+  {
+    src: '/placeholder.svg?height=220&width=320',
+    alt: '街头摄影',
+    caption: 'Photography · 喜欢光线与阴影堆叠的瞬间。'
+  }
+];
+---
+
+<BaseLayout
+  title="Interests · 读书·音乐·生活节奏"
+  description="记录我热爱的书、音乐和日常小爱好，让个人网站更像真实的我。"
+>
+  <Header />
+
+  <main class="flex-1">
+    <section class="section-padding">
+      <div class="container-width">
+        <div class="text-center space-y-4">
+          <p class="text-sm uppercase tracking-[0.3em] text-primary/70">Interests</p>
+          <h1 class="text-3xl sm:text-4xl font-bold text-foreground">读书 · 音乐 · 运动 · 拍照</h1>
+          <p class="mx-auto max-w-2xl text-muted-foreground">
+            骨子里是个生活型选手，喜欢把灵感留在阅读笔记里，把节奏放进歌单里，
+            也把运动与厨房里的时间，变成给自己充电的方式。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-padding pt-2">
+      <div class="container-width space-y-10">
+        <div class="flex items-center justify-between gap-4">
+          <h2 class="text-2xl font-semibold text-foreground">Bookshelf</h2>
+          <span class="text-sm text-muted-foreground">阅读，是最耐心的自我更新</span>
+        </div>
+        <div class="grid gap-6 lg:grid-cols-3">
+          {bookshelf.map((shelf) => (
+            <div class="rounded-2xl border bg-card/80 p-6 shadow-sm backdrop-blur-sm">
+              <h3 class="text-lg font-semibold text-foreground">{shelf.title}</h3>
+              <ul class="mt-4 space-y-3 text-sm text-muted-foreground">
+                {shelf.items.map((book) => (
+                  <li class="rounded-lg bg-muted/60 p-4">
+                    <p class="font-medium text-foreground">{book.name}</p>
+                    <p class="mt-1 text-xs leading-relaxed">{book.note}</p>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="section-padding pt-2">
+      <div class="container-width space-y-10">
+        <div class="flex items-center justify-between gap-4">
+          <h2 class="text-2xl font-semibold text-foreground">Music</h2>
+          <span class="text-sm text-muted-foreground">歌单里保存当天的心情</span>
+        </div>
+        <div class="grid gap-4 md:grid-cols-2">
+          {musicList.map((track) => (
+            <div class="group rounded-2xl border bg-card/80 p-5 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
+              <div class="flex items-center justify-between">
+                <div>
+                  <p class="text-base font-semibold text-foreground">{track.name}</p>
+                  <p class="text-sm text-muted-foreground">{track.artist}</p>
+                </div>
+                <span class="rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary">
+                  daily vibe
+                </span>
+              </div>
+              <p class="mt-4 text-sm text-muted-foreground leading-relaxed">{track.vibe}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="section-padding pt-2">
+      <div class="container-width space-y-10">
+        <div class="flex items-center justify-between gap-4">
+          <h2 class="text-2xl font-semibold text-foreground">Other Hobbies</h2>
+          <span class="text-sm text-muted-foreground">把日常的小事拍下来</span>
+        </div>
+        <div class="grid gap-6 md:grid-cols-3">
+          {hobbyPhotos.map((photo) => (
+            <figure class="overflow-hidden rounded-2xl border bg-card/70 shadow-sm">
+              <img src={photo.src} alt={photo.alt} class="h-48 w-full object-cover" />
+              <figcaption class="space-y-2 p-4 text-sm text-muted-foreground">
+                <p class="font-semibold text-foreground">{photo.alt}</p>
+                <p class="leading-relaxed">{photo.caption}</p>
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>
