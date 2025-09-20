@@ -4,7 +4,7 @@ export async function getAllTags() {
   const allPosts = await getCollection("blog")
   const publishedPosts = allPosts.filter((post) => !post.data.draft)
 
-  const tagCounts = {}
+  const tagCounts = {} as Record<string, number>
   publishedPosts.forEach((post) => {
     post.data.tags.forEach((tag) => {
       tagCounts[tag] = (tagCounts[tag] || 0) + 1
