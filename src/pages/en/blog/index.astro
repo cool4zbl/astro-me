@@ -1,0 +1,44 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import BlogCard from '../../../components/BlogCard.astro';
+import { getCollection } from 'astro:content';
+import { getTranslations } from '../../../i18n/config';
+
+const t = getTranslations('en');
+
+const posts = await getCollection('blog');
+const sortedPosts = posts
+  .filter(post => !post.data.draft)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+---
+
+<BaseLayout 
+  title="Blog - My Personal Blog"
+  description="All blog posts about technology, programming, and life experiences."
+>
+  <Header />
+  
+  <main class="flex-1">
+    <div class="container mx-auto px-4 py-8">
+      <div class="max-w-4xl mx-auto">
+        <h1 class="text-4xl font-bold mb-8">{t('nav.blog')}</h1>
+        
+        <div class="grid gap-6">
+          {sortedPosts.map((post) => (
+            <BlogCard post={post} />
+          ))}
+        </div>
+        
+        {sortedPosts.length === 0 && (
+          <p class="text-center text-muted-foreground py-12">
+            No blog posts found.
+          </p>
+        )}
+      </div>
+    </div>
+  </main>
+  
+  <Footer />
+</BaseLayout>

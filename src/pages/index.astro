@@ -1,0 +1,73 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import BlogCard from '../components/BlogCard.astro';
+
+const allPosts = await getCollection('blog');
+const recentPosts = allPosts
+  .filter(post => !post.data.draft)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
+---
+
+<BaseLayout 
+  title="我的博客 - 分享技术与生活"
+  description="欢迎来到我的个人博客，这里分享前端技术、编程经验和生活感悟。"
+>
+  <Header />
+  
+  <main class="flex-1">
+    <!-- Hero Section -->
+    <section class="container mx-auto px-4 py-16 text-center">
+      <h1 class="text-4xl font-bold tracking-tight text-foreground sm:text-6xl">
+        欢迎来到我的博客
+      </h1>
+      <p class="mx-auto mt-6 max-w-2xl text-lg leading-8 text-muted-foreground">
+        在这里分享前端技术、编程经验和生活感悟。探索代码的艺术，记录成长的足迹。
+      </p>
+      <div class="mt-10 flex items-center justify-center gap-x-6">
+        <a
+          href="/blog"
+          class="rounded-md bg-primary px-3.5 py-2.5 text-sm font-semibold text-primary-foreground shadow-sm hover:bg-primary/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+        >
+          阅读博客
+        </a>
+        <a
+          href="/tags"
+          class="text-sm font-semibold leading-6 text-foreground hover:text-primary"
+        >
+          浏览标签 <span aria-hidden="true">→</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- Recent Posts -->
+    <section class="container mx-auto px-4 py-16">
+      <div class="mx-auto max-w-2xl lg:max-w-4xl">
+        <h2 class="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+          最新文章
+        </h2>
+        <p class="mt-2 text-lg leading-8 text-muted-foreground">
+          了解最新的技术动态和个人思考
+        </p>
+        <div class="mt-16 space-y-20 lg:mt-20 lg:space-y-20">
+          {recentPosts.map((post) => (
+            <BlogCard post={post} />
+          ))}
+        </div>
+        <div class="mt-16 text-center">
+          <a
+            href="/blog"
+            class="rounded-md bg-secondary px-3.5 py-2.5 text-sm font-semibold text-secondary-foreground shadow-sm hover:bg-secondary/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary"
+          >
+            查看所有文章
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <Footer />
+</BaseLayout>

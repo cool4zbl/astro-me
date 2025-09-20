@@ -1,0 +1,51 @@
+---
+import { CollectionEntry } from 'astro:content';
+import FormattedDate from './FormattedDate.astro';
+import TagList from './TagList.astro';
+
+const { post } = Astro.props;
+---
+
+<article class="relative isolate flex flex-col gap-8 lg:flex-row">
+  <div class="relative aspect-[16/9] sm:aspect-[2/1] lg:aspect-square lg:w-64 lg:shrink-0">
+    <img
+      src={post.data.heroImage || `/placeholder.svg?height=256&width=256&query=${encodeURIComponent(post.data.title)}`}
+      alt={post.data.title}
+      class="absolute inset-0 h-full w-full rounded-2xl bg-muted object-cover"
+    />
+    <div class="absolute inset-0 rounded-2xl ring-1 ring-inset ring-border"></div>
+  </div>
+  <div>
+    <div class="flex items-center gap-x-4 text-xs">
+      <FormattedDate date={post.data.pubDate} class="text-muted-foreground" />
+      {post.data.tags.length > 0 && (
+        <TagList tags={post.data.tags.slice(0, 2)} />
+      )}
+    </div>
+    <div class="group relative max-w-xl">
+      <h3 class="mt-3 text-lg font-semibold leading-6 text-foreground group-hover:text-primary">
+        <a href={`/blog/${post.slug}/`}>
+          <span class="absolute inset-0"></span>
+          {post.data.title}
+        </a>
+      </h3>
+      <p class="mt-5 text-sm leading-6 text-muted-foreground line-clamp-3">
+        {post.data.description}
+      </p>
+    </div>
+    <div class="mt-6 flex border-t border-border pt-6">
+      <div class="relative flex items-center gap-x-4">
+        <div class="text-sm leading-6">
+          <p class="font-semibold text-foreground">
+            <a href={`/blog/${post.slug}/`} class="hover:text-primary">
+              阅读全文
+            </a>
+          </p>
+          <p class="text-muted-foreground">
+            <FormattedDate date={post.data.pubDate} />
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

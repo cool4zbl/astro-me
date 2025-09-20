@@ -1,0 +1,65 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import BlogCard from '../../components/BlogCard.astro';
+import { getCollection } from 'astro:content';
+import { getTranslations } from '../../i18n/config';
+
+const t = getTranslations('en');
+
+const posts = await getCollection('blog');
+const sortedPosts = posts
+  .filter(post => !post.data.draft)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
+
+---
+
+<BaseLayout 
+  title="My Blog - Personal Blog"
+  description="Welcome to my personal blog where I share thoughts on technology, life, and everything in between."
+>
+  <Header />
+  
+  <main class="flex-1">
+    <div class="container mx-auto px-4 py-8">
+      <!-- Hero Section -->
+      <section class="text-center py-12">
+        <h1 class="text-4xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
+          Welcome to My Blog
+        </h1>
+        <p class="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
+          Sharing thoughts on technology, life, and everything in between. 
+          Join me on this journey of discovery and learning.
+        </p>
+        <a 
+          href="/en/blog" 
+          class="inline-flex items-center justify-center rounded-md bg-primary px-6 py-3 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90"
+        >
+          Read Blog Posts
+        </a>
+      </section>
+
+      <!-- Latest Posts -->
+      <section class="py-12">
+        <h2 class="text-3xl font-bold mb-8 text-center">Latest Posts</h2>
+        <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {sortedPosts.map((post) => (
+            <BlogCard post={post} />
+          ))}
+        </div>
+        <div class="text-center mt-8">
+          <a 
+            href="/en/blog" 
+            class="inline-flex items-center text-primary hover:underline"
+          >
+            View all posts →
+          </a>
+        </div>
+      </section>
+    </div>
+  </main>
+  
+  <Footer />
+</BaseLayout>

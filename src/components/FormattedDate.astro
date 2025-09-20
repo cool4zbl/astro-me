@@ -1,0 +1,13 @@
+---
+const { date, class: className } = Astro.props;
+
+const formattedDate = new Intl.DateTimeFormat('zh-CN', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+}).format(date);
+---
+
+<time datetime={date.toISOString()} class={className}>
+  {formattedDate}
+</time>

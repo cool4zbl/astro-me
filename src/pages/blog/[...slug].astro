@@ -1,0 +1,102 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import FormattedDate from '../../components/FormattedDate.astro';
+import TagList from '../../components/TagList.astro';
+import Comments from '../../components/Comments.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: post,
+  }));
+}
+
+const post = Astro.props;
+const { Content } = await post.render();
+---
+
+<BaseLayout 
+  title={post.data.title}
+  description={post.data.description}
+  image={post.data.heroImage}
+  article={true}
+  publishedTime={post.data.pubDate}
+  modifiedTime={post.data.updatedDate}
+  tags={post.data.tags}
+>
+  <Header />
+  
+  <main class="flex-1">
+    <article class="container mx-auto px-4 py-16">
+      <div class="mx-auto max-w-3xl">
+        <header class="mb-8">
+          <h1 class="text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
+            {post.data.title}
+          </h1>
+          <p class="mt-4 text-xl text-muted-foreground">
+            {post.data.description}
+          </p>
+          <div class="mt-6 flex items-center gap-4 text-sm text-muted-foreground">
+            <FormattedDate date={post.data.pubDate} />
+            {post.data.updatedDate && (
+              <span>
+                · 更新于 <FormattedDate date={post.data.updatedDate} />
+              </span>
+            )}
+          </div>
+          {post.data.tags.length > 0 && (
+            <div class="mt-4">
+              <TagList tags={post.data.tags} />
+            </div>
+          )}
+        </header>
+        
+        {post.data.heroImage && (
+          <div class="mb-8">
+            <img
+              src={post.data.heroImage || "/placeholder.svg"}
+              alt={post.data.title}
+              class="w-full rounded-lg border bg-muted"
+            />
+          </div>
+        )}
+        
+        <div class="prose prose-lg max-w-none dark:prose-invert">
+          <Content />
+        </div>
+        
+        <footer class="mt-16 border-t pt-8">
+          <div class="flex items-center justify-between">
+            <div>
+              <p class="text-sm text-muted-foreground">
+                发布于 <FormattedDate date={post.data.pubDate} />
+              </p>
+              {post.data.tags.length > 0 && (
+                <div class="mt-2">
+                  <TagList tags={post.data.tags} />
+                </div>
+              )}
+            </div>
+            <a
+              href="/blog"
+              class="text-sm font-medium text-primary hover:underline"
+            >
+              ← 返回博客
+            </a>
+          </div>
+        </footer>
+        
+        <!-- Comments Section -->
+        <div class="mt-16">
+          <Comments />
+        </div>
+      </div>
+    </article>
+  </main>
+  
+  <Footer />
+</BaseLayout>
