@@ -6,7 +6,6 @@ import Footer from '../../components/Footer.astro';
 import FormattedDate from '../../components/FormattedDate.astro';
 import TagList from '../../components/TagList.astro';
 import Comments from '../../components/Comments.astro';
-import TableOfContents from '../../components/TableOfContents.astro';
 import RelatedPosts from '../../components/RelatedPosts.astro';
 import OptimizedImage from '../../components/OptimizedImage.astro';
 
@@ -19,7 +18,7 @@ export async function getStaticPaths() {
 }
 
 const post = Astro.props;
-const { Content, headings } = await post.render();
+const { Content } = await post.render();
 ---
 
 <BaseLayout 
@@ -35,85 +34,79 @@ const { Content, headings } = await post.render();
   
   <main class="flex-1">
     <article class="container mx-auto px-4 py-12 lg:py-16">
-      <div class="mx-auto flex max-w-5xl flex-col gap-12 lg:flex-row">
-        <div class="w-full lg:flex-1 lg:max-w-3xl">
-          <!-- 主要内容区域 -->
-          <header class="mb-6 space-y-4">
-            <h1 class="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
-              {post.data.title}
-            </h1>
-            <p class="text-lg text-muted-foreground">
-              {post.data.description}
-            </p>
-            <div class="flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
-              <FormattedDate date={post.data.pubDate} />
-              {post.data.updatedDate && (
-                <span>
-                  · 更新于 <FormattedDate date={post.data.updatedDate} />
-                </span>
-              )}
-            </div>
-            {post.data.tags.length > 0 && (
-              <div>
-                <TagList tags={post.data.tags} />
-              </div>
+      <!-- Removed sidebar and made content centered with max-width -->
+      <div class="mx-auto max-w-3xl">
+        <header class="mb-6 space-y-4">
+          <h1 class="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+            {post.data.title}
+          </h1>
+          <p class="text-lg text-muted-foreground">
+            {post.data.description}
+          </p>
+          <div class="flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
+            <FormattedDate date={post.data.pubDate} />
+            {post.data.updatedDate && (
+              <span>
+                · 更新于 <FormattedDate date={post.data.updatedDate} />
+              </span>
             )}
-          </header>
-
-          {post.data.heroImage && (
-            <div class="mb-8 overflow-hidden rounded-xl border bg-muted/40">
-              <OptimizedImage
-                src={post.data.heroImage}
-                alt={post.data.title}
-                width={1280}
-                height={720}
-                class="h-full w-full max-h-80 object-cover"
-                sizes="(max-width: 1024px) 100vw, 768px"
-                format="webp"
-                priority={true}
-              />
+          </div>
+          {post.data.tags.length > 0 && (
+            <div>
+              <TagList tags={post.data.tags} />
             </div>
           )}
+        </header>
 
-          <div class="prose prose-lg mx-auto dark:prose-invert">
-            <Content />
-          </div>
-
-          <footer class="mt-12 border-t pt-8">
-            <div class="flex flex-col gap-4 text-sm text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
-              <div class="space-y-2">
-                <p>发布于 <FormattedDate date={post.data.pubDate} /></p>
-                {post.data.tags.length > 0 && (
-                  <TagList tags={post.data.tags} />
-                )}
-              </div>
-              <a
-                href="/blog"
-                class="inline-flex items-center text-sm font-medium text-primary hover:text-accent"
-              >
-                ← 返回博客
-              </a>
-            </div>
-          </footer>
-
-          <div class="mt-12">
-            <RelatedPosts 
-              currentSlug={post.slug} 
-              currentTags={post.data.tags}
-              lang="zh"
+        {post.data.heroImage && (
+          <div class="mb-8 overflow-hidden rounded-xl border bg-muted/40">
+            <!-- Reduced image height for better proportions -->
+            <OptimizedImage
+              src={post.data.heroImage}
+              alt={post.data.title}
+              width={1280}
+              height={720}
+              class="h-full w-full max-h-64 object-cover"
+              sizes="(max-width: 1024px) 100vw, 768px"
+              format="webp"
+              priority={true}
             />
           </div>
+        )}
 
-          <div class="mt-16">
-            <Comments />
-          </div>
+        <!-- Added custom prose styles to reduce image sizes -->
+        <div class="prose prose-lg mx-auto dark:prose-invert prose-img:max-h-80 prose-img:w-auto prose-img:mx-auto prose-img:rounded-lg">
+          <Content />
         </div>
 
-        <aside class="w-full lg:w-64 lg:flex-none">
-          <div class="lg:sticky lg:top-6">
-            <TableOfContents headings={headings} lang="zh" />
+        <footer class="mt-12 border-t pt-8">
+          <div class="flex flex-col gap-4 text-sm text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
+            <div class="space-y-2">
+              <p>发布于 <FormattedDate date={post.data.pubDate} /></p>
+              {post.data.tags.length > 0 && (
+                <TagList tags={post.data.tags} />
+              )}
+            </div>
+            <a
+              href="/blog"
+              class="inline-flex items-center text-sm font-medium text-primary hover:text-accent"
+            >
+              ← 返回博客
+            </a>
           </div>
-        </aside>
+        </footer>
+
+        <div class="mt-12">
+          <RelatedPosts 
+            currentSlug={post.slug} 
+            currentTags={post.data.tags}
+            lang="zh"
+          />
+        </div>
+
+        <div class="mt-16">
+          <Comments />
+        </div>
       </div>
     </article>
   </main>

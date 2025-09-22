@@ -1,70 +1,30 @@
 ---
-import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import BlogCard from '../components/BlogCard.astro';
-import OptimizedImage from '../components/OptimizedImage.astro';
-
-const allPosts = await getCollection('blog');
-const recentPosts = allPosts
-  .filter(post => !post.data.draft)
-  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-  .slice(0, 3);
-
-const bookshelf = [
-  { title: '在读', items: ['《浪潮之巅》', 'Clean Architecture'] },
-  { title: '读过', items: ['《三体》', 'The Pragmatic Programmer'] },
-  { title: '想读', items: ['《刻意练习》', 'Designing Data-Intensive Applications'] }
-];
-
-const musicFavorites = [
-  'Nujabes - Luv(sic) Part 3',
-  'Bon Iver - Holocene',
-  '坂本龙一 - Merry Christmas Mr. Lawrence',
-  'The 1975 - About You'
-];
-
-const hobbyPhotos = [
-  {
-    src: '/placeholder.jpg',
-    alt: '晨跑和力量训练的瞬间',
-    caption: 'Workout · 追踪心率和配速的小目标'
-  },
-  {
-    src: '/placeholder-user.jpg',
-    alt: '厨房实验和家常菜',
-    caption: 'Cooking · 喜欢研究新的早餐和汤品'
-  },
-  {
-    src: '/placeholder.svg?height=220&width=320',
-    alt: '街头摄影和光影记录',
-    caption: 'Photography · 记录傍晚的光线与城市感'
-  }
-];
+import SimpleHeader from '../components/SimpleHeader.astro';
+import SimpleFooter from '../components/SimpleFooter.astro';
 ---
 
 <BaseLayout 
-  title="My Blog - Full-Stack Developer & Tech Enthusiast"
+  title="Binliu Zhang - Full-Stack Developer & Tech Enthusiast"
   description="Welcome to my personal website. I'm a full-stack developer specializing in Java backend development, sharing my projects, experiences, and insights."
 >
-  <Header />
+  <SimpleHeader />
   
   <main class="flex-1">
-    <!-- Hero Section -->
-    <section class="section-padding bg-gradient-to-br from-background via-muted/20 to-background">
-      <div class="container-width">
-        <div class="animate-fade-in mx-auto max-w-3xl space-y-6 text-left sm:text-center">
+    <!-- Hero section -->
+    <section class="py-16 bg-gradient-to-br from-background via-muted/20 to-background">
+      <div class="container mx-auto max-w-6xl px-6">
+        <div class="mx-auto max-w-3xl space-y-4 text-center">
           <span class="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2 text-xs font-medium uppercase tracking-[0.25em] text-primary">
             calm engineering · personal notes
           </span>
-          <h1 class="text-4xl font-bold leading-tight text-foreground sm:text-5xl">
+          <h1 class="text-3xl font-bold leading-tight text-foreground sm:text-4xl">
             Building dependable backend systems and telling the stories behind them.
           </h1>
-          <p class="text-base leading-relaxed text-muted-foreground sm:text-lg">
+          <p class="text-base leading-relaxed text-muted-foreground">
             I design Java-centric services, polish the tiny UX details, and document lessons so future-me—and maybe you—can move faster with a lighter mind.
           </p>
-          <div class="flex flex-wrap items-center gap-3 sm:justify-center">
+          <div class="flex flex-wrap items-center gap-3 justify-center">
             <a
               href="/projects"
               class="inline-flex items-center rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground shadow-sm transition hover:bg-primary/90"
@@ -82,12 +42,12 @@ const hobbyPhotos = [
       </div>
     </section>
 
-    <!-- About Me Section -->
-    <section class="section-padding">
-      <div class="container-width">
-        <div class="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+    <!-- About Me section -->
+    <section class="py-16">
+      <div class="container mx-auto max-w-6xl px-6">
+        <div class="grid items-center gap-8 lg:grid-cols-2 lg:gap-12">
           <div>
-            <h2 class="mb-5 text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+            <h2 class="mb-4 text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
               About Me
             </h2>
             <div class="space-y-3 text-sm leading-relaxed text-muted-foreground sm:text-base">
@@ -101,7 +61,7 @@ const hobbyPhotos = [
                 Away from the keyboard, I am usually annotating a book, curating a playlist, or experimenting with a new workout plan—all habits that keep my curiosity running.
               </p>
             </div>
-            <div class="mt-8">
+            <div class="mt-6">
               <a
                 href="/experience"
                 class="inline-flex items-center gap-2 text-sm font-medium text-primary transition hover:text-primary/80"
@@ -114,13 +74,13 @@ const hobbyPhotos = [
             </div>
           </div>
           <div class="relative">
-            <div class="aspect-square rounded-2xl bg-gradient-primary p-8 shadow-2xl">
+            <div class="aspect-square rounded-2xl bg-gradient-to-br from-primary/20 to-primary/5 p-6 shadow-lg">
               <div class="h-full w-full rounded-xl bg-background/10 backdrop-blur-sm flex items-center justify-center">
-                <OptimizedImage 
-                  src="/placeholder.svg?height=300&width=300"
+                <img 
+                  src="/placeholder.svg?height=280&width=280"
                   alt="Professional developer portrait"
-                  width={300}
-                  height={300}
+                  width="280"
+                  height="280"
                   class="rounded-xl shadow-lg"
                   loading="lazy"
                 />
@@ -131,280 +91,23 @@ const hobbyPhotos = [
       </div>
     </section>
 
-    <!-- Projects Overview Section -->
-    <section class="section-padding bg-muted/30">
-      <div class="container-width">
-        <div class="mb-12 space-y-3 text-center">
-          <h2 class="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
-            Featured Projects
-          </h2>
-          <p class="mx-auto max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">
-            Highlights from recent client work and personal experiments—lean services, pragmatic integrations, and interfaces that feel comfortable.
-          </p>
-        </div>
-        
-        <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          <!-- Project 1 -->
-          <div class="group relative rounded-xl border bg-card p-6 shadow-sm hover:shadow-md transition-all duration-200">
-            <div class="aspect-video rounded-lg bg-muted mb-4 overflow-hidden">
-              <OptimizedImage 
-                src="/placeholder.svg?height=200&width=350"
-                alt="E-commerce Platform"
-                width={350}
-                height={200}
-                class="h-full w-full object-cover transition-transform duration-200 group-hover:scale-105"
-                loading="lazy"
-              />
-            </div>
-            <h3 class="text-xl font-semibold text-card-foreground mb-2">E-commerce Platform</h3>
-            <p class="mb-4 text-sm leading-relaxed text-muted-foreground">
-              Full-stack e-commerce solution built with Spring Boot, React, and PostgreSQL. Features include user authentication, payment processing, and admin dashboard.
-            </p>
-            <div class="flex flex-wrap gap-2 mb-4">
-              <span class="inline-flex items-center rounded-full bg-primary/10 px-2 py-1 text-xs font-medium text-primary">Java</span>
-              <span class="inline-flex items-center rounded-full bg-primary/10 px-2 py-1 text-xs font-medium text-primary">Spring Boot</span>
-              <span class="inline-flex items-center rounded-full bg-primary/10 px-2 py-1 text-xs font-medium text-primary">React</span>
-            </div>
-          </div>
-
-          <!-- Project 2 -->
-          <div class="group relative rounded-xl border bg-card p-6 shadow-sm hover:shadow-md transition-all duration-200">
-            <div class="aspect-video rounded-lg bg-muted mb-4 overflow-hidden">
-              <OptimizedImage 
-                src="/placeholder.svg?height=200&width=350"
-                alt="Microservices API"
-                width={350}
-                height={200}
-                class="h-full w-full object-cover transition-transform duration-200 group-hover:scale-105"
-                loading="lazy"
-              />
-            </div>
-            <h3 class="text-xl font-semibold text-card-foreground mb-2">Microservices API</h3>
-            <p class="mb-4 text-sm leading-relaxed text-muted-foreground">
-              Scalable microservices architecture with Spring Cloud, Docker, and Kubernetes. Implements service discovery, load balancing, and distributed tracing.
-            </p>
-            <div class="flex flex-wrap gap-2 mb-4">
-              <span class="inline-flex items-center rounded-full bg-primary/10 px-2 py-1 text-xs font-medium text-primary">Spring Cloud</span>
-              <span class="inline-flex items-center rounded-full bg-primary/10 px-2 py-1 text-xs font-medium text-primary">Docker</span>
-              <span class="inline-flex items-center rounded-full bg-primary/10 px-2 py-1 text-xs font-medium text-primary">Kubernetes</span>
-            </div>
-          </div>
-
-          <!-- Project 3 -->
-          <div class="group relative rounded-xl border bg-card p-6 shadow-sm hover:shadow-md transition-all duration-200">
-            <div class="aspect-video rounded-lg bg-muted mb-4 overflow-hidden">
-              <OptimizedImage 
-                src="/placeholder.svg?height=200&width=350"
-                alt="Analytics Dashboard"
-                width={350}
-                height={200}
-                class="h-full w-full object-cover transition-transform duration-200 group-hover:scale-105"
-                loading="lazy"
-              />
-            </div>
-            <h3 class="text-xl font-semibold text-card-foreground mb-2">Analytics Dashboard</h3>
-            <p class="mb-4 text-sm leading-relaxed text-muted-foreground">
-              Real-time analytics platform with data visualization, built using Spring WebFlux, Redis, and Chart.js for interactive reporting.
-            </p>
-            <div class="flex flex-wrap gap-2 mb-4">
-              <span class="inline-flex items-center rounded-full bg-primary/10 px-2 py-1 text-xs font-medium text-primary">WebFlux</span>
-              <span class="inline-flex items-center rounded-full bg-primary/10 px-2 py-1 text-xs font-medium text-primary">Redis</span>
-              <span class="inline-flex items-center rounded-full bg-primary/10 px-2 py-1 text-xs font-medium text-primary">Chart.js</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="mt-10 text-center">
-          <a
-            href="/projects"
-            class="inline-flex items-center rounded-full border border-secondary px-5 py-2.5 text-sm font-semibold text-secondary-foreground shadow-sm transition hover:bg-secondary"
-          >
-            View All Projects
-            <svg class="ml-2 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-            </svg>
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <!-- Things I Believe Section -->
-    <section class="section-padding bg-muted/30">
-      <div class="container-width">
-        <div class="mb-12 space-y-3 text-center">
-          <h2 class="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
-            Things I Believe
-          </h2>
-          <p class="mx-auto max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">
-            A few reminders I return to when making decisions about code, teams, and the people who end up using the things we build.
-          </p>
-        </div>
-
-        <div class="grid gap-6 md:grid-cols-2">
-          <div class="rounded-xl border bg-card p-6 shadow-sm">
-            <div class="flex items-start space-x-4">
-              <div class="flex-shrink-0">
-                <div class="h-8 w-8 rounded-full bg-primary/10 flex items-center justify-center">
-                  <svg class="h-5 w-5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-                  </svg>
-                </div>
-              </div>
-              <div>
-                <h3 class="text-lg font-semibold text-card-foreground mb-2">Code is Communication</h3>
-                <p class="text-muted-foreground">
-                  Writing clean, readable code is not just about functionality—it's about communicating intent to future developers, including yourself. Good code tells a story.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div class="rounded-xl border bg-card p-6 shadow-sm">
-            <div class="flex items-start space-x-4">
-              <div class="flex-shrink-0">
-                <div class="h-8 w-8 rounded-full bg-primary/10 flex items-center justify-center">
-                  <svg class="h-5 w-5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-                  </svg>
-                </div>
-              </div>
-              <div>
-                <h3 class="text-lg font-semibold text-card-foreground mb-2">Continuous Learning</h3>
-                <p class="text-muted-foreground">
-                  Technology evolves rapidly, and staying curious is essential. Every project is an opportunity to learn something new and improve existing skills.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div class="rounded-xl border bg-card p-6 shadow-sm">
-            <div class="flex items-start space-x-4">
-              <div class="flex-shrink-0">
-                <div class="h-8 w-8 rounded-full bg-primary/10 flex items-center justify-center">
-                  <svg class="h-5 w-5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z" />
-                  </svg>
-                </div>
-              </div>
-              <div>
-                <h3 class="text-lg font-semibold text-card-foreground mb-2">User-Centric Development</h3>
-                <p class="text-muted-foreground">
-                  The best technical solutions are meaningless if they don't solve real user problems. Always keep the end user's experience at the center of development decisions.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div class="rounded-xl border bg-card p-6 shadow-sm">
-            <div class="flex items-start space-x-4">
-              <div class="flex-shrink-0">
-                <div class="h-8 w-8 rounded-full bg-primary/10 flex items-center justify-center">
-                  <svg class="h-5 w-5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m8 6V9a2 2 0 00-2-2H10a2 2 0 00-2 2v3.1M16 20h4v-4h-4v4z" />
-                  </svg>
-                </div>
-              </div>
-              <div>
-                <h3 class="text-lg font-semibold text-card-foreground mb-2">Quality Over Speed</h3>
-                <p class="text-muted-foreground">
-                  While delivering quickly is important, building robust, maintainable solutions creates more value in the long run. Technical debt always comes due.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Personal Interests Section -->
-    <section class="section-padding">
-      <div class="container-width space-y-12">
-        <div class="space-y-3 text-center">
-          <h2 class="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">读书 · 音乐 · 运动 · 拍照</h2>
-          <p class="mx-auto max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">
-            这些是工作之外最让我充电的几个角度：读书带来新视角，音乐控制节奏，运动让状态稳定，摄影把灵感留在日常。
-          </p>
-        </div>
-
-        <div class="grid gap-6 lg:grid-cols-3">
-          <div class="rounded-2xl border bg-card/80 p-6 shadow-sm">
-            <div class="flex items-center justify-between">
-              <h3 class="text-lg font-semibold text-foreground">Bookshelf</h3>
-              <span class="text-xs uppercase tracking-wide text-primary/70">notes</span>
-            </div>
-            <div class="mt-5 space-y-4 text-sm text-muted-foreground">
-              {bookshelf.map((shelf) => (
-                <div class="rounded-xl bg-muted/60 p-4">
-                  <p class="text-xs uppercase tracking-wide text-primary/80">{shelf.title}</p>
-                  <ul class="mt-2 space-y-1 text-foreground">
-                    {shelf.items.map((item) => (
-                      <li class="flex items-center gap-2 text-sm">
-                        <span class="h-1.5 w-1.5 rounded-full bg-primary"></span>
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div class="rounded-2xl border bg-card/80 p-6 shadow-sm">
-            <div class="flex items-center justify-between">
-              <h3 class="text-lg font-semibold text-foreground">Music</h3>
-              <span class="text-xs uppercase tracking-wide text-primary/70">daily vibe</span>
-            </div>
-            <p class="mt-4 text-sm text-muted-foreground">
-              喜欢可以循环播放的旋律，适配不同时间段的心情。
-            </p>
-            <ul class="mt-5 grid gap-3 text-sm text-foreground">
-              {musicFavorites.map((track) => (
-                <li class="flex items-center justify-between gap-3 rounded-full border border-primary/30 px-4 py-2">
-                  <span class="truncate">{track}</span>
-                  <span class="text-xs text-primary/70">loop</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div class="rounded-2xl border bg-card/80 p-6 shadow-sm">
-            <div class="flex items-center justify-between">
-              <h3 class="text-lg font-semibold text-foreground">Other Hobbies</h3>
-              <span class="text-xs uppercase tracking-wide text-primary/70">snapshots</span>
-            </div>
-            <div class="mt-5 space-y-4">
-              {hobbyPhotos.map((photo) => (
-                <figure class="overflow-hidden rounded-xl bg-muted/60">
-                  <OptimizedImage src={photo.src} alt={photo.alt} width={320} height={220} class="h-28 w-full object-cover" loading="lazy" />
-                  <figcaption class="space-y-1 p-3">
-                    <p class="text-sm font-medium text-foreground">{photo.alt}</p>
-                    <p class="text-xs leading-relaxed text-muted-foreground">{photo.caption}</p>
-                  </figcaption>
-                </figure>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Recent Posts Section -->
-    <section class="section-padding">
-      <div class="container-width">
-        <div class="mb-12 space-y-3 text-center">
-          <h2 class="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+    <!-- Latest Posts section -->
+    <section class="py-16 bg-muted/30">
+      <div class="container mx-auto max-w-6xl px-6">
+        <div class="mb-8 space-y-2 text-center">
+          <h2 class="text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
             Latest Posts
           </h2>
-          <p class="mx-auto max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">
+          <p class="mx-auto max-w-2xl text-sm leading-relaxed text-muted-foreground">
             Notes on learning, architecture decisions, and experiments that actually made it to production.
           </p>
         </div>
-        <div class="space-y-16">
-          {recentPosts.map((post) => (
-            <BlogCard post={post} />
-          ))}
+        
+        <div class="text-center py-12">
+          <p class="text-muted-foreground">No blog posts available yet. Check back soon!</p>
         </div>
-        <div class="mt-10 text-center">
+        
+        <div class="mt-8 text-center">
           <a
             href="/blog"
             class="inline-flex items-center rounded-full border border-secondary px-5 py-2.5 text-sm font-semibold text-secondary-foreground shadow-sm transition hover:bg-secondary"
@@ -419,5 +122,5 @@ const hobbyPhotos = [
     </section>
   </main>
   
-  <Footer />
+  <SimpleFooter />
 </BaseLayout>

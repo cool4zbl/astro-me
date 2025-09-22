@@ -2,7 +2,6 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import OptimizedImage from '../components/OptimizedImage.astro';
 
 const bookshelf = [
   {
@@ -28,70 +27,69 @@ const bookshelf = [
   },
 ];
 
-const musicList = [
+const articlesILike = [
   {
-    name: 'Luv(sic) Part 3',
-    artist: 'Nujabes',
-    vibe: '雨天配lofi，节奏慢下来。'
+    title: 'The Architecture of Open Source Applications',
+    author: 'Amy Brown & Greg Wilson',
+    url: 'https://aosabook.org/',
+    note: '从实际项目中学习架构设计的思路，每个案例都很实用。'
   },
   {
-    name: 'Holocene',
-    artist: 'Bon Iver',
-    vibe: '清晨的空气，总有人安静写歌。'
+    title: 'High Scalability',
+    author: 'Todd Hoff',
+    url: 'http://highscalability.com/',
+    note: '大规模系统设计的案例分析，总能找到新的思路。'
   },
   {
-    name: 'Merry Christmas Mr. Lawrence',
-    artist: '坂本龙一',
-    vibe: '旋律里的克制与情绪。'
+    title: 'Martin Fowler\'s Blog',
+    author: 'Martin Fowler',
+    url: 'https://martinfowler.com/',
+    note: '软件设计的经典思考，文章质量很高。'
   },
   {
-    name: 'About You',
-    artist: 'The 1975',
-    vibe: '夜跑的背景音乐。'
-  },
-];
-
-const hobbyPhotos = [
-  {
-    src: '/placeholder.jpg',
-    alt: '清晨跑步',
-    caption: 'Workout · 如果不记得跑了多久，就记住跑完的心情。'
+    title: 'Joel on Software',
+    author: 'Joel Spolsky',
+    url: 'https://www.joelonsoftware.com/',
+    note: '关于软件开发的深度思考，很多观点至今仍然适用。'
   },
   {
-    src: '/placeholder-user.jpg',
-    alt: '厨房烹饪',
-    caption: 'Cooking · 把香味留在家里，也是陪伴的一种。'
+    title: 'Hacker News',
+    author: 'Y Combinator',
+    url: 'https://news.ycombinator.com/',
+    note: '技术圈的日常讨论，总能发现有趣的项目和观点。'
   },
   {
-    src: '/placeholder.svg?height=220&width=320',
-    alt: '街头摄影',
-    caption: 'Photography · 喜欢光线与阴影堆叠的瞬间。'
+    title: 'The Pragmatic Engineer',
+    author: 'Gergely Orosz',
+    url: 'https://blog.pragmaticengineer.com/',
+    note: '工程师成长和团队管理的实用建议。'
   }
 ];
 ---
 
 <BaseLayout
-  title="Interests · 读书·音乐·生活节奏"
-  description="记录我热爱的书、音乐和日常小爱好，让个人网站更像真实的我。"
+  title="Interests · 读书与文章收藏"
+  description="记录我热爱的书籍和值得收藏的技术文章，让个人网站更像真实的我。"
 >
   <Header />
 
   <main class="flex-1">
-    <section class="section-padding">
-      <div class="container-width">
+    <!-- Simplified header section -->
+    <section class="py-16">
+      <div class="container mx-auto max-w-6xl px-6">
         <div class="text-center space-y-4">
           <p class="text-sm uppercase tracking-[0.3em] text-primary/70">Interests</p>
-          <h1 class="text-3xl sm:text-4xl font-bold text-foreground">读书 · 音乐 · 运动 · 拍照</h1>
+          <h1 class="text-3xl sm:text-4xl font-bold text-foreground">读书 · 文章收藏</h1>
           <p class="mx-auto max-w-2xl text-muted-foreground">
-            骨子里是个生活型选手，喜欢把灵感留在阅读笔记里，把节奏放进歌单里，
-            也把运动与厨房里的时间，变成给自己充电的方式。
+            记录那些让我思考的书籍和文章，它们塑造了我对技术和生活的理解。
           </p>
         </div>
       </div>
     </section>
 
-    <section class="section-padding pt-2">
-      <div class="container-width space-y-10">
+    <!-- Reduced padding and kept only bookshelf section -->
+    <section class="py-8">
+      <div class="container mx-auto max-w-6xl px-6 space-y-8">
         <div class="flex items-center justify-between gap-4">
           <h2 class="text-2xl font-semibold text-foreground">Bookshelf</h2>
           <span class="text-sm text-muted-foreground">阅读，是最耐心的自我更新</span>
@@ -114,46 +112,31 @@ const hobbyPhotos = [
       </div>
     </section>
 
-    <section class="section-padding pt-2">
-      <div class="container-width space-y-10">
+    <!-- Added articles I like section -->
+    <section class="py-8">
+      <div class="container mx-auto max-w-6xl px-6 space-y-8">
         <div class="flex items-center justify-between gap-4">
-          <h2 class="text-2xl font-semibold text-foreground">Music</h2>
-          <span class="text-sm text-muted-foreground">歌单里保存当天的心情</span>
+          <h2 class="text-2xl font-semibold text-foreground">Articles I Like</h2>
+          <span class="text-sm text-muted-foreground">值得收藏的技术文章和博客</span>
         </div>
         <div class="grid gap-4 md:grid-cols-2">
-          {musicList.map((track) => (
+          {articlesILike.map((article) => (
             <div class="group rounded-2xl border bg-card/80 p-5 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
-              <div class="flex items-center justify-between">
-                <div>
-                  <p class="text-base font-semibold text-foreground">{track.name}</p>
-                  <p class="text-sm text-muted-foreground">{track.artist}</p>
+              <div class="flex items-start justify-between gap-4">
+                <div class="flex-1">
+                  <h3 class="text-base font-semibold text-foreground group-hover:text-primary">
+                    <a href={article.url} target="_blank" rel="noopener noreferrer" class="hover:underline">
+                      {article.title}
+                    </a>
+                  </h3>
+                  <p class="text-sm text-muted-foreground mt-1">{article.author}</p>
                 </div>
-                <span class="rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary">
-                  daily vibe
-                </span>
+                <svg class="h-4 w-4 text-muted-foreground group-hover:text-primary transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                </svg>
               </div>
-              <p class="mt-4 text-sm text-muted-foreground leading-relaxed">{track.vibe}</p>
+              <p class="mt-3 text-sm text-muted-foreground leading-relaxed">{article.note}</p>
             </div>
-          ))}
-        </div>
-      </div>
-    </section>
-
-    <section class="section-padding pt-2">
-      <div class="container-width space-y-10">
-        <div class="flex items-center justify-between gap-4">
-          <h2 class="text-2xl font-semibold text-foreground">Other Hobbies</h2>
-          <span class="text-sm text-muted-foreground">把日常的小事拍下来</span>
-        </div>
-        <div class="grid gap-6 md:grid-cols-3">
-          {hobbyPhotos.map((photo) => (
-            <figure class="overflow-hidden rounded-2xl border bg-card/70 shadow-sm">
-              <OptimizedImage src={photo.src} alt={photo.alt} width={320} height={220} class="h-48 w-full object-cover" loading="lazy" />
-              <figcaption class="space-y-2 p-4 text-sm text-muted-foreground">
-                <p class="font-semibold text-foreground">{photo.alt}</p>
-                <p class="leading-relaxed">{photo.caption}</p>
-              </figcaption>
-            </figure>
           ))}
         </div>
       </div>
