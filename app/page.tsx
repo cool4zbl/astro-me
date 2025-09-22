@@ -1,7 +1,7 @@
 "use client"
 
-import  from "../astro.config"
+import { ThemeProvider } from "../components/theme-provider"
 
 export default function SyntheticV0PageForDeployment() {
-  return < />
+  return <ThemeProvider />
 }

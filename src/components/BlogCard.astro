@@ -41,14 +41,17 @@ const heroSrc = post.data.heroImage || `/placeholder.svg?height=360&width=640&qu
         {post.data.description}
       </p>
     </div>
-    <!-- Removed duplicate date display and simplified read more section -->
     <div class="mt-6 flex border-t border-border pt-6">
       <div class="relative flex items-center gap-x-4">
         <div class="text-sm leading-6">
           <p class="font-semibold text-foreground">
             <a href={`/blog/${post.slug}/`} class="hover:text-primary">
+              <!-- 移除硬编码的中文文本，让组件更通用 -->
               Read more
             </a>
+          </p>
+          <p class="text-muted-foreground">
+            <FormattedDate date={post.data.pubDate} />
           </p>
         </div>
       </div>
