@@ -13,9 +13,8 @@ const navItems = [
   { key: 'home', href: getLocalizedPath('/', lang) },
   { key: 'blog', href: getLocalizedPath('/blog', lang) },
   { key: 'projects', href: getLocalizedPath('/projects', lang) },
-  { key: 'interests', href: getLocalizedPath('/interests', lang) },
-  { key: 'experience', href: getLocalizedPath('/experience', lang) },
-  { key: 'search', href: getLocalizedPath('/search', lang) }
+  // { key: 'interests', href: getLocalizedPath('/interests', lang) },
+  { key: 'experience', href: getLocalizedPath('/experience', lang) }
 ];
 ---
 
@@ -28,16 +27,16 @@ const navItems = [
           <span class="text-primary-foreground font-bold text-sm">MB</span>
         </div>
         <span class="text-xl font-bold group-hover:text-primary transition-colors">
-          {lang === 'zh' ? '我的博客' : 'My Blog'}
+          {t('site.title')}
         </span>
       </a>
     </div>
-    
+
     <!-- 改进导航菜单，添加移动端支持 -->
     <nav class="hidden md:flex items-center space-x-6">
       {navItems.map((item) => (
-        <a 
-          href={item.href} 
+        <a
+          href={item.href}
           class={`text-sm font-medium transition-colors hover:text-primary relative ${
             currentPath === item.href ? 'text-primary' : 'text-muted-foreground'
           }`}
@@ -56,11 +55,11 @@ const navItems = [
       <div class="hidden lg:block">
         <SocialLinks size="sm" lang={lang} />
       </div>
-      
+
       <!-- 语言切换 -->
       <div class="flex items-center space-x-1 bg-muted rounded-lg p-1">
-        <a 
-          href={basePath === '/' ? '/zh' : `/zh${basePath}`} 
+        <a
+          href={basePath === '/' ? '/zh' : `/zh${basePath}`}
           class={`text-xs px-2 py-1 rounded transition-colors ${
             lang === 'zh' 
               ? 'bg-primary text-primary-foreground shadow-sm' 
@@ -69,8 +68,8 @@ const navItems = [
         >
           中
         </a>
-        <a 
-          href={basePath} 
+        <a
+          href={basePath}
           class={`text-xs px-2 py-1 rounded transition-colors ${
             lang === 'en' 
               ? 'bg-primary text-primary-foreground shadow-sm' 
@@ -80,13 +79,13 @@ const navItems = [
           EN
         </a>
       </div>
-      
+
       <ThemeToggle />
-      
+
       <!-- 添加移动端菜单按钮 -->
-      <button 
+      <button
         class="md:hidden p-2 rounded-lg hover:bg-muted transition-colors"
-        aria-label="Toggle menu"
+        aria-label={t('nav.toggleMenu')}
         id="mobile-menu-button"
       >
         <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -95,13 +94,13 @@ const navItems = [
       </button>
     </div>
   </div>
-  
+
   <!-- 添加移动端菜单 -->
   <div class="md:hidden border-t bg-background/95 backdrop-blur hidden" id="mobile-menu">
     <div class="container mx-auto px-4 py-4 space-y-4">
       {navItems.map((item) => (
-        <a 
-          href={item.href} 
+        <a
+          href={item.href}
           class={`block text-sm font-medium transition-colors hover:text-primary ${
             currentPath === item.href ? 'text-primary' : 'text-muted-foreground'
           }`}
@@ -120,12 +119,12 @@ const navItems = [
   document.addEventListener('DOMContentLoaded', function() {
     const menuButton = document.getElementById('mobile-menu-button');
     const mobileMenu = document.getElementById('mobile-menu');
-    
+
     if (menuButton && mobileMenu) {
       menuButton.addEventListener('click', function() {
         mobileMenu.classList.toggle('hidden');
       });
-      
+
       // 点击外部关闭菜单
       document.addEventListener('click', function(event) {
         if (!menuButton.contains(event.target) && !mobileMenu.contains(event.target)) {

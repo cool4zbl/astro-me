@@ -4,12 +4,12 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 ---
 
-<BaseLayout 
+<BaseLayout
   title="Experience - My Professional Journey"
   description="Explore my professional experience in full-stack development, backend systems, and team leadership across various industries and technologies."
 >
   <Header />
-  
+
   <main class="flex-1">
     <!-- Hero Section -->
     <section class="section-padding bg-gradient-to-br from-background via-muted/20 to-background">
@@ -20,6 +20,18 @@ import Footer from '../components/Footer.astro';
         <p class="mx-auto max-w-2xl text-lg leading-8 text-muted-foreground sm:text-xl">
           Over 5+ years of experience building scalable backend systems, leading development teams, and delivering enterprise-grade solutions across various industries.
         </p>
+        <div class="mt-8">
+          <a
+            href="/cv.pdf"
+            download="CV.pdf"
+            class="inline-flex items-center rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground shadow-sm transition hover:bg-primary/90"
+          >
+            <svg class="mr-2 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-4-4m4 4l4-4m-7-9h10a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2z" />
+            </svg>
+            Download CV
+          </a>
+        </div>
       </div>
     </section>
 
@@ -29,14 +41,14 @@ import Footer from '../components/Footer.astro';
         <div class="relative">
           <!-- Timeline Line -->
           <div class="absolute left-8 top-0 bottom-0 w-0.5 bg-border"></div>
-          
+
           <div class="space-y-12">
             <!-- Current Position -->
             <div class="relative flex items-start space-x-8">
               <div class="flex-shrink-0">
                 <div class="h-16 w-16 rounded-full bg-primary flex items-center justify-center shadow-lg">
                   <svg class="h-8 w-8 text-primary-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                    <path stroke-linecap="round" stroke-linejoin="round" strokeWidth="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
                   </svg>
                 </div>
               </div>
@@ -54,11 +66,11 @@ import Footer from '../components/Footer.astro';
                       <p class="text-sm text-muted-foreground mt-1">2022 - Present</p>
                     </div>
                   </div>
-                  
+
                   <p class="text-muted-foreground mb-6 leading-relaxed">
                     Leading the development of enterprise-grade web applications and microservices architecture. Responsible for technical decision-making, code reviews, and mentoring junior developers while delivering high-quality solutions for Fortune 500 clients.
                   </p>
-                  
+
                   <div class="space-y-4 mb-6">
                     <div>
                       <h4 class="font-semibold text-card-foreground mb-2">Key Achievements:</h4>
@@ -104,11 +116,11 @@ import Footer from '../components/Footer.astro';
                       <p class="text-sm text-muted-foreground">2020 - 2022</p>
                     </div>
                   </div>
-                  
+
                   <p class="text-muted-foreground mb-6 leading-relaxed">
                     Focused on backend development and API design for fintech applications. Worked closely with product teams to deliver secure, scalable solutions handling financial transactions and user data with strict compliance requirements.
                   </p>
-                  
+
                   <div class="space-y-4 mb-6">
                     <div>
                       <h4 class="font-semibold text-card-foreground mb-2">Key Contributions:</h4>
@@ -153,11 +165,11 @@ import Footer from '../components/Footer.astro';
                       <p class="text-sm text-muted-foreground">2019 - 2020</p>
                     </div>
                   </div>
-                  
+
                   <p class="text-muted-foreground mb-6 leading-relaxed">
                     Joined as one of the first developers in a fast-growing startup. Responsible for building the core platform from scratch, establishing development practices, and scaling the system to handle rapid user growth.
                   </p>
-                  
+
                   <div class="space-y-4 mb-6">
                     <div>
                       <h4 class="font-semibold text-card-foreground mb-2">Key Accomplishments:</h4>
@@ -204,11 +216,11 @@ import Footer from '../components/Footer.astro';
                       <p class="text-sm text-muted-foreground">2015 - 2019</p>
                     </div>
                   </div>
-                  
+
                   <p class="text-muted-foreground mb-6 leading-relaxed">
                     Graduated with honors, focusing on software engineering, algorithms, and database systems. Active in programming competitions and open source contributions during university years.
                   </p>
-                  
+
                   <div class="space-y-4 mb-6">
                     <div>
                       <h4 class="font-semibold text-card-foreground mb-2">Academic Highlights:</h4>
@@ -366,6 +378,6 @@ import Footer from '../components/Footer.astro';
       </div>
     </section>
   </main>
-  
+
   <Footer />
 </BaseLayout>

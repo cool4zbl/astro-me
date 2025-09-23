@@ -1,5 +1,4 @@
 ---
-import { CollectionEntry } from 'astro:content';
 import FormattedDate from './FormattedDate.astro';
 import TagList from './TagList.astro';
 import OptimizedImage from './OptimizedImage.astro';
@@ -14,8 +13,8 @@ const heroSrc = post.data.heroImage || `/placeholder.svg?height=360&width=640&qu
     <OptimizedImage
       src={heroSrc}
       alt={post.data.title}
-      width={640}
-      height={360}
+      width={480}
+      height={200}
       class="absolute inset-0 h-full w-full rounded-2xl bg-muted object-cover"
       sizes="(max-width: 1023px) 100vw, 256px"
       loading="lazy"
@@ -46,12 +45,8 @@ const heroSrc = post.data.heroImage || `/placeholder.svg?height=360&width=640&qu
         <div class="text-sm leading-6">
           <p class="font-semibold text-foreground">
             <a href={`/blog/${post.slug}/`} class="hover:text-primary">
-              <!-- 移除硬编码的中文文本，让组件更通用 -->
               Read more
             </a>
-          </p>
-          <p class="text-muted-foreground">
-            <FormattedDate date={post.data.pubDate} />
           </p>
         </div>
       </div>
