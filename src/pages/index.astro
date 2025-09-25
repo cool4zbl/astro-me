@@ -5,111 +5,82 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import BlogCard from '../components/BlogCard.astro';
 import OptimizedImage from '../components/OptimizedImage.astro';
-import { getLangFromUrl, getTranslations, getLocalizedPath } from '../i18n/config';
+import { getLangFromUrl, getLocalizedPath, type Language } from '../i18n/config';
+import { getHomeCopy } from '../i18n/pages/home';
 
-const lang = getLangFromUrl(Astro.url);
-const t = getTranslations(lang);
+const lang: Language = Astro.props?.lang ?? getLangFromUrl(Astro.url);
+const copy = getHomeCopy(lang);
 
 const allPosts = await getCollection('blog');
-const recentPosts = allPosts
-  .filter(post => !post.data.draft)
-  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-  .slice(0, 3);
+const publishedPosts = allPosts
+  .filter((post) => !post.data.draft)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+const recentPosts = publishedPosts.slice(0, 3);
+const totalPostsLabel = copy.latestPosts.totalLabel(publishedPosts.length);
 
-const featuredProjects = [
-  {
-    key: 'ecommerce',
-    image: '/placeholder.svg?height=200&width=350',
-    alt: 'E-commerce Platform',
-    tags: ['Java', 'Spring Boot', 'React']
-  },
-  {
-    key: 'microservices',
-    image: '/placeholder.svg?height=200&width=350',
-    alt: 'Microservices API',
-    tags: ['Spring Cloud', 'Docker', 'Kubernetes']
-  },
-  {
-    key: 'analytics',
-    image: '/placeholder.svg?height=200&width=350',
-    alt: 'Analytics Dashboard',
-    tags: ['WebFlux', 'Redis', 'Chart.js']
-  }
-];
+const heroPrimaryHref = getLocalizedPath(copy.hero.primary.href, lang);
+const heroSecondaryHref = getLocalizedPath(copy.hero.secondary.href, lang);
+const experienceHref = getLocalizedPath('/experience', lang);
+const projectsHref = getLocalizedPath('/projects', lang);
+const blogHref = getLocalizedPath('/blog', lang);
 ---
 
 <BaseLayout
-  title="My Blog - Full-Stack Developer & Tech Enthusiast"
-  description="Welcome to my personal website. I'm a full-stack developer specializing in Java backend development, sharing my projects, experiences, and insights."
+  title="Binliu Zhang - Software Engineer"
+  description="Welcome to my personal website. I'm a senior software developer specializing in Java backend development, sharing my projects, experiences, and insights."
 >
   <Header />
 
   <main class="flex-1">
-    <!-- Hero Section -->
+    <!-- Hero & About Me Section -->
     <section class="section-padding bg-gradient-to-br from-background via-muted/20 to-background">
       <div class="container-width">
-        <div class="animate-fade-in mx-auto max-w-3xl space-y-6 text-left sm:text-center">
-          <span class="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2 text-xs font-medium uppercase tracking-[0.25em] text-primary">
-            {t('home.hero.tagline')}
-          </span>
-          <h1 class="text-4xl font-bold leading-tight text-foreground sm:text-5xl">
-            {t('home.hero.title')}
-          </h1>
-          <p class="text-base leading-relaxed text-muted-foreground sm:text-lg">
-            {t('home.hero.description')}
-          </p>
-          <div class="flex flex-wrap items-center gap-3 sm:justify-center">
-            <a
-              href={getLocalizedPath('/projects', lang)}
-              class="inline-flex items-center rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground shadow-sm transition hover:bg-primary/90"
-            >
-              {t('home.hero.viewProjects')}
-            </a>
-            <a
-              href={getLocalizedPath('/blog', lang)}
-              class="inline-flex items-center rounded-full border border-primary/30 px-5 py-2.5 text-sm font-semibold text-primary transition hover:bg-primary/10"
-            >
-              {t('home.hero.readBlog')} <span aria-hidden="true" class="ml-2">→</span>
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- About Me Section -->
-    <section class="section-padding">
-      <div class="container-width">
         <div class="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
-          <div>
-            <h2 class="mb-5 text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
-              {t('home.about.title')}
-            </h2>
-            <div class="space-y-3 text-sm leading-relaxed text-muted-foreground sm:text-base">
-              <p>
-                {t('home.about.paragraph1')}
-              </p>
-              <p>
-                {t('home.about.paragraph2')}
-              </p>
-              <p>
-                {t('home.about.paragraph3')}
-              </p>
+          <div class="animate-fade-in space-y-6">
+            <span class="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2 text-xs font-medium uppercase tracking-[0.25em] text-primary">
+              {copy.hero.label}
+            </span>
+            <h1 class="text-4xl font-bold leading-tight text-foreground sm:text-5xl">
+              {copy.hero.title}
+            </h1>
+            <!--<p class="text-base leading-relaxed text-muted-foreground sm:text-lg">-->
+            <!--  {copy.hero.description}-->
+            <!--</p>-->
+
+            <div class="space-y-3 text-base leading-relaxed text-muted-foreground sm:text-base">
+              {copy.hero.description.map((paragraph) => (
+                <p>{paragraph}</p>
+              ))}
             </div>
-            <div class="mt-8">
+
+            <div class="flex flex-wrap items-center gap-3">
               <a
-                href={getLocalizedPath('/experience', lang)}
+                href={heroPrimaryHref}
+                class="inline-flex items-center rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground shadow-sm transition hover:bg-primary/90"
+              >
+                {copy.hero.primary.label}
+              </a>
+              <a
+                href={heroSecondaryHref}
+                class="inline-flex items-center rounded-full border border-primary/30 px-5 py-2.5 text-sm font-semibold text-primary transition hover:bg-primary/10"
+              >
+                {copy.hero.secondary.label} <span aria-hidden="true" class="ml-2">→</span>
+              </a>
+              <a
+                href={experienceHref}
                 class="inline-flex items-center gap-2 text-sm font-medium text-primary transition hover:text-primary/80"
               >
-                {t('home.about.viewExperience')}
+                {copy.about.experienceLinkLabel}
                 <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                 </svg>
               </a>
             </div>
           </div>
+
           <div class="relative">
             <div class="aspect-square rounded-2xl bg-gradient-primary p-8 shadow-2xl">
-              <div class="h-full w-full rounded-xl bg-background/10 backdrop-blur-sm flex items-center justify-center">
+              <div class="flex h-full w-full items-center justify-center rounded-xl bg-background/10 backdrop-blur-sm">
                 <OptimizedImage
                   src="/placeholder.svg?height=300&width=300"
                   alt="Professional developer portrait"
@@ -130,37 +101,35 @@ const featuredProjects = [
       <div class="container-width">
         <div class="mb-12 space-y-3 text-center">
           <h2 class="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
-            {t('home.projects.title')}
+            {copy.projects.title}
           </h2>
           <p class="mx-auto max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">
-            {t('home.projects.description')}
+            {copy.projects.description}
           </p>
         </div>
 
         <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {featuredProjects.map((project) => (
-            <div class="group relative rounded-xl border bg-card p-6 shadow-sm hover:shadow-md transition-all duration-200">
-              <div class="aspect-video rounded-lg bg-muted mb-4 overflow-hidden">
+          {copy.projects.items.map((project) => (
+            <div class="group relative rounded-xl border bg-card p-6 shadow-sm transition-all duration-200 hover:shadow-md">
+              <div class="aspect-video overflow-hidden rounded-lg bg-muted mb-4">
                 <OptimizedImage
-                  src={project.image}
-                  alt={project.alt}
+                  src={project.image.src}
+                  alt={project.image.alt}
                   width={350}
                   height={200}
                   class="h-full w-full object-cover transition-transform duration-200 group-hover:scale-105"
                   loading="lazy"
                 />
               </div>
-              <h3 class="text-xl font-semibold text-card-foreground mb-2">
-                {t(`home.projects.${project.key}.title`)}
+              <h3 class="mb-2 text-xl font-semibold text-card-foreground">
+                {project.title}
               </h3>
               <p class="mb-4 text-sm leading-relaxed text-muted-foreground">
-                {t(`home.projects.${project.key}.description`)}
+                {project.description}
               </p>
-              <div class="flex flex-wrap gap-2 mb-4">
+              <div class="mb-4 flex flex-wrap gap-2">
                 {project.tags.map((tag) => (
-                  <span class="inline-flex items-center rounded-full bg-primary/10 px-2 py-1 text-xs font-medium text-primary">
-                    {tag}
-                  </span>
+                  <span class="inline-flex items-center rounded-full bg-primary/10 px-2 py-1 text-xs font-medium text-primary">{tag}</span>
                 ))}
               </div>
             </div>
@@ -169,10 +138,10 @@ const featuredProjects = [
 
         <div class="mt-10 text-center">
           <a
-            href={getLocalizedPath('/projects', lang)}
+            href={projectsHref}
             class="inline-flex items-center rounded-full border border-secondary px-5 py-2.5 text-sm font-semibold text-secondary-foreground shadow-sm transition hover:bg-secondary"
           >
-            {t('home.projects.viewAll')}
+            {copy.projects.viewAllLabel}
             <svg class="ml-2 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
             </svg>
@@ -185,29 +154,36 @@ const featuredProjects = [
     <section class="section-padding">
       <div class="container-width">
         <div class="mb-12 space-y-3 text-center">
-          <h2 class="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
-            {t('home.posts.title')}
-          </h2>
+          <h2 class="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">{copy.latestPosts.title}</h2>
           <p class="mx-auto max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">
-            {t('home.posts.description')}
+            {copy.latestPosts.description}
+          </p>
+          <p class="text-xs font-medium uppercase tracking-[0.3em] text-muted-foreground">
+            {totalPostsLabel}
           </p>
         </div>
         <div class="space-y-16">
           {recentPosts.map((post) => (
-            <BlogCard post={post} />
+            <BlogCard post={post} lang={lang} />
           ))}
         </div>
         <div class="mt-10 text-center">
           <a
-            href={getLocalizedPath('/blog', lang)}
+            href={blogHref}
             class="inline-flex items-center rounded-full border border-secondary px-5 py-2.5 text-sm font-semibold text-secondary-foreground shadow-sm transition hover:bg-secondary"
           >
-            {t('home.posts.viewAll')}
+            {copy.latestPosts.viewAllLabel}
             <svg class="ml-2 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
             </svg>
           </a>
         </div>
+
+        {recentPosts.length === 0 && (
+          <div class="py-16 text-center">
+            <p class="text-muted-foreground">{copy.latestPosts.emptyLabel}</p>
+          </div>
+        )}
       </div>
     </section>
   </main>

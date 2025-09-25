@@ -86,7 +86,8 @@
 
   body {
     @apply bg-background text-foreground font-sans;
-    /* Added font-sans class for consistent typography */
+    font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+      /* Added font-sans class for consistent typography */
   }
 
 /* Added typography improvements */

@@ -13,9 +13,9 @@ export interface Props {
 }
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
-const { 
-  title, 
-  description, 
+const {
+  title,
+  description,
   image = '/og-image.jpg',
   article = false,
   publishedTime,
@@ -28,16 +28,15 @@ const htmlLang = lang === 'zh' ? 'zh-CN' : 'en';
 ---
 
 <!doctype html>
-<!-- 动态设置 lang 属性 -->
 <html lang={htmlLang} class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/jpeg" href="/favicon.jpg" />
     <meta name="generator" content={Astro.generator} />
-    
+
     <!-- SEO Component -->
-    <SEO 
+    <SEO
       title={title}
       description={description}
       image={image}
@@ -46,25 +45,25 @@ const htmlLang = lang === 'zh' ? 'zh-CN' : 'en';
       modifiedTime={modifiedTime}
       tags={tags}
     />
-    
+
     <!-- RSS -->
     <link rel="alternate" type="application/rss+xml" title={title} href={`${Astro.site}rss.xml`} />
-    
+
     <!-- Sitemap -->
     <link rel="sitemap" href="/sitemap-index.xml" />
-    
+
     <!-- Preconnect to external domains -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    
+
     <!-- Global Styles -->
     <link rel="stylesheet" href="/src/styles/global.css" />
-    
+
     <!-- 添加语言切换支持的 hreflang -->
     <link rel="alternate" hreflang="zh-CN" href={`${Astro.site}`} />
     <link rel="alternate" hreflang="en" href={`${Astro.site}en/`} />
     <link rel="alternate" hreflang="x-default" href={`${Astro.site}`} />
-    
+
     <!-- Theme Script -->
     <script is:inline>
       const getThemePreference = () => {
@@ -75,7 +74,7 @@ const htmlLang = lang === 'zh' ? 'zh-CN' : 'en';
       };
       const isDark = getThemePreference() === 'dark';
       document.documentElement.classList[isDark ? 'add' : 'remove']('dark');
-      
+
       if (typeof localStorage !== 'undefined') {
         const observer = new MutationObserver(() => {
           const isDark = document.documentElement.classList.contains('dark');

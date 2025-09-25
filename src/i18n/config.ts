@@ -7,6 +7,7 @@ export const defaultLang = "en" as const
 
 export type Language = keyof typeof languages
 
+// TODO: merge with home.ts
 export const ui = {
   zh: {
     "nav.home": "首页",
@@ -67,6 +68,7 @@ export const ui = {
     "home.posts.viewAll": "查看所有文章",
   },
   en: {
+    "site.title": "Binliu Zhang",
     "nav.home": "Home",
     "nav.blog": "Blog",
     "nav.projects": "Projects",

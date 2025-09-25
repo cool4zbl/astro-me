@@ -2,10 +2,13 @@
 import FormattedDate from './FormattedDate.astro';
 import TagList from './TagList.astro';
 import OptimizedImage from './OptimizedImage.astro';
+import { getLangFromUrl, getLocalizedPath } from '../i18n/config';
 
-const { post } = Astro.props;
+const { post, lang: langProp } = Astro.props;
+const lang = langProp ?? getLangFromUrl(Astro.url);
 
 const heroSrc = post.data.heroImage || `/placeholder.svg?height=360&width=640&query=${encodeURIComponent(post.data.title)}`;
+const postHref = getLocalizedPath(`/blog/${post.slug}/`, lang);
 ---
 
 <article class="relative isolate flex flex-col gap-8 lg:flex-row">
@@ -26,12 +29,12 @@ const heroSrc = post.data.heroImage || `/placeholder.svg?height=360&width=640&qu
     <div class="flex items-center gap-x-4 text-xs">
       <FormattedDate date={post.data.pubDate} class="text-muted-foreground" />
       {post.data.tags.length > 0 && (
-        <TagList tags={post.data.tags.slice(0, 2)} />
+        <TagList tags={post.data.tags.slice(0, 2)} lang={lang} />
       )}
     </div>
     <div class="group relative max-w-xl">
       <h3 class="mt-3 text-lg font-semibold leading-6 text-foreground group-hover:text-primary">
-        <a href={`/blog/${post.slug}/`}>
+        <a href={postHref}>
           <span class="absolute inset-0"></span>
           {post.data.title}
         </a>
@@ -44,7 +47,7 @@ const heroSrc = post.data.heroImage || `/placeholder.svg?height=360&width=640&qu
       <div class="relative flex items-center gap-x-4">
         <div class="text-sm leading-6">
           <p class="font-semibold text-foreground">
-            <a href={`/blog/${post.slug}/`} class="hover:text-primary">
+            <a href={postHref} class="hover:text-primary">
               Read more
             </a>
           </p>
