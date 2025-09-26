@@ -22,7 +22,7 @@ const post = Astro.props;
 const { Content, headings } = await post.render();
 ---
 
-<BaseLayout 
+<BaseLayout
   title={post.data.title}
   description={post.data.description}
   image={post.data.heroImage}
@@ -32,9 +32,9 @@ const { Content, headings } = await post.render();
   tags={post.data.tags}
 >
   <Header />
-  
+
   <main class="flex-1">
-    <article class="container mx-auto px-4 py-12 lg:py-16">
+    <article class="container-width py-12 lg:py-16">
       <div class="mx-auto flex max-w-5xl flex-col gap-12 lg:flex-row">
         <div class="w-full lg:flex-1 lg:max-w-3xl">
           <!-- 主要内容区域 -->
@@ -97,8 +97,8 @@ const { Content, headings } = await post.render();
           </footer>
 
           <div class="mt-12">
-            <RelatedPosts 
-              currentSlug={post.slug} 
+            <RelatedPosts
+              currentSlug={post.slug}
               currentTags={post.data.tags}
               lang="zh"
             />
@@ -117,6 +117,6 @@ const { Content, headings } = await post.render();
       </div>
     </article>
   </main>
-  
+
   <Footer />
 </BaseLayout>

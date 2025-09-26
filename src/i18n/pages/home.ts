@@ -43,7 +43,7 @@ const homeCopy: Record<Language, HomeCopy> = {
       // TODO: rewrite
       hero: {
           label: 'software engineering · personal notes',
-          title: 'Hi there! I\'m Binliu',
+          title: 'Hey, I\'m Binliu!',
           description: [
               "Senior Software Engineer specializing in Java backend development.",
               " Living in the Netherlands, I enjoy building large-scale systems and love sharing my technical practice.",

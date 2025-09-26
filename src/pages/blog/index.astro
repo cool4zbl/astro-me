@@ -11,14 +11,14 @@ const publishedPosts = allPosts
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 ---
 
-<BaseLayout 
+<BaseLayout
   title="Blog Posts - My Blog"
   description="Browse all blog posts covering frontend technologies, programming experiences, and life insights."
 >
   <Header />
-  
+
   <main class="flex-1">
-    <div class="container mx-auto px-4 py-16">
+    <div class="container-width py-16">
       <div class="mx-auto max-w-2xl lg:max-w-4xl">
         <header class="text-center">
           <h1 class="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
@@ -28,13 +28,13 @@ const publishedPosts = allPosts
             {publishedPosts.length} posts in total
           </p>
         </header>
-        
+
         <div class="mt-16 space-y-20 lg:mt-20 lg:space-y-20">
           {publishedPosts.map((post) => (
             <BlogCard post={post} />
           ))}
         </div>
-        
+
         {publishedPosts.length === 0 && (
           <div class="text-center py-16">
             <p class="text-muted-foreground">No posts published yet</p>
@@ -43,6 +43,6 @@ const publishedPosts = allPosts
       </div>
     </div>
   </main>
-  
+
   <Footer />
 </BaseLayout>

@@ -193,7 +193,8 @@ button:focus,
 }
 
 .container-width {
-  @apply mx-auto max-w-5xl;
+  @apply mx-auto px-4;
+  max-width: 1280px;
 }
 
 /* Added animation utilities */

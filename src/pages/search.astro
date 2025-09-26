@@ -4,14 +4,14 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 ---
 
-<BaseLayout 
+<BaseLayout
   title="Search - My Blog"
   description="Search blog articles to quickly find content you're interested in."
 >
   <Header />
-  
+
   <main class="flex-1">
-    <div class="container mx-auto px-4 py-16">
+    <div class="container-width py-16">
       <div class="mx-auto max-w-2xl lg:max-w-4xl">
         <header class="text-center mb-16">
           <h1 class="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
@@ -21,7 +21,7 @@ import Footer from '../components/Footer.astro';
             Enter keywords to search for related articles
           </p>
         </header>
-        
+
         <!-- Search Box -->
         <div class="mb-8">
           <div class="relative">
@@ -38,7 +38,7 @@ import Footer from '../components/Footer.astro';
             />
           </div>
         </div>
-        
+
         <!-- Search Results -->
         <div id="search-results" class="hidden">
           <div class="mb-4">
@@ -46,7 +46,7 @@ import Footer from '../components/Footer.astro';
           </div>
           <div id="results-container" class="space-y-6"></div>
         </div>
-        
+
         <!-- No Results -->
         <div id="no-results" class="hidden text-center py-16">
           <div class="mx-auto h-12 w-12 text-muted-foreground mb-4">
@@ -65,7 +65,7 @@ import Footer from '../components/Footer.astro';
             </a>
           </div>
         </div>
-        
+
         <!-- Initial State -->
         <div id="initial-state" class="text-center py-16">
           <div class="mx-auto h-12 w-12 text-muted-foreground mb-4">
@@ -79,22 +79,22 @@ import Footer from '../components/Footer.astro';
       </div>
     </div>
   </main>
-  
+
   <Footer />
 </BaseLayout>
 
 <script>
   import MiniSearch from 'minisearch';
-  
+
   let miniSearch;
   let searchData = [];
-  
+
   // Initialize search
   async function initSearch() {
     try {
       const response = await fetch('/search-data.json');
       searchData = await response.json();
-      
+
       miniSearch = new MiniSearch({
         fields: ['title', 'description', 'content', 'tags'],
         storeFields: ['title', 'description', 'slug', 'pubDate', 'tags'],
@@ -104,24 +104,24 @@ import Footer from '../components/Footer.astro';
           prefix: true
         }
       });
-      
+
       miniSearch.addAll(searchData);
     } catch (error) {
       console.error('Failed to initialize search:', error);
     }
   }
-  
+
   // Execute search
   function performSearch(query) {
     if (!miniSearch || !query.trim()) {
       showInitialState();
       return;
     }
-    
+
     const results = miniSearch.search(query, { limit: 20 });
     displayResults(results, query);
   }
-  
+
   // Display search results
   function displayResults(results, query) {
     const searchResults = document.getElementById('search-results');
@@ -129,20 +129,20 @@ import Footer from '../components/Footer.astro';
     const initialState = document.getElementById('initial-state');
     const searchCount = document.getElementById('search-count');
     const resultsContainer = document.getElementById('results-container');
-    
+
     initialState.classList.add('hidden');
-    
+
     if (results.length === 0) {
       searchResults.classList.add('hidden');
       noResults.classList.remove('hidden');
       return;
     }
-    
+
     noResults.classList.add('hidden');
     searchResults.classList.remove('hidden');
-    
+
     searchCount.textContent = `Found ${results.length} related articles`;
-    
+
     resultsContainer.innerHTML = results.map(result => `
       <article class="border rounded-lg p-6 hover:bg-accent/50 transition-colors">
         <div class="flex items-start justify-between">
@@ -172,22 +172,22 @@ import Footer from '../components/Footer.astro';
       </article>
     `).join('');
   }
-  
+
   // Show initial state
   function showInitialState() {
     document.getElementById('search-results').classList.add('hidden');
     document.getElementById('no-results').classList.add('hidden');
     document.getElementById('initial-state').classList.remove('hidden');
   }
-  
+
   // Highlight search keywords
   function highlightText(text, query) {
     if (!query.trim()) return text;
-    
+
     const regex = new RegExp(`(${query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
     return text.replace(regex, '<mark class="bg-yellow-200 dark:bg-yellow-800 px-1 rounded">$1</mark>');
   }
-  
+
   // Format date
   function formatDate(dateString) {
     const date = new Date(dateString);
@@ -197,7 +197,7 @@ import Footer from '../components/Footer.astro';
       day: 'numeric',
     }).format(date);
   }
-  
+
   // Debounce function
   function debounce(func, wait) {
     let timeout;
@@ -210,18 +210,18 @@ import Footer from '../components/Footer.astro';
       timeout = setTimeout(later, wait);
     };
   }
-  
+
   // Initialize
   document.addEventListener('DOMContentLoaded', () => {
     initSearch();
-    
+
     const searchInput = document.getElementById('search-input');
     const debouncedSearch = debounce((query) => performSearch(query), 300);
-    
+
     searchInput.addEventListener('input', (e) => {
       debouncedSearch(e.target.value);
     });
-    
+
     // From URL parameters get search query
     const urlParams = new URLSearchParams(window.location.search);
     const query = urlParams.get('q');

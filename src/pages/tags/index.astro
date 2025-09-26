@@ -21,14 +21,14 @@ const sortedTags = Object.entries(tagCounts)
   .map(([tag, count]) => ({ tag, count }));
 ---
 
-<BaseLayout 
+<BaseLayout
   title="Tags - My Blog"
   description="Browse all article tags to find content by topic."
 >
   <Header />
-  
+
   <main class="flex-1">
-    <div class="container mx-auto px-4 py-16">
+    <div class="container-width py-16">
       <div class="mx-auto max-w-4xl">
         <header class="text-center mb-16">
           <h1 class="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
@@ -38,7 +38,7 @@ const sortedTags = Object.entries(tagCounts)
             {sortedTags.length} tags, {publishedPosts.length} articles
           </p>
         </header>
-        
+
         {sortedTags.length > 0 ? (
           <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {sortedTags.map(({ tag, count }) => (
@@ -65,7 +65,7 @@ const sortedTags = Object.entries(tagCounts)
             <p class="text-muted-foreground">No tags available</p>
           </div>
         )}
-        
+
         <!-- Tag Cloud -->
         <div class="mt-16 border-t pt-16">
           <h2 class="text-2xl font-bold text-center mb-8">Tag Cloud</h2>
@@ -88,6 +88,6 @@ const sortedTags = Object.entries(tagCounts)
       </div>
     </div>
   </main>
-  
+
   <Footer />
 </BaseLayout>

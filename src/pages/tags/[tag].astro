@@ -8,10 +8,10 @@ import BlogCard from '../../components/BlogCard.astro';
 export async function getStaticPaths() {
   const allPosts = await getCollection('blog');
   const publishedPosts = allPosts.filter(post => !post.data.draft);
-  
+
   // Get all unique tags
   const uniqueTags = [...new Set(publishedPosts.flatMap(post => post.data.tags))];
-  
+
   return uniqueTags.map(tag => ({
     params: { tag },
     props: {
@@ -26,14 +26,14 @@ const { tag } = Astro.params;
 const { posts } = Astro.props;
 ---
 
-<BaseLayout 
+<BaseLayout
   title={`Tag: ${tag} - My Blog`}
   description={`Browse all articles tagged with "${tag}", ${posts.length} posts total.`}
 >
   <Header />
-  
+
   <main class="flex-1">
-    <div class="container mx-auto px-4 py-16">
+    <div class="container-width py-16">
       <div class="mx-auto max-w-2xl lg:max-w-4xl">
         <header class="text-center mb-16">
           <div class="inline-flex items-center rounded-full bg-secondary px-4 py-2 text-sm font-medium text-secondary-foreground mb-4">
@@ -54,7 +54,7 @@ const { posts } = Astro.props;
             </a>
           </div>
         </header>
-        
+
         {posts.length > 0 ? (
           <div class="space-y-20 lg:space-y-20">
             {posts.map((post) => (
@@ -69,6 +69,6 @@ const { posts } = Astro.props;
       </div>
     </div>
   </main>
-  
+
   <Footer />
 </BaseLayout>
