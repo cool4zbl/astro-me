@@ -4,12 +4,12 @@ import sitemap from '@astrojs/sitemap';
 import tailwind from '@astrojs/tailwind';
 
 export default defineConfig({
-  site: 'https://your-blog.vercel.app',
+  site: 'https://binliu.netlify.app/',
   integrations: [
     mdx(),
     sitemap(),
     tailwind({
-      applyBaseStyles: false,
+      applyBaseStyles: true,
     }),
   ],
   markdown: {
