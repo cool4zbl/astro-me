@@ -13,7 +13,6 @@ const footerLinks = {
     { key: 'home', href: getLocalizedPath('/', lang) },
     { key: 'blog', href: getLocalizedPath('/blog', lang) },
     { key: 'projects', href: getLocalizedPath('/projects', lang) },
-    { key: 'interests', href: getLocalizedPath('/interests', lang) },
     { key: 'experience', href: getLocalizedPath('/experience', lang) }
   ],
   resources: [
@@ -39,6 +38,10 @@ const footerLinks = {
 };
 
 const mottoPool = [
+    {
+        en: 'Stay hungry, stay foolish.',
+        zh: 'Stay hungry, stay foolish.'
+    },
   {
     zh: '慢下来也能走得远，关键是保持持续的节奏。',
     en: 'Going slower still gets you far when the rhythm is sustainable.'
@@ -63,54 +66,36 @@ const initialMotto = mottoTexts[0];
 ---
 
 <footer class="border-t bg-muted/30">
-  <div class="container mx-auto px-4 py-12">
+  <div class="container-width py-12">
     {isHome ? (
-      <div class="space-y-10 text-center">
-        <div class="flex flex-col items-center gap-3">
-          <div class="flex items-center gap-2">
-            <div class="h-9 w-9 rounded-xl bg-gradient-primary flex items-center justify-center">
-              <span class="text-primary-foreground text-sm font-bold">MB</span>
+      <div class="grid gap-8 md:grid-cols-2">
+        <!-- Left Column: Logo and Motto -->
+        <div>
+          <!-- Logo Component for Home -->
+          <div class="mb-4 flex items-center gap-2">
+            <div class="h-8 w-8 rounded-xl bg-primary flex items-center justify-center shadow-sm">
+              <span class="text-primary-foreground text-sm font-bold">BZ</span>
             </div>
             <span class="text-xl font-semibold">{t('footer.myWebsite')}</span>
           </div>
-          <div
-            id={mottoId}
-            data-mottos={JSON.stringify(mottoTexts)}
-            class="relative w-full overflow-hidden rounded-3xl bg-gradient-to-r from-primary via-primary/80 to-primary/60 p-[1px]"
-          >
-            <div class="rounded-3xl bg-background/95 p-6 text-left shadow-sm sm:p-8">
-              <p class="text-xs uppercase tracking-[0.3em] text-primary/70">
-                {t('footer.inspiringMotto')}
-              </p>
-              <p data-motto-text class="mt-4 text-base leading-relaxed text-foreground sm:text-lg">
-                {initialMotto}
-              </p>
-            </div>
-          </div>
-          <SocialLinks size="md" lang={lang} />
-        </div>
-        <div class="border-t pt-6 text-xs text-muted-foreground sm:text-sm">
-          © {currentYear} {t('footer.poweredByAstro')}
-        </div>
-      </div>
-    ) : (
-      <>
-        <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
-          <div class="lg:col-span-2">
-            <div class="mb-4 flex items-center space-x-2">
-              <div class="h-8 w-8 rounded-lg bg-gradient-primary flex items-center justify-center">
-                <span class="text-primary-foreground font-bold text-sm">MB</span>
-              </div>
-              <span class="text-xl font-bold">
-                {t('footer.myBlog')}
-              </span>
-            </div>
-            <p class="mb-6 max-w-md text-sm leading-relaxed text-muted-foreground">
-              {t('footer.description')}
+
+          <!-- Simplified Motto -->
+          <div class="mb-6">
+            <p
+              id={mottoId}
+              data-mottos={JSON.stringify(mottoTexts)}
+              class="text-sm leading-relaxed text-muted-foreground italic"
+            >
+              {initialMotto}
             </p>
-            <SocialLinks size="md" lang={lang} />
           </div>
 
+          <SocialLinks size="md" lang={lang} />
+        </div>
+
+        <!-- Right Column: Navigation and Resources -->
+        <div class="grid gap-8 sm:grid-cols-2">
+          <!-- Navigation Links Section -->
           <div>
             <h3 class="mb-4 text-sm font-semibold text-foreground uppercase tracking-[0.2em]">
               {t('footer.navigation')}
@@ -129,6 +114,76 @@ const initialMotto = mottoTexts[0];
             </ul>
           </div>
 
+          <!-- Resources Links Section -->
+          <div>
+            <h3 class="mb-4 text-sm font-semibold text-foreground uppercase tracking-[0.2em]">
+              {t('footer.resources')}
+            </h3>
+            <ul class="space-y-2 text-sm text-muted-foreground">
+              {footerLinks.resources.map((link) => (
+                <li>
+                  <a
+                    href={link.href}
+                    class="transition-colors hover:text-primary"
+                    target={link.external ? "_blank" : undefined}
+                    rel={link.external ? "noreferrer" : undefined}
+                  >
+                    {link.name}
+                    {link.external && (
+                      <svg class="ml-1 inline h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                      </svg>
+                    )}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Simple Copyright for Home -->
+      <div class="mt-8 border-t pt-6 text-xs text-muted-foreground sm:text-sm text-center">
+        © {currentYear} {t('footer.poweredByAstro')}
+      </div>
+    ) : (
+      <>
+        <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+          <div class="lg:col-span-2">
+            <!-- Logo Component for Non-Home -->
+            <div class="mb-4 flex items-center gap-2">
+              <div class="h-8 w-8 rounded-xl bg-primary flex items-center justify-center shadow-sm">
+                <span class="text-primary-foreground text-sm font-bold">BZ</span>
+              </div>
+              <span class="text-xl font-semibold">{t('footer.myBlog')}</span>
+            </div>
+
+            <p class="mb-6 max-w-md text-sm leading-relaxed text-muted-foreground">
+              {t('footer.description')}
+            </p>
+            <SocialLinks size="md" lang={lang} />
+          </div>
+
+          <!-- Navigation Links Section -->
+          <div>
+            <h3 class="mb-4 text-sm font-semibold text-foreground uppercase tracking-[0.2em]">
+              {t('footer.navigation')}
+            </h3>
+            <ul class="space-y-2 text-sm text-muted-foreground">
+              {footerLinks.navigation.map((link) => (
+                <li>
+                  <a
+                    href={link.href}
+                    class="transition-colors hover:text-primary"
+                  >
+                    {t(`nav.${link.key}`)}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <!-- Resources Links Section -->
           <div>
             <h3 class="mb-4 text-sm font-semibold text-foreground uppercase tracking-[0.2em]">
               {t('footer.resources')}
@@ -155,6 +210,7 @@ const initialMotto = mottoTexts[0];
           </div>
         </div>
 
+        <!-- Full Copyright for Non-Home -->
         <div class="mt-8 flex flex-col gap-4 border-t pt-8 text-xs text-muted-foreground sm:flex-row sm:items-center sm:justify-between sm:text-sm">
           <p>
             © {currentYear} {t('footer.copyright')}.
@@ -168,18 +224,18 @@ const initialMotto = mottoTexts[0];
         </div>
       </>
     )}
+
   </div>
   {isHome && (
-    <script is:inline>
-      const mottoContainer = document.getElementById('{mottoId}');
+    <script is:inline define:vars={{ mottoId }}>
+      const mottoContainer = document.getElementById(mottoId);
       if (mottoContainer) {
         try {
           const mottos = JSON.parse(mottoContainer.dataset.mottos || '[]');
           if (Array.isArray(mottos) && mottos.length > 0) {
             const pick = mottos[Math.floor(Math.random() * mottos.length)];
-            const textNode = mottoContainer.querySelector('[data-motto-text]');
-            if (pick && textNode) {
-              textNode.textContent = pick;
+            if (pick) {
+              mottoContainer.textContent = pick;
             }
           }
         } catch (error) {
