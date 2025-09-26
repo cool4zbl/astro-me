@@ -1,5 +1,5 @@
 export const languages = {
-    zh: "中文",
+    // zh: "中文",
     en: "English",
 } as const
 
