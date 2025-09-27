@@ -6,8 +6,14 @@ import { getLangFromUrl, getTranslations, getLocalizedPath } from '../i18n/confi
 const lang = getLangFromUrl(Astro.url);
 const t = getTranslations(lang);
 
-const currentPath = Astro.url.pathname;
-const basePath = lang === 'en' ? currentPath : currentPath.replace(`/${lang}`, '');
+const normalizePath = (path: string) => {
+  const normalized = path.replace(/\/+$/, '');
+  return normalized === '' ? '/' : normalized;
+};
+
+const rawCurrentPath = Astro.url.pathname;
+const currentPath = normalizePath(rawCurrentPath);
+const basePath = lang === 'en' ? rawCurrentPath : rawCurrentPath.replace(`/${lang}`, '');
 
 const navItems = [
   { key: 'home', href: getLocalizedPath('/', lang) },
@@ -36,11 +42,11 @@ const navItems = [
         <a
           href={item.href}
           class={`text-sm font-medium transition-colors hover:text-primary relative ${
-            currentPath === item.href ? 'text-primary' : 'text-muted-foreground'
+            currentPath === normalizePath(item.href) ? 'text-primary' : 'text-muted-foreground'
           }`}
         >
           {t(`nav.${item.key}`)}
-          {currentPath === item.href && (
+          {currentPath === normalizePath(item.href) && (
             <div class="absolute -bottom-1 left-0 right-0 h-0.5 bg-primary rounded-full"></div>
           )}
         </a>
@@ -100,7 +106,7 @@ const navItems = [
         <a
           href={item.href}
           class={`block text-sm font-medium transition-colors hover:text-primary ${
-            currentPath === item.href ? 'text-primary' : 'text-muted-foreground'
+            currentPath === normalizePath(item.href) ? 'text-primary' : 'text-muted-foreground'
           }`}
         >
           {t(`nav.${item.key}`)}

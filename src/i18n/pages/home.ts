@@ -42,8 +42,8 @@ const homeCopy: Record<Language, HomeCopy> = {
   en: {
       // TODO: rewrite
       hero: {
-          label: 'platform engineering · distributed systems',
-          title: "Hi, I'm Binliu Zhang.",
+          label: 'software engineering · personal notes',
+          title: "Hey, I'm Binliu!",
           description: [
               'Senior Software Engineer at Just Eat Takeaway, where I design event-driven automation so customer issues are resolved without human intervention.',
               'Across 8+ years at Just Eat Takeaway, Grab, Ant Group, and Douban I have scaled backend platforms that support food delivery, mobility, fintech, and consumer communities.',
