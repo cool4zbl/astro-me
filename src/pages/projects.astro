@@ -14,106 +14,124 @@ const translations = {
       highlight: 'Projects',
       suffix: '',
       description:
-        'A collection of full-stack applications, backend systems, and cloud solutions that showcase my expertise in Java development and modern web technologies.',
+        'Platform builds that automated customer operations, scaled geospatial data quality, and powered experimentation for millions of users.',
     },
     featured: [
       {
-        image: { src: '/placeholder.svg?height=400&width=600', alt: 'E-commerce Platform Screenshot' },
-        badge: { label: 'Featured Project', class: 'bg-primary/10 text-primary' },
-        title: 'E-commerce Platform',
+        image: { src: '/placeholder.svg?height=400&width=600', alt: 'JETMS operational workspace mockup' },
+        badge: { label: 'Operations Platform', class: 'bg-primary/10 text-primary' },
+        title: 'JETMS Operational Platform',
         subtitle: '',
         description:
-          'A comprehensive e-commerce solution built with Spring Boot and React. Features include user authentication, product catalog management, shopping cart functionality, payment processing with Stripe, and an admin dashboard for order management.',
+          'Multi-tenant workspace that unified 20+ Just Eat Takeaway support tools, enabling agents across Europe to resolve customer issues faster with shared data and automation.',
         sections: [
           {
-            title: 'Key Features',
+            title: 'Impact',
             items: [
-              'JWT-based authentication and authorization',
-              'RESTful API with comprehensive error handling',
-              'Real-time inventory management',
-              'Secure payment processing integration',
-              'Responsive admin dashboard',
+              'Consolidated fragmented tooling into a single platform used by 1,000+ agents across 8 markets.',
+              'Reduced resolution SLA by ~33% through reusable workflows and consistent data contracts.',
+              'Provided compliance-ready audit trails and access controls for regulated operations.',
+            ],
+          },
+          {
+            title: 'My Focus',
+            items: [
+              'Led architecture for Java/Spring Boot CQRS services and TypeScript front-end integration.',
+              'Designed tenant-aware routing, event-sourcing patterns, and rollout strategy.',
+              'Partnered with product and ops leadership to prioritize automation opportunities.',
             ],
           },
         ],
-        stack: ['Spring Boot', 'React', 'PostgreSQL', 'Redis', 'Docker'],
+        stack: ['Java', 'Spring Boot', 'CQRS', 'MySQL', 'TypeScript', 'AWS'],
         actions: [
-          { label: 'Live Demo', variant: 'primary' },
-          { label: 'GitHub', variant: 'outline' },
+          { label: 'Architecture Notes', variant: 'primary' },
+          { label: 'Operations Playbook', variant: 'outline' },
         ],
       },
       {
-        image: { src: '/placeholder.svg?height=400&width=600', alt: 'Microservices Architecture Diagram' },
-        badge: { label: 'Backend Focus', class: 'bg-accent/10 text-accent' },
-        title: 'Microservices API Gateway',
+        image: { src: '/placeholder.svg?height=400&width=600', alt: 'Jarvis crowdsourcing dashboard mockup' },
+        badge: { label: 'Mapping Platform', class: 'bg-accent/10 text-accent' },
+        title: 'Jarvis Map Collection System',
         subtitle: '',
         description:
-          'A scalable microservices architecture built with Spring Cloud, featuring service discovery, load balancing, circuit breakers, and distributed tracing. Deployed on Kubernetes with automated CI/CD pipelines.',
+          'Crowdsourced geospatial task engine that helped Grab maintain up-to-date maps for ride-hailing and deliveries across Southeast Asia.',
         sections: [
           {
-            title: 'Architecture Highlights',
+            title: 'Impact',
             items: [
-              'Spring Cloud Gateway for API routing',
-              'Eureka service discovery and registration',
-              'Hystrix circuit breaker pattern',
-              'Zipkin distributed tracing',
-              'Kubernetes deployment with Helm charts',
+              'Automated 300k+ mapping tasks and processed 400k geospatial assets with strong SLA guarantees.',
+              'Improved marketplace accuracy, reducing passenger and driver cancellations tied to map errors.',
+              'Delivered operational transparency for regional operations teams with search and review tooling.',
+            ],
+          },
+          {
+            title: 'My Focus',
+            items: [
+              'Built Go microservices with PostgreSQL/PostGIS and Kafka pipelines for task orchestration.',
+              'Implemented ElasticSearch indexing and reviewer workflows for quality assurance.',
+              'Collaborated with data science partners on scoring models and prioritization logic.',
             ],
           },
         ],
-        stack: ['Spring Cloud', 'Kubernetes', 'Docker', 'MongoDB', 'RabbitMQ'],
+        stack: ['Go', 'PostgreSQL', 'PostGIS', 'Kafka', 'ElasticSearch'],
         actions: [
-          { label: 'View Code', variant: 'outline' },
-          { label: 'Documentation', variant: 'outline' },
+          { label: 'System Overview', variant: 'primary' },
+          { label: 'Operational Metrics', variant: 'outline' },
         ],
       },
       {
-        image: { src: '/placeholder.svg?height=400&width=600', alt: 'Analytics Dashboard Screenshot' },
-        badge: { label: 'Real-time System', class: 'bg-primary/10 text-primary' },
-        title: 'Analytics Dashboard',
+        image: { src: '/placeholder.svg?height=400&width=600', alt: 'Darwin experimentation analytics mockup' },
+        badge: { label: 'Experimentation', class: 'bg-primary/10 text-primary' },
+        title: 'Darwin Experimentation Platform',
         subtitle: '',
         description:
-          'A real-time analytics platform built with Spring WebFlux for reactive programming. Features live data streaming, interactive charts, and customizable dashboards with sub-second latency for business intelligence.',
+          'High-scale experimentation stack powering Ant Group products with consistent traffic allocation and real-time insight.',
         sections: [
           {
-            title: 'Technical Features',
+            title: 'Impact',
             items: [
-              'Reactive streams with WebFlux and WebSocket',
-              'Redis for real-time data caching',
-              'Interactive charts with Chart.js and D3.js',
-              'Custom dashboard builder interface',
-              'Export capabilities (PDF, Excel, CSV)',
+              'Supported 15M+ DAUs and 1,000+ yearly experiments with standardized SDK contracts.',
+              'Delivered 2% conversion lift and $10M+ annual savings by accelerating trustworthy experimentation.',
+              'Enabled cross-device consistency through deterministic allocation and caching strategies.',
+            ],
+          },
+          {
+            title: 'My Focus',
+            items: [
+              'Re-architected Java APIs and client SDKs with backward-compatible rollout plans.',
+              'Implemented secondary hashing and offline caching to cut server-side computation by 40%.',
+              'Partnered with analytics and product teams on experiment governance best practices.',
             ],
           },
         ],
-        stack: ['Spring WebFlux', 'Redis', 'WebSocket', 'Chart.js', 'Vue.js'],
+        stack: ['Java', 'SDKs', 'Experimentation', 'Redis', 'Microservices'],
         actions: [
-          { label: 'Live Demo', variant: 'primary' },
-          { label: 'Source Code', variant: 'outline' },
+          { label: 'Platform Guide', variant: 'primary' },
+          { label: 'Technical Deep Dive', variant: 'outline' },
         ],
       },
     ],
     other: {
       title: 'Other Projects',
-      description: 'Additional projects showcasing various technologies and problem-solving approaches.',
+      description: 'Additional initiatives that strengthened observability, automation, and user experience across platforms.',
       cards: [
         {
-          image: { src: '/placeholder.svg?height=200&width=350', alt: 'Task Management App' },
-          title: 'Task Management API',
-          description: 'RESTful API for task management with team collaboration features, built with Spring Boot and JWT authentication.',
-          tags: ['Spring Boot', 'MySQL', 'JWT'],
+          image: { src: '/placeholder.svg?height=200&width=350', alt: 'Help experience orchestration diagram' },
+          title: 'Help Experience Orchestration Layer',
+          description: 'Event-driven chatbot backend coordinating handoffs between automation, live agents, and order systems; reduced manual escalations by 60%.',
+          tags: ['Java', 'Kafka', 'AWS SQS'],
         },
         {
-          image: { src: '/placeholder.svg?height=200&width=350', alt: 'Real-time Chat App' },
-          title: 'Real-time Chat App',
-          description: 'WebSocket-based chat application with rooms, file sharing, and message history using Spring Boot and React.',
-          tags: ['WebSocket', 'React', 'MongoDB'],
+          image: { src: '/placeholder.svg?height=200&width=350', alt: 'Logging pipeline visualization' },
+          title: 'Centralized Logging Pipeline',
+          description: 'Benthos and Kafka-powered ingestion pipeline feeding OpenSearch dashboards to cut MTTR by 25% and expose proactive alerts.',
+          tags: ['Benthos', 'Kafka', 'OpenSearch'],
         },
         {
-          image: { src: '/placeholder.svg?height=200&width=350', alt: 'Inventory System' },
-          title: 'Inventory Management',
-          description: 'Enterprise inventory management system with barcode scanning, reporting, and multi-location support.',
-          tags: ['Spring MVC', 'Thymeleaf', 'PostgreSQL'],
+          image: { src: '/placeholder.svg?height=200&width=350', alt: 'Street-view processing mockup' },
+          title: 'KartaView Street-View Service',
+          description: 'Go/PostGIS microservice applying Douglas–Peucker simplification to shrink geospatial payloads by 70% while improving query latency.',
+          tags: ['Go', 'PostGIS', 'Geospatial'],
         },
       ],
     },
@@ -123,82 +141,100 @@ const translations = {
       prefix: '我的',
       highlight: '项目',
       suffix: '',
-      description: '这里是我做过的全栈应用、后端系统与云端解决方案，展现我在 Java 开发与现代 Web 技术上的实践经验。',
+      description: '这些平台级项目覆盖外卖客服自动化、众包地图质量以及金融级实验体系，真实反映了我在大规模后端工程上的经验。',
     },
     featured: [
       {
-        image: { src: '/placeholder.svg?height=400&width=600', alt: '电商平台界面截图' },
-        badge: { label: '重点项目', class: 'bg-primary/10 text-primary' },
-        title: '电商平台',
+        image: { src: '/placeholder.svg?height=400&width=600', alt: 'JETMS 运营平台界面示意' },
+        badge: { label: '运营平台', class: 'bg-primary/10 text-primary' },
+        title: 'JETMS 运营平台',
         subtitle: '',
         description:
-          '基于 Spring Boot 与 React 构建的电商系统，支持用户登录、商品管理、购物车、Stripe 支付，以及订单管理后台。',
+          '为 Just Eat Takeaway 构建的多租户运营工作台，将 20+ 客服工具统一在同一平台，帮助欧洲市场的客服团队更快解决订单问题。',
         sections: [
           {
-            title: '核心功能',
+            title: '业务成效',
             items: [
-              'JWT 鉴权与角色权限管理',
-              '完善的 RESTful API 错误处理机制',
-              '库存实时同步与提醒',
-              '安全稳定的支付流程集成',
-              '自适应的后台运营界面',
+              '统一分散的工具，服务 8 个市场、1000+ 客服代理的日常工作。',
+              '通过复用流程与数据契约，使处理 SLA 提升约 33%。',
+              '内置合规审计与权限控制，满足高度监管的运营要求。',
+            ],
+          },
+          {
+            title: '我的职责',
+            items: [
+              '主导 Java/Spring Boot CQRS 服务与 TypeScript 前端整合。',
+              '设计多租户路由、事件溯源模式及灰度发布策略。',
+              '与产品、运营负责人共建自动化路线图，识别最高价值场景。',
             ],
           },
         ],
-        stack: ['Spring Boot', 'React', 'PostgreSQL', 'Redis', 'Docker'],
+        stack: ['Java', 'Spring Boot', 'CQRS', 'MySQL', 'TypeScript', 'AWS'],
         actions: [
-          { label: '线上演示', variant: 'primary' },
-          { label: 'GitHub', variant: 'outline' },
+          { label: '架构笔记', variant: 'primary' },
+          { label: '运营手册', variant: 'outline' },
         ],
       },
       {
-        image: { src: '/placeholder.svg?height=400&width=600', alt: '微服务架构图示' },
-        badge: { label: '后端专注', class: 'bg-accent/10 text-accent' },
-        title: '微服务 API 网关',
+        image: { src: '/placeholder.svg?height=400&width=600', alt: 'Jarvis 众包任务面板示意' },
+        badge: { label: '地图平台', class: 'bg-accent/10 text-accent' },
+        title: 'Jarvis 地图众包系统',
         subtitle: '',
         description:
-          '使用 Spring Cloud 构建的可扩展微服务架构，具备服务发现、负载均衡、断路器与链路追踪能力，并通过 Kubernetes 与 CI/CD 实现自动化部署。',
+          '为 Grab 打造的众包地图采集引擎，确保东南亚出行与配送业务拥有最新、可靠的地理数据。',
         sections: [
           {
-            title: '架构亮点',
+            title: '业务成效',
             items: [
-              'Spring Cloud Gateway 负责统一路由',
-              'Eureka 实现服务注册与发现',
-              'Hystrix 断路器保护核心服务',
-              'Zipkin 追踪链路性能',
-              '结合 Helm 的 Kubernetes 部署方案',
+              '自动编排 30 万+ 地图任务，沉淀 40 万条地理要素并保障 SLA。',
+              '显著降低乘客与司机因地图错误导致的取消率。',
+              '为区域运营团队提供检索、复核与回溯工具，透明管理生产流程。',
+            ],
+          },
+          {
+            title: '我的职责',
+            items: [
+              '构建基于 Go、PostgreSQL/PostGIS、Kafka 的任务编排微服务。',
+              '实现 ElasticSearch 索引与质检工作流，提升数据质量。',
+              '与数据科学团队共建任务评分模型与优先级策略。',
             ],
           },
         ],
-        stack: ['Spring Cloud', 'Kubernetes', 'Docker', 'MongoDB', 'RabbitMQ'],
+        stack: ['Go', 'PostgreSQL', 'PostGIS', 'Kafka', 'ElasticSearch'],
         actions: [
-          { label: '查看代码', variant: 'outline' },
-          { label: '技术文档', variant: 'outline' },
+          { label: '系统概览', variant: 'primary' },
+          { label: '运营指标', variant: 'outline' },
         ],
       },
       {
-        image: { src: '/placeholder.svg?height=400&width=600', alt: '实时分析看板截图' },
-        badge: { label: '实时系统', class: 'bg-primary/10 text-primary' },
-        title: '实时分析看板',
+        image: { src: '/placeholder.svg?height=400&width=600', alt: 'Darwin 实验分析界面示意' },
+        badge: { label: '实验平台', class: 'bg-primary/10 text-primary' },
+        title: 'Darwin 实验平台',
         subtitle: '',
         description:
-          '借助 Spring WebFlux 打造的实时数据分析平台，支持数据流、交互式图表以及可自定义的仪表盘，帮助业务快速洞察。',
+          '支撑蚂蚁集团产品的高并发实验体系，提供一致的流量分配与实时分析能力。',
         sections: [
           {
-            title: '技术特性',
+            title: '业务成效',
             items: [
-              'WebFlux + WebSocket 实现响应式数据流',
-              'Redis 作为实时缓存层',
-              'Chart.js / D3.js 绘制动态图表',
-              '自定义仪表盘编辑体验',
-              '支持导出 PDF、Excel、CSV 等格式',
+              '稳定支撑 1500 万+ 日活、每年 1000+ 实验，全部基于统一 SDK 契约。',
+              '帮助业务实现 2% 转化率提升与每年 1000 万美元以上的收益贡献。',
+              '通过确定性分流与缓存策略确保跨终端结果一致。',
+            ],
+          },
+          {
+            title: '我的职责',
+            items: [
+              '重构 Java API 与客户端 SDK，保障平滑升级与兼容。',
+              '实现二次哈希与本地缓存，将服务端计算量降低 40%。',
+              '与分析、产品团队共建实验治理规范。',
             ],
           },
         ],
-        stack: ['Spring WebFlux', 'Redis', 'WebSocket', 'Chart.js', 'Vue.js'],
+        stack: ['Java', 'SDK', '实验平台', 'Redis', '微服务'],
         actions: [
-          { label: '在线演示', variant: 'primary' },
-          { label: '源代码', variant: 'outline' },
+          { label: '平台指南', variant: 'primary' },
+          { label: '技术解析', variant: 'outline' },
         ],
       },
     ],
@@ -207,22 +243,22 @@ const translations = {
       description: '还有一些项目展示了我在不同场景下的工程实践与解决问题的方式。',
       cards: [
         {
-          image: { src: '/placeholder.svg?height=200&width=350', alt: '任务管理应用界面' },
-          title: '任务管理 API',
-          description: '面向团队协作的任务管理 RESTful API，支持多角色、标签管理与 JWT 鉴权。',
-          tags: ['Spring Boot', 'MySQL', 'JWT'],
+          image: { src: '/placeholder.svg?height=200&width=350', alt: '客服编排架构示意图' },
+          title: '客服编排引擎',
+          description: '事件驱动的聊天机器人后台，协调自动化、人工坐席与订单系统，将人工升级率降低 60%。',
+          tags: ['Java', 'Kafka', 'AWS SQS'],
         },
         {
-          image: { src: '/placeholder.svg?height=200&width=350', alt: '实时聊天应用界面' },
-          title: '实时聊天应用',
-          description: '基于 WebSocket 的实时聊天系统，支持房间、文件传输与消息历史记录，后端使用 Spring Boot。',
-          tags: ['WebSocket', 'React', 'MongoDB'],
+          image: { src: '/placeholder.svg?height=200&width=350', alt: '日志管线示意图' },
+          title: '集中式日志管线',
+          description: '基于 Benthos 与 Kafka 的日志采集，接入 OpenSearch 仪表盘，使 MTTR 降低 25% 并实现主动告警。',
+          tags: ['Benthos', 'Kafka', 'OpenSearch'],
         },
         {
-          image: { src: '/placeholder.svg?height=200&width=350', alt: '库存管理系统界面' },
-          title: '库存管理系统',
-          description: '企业级库存管理平台，支持条码扫描、报表分析与多仓库协同。',
-          tags: ['Spring MVC', 'Thymeleaf', 'PostgreSQL'],
+          image: { src: '/placeholder.svg?height=200&width=350', alt: '街景处理流程示意图' },
+          title: 'KartaView 街景服务',
+          description: '使用 Go/PostGIS 与 Douglas–Peucker 算法，将地理数据体积减少 70%，显著提升查询延迟表现。',
+          tags: ['Go', 'PostGIS', '地理空间'],
         },
       ],
     },
@@ -240,8 +276,8 @@ const actionClassMap = {
 ---
 
 <BaseLayout 
-  title="Projects - My Portfolio"
-  description="Explore my full-stack development projects featuring Java backend systems, modern web applications, and cloud-native solutions."
+  title="Projects - Binliu Zhang"
+  description="Explore platforms I built for marketplace operations, geospatial data quality, and large-scale experimentation across Just Eat Takeaway, Grab, and Ant Group."
 >
   <Header />
   

@@ -40,14 +40,13 @@ type HomeCopy = {
 
 const homeCopy: Record<Language, HomeCopy> = {
   en: {
-      // TODO: rewrite
       hero: {
-          label: 'software engineering · personal notes',
-          title: 'Hey, I\'m Binliu!',
+          label: 'marketplaces · large-scale platforms',
+          title: "Hi, I'm Binliu—Senior backend engineer building resilient marketplaces.",
           description: [
-              "Senior Software Engineer specializing in Java backend development.",
-              " Living in the Netherlands, I enjoy building large-scale systems and love sharing my technical practice.",
-              "Currently working on microservices architecture and distributed systems that handle millions of requests daily.",
+              'Senior Software Engineer with 8+ years shipping event-driven, data-heavy systems across food delivery, mobility, and fintech.',
+              'Based in the Netherlands, I lead Java and Go services at Just Eat Takeaway to automate customer support workflows and improve operational efficiency.',
+              'I partner with product, ops, and data teams to make platforms observable, dependable, and easier for humans to operate.',
           ],
           primary: { label: 'View Projects', href: '/projects' },
           secondary: { label: 'Read the Blog', href: '/blog' },
@@ -55,37 +54,37 @@ const homeCopy: Record<Language, HomeCopy> = {
       about: {
           title: 'What I Do',
           paragraphs: [
-              'I work across the stack with a soft spot for clean backend architecture. Most days you will find me fine-tuning Spring services, designing APIs, and adjusting the front-end details until they feel intuitive.',
-              'Teams lean on me for calm execution: I document decisions, automate checks, and keep an eye on maintainability so we can move quickly without the hangover.',
-              'Away from the keyboard, I am usually annotating a book, curating a playlist, or experimenting with a new workout plan—all habits that keep my curiosity running.',
+              'I architect and scale backend platforms that blend clean design with pragmatic operations. My toolkit centers on Java, Go, Kafka, and distributed data stores.',
+              'From chatbot orchestration to crowdsourced mapping and experimentation platforms, I thrive on aligning cross-functional teams and delivering systems people trust.',
+              'Outside work you can find me mentoring engineers, annotating books, or logging miles on a running trail to keep curiosity and focus sharp.',
           ],
           experienceLinkLabel: 'View My Experience',
       },
       projects: {
-          title: 'Featured Projects',
+          title: 'Featured Work',
           description:
-              'Highlights from recent client work and personal experiments—lean services, pragmatic integrations, and interfaces that feel comfortable.',
+              'Select platform builds and system rewrites that shaped how millions of users order food, book rides, and interact with financial products.',
           items: [
               {
-                  title: 'E-commerce Platform',
+                  title: 'JETMS Operational Platform',
                   description:
-                      'Full-stack e-commerce solution built with Spring Boot, React, and PostgreSQL. Features include user authentication, payment processing, and admin dashboard.',
-                  tags: ['Java', 'Spring Boot', 'React'],
-                  image: { src: '/placeholder.svg?height=200&width=350', alt: 'E-commerce Platform' },
+                      'Unified 20+ Just Eat Takeaway tools behind a multi-tenant Java/Spring Boot platform with CQRS routing, cutting operational complexity and incident resolution time by ~33%.',
+                  tags: ['Java', 'Spring Boot', 'CQRS', 'MySQL', 'TypeScript'],
+                  image: { src: '/placeholder.svg?height=200&width=350', alt: 'JETMS operational interface mockup' },
               },
               {
-                  title: 'Microservices API',
+                  title: 'Jarvis Map Collection System',
                   description:
-                      'Scalable microservices architecture with Spring Cloud, Docker, and Kubernetes. Implements service discovery, load balancing, and distributed tracing.',
-                  tags: ['Spring Cloud', 'Docker', 'Kubernetes'],
-                  image: { src: '/placeholder.svg?height=200&width=350', alt: 'Microservices architecture mockup' },
+                      'Designed a Go and PostgreSQL-based crowdsourcing engine processing 300k+ mapping tasks and 400k geospatial assets to fuel Grab’s mobility and delivery accuracy.',
+                  tags: ['Go', 'PostgreSQL', 'Kafka', 'ElasticSearch'],
+                  image: { src: '/placeholder.svg?height=200&width=350', alt: 'Jarvis task management interface mockup' },
               },
               {
-                  title: 'Analytics Dashboard',
+                  title: 'Darwin Experimentation Platform',
                   description:
-                      'Real-time analytics platform with data visualization, built using Spring WebFlux, Redis, and Chart.js for interactive reporting.',
-                  tags: ['WebFlux', 'Redis', 'Chart.js'],
-                  image: { src: '/placeholder.svg?height=200&width=350', alt: 'Analytics dashboard charts' },
+                      'Re-architected Ant Group’s experimentation SDKs and Java APIs to support 15M+ DAUs and 1,000+ annual experiments, delivering a 2% conversion lift and $10M+ savings.',
+                  tags: ['Java', 'SDKs', 'Experimentation', 'Traffic Splitting'],
+                  image: { src: '/placeholder.svg?height=200&width=350', alt: 'Experimentation analytics mockup' },
               },
           ],
           viewAllLabel: 'View All Projects',
@@ -93,7 +92,7 @@ const homeCopy: Record<Language, HomeCopy> = {
       latestPosts: {
           title: 'Latest Posts',
           description:
-              'Recent notes on architecture decisions, experiments that worked, and the mindset shifts that helped along the way.',
+              'Recent notes on platform architecture, scaling lessons, and the little process tweaks that keep teams calm in production.',
           viewAllLabel: 'View All Posts',
           emptyLabel: 'No posts published yet',
           totalLabel: (count: number) => `${count} posts in total`,
