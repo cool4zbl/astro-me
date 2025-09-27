@@ -4,6 +4,7 @@
 
 @layer base {
   :root {
+    /* TODO: 32e6e2 */
     --ifm-color-primary: #25c2a0;
     --ifm-color-primary-dark: #21af90;
     --ifm-color-primary-darker: #1fa588;
