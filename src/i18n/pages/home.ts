@@ -56,7 +56,7 @@ const homeCopy: Record<Language, HomeCopy> = {
           title: 'What I Do',
           paragraphs: [
               'I partner with product, operations, and support teams to turn messy service workflows into reliable automation. Recent work includes the orchestration layer behind JET’s customer help chatbot and the operational tools that keep millions of orders moving.',
-              'Before JET I led data platforms at Grab and Ant Group, building geospatial pipelines, experimentation frameworks, and developer tooling that power real-world experiences for riders, drivers, and merchants.',
+              'Before JET I worked at Grab and Ant Group, building geospatial pipelines, experimentation frameworks, and developer tooling that power real-world experiences for riders, drivers, and merchants.',
               'I mentor engineers, document trade-offs, and lean on observability to keep systems stable. Outside of work I volunteer with Women in Tech and recharge by curating playlists or exploring new training plans.',
           ],
           experienceLinkLabel: 'View My Experience',
