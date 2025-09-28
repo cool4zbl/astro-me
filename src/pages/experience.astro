@@ -2,6 +2,13 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+
+const resume = {
+  en: '/Binliu Zhang-Senior-Software-Engineer.pdf',
+    // todo: add Chinese version later
+  zh: '/Binliu Zhang-Senior-Software-Engineer.pdf',
+};
+
 ---
 
 <BaseLayout
@@ -22,7 +29,7 @@ import Footer from '../components/Footer.astro';
         </p>
         <div class="mt-8">
           <a
-            href="/cv.pdf"
+            href={resume[Astro.props.lang || 'en']}
             download="Binliu-Zhang-Senior-Software-Engineer.pdf"
             class="inline-flex items-center rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground shadow-sm transition hover:bg-primary/90"
           >
