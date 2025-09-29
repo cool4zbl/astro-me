@@ -24,7 +24,7 @@ const experienceHref = getLocalizedPath('/experience', lang);
 const projectsHref = getLocalizedPath('/projects', lang);
 const blogHref = getLocalizedPath('/blog', lang);
 
-const profileImage = '/avt1.JPG'; 
+const profileImage = '/avt1.JPG';
 ---
 
 <BaseLayout
@@ -83,13 +83,14 @@ const profileImage = '/avt1.JPG';
           <div class="relative flex justify-center lg:justify-end lg:-ml-8 xl:-ml-12">
             <div class="absolute -top-8 -right-4 hidden h-28 w-28 rounded-full bg-primary/15 blur-3xl md:block"></div>
             <div class="absolute -bottom-10 -left-6 hidden h-24 w-24 rounded-full bg-accent/20 blur-3xl lg:block"></div>
-            <div class="relative mx-auto h-36 w-36 overflow-hidden rounded-full shadow-2xl md:h-60 md:w-60 lg:h-72 lg:w-72">
+            <div class="relative mx-auto h-36 w-36 overflow-hidden rounded-full shadow-2xl md:h-48 md:w-48 lg:h-64 lg:w-64">
               <OptimizedImage
                 src={profileImage}
                 alt="binliuzhang Professional developer portrait"
-                width={400}
-                height={400}
+                width={500}
+                height={500}
                 class="h-full w-full object-cover"
+                style="width: 100%; height: 100%;"
                 loading="lazy"
               />
             </div>
