@@ -98,8 +98,9 @@ const translations = {
             ],
           },
         ],
-        stack: ['Go', 'PostgreSQL', 'PostGIS', 'Kafka', 'ElasticSearch', 'Redis'],
+        stack: ['Go', 'PostgreSQL', 'PostGIS', 'Kafka', 'ElasticSearch'],
         actions: [
+          { label: 'Live Demo', variant: 'primary', href: 'https://jarvis.example.com' },
           { label: 'Experience Overview', variant: 'outline', href: '/experience' },
         ],
       },
@@ -122,7 +123,10 @@ const translations = {
         },
         // TODO:
         {
-          image: { src: '/placeholder.svg?height=200&width=350', alt: 'Street-view map tiles' },
+          image: {
+              src: '/placeholder.svg?height=200&width=350', alt: 'Street-view map tiles'
+          },
+          url: 'https://kartaview.org',
           title: 'KartaView Street-View Service',
           description: 'High-performance PostGIS service applying the Douglas–Peucker algorithm to shrink geospatial datasets by 70% for faster queries.',
           tags: ['Go', 'PostGIS', 'Microservices'],
@@ -184,9 +188,9 @@ const actionClassMap = {
                   {project.sections.map((section) => (
                     <div>
                       <h3 class="font-semibold text-foreground mb-2">{section.title}:</h3>
-                      <ul class="text-muted-foreground space-y-1 text-sm">
+                      <ul class="text-muted-foreground space-y-1 text-sm list-disc pl-6">
                         {section.items.map((item) => (
-                          <li>• {item}</li>
+                          <li>{item}</li>
                         ))}
                       </ul>
                     </div>
@@ -259,8 +263,10 @@ const actionClassMap = {
                   <span class="inline-flex items-center rounded-full bg-secondary px-2 py-1 text-xs font-medium text-secondary-foreground">{tag}</span>
                 ))}
               </div>
-              <a href="#" class="text-primary hover:text-accent font-medium text-sm transition-colors">
-                {lang === 'zh' ? '查看项目 →' : 'View Project →'}
+              <a
+                      target="_blank"
+                      href={card.url || '#'} class="text-primary hover:text-accent font-medium text-sm transition-colors">
+                View Project →
               </a>
             </div>
           ))}
