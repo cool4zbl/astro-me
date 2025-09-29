@@ -71,7 +71,7 @@ const homeCopy: Record<Language, HomeCopy> = {
                   description:
                       'Event-driven coordination for Just Eat Takeaway’s customer chatbot. Automated order issue resolution and cut manual interventions by 60% while improving stability for millions of users.',
                   tags: ['Java', 'Spring Boot', 'Kafka', 'AWS SQS', 'Redis'],
-                  image: { src: '/placeholder.svg?height=200&width=350', alt: 'Architecture diagram for orchestration layer' },
+                  image: { src: '/help-orchestration.png?height=200&width=350', alt: 'Architecture diagram for orchestration layer' },
               },
               {
                   title: 'JETMS Operational Platform',

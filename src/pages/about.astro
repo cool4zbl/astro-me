@@ -1,0 +1,215 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import OptimizedImage from '../components/OptimizedImage.astro';
+import { getLangFromUrl, getLocalizedPath } from '../i18n/config';
+
+const lang = getLangFromUrl(Astro.url);
+const profileImage = '/avt1.JPG';
+const blogLink = getLocalizedPath('/blog', lang);
+const resumeLink = '/Binliu Zhang-Senior-Software-Engineer.pdf';
+
+const contactLinks = [
+  {
+    title: 'LinkedIn',
+    url: 'https://www.linkedin.com/in/binliu-zhang',
+    description: 'Let’s chat about roles, collaborations, or anything you’re building.'
+  },
+  {
+    title: 'GitHub',
+    url: 'https://github.com/cool4zbl',
+    description: 'Most of my experiments, tooling, and open-source notes live here.'
+  },
+  {
+    title: 'Email',
+    url: 'mailto:binliu.zhang@gmail.com',
+    description: 'Prefer long-form conversations? Drop me a message anytime.'
+  }
+];
+
+const focusAreas = [
+  'Building large-scale distributed systems',
+  'Exploring new tools and productivity workflows',
+  'Reading about personal growth and deliberate practice'
+];
+
+const wantToDoMore = [
+  'Creating art with code',
+  'Writing about lessons from the trenches',
+  'Speaking and sharing with the community'
+];
+
+const lifeBeyondCode = [
+  'Soundtracking my days with rock, lofi, and electronic playlists',
+  'Cooking Chinese comfort food that reminds me of home',
+  'Battling it out (and breaking a sweat) on the gym',
+  'Cycling through Dutch bike lanes whenever the sun shows up'
+];
+---
+
+<BaseLayout
+  title="About Me"
+  description="A personal look at my journey through engineering, curiosity, and the tools that keep me learning."
+>
+  <Header />
+
+  <main class="flex-1">
+    <section class="section-padding bg-gradient-to-br from-background via-muted/30 to-background">
+      <div class="container-width max-w-4xl">
+        <div class="flex flex-col items-center gap-8 text-center md:flex-row md:text-left md:items-center">
+          <div class="shrink-0">
+            <div class="relative mx-auto h-36 w-36 overflow-hidden rounded-full border-4 border-primary/30 shadow-lg md:mx-0 md:h-40 md:w-40">
+              <OptimizedImage src={profileImage} 
+              alt="Binliu Zhang portrait" width={320} height={320} class="h-full w-full object-cover" loading="lazy" />
+            </div>
+          </div>
+          <div class="space-y-4">
+            <p class="text-sm uppercase tracking-[0.3em] text-primary/70">Hey, I'm Binliu!</p>
+            <h1 class="text-4xl sm:text-5xl font-bold text-foreground">
+              This is my corner for engineering deep dives and everyday curiosity
+            </h1>
+            <p class="text-lg text-muted-foreground leading-relaxed">
+              I grew up in China, now live in the Netherlands, and spend my days building large-scale systems. I write code in daylight, read books at night, and keep exploring the layers beneath the tools we rely on.
+            </p>
+            <div class="flex flex-wrap items-center justify-center gap-4 md:justify-start">
+              <a
+                href={resumeLink}
+                class="inline-flex items-center rounded-full bg-primary px-5 py-2 text-sm font-semibold text-primary-foreground shadow-sm transition hover:bg-primary/90"
+              >
+                Download Resume
+              </a>
+              <a
+                href={blogLink}
+                class="inline-flex items-center rounded-full border border-primary/60 px-5 py-2 text-sm font-semibold text-primary transition hover:bg-primary/10"
+              >
+                Read the Blog
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-padding">
+      <div class="container-width max-w-4xl space-y-8">
+        <div class="rounded-3xl border bg-card/80 p-8 shadow-sm backdrop-blur">
+          <h2 class="text-3xl font-semibold text-foreground">A Bit About Me</h2>
+          <p class="mt-4 text-muted-foreground leading-relaxed">
+            I’m a self-taught software engineer with a soft spot for understanding what happens under the hood—kernels, networks, data stores, the whole stack. Vimer at heart, tool nerd by nature, and forever chasing the next productivity tweak that buys me more focus time.
+          </p>
+          <p class="mt-4 text-muted-foreground leading-relaxed">
+            My work spans customer support automation, geospatial platforms, and experimentation tooling. I keep a notebook close by to log aha-moments, tricky incidents, and the habits that make or break momentum.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-padding bg-muted/40">
+      <div class="container-width max-w-4xl space-y-10">
+        <div class="space-y-4">
+          <span class="inline-flex items-center rounded-full bg-secondary/20 px-4 py-1 text-sm font-medium text-secondary-foreground">My Journey</span>
+          <h2 class="text-3xl font-semibold text-foreground">From curiosity to production impact</h2>
+        </div>
+
+        <div class="space-y-8 text-muted-foreground leading-relaxed">
+          <p>
+            My fascination with computers started long before I wrote my first line of production code. Julia Evans summed up my philosophy perfectly:
+          </p>
+          <blockquote class="border-l-4 border-primary/70 bg-background/70 p-4 text-sm italic text-foreground">
+            “Deeply understanding the underlying systems you use... is essential if you want to do technically innovative work and be able to solve hard problems.”
+          </blockquote>
+          <p>
+            I resist neat labels like “just FE” or “just BE.” I want to know how every layer fits together, so I keep digging. That’s why I taught myself web development while studying Electronic Engineering at UESTC—hardware was tough, the web felt magical, and shipping UI to real users hooked me instantly.
+          </p>
+          <p>
+            At Douban I learned craftsmanship the hard way: when millions feel every change, you ship with respect. Ant Group pulled me deeper into data—statistics, experimentation, and the pipelines that make insights actionable. Grab flipped my perspective again. Switching into backend engineering meant living in distributed systems, Go, databases, and cloud patterns. It was like discovering a new operating system for my brain.
+          </p>
+          <p>
+            Today at Just Eat Takeaway I’m designing orchestration layers that help a customer support chatbot resolve issues without humans jumping in—cutting manual steps by 60% so far. Along the way I picked up Kotlin, micro-frontends, Kubernetes, and even dove into JVM internals when performance demanded it. Every tour opened another rabbit hole, and I’m still following them.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-padding">
+      <div class="container-width max-w-4xl space-y-10">
+        <div class="space-y-4">
+          <span class="inline-flex items-center rounded-full bg-primary/10 px-4 py-1 text-sm font-medium text-primary">Philosophy</span>
+          <h2 class="text-3xl font-semibold text-foreground">Stay hungry, stay foolish, stay curious</h2>
+        </div>
+        <p class="text-muted-foreground leading-relaxed">
+          I chase the “aha!” moment, protect room for play, and trust my intuition when the documentation stops. Exploration beats stagnation. Creativity shows up when I follow the questions that won’t leave me alone.
+        </p>
+        <div class="grid gap-6 md:grid-cols-2">
+          <div class="rounded-2xl border bg-card/80 p-6 shadow-sm">
+            <h3 class="text-lg font-semibold text-foreground">What I’m focusing on</h3>
+            <ul class="mt-3 space-y-2 text-sm text-muted-foreground">
+              {focusAreas.map((area) => (
+                <li class="flex items-start gap-2">
+                  <span class="mt-1 h-1.5 w-1.5 rounded-full bg-primary"></span>
+                  <span>{area}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div class="rounded-2xl border bg-card/80 p-6 shadow-sm">
+            <h3 class="text-lg font-semibold text-foreground">I’d love to do more of</h3>
+            <ul class="mt-3 space-y-2 text-sm text-muted-foreground">
+              {wantToDoMore.map((item) => (
+                <li class="flex items-start gap-2">
+                  <span class="mt-1 h-1.5 w-1.5 rounded-full bg-primary"></span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-padding bg-muted/40">
+      <div class="container-width max-w-4xl space-y-8">
+        <div class="space-y-4">
+          <span class="inline-flex items-center rounded-full bg-secondary/20 px-4 py-1 text-sm font-medium text-secondary-foreground">Life Beyond Code</span>
+          <h2 class="text-3xl font-semibold text-foreground">The hobbies that recharge me</h2>
+        </div>
+        <ul class="grid gap-4 md:grid-cols-2 text-sm text-muted-foreground">
+          {lifeBeyondCode.map((item) => (
+            <li class="rounded-2xl border bg-background p-4 shadow-sm leading-relaxed">{item}</li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <section class="section-padding">
+      <div class="container-width max-w-4xl space-y-8">
+        <div class="space-y-4 text-center">
+          <span class="inline-flex items-center rounded-full bg-primary/10 px-4 py-1 text-sm font-medium text-primary">Contact</span>
+          <h2 class="text-3xl font-semibold text-foreground">Would love to connect</h2>
+          <p class="text-muted-foreground leading-relaxed">
+            Curious about something I’ve built? Want to swap book notes? Pick a channel and say hi.
+          </p>
+        </div>
+
+        <div class="grid gap-6 md:grid-cols-3">
+          {contactLinks.map((link) => (
+            <a
+              href={link.url}
+              class="group rounded-2xl border bg-card/80 p-6 text-left shadow-sm transition hover:-translate-y-1 hover:shadow-md"
+              target={link.url.startsWith('mailto') ? '_self' : '_blank'}
+              rel={link.url.startsWith('mailto') ? undefined : 'noopener noreferrer'}
+            >
+              <div class="text-lg font-semibold text-foreground group-hover:text-primary">
+                {link.title}
+              </div>
+              <p class="mt-3 text-sm text-muted-foreground leading-relaxed">{link.description}</p>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>

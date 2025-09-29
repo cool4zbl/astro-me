@@ -23,6 +23,8 @@ const heroSecondaryHref = getLocalizedPath(copy.hero.secondary.href, lang);
 const experienceHref = getLocalizedPath('/experience', lang);
 const projectsHref = getLocalizedPath('/projects', lang);
 const blogHref = getLocalizedPath('/blog', lang);
+
+const profileImage = '/avt1.JPG'; 
 ---
 
 <BaseLayout
@@ -35,7 +37,7 @@ const blogHref = getLocalizedPath('/blog', lang);
     <!-- Hero & About Me Section -->
     <section class="section-padding bg-gradient-to-br from-background via-muted/20 to-background">
       <div class="container-width">
-        <div class="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+        <div class="grid items-center gap-8 lg:grid-cols-2 lg:gap-10 xl:gap-12">
           <div class="animate-fade-in space-y-6">
             <span class="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2 text-xs font-medium uppercase tracking-[0.25em] text-primary">
               {copy.hero.label}
@@ -78,18 +80,18 @@ const blogHref = getLocalizedPath('/blog', lang);
             </div>
           </div>
 
-          <div class="relative">
-            <div class="aspect-square rounded-full bg-gradient-to-br from-muted via-muted/50 to-background p-8 shadow-2xl border border-border/50">
-              <div class="flex h-full w-full items-center justify-center rounded-full bg-background/80 backdrop-blur-sm shadow-inner">
-                <OptimizedImage
-                  src="/placeholder.svg?height=300&width=300"
-                  alt="Professional developer portrait"
-                  width={300}
-                  height={300}
-                  class="rounded-full shadow-lg"
-                  loading="lazy"
-                />
-              </div>
+          <div class="relative flex justify-center lg:justify-end lg:-ml-8 xl:-ml-12">
+            <div class="absolute -top-8 -right-4 hidden h-28 w-28 rounded-full bg-primary/15 blur-3xl md:block"></div>
+            <div class="absolute -bottom-10 -left-6 hidden h-24 w-24 rounded-full bg-accent/20 blur-3xl lg:block"></div>
+            <div class="relative mx-auto h-36 w-36 overflow-hidden rounded-full shadow-2xl md:h-60 md:w-60 lg:h-72 lg:w-72">
+              <OptimizedImage
+                src={profileImage}
+                alt="binliuzhang Professional developer portrait"
+                width={400}
+                height={400}
+                class="h-full w-full object-cover"
+                loading="lazy"
+              />
             </div>
           </div>
         </div>
