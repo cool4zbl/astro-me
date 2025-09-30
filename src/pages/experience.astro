@@ -2,6 +2,113 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+
+const resume = {
+  en: '/Binliu Zhang-Senior-Software-Engineer.pdf',
+    // todo: add Chinese version later
+  zh: '/Binliu Zhang-Senior-Software-Engineer.pdf',
+};
+
+const experiences = [
+  {
+    title: "Senior Software Engineer",
+    company: "Just Eat Takeaway",
+    department: "Help Experience Platform",
+    location: "Enschede, Netherlands",
+    period: "May 2023 – Present",
+    current: true,
+    description: "Own end-to-end automation for customer support operations across Europe, partnering with product, operations, and data teams to design resilient platforms that keep millions of orders moving smoothly.",
+    highlights: [
+      "Designed an event-driven orchestration layer (Java, Spring Boot, Kafka, AWS SQS, Redis) for the help chatbot, cutting manual interventions by 60% and improving stability.",
+      "Architected JETMS, a unified operational platform with multi-tenant routing and a shared data model that consolidates 20+ services and trims resolution SLAs by ~33%.",
+      "Built a centralized logging pipeline with Benthos, Kafka, AWS SQS, and OpenSearch to process 50K+ logs/day and reduce MTTR by 25%.",
+      "Drove instrumentation, documentation, and incident reviews that strengthened on-call readiness across the platform."
+    ],
+    skills: ["Java", "Spring Boot", "Kafka", "AWS", "Redis", "TypeScript"],
+    icon: "building",
+    theme: "primary"
+  },
+  {
+    title: "Senior Software Engineer",
+    company: "Grab",
+    department: "Geo – Map Collection",
+    location: "Beijing, China",
+    period: "Feb 2021 – Apr 2023",
+    current: false,
+    description: "Led geospatial data platforms that power Grab's ride-hailing and delivery experiences, balancing contributor workflows, data quality, and downstream service requirements.",
+    highlights: [
+      "Built Jarvis, a crowdsourced task management platform (Go, PostgreSQL, ElasticSearch, Kafka) scaling to 300K tasks and 400K+ geospatial data points.",
+      "Engineered KartaView, a high-performance street-view service backed by PostGIS and the Douglas–Peucker algorithm to shrink geospatial data size by 70% and accelerate queries.",
+      "Delivered a distributed notification system with Redis locks, Kafka, and ElasticSearch providing exactly-once delivery for 10K+ monthly notifications.",
+      "Partnered with product ops to prioritize roadmap, instrumentation, and rollout strategies across Southeast Asia markets."
+    ],
+    skills: ["Go", "PostgreSQL", "PostGIS", "Kafka", "ElasticSearch", "Distributed Systems"],
+    icon: "badge-check",
+    theme: "accent"
+  },
+  {
+    title: "Senior Software Engineer",
+    company: "Ant Group",
+    department: "AI Data Platform",
+    location: "Beijing, China",
+    period: "Jan 2018 – Jul 2020",
+    current: false,
+    description: "Re-architected experimentation infrastructure used by Ant Group's consumer and merchant products, enabling faster iteration while maintaining rigorous governance.",
+    highlights: [
+      "Rebuilt Darwin experimentation platform (client SDKs + Java APIs) with standardized contracts supporting 15M+ DAUs and 1,000+ experiments annually.",
+      "Developed a full-stack traffic-splitting SDK with secondary hashing and client caching to cut server compute cost by 40% while ensuring consistent experiment allocation.",
+      "Partnered with data scientists and PMs to craft governance that delivered a 2% conversion lift and $10M+ annual impact."
+    ],
+    skills: ["Java", "Experimentation", "SDK Design", "Microservices"],
+    icon: "code",
+    theme: "secondary"
+  },
+  {
+    title: "Software Engineer",
+    company: "Douban",
+    department: "User Product",
+    location: "Beijing, China",
+    period: "Jul 2015 – Sep 2017",
+    current: false,
+    description: "Delivered core social and media features for one of China's largest cultural communities, collaborating with designers and product managers on experiences used by 100M+ users.",
+    highlights: [
+      "Shipped and maintained high-traffic Python and JavaScript services across web and mobile surface."
+    ],
+    skills: ["Python", "JavaScript", "Web Development", "Product Engineering"],
+    icon: "layers",
+    theme: "muted"
+  },
+  {
+    title: "B.Sc. Electronic Engineering",
+    company: "University of Electronic Science and Technology of China",
+    department: "",
+    location: "",
+    period: "2015 - 2019",
+    current: false,
+    description: "Focused on embedded systems, signal processing, and software engineering fundamentals while collaborating on multidisciplinary projects that sparked my interest in large-scale platforms.",
+    highlights: [
+      "Studied C programming, embedded systems, digital circuits, and analog circuits.",
+      "Gained an understanding of the underlying computer hardware components and computer system architecture.",
+      "I still find software development interesting, so I taught myself web development before graduation."
+    ],
+    skills: ["Electronic Engineering", "Signal Processing", "Algorithms", "Embedded Systems"],
+    icon: "academic-cap",
+    theme: "muted",
+    isEducation: true
+  }
+];
+
+const getIcon = (iconName: string) => {
+  const icons = {
+    building: "M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4",
+    "badge-check": "M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z",
+    code: "M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4",
+    layers: "M12 14l9-5-9-5-9 5 9 5z",
+    "academic-cap": "M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"
+  };
+  return icons[iconName] || icons.building;
+};
+
 ---
 
 <BaseLayout
@@ -22,8 +129,8 @@ import Footer from '../components/Footer.astro';
         </p>
         <div class="mt-8">
           <a
-            href="/cv.pdf"
-            download="CV.pdf"
+            href={resume[Astro.props.lang || 'en']}
+            download="Binliu-Zhang-Senior-Software-Engineer.pdf"
             class="inline-flex items-center rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground shadow-sm transition hover:bg-primary/90"
           >
             <svg class="mr-2 h-4 w-4" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -45,384 +152,69 @@ import Footer from '../components/Footer.astro';
           <div class="absolute left-8 top-0 bottom-0 w-0.5 bg-border"></div>
 
           <div class="space-y-12">
-            <!-- Just Eat Takeaway -->
-            <div class="relative flex items-start space-x-8">
-              <div class="flex-shrink-0">
-                <div class="h-16 w-16 rounded-full bg-primary flex items-center justify-center shadow-lg">
-                  <svg class="h-8 w-8 text-primary-foreground" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                  </svg>
-                </div>
-              </div>
-              <div class="flex-1 min-w-0">
-                <div class="bg-card rounded-xl border p-8 shadow-sm">
-                  <div class="flex items-start justify-between mb-4">
-                    <div>
-                      <h3 class="text-2xl font-bold text-card-foreground">Senior Software Engineer</h3>
-                      <p class="text-lg text-primary font-semibold">Just Eat Takeaway · Help Experience Platform</p>
-                      <p class="text-sm text-muted-foreground mt-1">Enschede, Netherlands</p>
-                    </div>
-                    <div class="text-right">
-                      <span class="inline-flex items-center rounded-full bg-primary/10 px-3 py-1 text-sm font-medium text-primary">
-                        Current
-                      </span>
-                      <p class="text-sm text-muted-foreground mt-1">May 2023 – Present</p>
-                    </div>
-                  </div>
 
-                  <p class="text-muted-foreground mb-6 leading-relaxed">
-                    Own end-to-end automation for customer support operations across Europe, partnering with product, operations, and data teams to design resilient platforms that keep millions of orders moving smoothly.
-                  </p>
-
-                  <div class="space-y-4 mb-6">
-                    <div>
-                      <h4 class="font-semibold text-card-foreground mb-2">Highlights:</h4>
-                      <ul class="text-muted-foreground space-y-2 text-sm">
-                        <li>• Designed an event-driven orchestration layer (Java, Spring Boot, Kafka, AWS SQS, Redis) for the help chatbot, cutting manual interventions by 60% and improving stability.</li>
-                        <li>• Architected JETMS, a unified operational platform with multi-tenant routing and a shared data model that consolidates 20+ services and trims resolution SLAs by ~33%.</li>
-                        <li>• Built a centralized logging pipeline with Benthos, Kafka, AWS SQS, and OpenSearch to process 50K+ logs/day and reduce MTTR by 25%.</li>
-                        <li>• Drove instrumentation, documentation, and incident reviews that strengthened on-call readiness across the platform.</li>
-                      </ul>
-                    </div>
-                  </div>
-
-                  <div class="flex flex-wrap gap-2">
-                    <span class="inline-flex items-center rounded-full bg-primary/10 px-3 py-1 text-sm font-medium text-primary">Java</span>
-                    <span class="inline-flex items-center rounded-full bg-primary/10 px-3 py-1 text-sm font-medium text-primary">Spring Boot</span>
-                    <span class="inline-flex items-center rounded-full bg-primary/10 px-3 py-1 text-sm font-medium text-primary">Kafka</span>
-                    <span class="inline-flex items-center rounded-full bg-primary/10 px-3 py-1 text-sm font-medium text-primary">AWS</span>
-                    <span class="inline-flex items-center rounded-full bg-primary/10 px-3 py-1 text-sm font-medium text-primary">Redis</span>
-                    <span class="inline-flex items-center rounded-full bg-primary/10 px-3 py-1 text-sm font-medium text-primary">TypeScript</span>
+            {experiences.map((exp) => (
+              <div class="relative flex items-start space-x-8">
+                <div class="flex-shrink-0">
+                  <div class={`h-16 w-16 rounded-full bg-${exp.theme} flex items-center justify-center shadow-lg`}>
+                    <svg class={`h-8 w-8 text-${exp.theme}-foreground`} viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={getIcon(exp.icon)} />
+                    </svg>
                   </div>
                 </div>
-              </div>
-            </div>
-
-            <!-- Grab -->
-            <div class="relative flex items-start space-x-8">
-              <div class="flex-shrink-0">
-                <div class="h-16 w-16 rounded-full bg-accent flex items-center justify-center shadow-lg">
-                  <svg class="h-8 w-8 text-accent-foreground" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
-                  </svg>
-                </div>
-              </div>
-              <div class="flex-1 min-w-0">
-                <div class="bg-card rounded-xl border p-8 shadow-sm">
-                  <div class="flex items-start justify-between mb-4">
-                    <div>
-                      <h3 class="text-2xl font-bold text-card-foreground">Senior Software Engineer</h3>
-                      <p class="text-lg text-accent font-semibold">Grab · Geo – Map Collection</p>
-                      <p class="text-sm text-muted-foreground mt-1">Beijing, China</p>
+                <div class="flex-1 min-w-0">
+                  <div class="bg-card rounded-xl border p-8 shadow-sm">
+                    <div class="flex items-start justify-between mb-4">
+                      <div>
+                        <h3 class="text-2xl font-bold text-card-foreground">{exp.title}</h3>
+                        <p class={`text-lg font-semibold ${exp.theme === 'primary' ? 'text-primary' : exp.theme === 'accent' ? 'text-accent' : exp.theme === 'secondary' ? 'text-secondary-foreground' : 'text-muted-foreground'}`}>
+                          {exp.company}{exp.department && ` · ${exp.department}`}
+                        </p>
+                        {exp.location && <p class="text-sm text-muted-foreground mt-1">{exp.location}</p>}
+                      </div>
+                      <div class="text-right">
+                        {exp.current && (
+                          <span class="inline-flex items-center rounded-full bg-primary/10 px-3 py-1 text-sm font-medium text-primary">
+                            Current
+                          </span>
+                        )}
+                        <p class="text-sm text-muted-foreground mt-1">{exp.period}</p>
+                      </div>
                     </div>
-                    <div class="text-right">
-                      <p class="text-sm text-muted-foreground">Feb 2021 – Apr 2023</p>
+
+                    <p class="text-muted-foreground mb-6 leading-relaxed">
+                      {exp.description}
+                    </p>
+
+                    <div class="space-y-4 mb-6">
+                      <div>
+                        <h4 class="font-semibold text-card-foreground mb-2">Highlights:</h4>
+                        <ul class="text-muted-foreground space-y-2 text-sm list-disc pl-6">
+                          {exp.highlights.map((highlight) => (
+                            <li>{highlight}</li>
+                          ))}
+                        </ul>
+                      </div>
+
                     </div>
-                  </div>
 
-                  <p class="text-muted-foreground mb-6 leading-relaxed">
-                    Led geospatial data platforms that power Grab’s ride-hailing and delivery experiences, balancing contributor workflows, data quality, and downstream service requirements.
-                  </p>
-
-                  <div class="space-y-4 mb-6">
-                    <div>
-                      <h4 class="font-semibold text-card-foreground mb-2">Highlights:</h4>
-                      <ul class="text-muted-foreground space-y-2 text-sm">
-                        <li>• Built Jarvis, a crowdsourced task management platform (Go, PostgreSQL, ElasticSearch, Kafka) scaling to 300K tasks and 400K+ geospatial data points.</li>
-                        <li>• Engineered KartaView, a high-performance street-view service backed by PostGIS and the Douglas–Peucker algorithm to shrink geospatial data size by 70% and accelerate queries.</li>
-                        <li>• Delivered a distributed notification system with Redis locks, Kafka, and ElasticSearch providing exactly-once delivery for 10K+ monthly notifications.</li>
-                        <li>• Partnered with product ops to prioritize roadmap, instrumentation, and rollout strategies across Southeast Asia markets.</li>
-                      </ul>
+                    <div class="flex flex-wrap gap-2">
+                      {exp.skills.map((skill) => (
+                        <span class={`inline-flex items-center rounded-full ${exp.theme === 'primary' ? 'bg-primary/10 text-primary' : exp.theme === 'accent' ? 'bg-accent/10 text-accent' : exp.theme === 'secondary' ? 'bg-secondary/20 text-secondary-foreground' : 'bg-muted/50 text-muted-foreground'} px-3 py-1 text-sm font-medium`}>
+                          {skill}
+                        </span>
+                      ))}
                     </div>
-                  </div>
-
-                  <div class="flex flex-wrap gap-2">
-                    <span class="inline-flex items-center rounded-full bg-accent/10 px-3 py-1 text-sm font-medium text-accent">Go</span>
-                    <span class="inline-flex items-center rounded-full bg-accent/10 px-3 py-1 text-sm font-medium text-accent">PostgreSQL</span>
-                    <span class="inline-flex items-center rounded-full bg-accent/10 px-3 py-1 text-sm font-medium text-accent">PostGIS</span>
-                    <span class="inline-flex items-center rounded-full bg-accent/10 px-3 py-1 text-sm font-medium text-accent">Kafka</span>
-                    <span class="inline-flex items-center rounded-full bg-accent/10 px-3 py-1 text-sm font-medium text-accent">ElasticSearch</span>
-                    <span class="inline-flex items-center rounded-full bg-accent/10 px-3 py-1 text-sm font-medium text-accent">Distributed Systems</span>
                   </div>
                 </div>
               </div>
-            </div>
+            ))}
 
-            <!-- Ant Group -->
-            <div class="relative flex items-start space-x-8">
-              <div class="flex-shrink-0">
-                <div class="h-16 w-16 rounded-full bg-secondary flex items-center justify-center shadow-lg">
-                  <svg class="h-8 w-8 text-secondary-foreground" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-                  </svg>
-                </div>
-              </div>
-              <div class="flex-1 min-w-0">
-                <div class="bg-card rounded-xl border p-8 shadow-sm">
-                  <div class="flex items-start justify-between mb-4">
-                    <div>
-                      <h3 class="text-2xl font-bold text-card-foreground">Senior Software Engineer</h3>
-                      <p class="text-lg text-secondary-foreground font-semibold">Ant Group · AI Data Platform</p>
-                      <p class="text-sm text-muted-foreground mt-1">Beijing, China</p>
-                    </div>
-                    <div class="text-right">
-                      <p class="text-sm text-muted-foreground">Jan 2018 – Jul 2020</p>
-                    </div>
-                  </div>
-
-                  <p class="text-muted-foreground mb-6 leading-relaxed">
-                    Re-architected experimentation infrastructure used by Ant Group’s consumer and merchant products, enabling faster iteration while maintaining rigorous governance.
-                  </p>
-
-                  <div class="space-y-4 mb-6">
-                    <div>
-                      <h4 class="font-semibold text-card-foreground mb-2">Highlights:</h4>
-                      <ul class="text-muted-foreground space-y-2 text-sm">
-                        <li>• Rebuilt Darwin experimentation platform (client SDKs + Java APIs) with standardized contracts supporting 15M+ DAUs and 1,000+ experiments annually.</li>
-                        <li>• Developed a full-stack traffic-splitting SDK with secondary hashing and client caching to cut server compute cost by 40% while ensuring consistent experiment allocation.</li>
-                        <li>• Partnered with data scientists and PMs to craft governance that delivered a 2% conversion lift and $10M+ annual impact.</li>
-                      </ul>
-                    </div>
-                  </div>
-
-                  <div class="flex flex-wrap gap-2">
-                    <span class="inline-flex items-center rounded-full bg-secondary/20 px-3 py-1 text-sm font-medium text-secondary-foreground">Java</span>
-                    <span class="inline-flex items-center rounded-full bg-secondary/20 px-3 py-1 text-sm font-medium text-secondary-foreground">Experimentation</span>
-                    <span class="inline-flex items-center rounded-full bg-secondary/20 px-3 py-1 text-sm font-medium text-secondary-foreground">SDK Design</span>
-                    <span class="inline-flex items-center rounded-full bg-secondary/20 px-3 py-1 text-sm font-medium text-secondary-foreground">Microservices</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Douban -->
-            <div class="relative flex items-start space-x-8">
-              <div class="flex-shrink-0">
-                <div class="h-16 w-16 rounded-full bg-muted flex items-center justify-center shadow-lg">
-                  <svg class="h-8 w-8 text-muted-foreground" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z" />
-                  </svg>
-                </div>
-              </div>
-              <div class="flex-1 min-w-0">
-                <div class="bg-card rounded-xl border p-8 shadow-sm">
-                  <div class="flex items-start justify-between mb-4">
-                    <div>
-                      <h3 class="text-2xl font-bold text-card-foreground">Software Engineer</h3>
-                      <p class="text-lg text-muted-foreground font-semibold">Douban · User Product</p>
-                      <p class="text-sm text-muted-foreground mt-1">Beijing, China</p>
-                    </div>
-                    <div class="text-right">
-                      <p class="text-sm text-muted-foreground">Jul 2015 – Sep 2017</p>
-                    </div>
-                  </div>
-
-                  <p class="text-muted-foreground mb-6 leading-relaxed">
-                    Delivered core social and media features for one of China’s largest cultural communities, collaborating with designers and product managers on experiences used by 100M+ users.
-                  </p>
-
-                  <div class="space-y-4 mb-6">
-                    <div>
-                      <h4 class="font-semibold text-card-foreground mb-2">Highlights:</h4>
-                      <ul class="text-muted-foreground space-y-2 text-sm">
-                        <li>• Shipped personalized content modules and recommendation features across web and mobile surfaces.</li>
-                        <li>• Maintained high-traffic Python and JavaScript services, improving reliability for peak campaigns.</li>
-                        <li>• Introduced monitoring dashboards and deployment playbooks to streamline releases.</li>
-                      </ul>
-                    </div>
-                  </div>
-
-                  <div class="flex flex-wrap gap-2">
-                    <span class="inline-flex items-center rounded-full bg-muted/50 px-3 py-1 text-sm font-medium text-muted-foreground">Python</span>
-                    <span class="inline-flex items-center rounded-full bg-muted/50 px-3 py-1 text-sm font-medium text-muted-foreground">JavaScript</span>
-                    <span class="inline-flex items-center rounded-full bg-muted/50 px-3 py-1 text-sm font-medium text-muted-foreground">Web Development</span>
-                    <span class="inline-flex items-center rounded-full bg-muted/50 px-3 py-1 text-sm font-medium text-muted-foreground">Product Engineering</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Education -->
-            <div class="relative flex items-start space-x-8">
-              <div class="flex-shrink-0">
-                <div class="h-16 w-16 rounded-full bg-muted flex items-center justify-center shadow-lg">
-                  <svg class="h-8 w-8 text-muted-foreground" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z" />
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
-                  </svg>
-                </div>
-              </div>
-              <div class="flex-1 min-w-0">
-                <div class="bg-card rounded-xl border p-8 shadow-sm">
-                  <div class="flex items-start justify-between mb-4">
-                    <div>
-                      <h3 class="text-2xl font-bold text-card-foreground">B.Sc. Electronic Engineering</h3>
-                      <p class="text-lg text-muted-foreground font-semibold">University of Electronic Science and Technology of China</p>
-                    </div>
-                    <div class="text-right">
-                      <p class="text-sm text-muted-foreground">2015 - 2019</p>
-                    </div>
-                  </div>
-
-                  <p class="text-muted-foreground mb-6 leading-relaxed">
-                    Focused on embedded systems, signal processing, and software engineering fundamentals while collaborating on multidisciplinary projects that sparked my interest in large-scale platforms.
-                  </p>
-
-                  <div class="space-y-4 mb-6">
-                    <div>
-                      <h4 class="font-semibold text-card-foreground mb-2">Academic Highlights:</h4>
-                      <ul class="text-muted-foreground space-y-2 text-sm">
-                        <li>• Senior design project on distributed sensor networks that introduced me to reliable data collection.</li>
-                        <li>• Coursework emphasized algorithms, communications systems, and database design.</li>
-                        <li>• Organized peer study groups and mentorship for junior students exploring software careers.</li>
-                      </ul>
-                    </div>
-                  </div>
-
-                  <div class="flex flex-wrap gap-2">
-                    <span class="inline-flex items-center rounded-full bg-muted/50 px-3 py-1 text-sm font-medium text-muted-foreground">Electronic Engineering</span>
-                    <span class="inline-flex items-center rounded-full bg-muted/50 px-3 py-1 text-sm font-medium text-muted-foreground">Signal Processing</span>
-                    <span class="inline-flex items-center rounded-full bg-muted/50 px-3 py-1 text-sm font-medium text-muted-foreground">Algorithms</span>
-                    <span class="inline-flex items-center rounded-full bg-muted/50 px-3 py-1 text-sm font-medium text-muted-foreground">Embedded Systems</span>
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Skills Section -->
-    <section class="section-padding bg-muted/30">
-      <div class="container-width">
-        <div class="text-center mb-16">
-          <h2 class="text-3xl font-bold tracking-tight text-foreground sm:text-4xl mb-4">
-            Technical Skills
-          </h2>
-          <p class="text-lg text-muted-foreground max-w-2xl mx-auto">
-            The tools and practices I rely on to scale resilient services, automate operations, and surface insights quickly.
-          </p>
-        </div>
-
-        <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-          <!-- Backend & Distributed Systems -->
-          <div class="bg-card rounded-xl border p-6 shadow-sm">
-            <div class="flex items-center mb-4">
-              <div class="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center mr-3">
-                <svg class="h-6 w-6 text-primary" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01" />
-                </svg>
-              </div>
-              <h3 class="text-lg font-semibold text-card-foreground">Backend & Distributed Systems</h3>
-            </div>
-            <div class="space-y-3">
-              <div class="flex justify-between items-center">
-                <span class="text-sm text-muted-foreground">Java & Spring</span>
-                <div class="w-24 bg-muted rounded-full h-2">
-                  <div class="bg-primary h-2 rounded-full" style="width: 95%"></div>
-                </div>
-              </div>
-              <div class="flex justify-between items-center">
-                <span class="text-sm text-muted-foreground">Go & Microservices</span>
-                <div class="w-24 bg-muted rounded-full h-2">
-                  <div class="bg-primary h-2 rounded-full" style="width: 88%"></div>
-                </div>
-              </div>
-              <div class="flex justify-between items-center">
-                <span class="text-sm text-muted-foreground">Event-Driven Architecture</span>
-                <div class="w-24 bg-muted rounded-full h-2">
-                  <div class="bg-primary h-2 rounded-full" style="width: 92%"></div>
-                </div>
-              </div>
-              <div class="flex justify-between items-center">
-                <span class="text-sm text-muted-foreground">CQRS & Domain Modeling</span>
-                <div class="w-24 bg-muted rounded-full h-2">
-                  <div class="bg-primary h-2 rounded-full" style="width: 85%"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Data Platforms & Observability -->
-          <div class="bg-card rounded-xl border p-6 shadow-sm">
-            <div class="flex items-center mb-4">
-              <div class="h-10 w-10 rounded-lg bg-accent/10 flex items-center justify-center mr-3">
-                <svg class="h-6 w-6 text-accent" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h18v6H3V3zm0 12h18v6H3v-6zm0-6h18v6H3V9z" />
-                </svg>
-              </div>
-              <h3 class="text-lg font-semibold text-card-foreground">Data Platforms & Observability</h3>
-            </div>
-            <div class="space-y-3">
-              <div class="flex justify-between items-center">
-                <span class="text-sm text-muted-foreground">Kafka & Streaming Pipelines</span>
-                <div class="w-24 bg-muted rounded-full h-2">
-                  <div class="bg-accent h-2 rounded-full" style="width: 90%"></div>
-                </div>
-              </div>
-              <div class="flex justify-between items-center">
-                <span class="text-sm text-muted-foreground">PostgreSQL & MySQL</span>
-                <div class="w-24 bg-muted rounded-full h-2">
-                  <div class="bg-accent h-2 rounded-full" style="width: 88%"></div>
-                </div>
-              </div>
-              <div class="flex justify-between items-center">
-                <span class="text-sm text-muted-foreground">ElasticSearch & OpenSearch</span>
-                <div class="w-24 bg-muted rounded-full h-2">
-                  <div class="bg-accent h-2 rounded-full" style="width: 86%"></div>
-                </div>
-              </div>
-              <div class="flex justify-between items-center">
-                <span class="text-sm text-muted-foreground">Monitoring & MTTR Reduction</span>
-                <div class="w-24 bg-muted rounded-full h-2">
-                  <div class="bg-accent h-2 rounded-full" style="width: 82%"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Cloud & Platform Operations -->
-          <div class="bg-card rounded-xl border p-6 shadow-sm">
-            <div class="flex items-center mb-4">
-              <div class="h-10 w-10 rounded-lg bg-secondary/20 flex items-center justify-center mr-3">
-                <svg class="h-6 w-6 text-secondary-foreground" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
-                </svg>
-              </div>
-              <h3 class="text-lg font-semibold text-card-foreground">Cloud & Platform Operations</h3>
-            </div>
-            <div class="space-y-3">
-              <div class="flex justify-between items-center">
-                <span class="text-sm text-muted-foreground">AWS & Azure</span>
-                <div class="w-24 bg-muted rounded-full h-2">
-                  <div class="bg-secondary-foreground h-2 rounded-full" style="width: 85%"></div>
-                </div>
-              </div>
-              <div class="flex justify-between items-center">
-                <span class="text-sm text-muted-foreground">Kubernetes & Docker</span>
-                <div class="w-24 bg-muted rounded-full h-2">
-                  <div class="bg-secondary-foreground h-2 rounded-full" style="width: 88%"></div>
-                </div>
-              </div>
-              <div class="flex justify-between items-center">
-                <span class="text-sm text-muted-foreground">CI/CD Automation</span>
-                <div class="w-24 bg-muted rounded-full h-2">
-                  <div class="bg-secondary-foreground h-2 rounded-full" style="width: 92%"></div>
-                </div>
-              </div>
-              <div class="flex justify-between items-center">
-                <span class="text-sm text-muted-foreground">Infrastructure as Code</span>
-                <div class="w-24 bg-muted rounded-full h-2">
-                  <div class="bg-secondary-foreground h-2 rounded-full" style="width: 78%"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
   </main>
 
   <Footer />
