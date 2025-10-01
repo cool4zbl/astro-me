@@ -70,13 +70,13 @@ const translations = {
         ],
         stack: ['Java', 'TypeScript', 'MySQL', 'CQRS', 'Micro Frontends'],
         actions: [
-        // TODO:
+           // TODO:
           // { label: 'Live Demo', variant: 'primary', href: 'https://jetms.example.com' },
           { label: 'Experience Overview', variant: 'outline', href: '/experience' },
         ],
       },
       {
-        image: { src: '/placeholder.svg?height=400&width=600', alt: 'Map and geospatial data pipeline illustration' },
+        image: { src: '/jarvis-feature-1.png?height=400&width=600', alt: 'Map and geospatial data pipeline illustration' },
         badge: { label: 'Geo Platforms', class: 'bg-primary/10 text-primary' },
         title: 'Jarvis Crowdsourcing Platform',
         subtitle: 'Grab',
@@ -101,7 +101,7 @@ const translations = {
         ],
         stack: ['Go', 'PostgreSQL', 'PostGIS', 'Kafka', 'ElasticSearch'],
         actions: [
-          { label: 'Live Demo', variant: 'primary', href: 'https://jarvis.example.com' },
+          { label: 'Live Demo', variant: 'primary', href: 'https://grabmaps.grab.com/solutions/mapmaking-tools-and-saas' },
           { label: 'Experience Overview', variant: 'outline', href: '/experience' },
 
         ],
@@ -207,7 +207,9 @@ const actionClassMap = {
                 {project.actions && project.actions.length > 0 && (
                   <div class="flex gap-4 flex-wrap">
                     {project.actions.map((action) => (
-                      <a href={action.href ?? '#'} class={actionClassMap[action.variant]}>
+                      <a
+                        target="_blank"
+                        href={action.href ?? '#'} class={actionClassMap[action.variant]}>
                         {action.label}
                       </a>
                     ))}
@@ -266,9 +268,7 @@ const actionClassMap = {
                   <span class="inline-flex items-center rounded-full bg-secondary px-2 py-1 text-xs font-medium text-secondary-foreground">{tag}</span>
                 ))}
               </div>
-              <a
-                      target="_blank"
-                      href={card.url || '#'} class="text-primary hover:text-accent font-medium text-sm transition-colors">
+              <a target="_blank" href={card.url ?? '#'} class="text-primary hover:text-accent font-medium text-sm transition-colors">
                 View Project →
               </a>
             </div>

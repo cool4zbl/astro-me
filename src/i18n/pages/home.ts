@@ -78,14 +78,14 @@ const homeCopy: Record<Language, HomeCopy> = {
                   description:
                       'Unified multi-tenant tooling that consolidates 20+ internal services into a single workspace with CQRS-based routing and a shared data model, reducing SLA for issue resolution by a third.',
                   tags: ['Java', 'TypeScript', 'MySQL', 'CQRS'],
-                  image: { src: '/placeholder.svg?height=200&width=350', alt: 'Operational platform interface mockup' },
+                  image: { src: '/jetms-feature.png?height=650&width=650', alt: 'Operational platform interface mockup' },
               },
               {
                   title: 'Jarvis Geospatial Crowdsourcing Platform',
                   description:
                       'Crowdsourced task management engine at Grab scaling to 300K tasks and 400K+ geospatial points, boosting the accuracy of maps and on-trip experiences across Southeast Asia.',
                   tags: ['Go', 'PostgreSQL', 'Kafka', 'ElasticSearch'],
-                  image: { src: '/placeholder.svg?height=200&width=350', alt: 'Geospatial data workflow visualization' },
+                  image: { src: '/jarvis-feature-1.png?height=200&width=350', alt: 'Geospatial data workflow visualization' },
               },
           ],
           viewAllLabel: 'View All Projects',
