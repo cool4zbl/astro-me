@@ -9,32 +9,32 @@ const pathname = Astro.url.pathname;
 const isHome = ['/', '/zh', '/zh/', '/en', '/en/'].includes(pathname);
 
 const footerLinks = {
-  navigation: [
-    { key: 'home', href: getLocalizedPath('/', lang) },
-    { key: 'blog', href: getLocalizedPath('/blog', lang) },
-    { key: 'projects', href: getLocalizedPath('/projects', lang) },
-    { key: 'experience', href: getLocalizedPath('/experience', lang) }
-  ],
-  resources: [
-    {
-      name: 'RSS',
-      href: '/rss.xml',
-      external: true
-    },
-    {
-      name: 'Sitemap',
-      href: '/sitemap-index.xml',
-      external: true
-    },
-    {
-      name: t('nav.tags'),
-      href: getLocalizedPath('/tags', lang)
-    },
-    {
-      name: t('nav.search'),
-      href: getLocalizedPath('/search', lang)
-    }
-  ]
+    navigation: [
+        { key: 'home', href: getLocalizedPath('/', lang) },
+        { key: 'blog', href: getLocalizedPath('/blog', lang) },
+        { key: 'projects', href: getLocalizedPath('/projects', lang) },
+        { key: 'experience', href: getLocalizedPath('/experience', lang) }
+    ],
+    resources: [
+        {
+            name: 'RSS',
+            href: '/rss.xml',
+            external: true
+        },
+        {
+            name: 'Sitemap',
+            href: '/sitemap-index.xml',
+            external: true
+        },
+        {
+            name: t('nav.tags'),
+            href: getLocalizedPath('/tags', lang)
+        },
+        {
+            name: t('nav.search'),
+            href: getLocalizedPath('/search', lang)
+        }
+    ]
 };
 
 const mottoPool = [
@@ -42,22 +42,25 @@ const mottoPool = [
         en: 'Stay hungry, stay foolish.',
         zh: 'Stay hungry, stay foolish.'
     },
-  {
-    zh: '慢下来也能走得远，关键是保持持续的节奏。',
-    en: 'Going slower still gets you far when the rhythm is sustainable.'
-  },
-  {
-    zh: '写代码之前先想一想用户的感受，故事就会顺很多。',
-    en: 'When you picture the user first, the code tends to fall into place.'
-  },
-  {
-    zh: '记录比记忆可靠，哪怕只是三行札记。',
-    en: 'Notes beat memory—three lines today save hours later.'
-  },
-  {
-    zh: '保持好奇，工具会更新，方法也会。',
-    en: 'Stay curious—tools evolve, so can your approach.'
-  }
+    {
+        zh: '保持好奇，工具会更新，方法也会。',
+        en: 'Stay curious—tools evolve, so can your approach.'
+    },
+    {
+        en: "Be motivated, be bold, be brave, be you.",
+        zh: 'Be motivated, be bold, be brave, be you.'
+    },
+    {   en: "Leap, and the net will appear.", zh: 'Leap, and the net will appear.'
+    },
+    {   en: "Always ask for the opportunity. Always ask if you want something. And when you’re offered an opportunity, always say yes. And then lastly, practise a growth mindset.",
+        zh: 'Always ask for the opportunity. Always ask if you want something. And when you’re offered an opportunity, always say yes. And then lastly, practise a growth mindset.'
+    },
+
+    {
+        en: "Promise me you'll always remember: You're braver than you believe, and stronger than you seem, and smarter than you think.",
+        zh: "Promise me you'll always remember: You're braver than you believe, and stronger than you seem, and smarter than you think."
+    }
+
 ];
 
 const mottoTexts = mottoPool.map((item) => item[lang]);
