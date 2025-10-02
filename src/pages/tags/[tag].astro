@@ -4,6 +4,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import BlogCard from '../../components/BlogCard.astro';
+import { getTagPageMetadata } from '../../utils/metadata';
 
 export async function getStaticPaths() {
   const allPosts = await getCollection('blog');
@@ -24,12 +25,12 @@ export async function getStaticPaths() {
 
 const { tag } = Astro.params;
 const { posts } = Astro.props;
+const { title: pageTitle, description: baseDescription } = getTagPageMetadata(tag);
+const postCountText = posts.length === 1 ? '1 post available.' : `${posts.length} posts available.`;
+const pageDescription = `${baseDescription} ${postCountText}`;
 ---
 
-<BaseLayout
-  title={`Tag: ${tag} - My Blog`}
-  description={`Browse all articles tagged with "${tag}", ${posts.length} posts total.`}
->
+<BaseLayout title={pageTitle} description={pageDescription}>
   <Header />
 
   <main class="flex-1">

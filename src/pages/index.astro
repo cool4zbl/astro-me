@@ -7,9 +7,11 @@ import BlogCard from '../components/BlogCard.astro';
 import OptimizedImage from '../components/OptimizedImage.astro';
 import { getLangFromUrl, getLocalizedPath, type Language } from '../i18n/config';
 import { getHomeCopy } from '../i18n/pages/home';
+import { getPageMetadata } from '../utils/metadata';
 
 const lang: Language = Astro.props?.lang ?? getLangFromUrl(Astro.url);
 const copy = getHomeCopy(lang);
+const { title: pageTitle, description: pageDescription } = getPageMetadata('home');
 
 const allPosts = await getCollection('blog');
 const publishedPosts = allPosts
@@ -27,10 +29,7 @@ const blogHref = getLocalizedPath('/blog', lang);
 const profileImage = '/binliuzhang-avt1.JPG';
 ---
 
-<BaseLayout
-  title="Binliu Zhang - Senior Software Engineer"
-  description="Senior Software Engineer with 8+ years building distributed platforms at Just Eat Takeaway, Grab, Ant Group, and Douban. Explore my projects, experience, and writing."
->
+<BaseLayout title={pageTitle} description={pageDescription}>
   <Header />
 
   <main class="flex-1">

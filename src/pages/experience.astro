@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import { getPageMetadata } from '../utils/metadata';
 
 const resume = {
   en: '/Binliu Zhang-Senior-Software-Engineer.pdf',
@@ -109,12 +110,11 @@ const getIcon = (iconName: string) => {
   return icons[iconName] || icons.building;
 };
 
+const { title: pageTitle, description: pageDescription } = getPageMetadata('experience');
+
 ---
 
-<BaseLayout
-  title="Experience - My Professional Journey"
-  description="Explore my professional experience in full-stack development, backend systems, and team leadership across various industries and technologies."
->
+<BaseLayout title={pageTitle} description={pageDescription}>
   <Header />
 
   <main class="flex-1">

@@ -4,11 +4,13 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import OptimizedImage from '../components/OptimizedImage.astro';
 import { getLangFromUrl, getLocalizedPath } from '../i18n/config';
+import { getPageMetadata } from '../utils/metadata';
 
 const lang = getLangFromUrl(Astro.url);
 const profileImage = '/binliuzhang-avt1.JPG';
 const blogLink = getLocalizedPath('/blog', lang);
 const resumeLink = '/Binliu Zhang-Senior-Software-Engineer.pdf';
+const { title: pageTitle, description: pageDescription } = getPageMetadata('about');
 
 const contactLinks = [
   {
@@ -46,10 +48,7 @@ const lifeBeyondCode = [
 ];
 ---
 
-<BaseLayout
-  title="About Me"
-  description="A personal look at my journey through engineering, curiosity, and the tools that keep me learning."
->
+<BaseLayout title={pageTitle} description={pageDescription}>
   <Header />
 
   <main class="flex-1">

@@ -2,12 +2,12 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import { getPageMetadata } from '../utils/metadata';
+
+const { title: pageTitle, description: pageDescription } = getPageMetadata('search');
 ---
 
-<BaseLayout
-  title="Search - My Blog"
-  description="Search blog articles to quickly find content you're interested in."
->
+<BaseLayout title={pageTitle} description={pageDescription}>
   <Header />
 
   <main class="flex-1">
