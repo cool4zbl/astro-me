@@ -5,8 +5,6 @@ import { getLangFromUrl, getTranslations, getLocalizedPath } from '../i18n/confi
 const currentYear = new Date().getFullYear();
 const lang = getLangFromUrl(Astro.url);
 const t = getTranslations(lang);
-const pathname = Astro.url.pathname;
-const isHome = ['/', '/zh', '/zh/', '/en', '/en/'].includes(pathname);
 
 const footerLinks = {
     navigation: [
@@ -70,181 +68,94 @@ const initialMotto = mottoTexts[0];
 
 <footer class="border-t bg-muted/30">
   <div class="container-width py-12">
-    {isHome ? (
-      <div class="grid gap-8 md:grid-cols-2">
-        <!-- Left Column: Logo and Motto -->
-        <div>
-          <!-- Logo Component for Home -->
-          <div class="mb-4 flex items-center gap-2">
-            <div class="h-8 w-8 rounded-xl bg-primary flex items-center justify-center shadow-sm">
-              <span class="text-primary-foreground text-sm font-bold">BZ</span>
-            </div>
-            <span class="text-xl font-semibold">{t('footer.myWebsite')}</span>
+    <div class="grid gap-8 md:grid-cols-2">
+      <!-- Left Column: Logo and Motto -->
+      <div>
+        <div class="mb-4 flex items-center gap-2">
+          <div class="h-8 w-8 rounded-xl bg-primary flex items-center justify-center shadow-sm">
+            <span class="text-primary-foreground text-sm font-bold">BZ</span>
           </div>
-
-          <!-- Simplified Motto -->
-          <div class="mb-6">
-            <p
-              id={mottoId}
-              data-mottos={JSON.stringify(mottoTexts)}
-              class="text-sm leading-relaxed text-muted-foreground italic"
-            >
-              {initialMotto}
-            </p>
-          </div>
-
-          <SocialLinks size="md" lang={lang} />
+          <span class="text-xl font-semibold">{t('footer.myWebsite')}</span>
         </div>
 
-        <!-- Right Column: Navigation and Resources -->
-        <div class="grid gap-8 sm:grid-cols-2">
-          <!-- Navigation Links Section -->
-          <div>
-            <h3 class="mb-4 text-sm font-semibold text-foreground uppercase tracking-[0.2em]">
-              {t('footer.navigation')}
-            </h3>
-            <ul class="space-y-2 text-sm text-muted-foreground">
-              {footerLinks.navigation.map((link) => (
-                <li>
-                  <a
-                    href={link.href}
-                    class="transition-colors hover:text-primary"
-                  >
-                    {t(`nav.${link.key}`)}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <!-- Resources Links Section -->
-          <div>
-            <h3 class="mb-4 text-sm font-semibold text-foreground uppercase tracking-[0.2em]">
-              {t('footer.resources')}
-            </h3>
-            <ul class="space-y-2 text-sm text-muted-foreground">
-              {footerLinks.resources.map((link) => (
-                <li>
-                  <a
-                    href={link.href}
-                    class="transition-colors hover:text-primary"
-                    target={link.external ? "_blank" : undefined}
-                    rel={link.external ? "noreferrer" : undefined}
-                  >
-                    {link.name}
-                    {link.external && (
-                      <svg class="ml-1 inline h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                      </svg>
-                    )}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <!-- Simple Copyright for Home -->
-      <div class="mt-8 border-t pt-6 text-xs text-muted-foreground sm:text-sm text-center">
-        © {currentYear} {t('footer.poweredByAstro')}
-      </div>
-    ) : (
-      <>
-        <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
-          <div class="lg:col-span-2">
-            <!-- Logo Component for Non-Home -->
-            <div class="mb-4 flex items-center gap-2">
-              <div class="h-8 w-8 rounded-xl bg-primary flex items-center justify-center shadow-sm">
-                <span class="text-primary-foreground text-sm font-bold">BZ</span>
-              </div>
-              <span class="text-xl font-semibold">{t('footer.myBlog')}</span>
-            </div>
-
-            <p class="mb-6 max-w-md text-sm leading-relaxed text-muted-foreground">
-              {t('footer.description')}
-            </p>
-            <SocialLinks size="md" lang={lang} />
-          </div>
-
-          <!-- Navigation Links Section -->
-          <div>
-            <h3 class="mb-4 text-sm font-semibold text-foreground uppercase tracking-[0.2em]">
-              {t('footer.navigation')}
-            </h3>
-            <ul class="space-y-2 text-sm text-muted-foreground">
-              {footerLinks.navigation.map((link) => (
-                <li>
-                  <a
-                    href={link.href}
-                    class="transition-colors hover:text-primary"
-                  >
-                    {t(`nav.${link.key}`)}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <!-- Resources Links Section -->
-          <div>
-            <h3 class="mb-4 text-sm font-semibold text-foreground uppercase tracking-[0.2em]">
-              {t('footer.resources')}
-            </h3>
-            <ul class="space-y-2 text-sm text-muted-foreground">
-              {footerLinks.resources.map((link) => (
-                <li>
-                  <a
-                    href={link.href}
-                    class="transition-colors hover:text-primary"
-                    target={link.external ? "_blank" : undefined}
-                    rel={link.external ? "noreferrer" : undefined}
-                  >
-                    {link.name}
-                    {link.external && (
-                      <svg class="ml-1 inline h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                      </svg>
-                    )}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-
-        <!-- Full Copyright for Non-Home -->
-        <div class="mt-8 flex flex-col gap-4 border-t pt-8 text-xs text-muted-foreground sm:flex-row sm:items-center sm:justify-between sm:text-sm">
-          <p>
-            © {currentYear} {t('footer.copyright')}.
-            {t('footer.builtWithAstro')}
+        <div class="mb-6">
+          <p
+            id={mottoId}
+            data-mottos={JSON.stringify(mottoTexts)}
+            class="text-sm leading-relaxed text-muted-foreground italic"
+          >
+            {initialMotto}
           </p>
-          <div class="flex items-center gap-4">
-            <span>{t('footer.theme')}: #32e6e2</span>
-            <span>•</span>
-            <span>{t('footer.responsiveDesign')}</span>
-          </div>
         </div>
-      </>
-    )}
 
+        <SocialLinks size="md" lang={lang} />
+      </div>
+
+      <!-- Right Column: Navigation and Resources -->
+      <div class="grid gap-8 sm:grid-cols-2">
+        <div>
+          <h3 class="mb-4 text-sm font-semibold text-foreground uppercase tracking-[0.2em]">
+            {t('footer.navigation')}
+          </h3>
+          <ul class="space-y-2 text-sm text-muted-foreground">
+            {footerLinks.navigation.map((link) => (
+              <li>
+                <a
+                  href={link.href}
+                  class="transition-colors hover:text-primary"
+                >
+                  {t(`nav.${link.key}`)}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="mb-4 text-sm font-semibold text-foreground uppercase tracking-[0.2em]">
+            {t('footer.resources')}
+          </h3>
+          <ul class="space-y-2 text-sm text-muted-foreground">
+            {footerLinks.resources.map((link) => (
+              <li>
+                <a
+                  href={link.href}
+                  class="transition-colors hover:text-primary"
+                  target={link.external ? "_blank" : undefined}
+                  rel={link.external ? "noreferrer" : undefined}
+                >
+                  {link.name}
+                  {link.external && (
+                    <svg class="ml-1 inline h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                    </svg>
+                  )}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-8 border-t pt-6 text-xs text-muted-foreground sm:text-sm text-center">
+      © {currentYear} {t('footer.poweredByAstro')}
+    </div>
   </div>
-  {isHome && (
-    <script is:inline define:vars={{ mottoId }}>
-      const mottoContainer = document.getElementById(mottoId);
-      if (mottoContainer) {
-        try {
-          const mottos = JSON.parse(mottoContainer.dataset.mottos || '[]');
-          if (Array.isArray(mottos) && mottos.length > 0) {
-            const pick = mottos[Math.floor(Math.random() * mottos.length)];
-            if (pick) {
-              mottoContainer.textContent = pick;
-            }
+  <script is:inline define:vars={{ mottoId }}>
+    const mottoContainer = document.getElementById(mottoId);
+    if (mottoContainer) {
+      try {
+        const mottos = JSON.parse(mottoContainer.dataset.mottos || '[]');
+        if (Array.isArray(mottos) && mottos.length > 0) {
+          const pick = mottos[Math.floor(Math.random() * mottos.length)];
+          if (pick) {
+            mottoContainer.textContent = pick;
           }
-        } catch (error) {
-          console.warn('Failed to parse motto list', error);
         }
+      } catch (error) {
+        console.warn('Failed to parse motto list', error);
       }
-    </script>
-  )}
+    }
+  </script>
 </footer>
