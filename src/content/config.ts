@@ -11,6 +11,10 @@ const blog = defineCollection({
     tags: z.array(z.string()).default([]),
     draft: z.boolean().default(false),
   }),
+    slug: ({ id }) => {
+      id.replace(/\/index\.mdx?$/, "")
+          .replace(/\.mdx?$/, "")
+    }
 })
 
 export const collections = { blog }

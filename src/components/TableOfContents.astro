@@ -1,86 +1,101 @@
 ---
-const { headings, lang = 'zh' } = Astro.props;
+const { headings, lang = 'en' } = Astro.props;
 
-// 过滤出h2和h3标题
-const tocHeadings = headings.filter(h => h.depth <= 3);
+const tocHeadings = headings.filter((h) => h.depth <= 3);
 
 const texts = {
-  zh: {
-    title: '目录'
-  },
   en: {
-    title: 'Table of Contents'
+    label: 'Table of contents'
+  },
+  zh: {
+    label: '目录'
   }
 };
 
-const t = texts[lang];
+const t = texts[lang] ?? texts.en;
 ---
 
 {tocHeadings.length > 0 && (
-  <div class="sticky top-6 rounded-xl border bg-card/80 p-4 shadow-sm backdrop-blur-sm lg:max-w-xs">
-    <h3 class="mb-3 flex items-center text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-      <svg class="mr-2 h-4 w-4 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16" />
-      </svg>
-      {t.title}
-    </h3>
-    <nav class="space-y-1 text-sm leading-snug">
-      {tocHeadings.map((heading) => (
-        <a
-          href={`#${heading.slug}`}
-          class={`block rounded-md px-2 py-1 transition-colors hover:bg-primary/10 hover:text-primary ${
-            heading.depth === 2 
-              ? 'pl-1 text-muted-foreground font-medium' 
-              : heading.depth === 3 
-                ? 'pl-4 text-muted-foreground text-sm' 
-                : 'pl-6 text-muted-foreground text-xs'
-          }`}
-        >
-          {heading.text}
-        </a>
-      ))}
-    </nav>
+  <div class="fixed right-4 top-1/2 z-30 hidden -translate-y-1/2 lg:block">
+    <div class="group/toc relative flex items-center justify-end">
+      <button
+        type="button"
+        aria-label={t.label}
+        class="flex h-12 w-12 items-center justify-center rounded-full border border-border/60 bg-background text-muted-foreground shadow-lg transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary group-hover/toc:bg-primary group-hover/toc:text-primary-foreground group-focus-within/toc:bg-primary group-focus-within/toc:text-primary-foreground"
+      >
+        <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+
+      <div class="pointer-events-none absolute right-full top-1/2 w-64 max-h-[70vh] -translate-y-1/2 translate-x-4 overflow-y-auto rounded-2xl border border-border/60 bg-background/95 p-4 text-sm shadow-xl opacity-0 transition-all duration-300 ease-out group-hover/toc:pointer-events-auto group-hover/toc:translate-x-0 group-hover/toc:opacity-100 group-focus-within/toc:pointer-events-auto group-focus-within/toc:translate-x-0 group-focus-within/toc:opacity-100">
+        <nav class="space-y-1">
+          {tocHeadings.map((heading) => (
+            <a
+              href={`#${heading.slug}`}
+              data-toc-link
+              class={`block rounded-md px-3 py-1.5 text-muted-foreground transition-colors hover:bg-primary/10 hover:text-primary ${
+                heading.depth === 2
+                  ? 'pl-3 font-medium'
+                  : heading.depth === 3
+                    ? 'pl-6 text-sm'
+                    : 'pl-8 text-xs'
+              }`}
+            >
+              {heading.text}
+            </a>
+          ))}
+        </nav>
+      </div>
+    </div>
   </div>
 )}
 
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const tocLinks = document.querySelectorAll('nav a[href^="#"]');
+  document.addEventListener('DOMContentLoaded', () => {
+    const tocLinks = document.querySelectorAll('[data-toc-link]');
     const headings = document.querySelectorAll('h1, h2, h3, h4, h5, h6');
-    
-    // 平滑滚动
-    tocLinks.forEach(link => {
-      link.addEventListener('click', function(e) {
-        e.preventDefault();
-        const targetId = this.getAttribute('href')?.substring(1);
-        const targetElement = document.getElementById(targetId || '');
+
+    tocLinks.forEach((link) => {
+      link.addEventListener('click', (event) => {
+        event.preventDefault();
+        const targetId = link.getAttribute('href')?.substring(1);
+        const targetElement = targetId ? document.getElementById(targetId) : null;
         if (targetElement) {
           targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
       });
     });
-    
-    // 滚动时高亮当前标题
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const id = entry.target.id;
-          tocLinks.forEach(link => {
-            link.classList.remove('text-primary', 'font-semibold');
-            link.classList.add('text-muted-foreground');
-            if (link.getAttribute('href') === `#${id}`) {
-              link.classList.remove('text-muted-foreground');
-              link.classList.add('text-primary', 'font-semibold');
-            }
-          });
-        }
-      });
-    }, { rootMargin: '-20% 0% -80% 0%' });
-    
-    headings.forEach(heading => {
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const id = entry.target.id;
+            tocLinks.forEach((link) => {
+              link.classList.remove('text-primary', 'font-semibold');
+              link.classList.add('text-muted-foreground');
+              if (link.getAttribute('href') === `#${id}`) {
+                link.classList.remove('text-muted-foreground');
+                link.classList.add('text-primary', 'font-semibold');
+              }
+            });
+          }
+        });
+      },
+      { rootMargin: '-20% 0% -70% 0%' }
+    );
+
+    headings.forEach((heading) => {
       if (heading.id) {
         observer.observe(heading);
       }
     });
   });
 </script>
+
+<style>
+  :global(.prose :where(h1, h2, h3, h4, h5, h6)) {
+    scroll-margin-top: calc(4rem + 1.5rem);
+  }
+</style>
