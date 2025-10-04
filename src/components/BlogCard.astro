@@ -39,9 +39,11 @@ const postHref = getLocalizedPath(`/blog/${post.slug}/`, lang);
           )}
         </div>
         <div class="space-y-3">
-          <h3 class="text-2xl font-semibold leading-tight text-foreground transition-colors group-hover:text-primary">
-            <a href={postHref} class="focus:outline-none">
-              <span class="absolute inset-0"></span>
+          <h3 class="relative text-2xl font-semibold leading-tight text-foreground transition-colors group-hover:text-primary">
+            <a
+              href={postHref}
+              class="inline-flex items-baseline gap-2 focus:outline-none focus-visible:rounded-md focus-visible:ring-2 focus-visible:ring-primary"
+            >
               {post.data.title}
             </a>
           </h3>

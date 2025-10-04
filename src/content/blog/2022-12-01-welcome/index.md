@@ -3,9 +3,8 @@ slug: welcome
 title: Welcome
 description: Hello, I started writing again.
 pubDate: 2022-12-01
-updatedDate: 2022-12-02
 authors: [binliu]
-tags: [hello, docusaurus]
+tags: ['General']
 ---
 
 Hello, I started writing again.

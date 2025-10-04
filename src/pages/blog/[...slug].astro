@@ -44,20 +44,21 @@ const pageDescription = post.data.description;
           <h1 class="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
             {post.data.title}
           </h1>
-          <p class="text-lg text-muted-foreground">
-            {post.data.description}
-          </p>
           <div class="flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
-            <FormattedDate date={post.data.pubDate} />
+            <div class="flex items-center gap-2">
+              <span class="font-medium text-foreground/80">Published</span>
+              <FormattedDate date={post.data.pubDate} class="text-muted-foreground" />
+            </div>
             {post.data.updatedDate && (
-              <span>
-                · Updated on <FormattedDate date={post.data.updatedDate} />
-              </span>
+              <div class="flex items-center gap-2">
+                <span class="font-medium text-foreground/80">Updated</span>
+                <FormattedDate date={post.data.updatedDate} class="text-muted-foreground" />
+              </div>
             )}
           </div>
           {post.data.tags.length > 0 && (
             <div>
-              <TagList tags={post.data.tags} />
+              <TagList tags={post.data.tags} size="lg" />
             </div>
           )}
         </header>
@@ -77,18 +78,12 @@ const pageDescription = post.data.description;
             </div>
           )}
 
-        <div class="prose prose-lg mx-auto dark:prose-invert">
+        <div class="prose prose-lg mx-auto dark:prose-invert prose-headings:first:mt-0">
           <Content />
         </div>
 
         <footer class="mt-12 border-t pt-8">
-          <div class="flex flex-col gap-4 text-sm text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
-            <div class="space-y-2">
-              <p>Published on <FormattedDate date={post.data.pubDate} /></p>
-              {post.data.tags.length > 0 && (
-                <TagList tags={post.data.tags} />
-              )}
-            </div>
+          <div class="flex flex-col gap-4 text-sm sm:flex-row sm:items-center sm:justify-between">
             <a
               href="/blog"
               class="inline-flex items-center text-sm font-medium text-primary hover:text-accent"
@@ -116,4 +111,10 @@ const pageDescription = post.data.description;
   </main>
 
   <Footer />
+
+  <style>
+    :global(.prose > h1:first-child) {
+      display: none;
+    }
+  </style>
 </BaseLayout>
