@@ -2,6 +2,8 @@
 import { getCollection } from 'astro:content';
 import FormattedDate from './FormattedDate.astro';
 import OptimizedImage from './OptimizedImage.astro';
+import TagList from './TagList.astro';
+import { getLocalizedPath } from '../i18n/config';
 
 const { currentSlug, currentTags, lang = 'zh' } = Astro.props;
 
@@ -68,22 +70,29 @@ const t = texts[lang];
             </div>
           )}
           <div class="p-6">
-            <div class="flex items-center gap-2 text-xs text-muted-foreground mb-3">
-              <FormattedDate date={post.data.pubDate} />
-              {post.data.tags.slice(0, 2).map(tag => (
-                <span class="inline-flex items-center rounded-full bg-primary/10 px-2 py-1 text-xs font-medium text-primary">
-                  {tag}
-                </span>
-              ))}
+            <div class="flex flex-wrap items-center gap-2 text-xs text-muted-foreground mb-3">
+              <FormattedDate date={post.data.pubDate} class="text-muted-foreground" />
+              {post.data.tags.length > 0 && (
+                <TagList
+                  tags={post.data.tags.slice(0, 2)}
+                  lang={lang}
+                  class="text-muted-foreground"
+                />
+              )}
             </div>
-            <h3 class="text-lg font-semibold text-card-foreground mb-2 group-hover:text-primary transition-colors line-clamp-2">
-              {post.data.title}
+            <h3 class="text-lg font-semibold text-card-foreground mb-2 transition-colors line-clamp-2">
+              <a
+                href={getLocalizedPath(`/blog/${post.slug}/`, lang)}
+                class="inline-flex focus:outline-none focus-visible:rounded-md focus-visible:ring-2 focus-visible:ring-primary group-hover:text-primary"
+              >
+                {post.data.title}
+              </a>
             </h3>
             <p class="text-sm text-muted-foreground mb-4 line-clamp-3">
               {post.data.description}
             </p>
             <a
-              href={`/blog/${post.slug}`}
+              href={getLocalizedPath(`/blog/${post.slug}/`, lang)}
               class="inline-flex items-center text-sm font-medium text-primary hover:text-accent transition-colors"
             >
               {t.readMore}
