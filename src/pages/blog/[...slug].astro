@@ -120,9 +120,67 @@ const pageDescription = post.data.description;
 
   <Footer />
 
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const contentHeadings = document.querySelectorAll('.prose h2[id], .prose h3[id], .prose h4[id], .prose h5[id], .prose h6[id]');
+
+      contentHeadings.forEach((heading) => {
+        if (heading.querySelector('[data-heading-anchor]')) {
+          return;
+        }
+
+        heading.classList.add('has-heading-anchor');
+
+        const anchor = document.createElement('a');
+        anchor.href = `#${heading.id}`;
+        anchor.className = 'heading-anchor';
+        anchor.setAttribute('data-heading-anchor', '');
+        const label = heading.textContent?.trim() || heading.id;
+        anchor.setAttribute('aria-label', `Jump to section ${label}`);
+        anchor.innerHTML = '<span aria-hidden="true">#</span><span class="sr-only">Section link</span>';
+
+        heading.prepend(anchor);
+      });
+    });
+  </script>
+
   <style>
     :global(.prose > h1:first-child) {
       display: none;
+    }
+
+    :global(.prose .has-heading-anchor) {
+      position: relative;
+      scroll-margin-top: calc(4rem + 1.5rem);
+    }
+
+    :global(.prose .heading-anchor) {
+      position: absolute;
+      top: 50%;
+      left: -1.75rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 1.5rem;
+      height: 1.5rem;
+      border-radius: 9999px;
+      color: hsl(var(--muted-foreground));
+      text-decoration: none;
+      opacity: 0;
+      transform: translate(0, -50%);
+      transition: opacity 150ms ease, transform 150ms ease, color 150ms ease;
+    }
+
+    :global(.prose .heading-anchor:hover),
+    :global(.prose .heading-anchor:focus-visible) {
+      color: hsl(var(--primary));
+    }
+
+    :global(.prose .has-heading-anchor:hover .heading-anchor),
+    :global(.prose .has-heading-anchor:focus-within .heading-anchor),
+    :global(.prose .heading-anchor:focus-visible) {
+      opacity: 1;
+      transform: translate(0, -50%);
     }
   </style>
 </BaseLayout>
