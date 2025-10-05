@@ -1,13 +1,13 @@
 ---
 slug: deep-dive-into-OOMKilled-JVM-Memory
-title: "A Deep Dive into a Production OOMKilled Alert: The Full Story from JVM Memory to a Code Vulnerability"
+title: "OOMKilled Deep Dive: From Alert to JVM Memory Leak"
 description: "An in-depth exploration of a production OOMKilled alert, tracing the issue from JVM memory management to a critical code vulnerability."
 publishedAt: 2025-09-01
 tags: ['Tech Deep Dive']
 ---
 
 
-# A Deep Dive into a Production OOMKilled Alert: The Full Story from JVM Memory to a Code Vulnerability
+# OOMKilled Deep Dive: From Alert to JVM Memory Leak
 
 > "In the complex world of distributed systems, every seemingly harmless alert can be a thread leading to the core of a problem."
 > 

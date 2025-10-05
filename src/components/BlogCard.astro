@@ -1,46 +1,66 @@
 ---
-import FormattedDate from './FormattedDate.astro';
-import TagList from './TagList.astro';
-import OptimizedImage from './OptimizedImage.astro';
-import { getLangFromUrl, getLocalizedPath } from '../i18n/config';
+import FormattedDate from "./FormattedDate.astro";
+import TagList from "./TagList.astro";
+import OptimizedImage from "./OptimizedImage.astro";
+import { getLangFromUrl, getLocalizedPath } from "../i18n/config";
 
 const { post, lang: langProp } = Astro.props;
 const lang = langProp ?? getLangFromUrl(Astro.url);
 
-const heroSrc = post.data.heroImage || `/placeholder.svg?height=640&width=640&query=${encodeURIComponent(post.data.title)}`;
+const placeholderImage = `/placeholder.svg?height=640&width=640&query=${encodeURIComponent(post.data.title)}`;
+const heroSrc = post.data.heroImage || placeholderImage;
 
 const postHref = getLocalizedPath(`/blog/${post.slug}/`, lang);
 ---
 
-<article class="group relative overflow-hidden rounded-3xl border border-border/60 bg-card/80 shadow-sm transition hover:border-border hover:shadow-xl">
-  <div class="absolute inset-y-0 right-0 hidden w-1/3 bg-gradient-to-l from-primary/10 via-transparent to-transparent opacity-0 transition group-hover:opacity-100 lg:block"></div>
-  <div class="relative grid gap-6 p-6 lg:grid-cols-[minmax(0,280px)_1fr] lg:p-8">
+<article
+  class="group relative overflow-hidden rounded-3xl border border-border/60 bg-card/80 shadow-sm transition hover:border-border hover:shadow-xl"
+>
+  <div
+    class="absolute inset-y-0 right-0 hidden w-1/3 bg-gradient-to-l from-primary/10 via-transparent to-transparent opacity-0 transition group-hover:opacity-100 lg:block"
+  >
+  </div>
+  <div
+    class="relative grid gap-6 p-6 lg:grid-cols-[minmax(0,280px)_1fr] lg:p-8"
+  >
     <div class="relative overflow-hidden rounded-2xl bg-muted">
       <div class="aspect-[16/10] sm:aspect-[5/3] lg:aspect-[4/3]">
         <OptimizedImage
           src={heroSrc}
           alt={post.data.title}
           width={640}
-          height={640}
+          height={360}
           class="h-full w-full object-cover transition duration-300 group-hover:scale-105"
-          sizes="(max-width: 1023px) 100vw, 33vw"
+          sizes="(max-width: 1023px) 100vw, 320px"
           loading="lazy"
           format="webp"
         />
       </div>
-      <div class="pointer-events-none absolute inset-0 rounded-2xl ring-1 ring-inset ring-border"></div>
+      <div
+        class="pointer-events-none absolute inset-0 rounded-2xl ring-1 ring-inset ring-border"
+      >
+      </div>
     </div>
 
     <div class="flex flex-col justify-between gap-6">
       <div class="space-y-4">
-        <div class="flex flex-wrap items-center gap-3 text-xs font-medium uppercase tracking-wide text-muted-foreground">
-          <FormattedDate date={post.data.publishedAt} class="text-muted-foreground" />
-          {post.data.tags.length > 0 && (
-            <TagList tags={post.data.tags.slice(0, 2)} lang={lang} />
-          )}
+        <div
+          class="flex flex-wrap items-center gap-3 text-xs font-medium uppercase tracking-wide text-muted-foreground"
+        >
+          <FormattedDate
+            date={post.data.publishedAt}
+            class="text-muted-foreground"
+          />
+          {
+            post.data.tags.length > 0 && (
+              <TagList tags={post.data.tags.slice(0, 2)} lang={lang} />
+            )
+          }
         </div>
         <div class="space-y-3">
-          <h3 class="relative text-2xl font-semibold leading-tight text-foreground transition-colors group-hover:text-primary">
+          <h3
+            class="text-xl font-semibold leading-tight text-foreground transition-colors group-hover:text-primary"
+          >
             <a
               href={postHref}
               class="inline-flex items-baseline gap-2 focus:outline-none focus-visible:rounded-md focus-visible:ring-2 focus-visible:ring-primary"
@@ -60,8 +80,17 @@ const postHref = getLocalizedPath(`/blog/${post.slug}/`, lang);
           class="inline-flex items-center gap-2 text-sm font-semibold text-primary transition-colors hover:text-primary/80"
         >
           Read article
-          <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          <svg
+            class="h-4 w-4"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M9 5l7 7-7 7"></path>
           </svg>
         </a>
       </div>
