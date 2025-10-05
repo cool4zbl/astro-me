@@ -1,5 +1,3 @@
-// 主题工具函数
-
 export type Theme = "light" | "dark" | "system"
 
 export function getStoredTheme(): Theme | null {
@@ -35,7 +33,6 @@ export function applyTheme(theme: "light" | "dark"): void {
   }
 }
 
-// 主题变化监听器
 export function onThemeChange(callback: (theme: "light" | "dark") => void): () => void {
   if (typeof window === "undefined") return () => {}
 
@@ -50,7 +47,6 @@ export function onThemeChange(callback: (theme: "light" | "dark") => void): () =
   }
 }
 
-// 系统主题变化监听器
 export function onSystemThemeChange(callback: (theme: "light" | "dark") => void): () => void {
   if (typeof window === "undefined" || !window.matchMedia) return () => {}
 

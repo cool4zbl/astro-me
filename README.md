@@ -104,7 +104,7 @@ export default defineConfig({
 ---
 title: '文章标题'
 description: '文章描述'
-pubDate: 2024-01-01
+publishedAt: 2024-01-01
 tags: ['标签1', '标签2']
 draft: false
 heroImage: '/images/hero.jpg' # 可选
@@ -119,8 +119,8 @@ heroImage: '/images/hero.jpg' # 可选
 
 - \`title\`: 文章标题 (必需)
 - \`description\`: 文章描述 (必需)
-- \`pubDate\`: 发布日期 (必需)
-- \`updatedDate\`: 更新日期 (可选)
+- \`publishedAt\`: 发布日期 (必需)
+- \`updatedAt\`: 更新日期 (可选)
 - \`tags\`: 标签数组 (可选)
 - \`draft\`: 是否为草稿 (可选，默认 false)
 - \`heroImage\`: 头图 (可选)

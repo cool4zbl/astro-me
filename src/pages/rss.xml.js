@@ -5,7 +5,7 @@ export async function GET(context) {
   const posts = await getCollection("blog")
   const publishedPosts = posts
     .filter((post) => !post.data.draft)
-    .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+    .sort((a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf())
 
   return rss({
     title: "My Blog",
@@ -13,7 +13,7 @@ export async function GET(context) {
     site: context.site,
     items: publishedPosts.map((post) => ({
       title: post.data.title,
-      pubDate: post.data.pubDate,
+      pubDate: post.data.publishedAt,
       description: post.data.description,
       link: `/blog/${post.slug}/`,
       content: post.body,

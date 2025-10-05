@@ -3,8 +3,8 @@ id: vitest-mock-bug
 title: TDD - Mocking vue-router with vitest
 description:
   In a TDD project using vitest, vue3, and vue-router, we encountered an error while running tests. This article explores the problem, analysis, and solution to effectively mock vue-router without introducing third-party libraries.
-pubDate: 2023-11-17
-updatedDate: 2023-11-17
+publishedAt: 2023-11-17
+updatedAt: 2023-11-17
 tags: [ 'Tech Deep Dive' ]
 
 ---

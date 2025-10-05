@@ -2,7 +2,7 @@
 slug: welcome
 title: Welcome
 description: Hello, I started writing again.
-pubDate: 2022-12-01
+publishedAt: 2022-12-01
 authors: [binliu]
 tags: ['General']
 ---
@@ -42,7 +42,6 @@ Yes, that's a lot to share, let's see how it goes.
 If you got to this point, then congratulations.
 
 Welcome to my blog. 😄
-
 
 
 

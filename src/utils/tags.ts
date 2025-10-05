@@ -31,5 +31,5 @@ export async function getPostsByTag(tag: Tag) {
   const allPosts = await getCollection("blog")
   return allPosts
     .filter((post) => !post.data.draft && post.data.tags.includes(tag))
-    .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+    .sort((a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf())
 }

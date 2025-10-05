@@ -30,8 +30,8 @@ const pageDescription = post.data.description;
   description={pageDescription}
   image={post.data.heroImage}
   article={true}
-  publishedTime={post.data.pubDate}
-  modifiedTime={post.data.updatedDate}
+  publishedTime={post.data.publishedAt}
+  modifiedTime={post.data.updatedAt}
   tags={post.data.tags}
 >
   <Header />
@@ -47,12 +47,12 @@ const pageDescription = post.data.description;
           <div class="flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
             <div class="flex items-center gap-1">
               <span class="font-medium text-muted-foreground italic">Published on</span>
-              <FormattedDate date={post.data.pubDate} class="text-foreground/80" />
+              <FormattedDate date={post.data.publishedAt} class="text-foreground/80" />
             </div>
-            {post.data.updatedDate && (
+            {post.data.updatedAt && (
               <div class="flex items-center gap-1">
                   <span class="font-medium text-muted-foreground italic">Updated on</span>
-                  <FormattedDate date={post.data.updatedDate} class="text-foreground/80" />
+                  <FormattedDate date={post.data.updatedAt} class="text-foreground/80" />
               </div>
             )}
           </div>
@@ -87,7 +87,7 @@ const pageDescription = post.data.description;
                 <div class="space-y-2">
                     <p><span class="italic">Last Updated on</span><FormattedDate
                             class="text-foreground/80"
-                            date={post.data.pubDate || post.data.updatedDate} /></p>
+                            date={post.data.publishedAt || post.data.updatedAt} /></p>
                     {post.data.tags.length > 0 && (
                             <TagList tags={post.data.tags} />
                     )}

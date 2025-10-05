@@ -16,7 +16,7 @@ const { title: pageTitle, description: pageDescription } = getPageMetadata('home
 const allPosts = await getCollection('blog');
 const publishedPosts = allPosts
   .filter((post) => !post.data.draft)
-  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+  .sort((a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf());
 const recentPosts = publishedPosts.slice(0, 3);
 const totalPostsLabel = copy.latestPosts.totalLabel(publishedPosts.length);
 

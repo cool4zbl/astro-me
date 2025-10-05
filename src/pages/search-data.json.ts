@@ -24,7 +24,7 @@ export async function GET() {
         description: post.data.description,
         content,
         slug: post.slug,
-        pubDate: post.data.pubDate.toISOString(),
+        publishedAt: post.data.publishedAt.toISOString(),
         tags: post.data.tags,
       }
     }),

@@ -1,7 +1,7 @@
 ---
 title: 'Markdown 写作指南'
 description: '掌握 Markdown 语法，让你的博客文章更加美观和易读。'
-pubDate: 2024-01-03
+publishedAt: 2024-01-03
 tags: ['Markdown', '写作', '教程']
 ---
 

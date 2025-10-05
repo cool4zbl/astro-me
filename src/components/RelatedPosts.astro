@@ -71,7 +71,7 @@ const t = texts[lang];
           )}
           <div class="p-6">
             <div class="flex flex-wrap items-center gap-2 text-xs text-muted-foreground mb-3">
-              <FormattedDate date={post.data.pubDate} class="text-muted-foreground" />
+              <FormattedDate date={post.data.publishedAt} class="text-muted-foreground" />
               {post.data.tags.length > 0 && (
                 <TagList
                   tags={post.data.tags.slice(0, 2)}

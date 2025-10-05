@@ -1,7 +1,7 @@
 ---
 title: From Internal Operation Platform to Internal Platform
 description: An exploration of transitioning from multiple internal operation platforms to a unified internal platform, addressing challenges and strategies.
-pubDate: 2023-10-14
+publishedAt: 2023-10-14
 tags: ['Tech Deep Dive']
 
 ---

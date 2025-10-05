@@ -18,7 +18,7 @@ export async function getStaticPaths() {
     props: {
       posts: publishedPosts
         .filter(post => post.data.tags.includes(tag))
-        .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+        .sort((a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf())
     }
   }));
 }

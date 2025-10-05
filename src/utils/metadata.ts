@@ -21,7 +21,7 @@ export const pageMetadata = {
   experience: {
     title: formatTitle('Experience'),
     description:
-      'Review eight years of product engineering, distributed systems design, and platform leadership across global teams.'
+      'Review multiple years of product engineering, distributed systems design, and platform leadership across global teams.'
   },
   projects: {
     title: formatTitle('Projects'),

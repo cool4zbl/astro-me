@@ -97,7 +97,7 @@ const { title: pageTitle, description: pageDescription } = getPageMetadata('sear
 
       miniSearch = new MiniSearch({
         fields: ['title', 'description', 'content', 'tags'],
-        storeFields: ['title', 'description', 'slug', 'pubDate', 'tags'],
+        storeFields: ['title', 'description', 'slug', 'publishedAt', 'tags'],
         searchOptions: {
           boost: { title: 2, tags: 1.5 },
           fuzzy: 0.2,
@@ -156,7 +156,7 @@ const { title: pageTitle, description: pageDescription } = getPageMetadata('sear
               ${highlightText(result.description, query)}
             </p>
             <div class="flex items-center gap-4 text-sm text-muted-foreground">
-              <time>${formatDate(result.pubDate)}</time>
+              <time>${formatDate(result.publishedAt)}</time>
               ${result.tags.length > 0 ? `
                 <div class="flex gap-1">
                   ${result.tags.slice(0, 3).map(tag => `

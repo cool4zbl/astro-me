@@ -1,7 +1,7 @@
 ---
 title: 'Powerful Features of Astro'
 description: 'Explore the core features and advantages of the Astro framework, and understand why it is an excellent choice for building modern websites.'
-pubDate: 2024-01-02
+publishedAt: 2024-01-02
 tags: ['astro', 'technology', 'frontend']
 heroImage: '/covers/astro-features.jpg'
 ---
@@ -52,7 +52,7 @@ const blog = defineCollection({
   schema: z.object({
     title: z.string(),
     description: z.string(),
-    pubDate: z.coerce.date(),
+    publishedAt: z.coerce.date(),
     tags: z.array(z.string()),
   }),
 });

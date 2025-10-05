@@ -1,7 +1,7 @@
 ---
 title: Initialize Pinia Store with Single-SPA Props
 description: A guide on initializing Pinia store state using Single-SPA props in a Vue application.
-pubDate: 2024-01-04
+publishedAt: 2024-01-04
 tags: ['Tech Deep Dive']
 ---
 
