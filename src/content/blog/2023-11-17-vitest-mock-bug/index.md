@@ -46,17 +46,9 @@ Running this test case resulted in an error, with the following message:
 
 The error originated from `router/index.ts` in the line `router.beforeEach(() => {})`.
 
-          <div class="flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
-              <span>
-                Published on <FormattedDate date={post.data.pubDate} />
-              </span>
 we had already mocked `vue-router` at the beginning of this test file.
-              <span>
-                Updated on <FormattedDate date={post.data.updatedDate} />
-              </span>
 
-Theoretically, the code in `router/index.ts` should
-not have been executed.
+Theoretically, the code in `router/index.ts` should not have been executed.
 
 Then, I carefully examined the error message,
 
@@ -82,14 +74,6 @@ src/stores/CountryStore.ts: `import { useUserStore } from "./UserStore.ts";`
 -->
 
 src/stores/UserStore.ts: `import { i18n } from "../main";`
-
-          <div class="flex flex-col gap-4 text-sm text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
-            <div class="space-y-2">
-              <p>Published on <FormattedDate date={post.data.pubDate} /></p>
-              {post.data.tags.length > 0 && (
-                <TagList tags={post.data.tags} />
-              )}
-            </div>
 
 src/main.ts: `import router from "./router";`
 

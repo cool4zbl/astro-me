@@ -6,7 +6,6 @@ import Footer from '../../components/Footer.astro';
 import BlogCard from '../../components/BlogCard.astro';
 import { getTagPageMetadata } from '../../utils/metadata';
 
-// Tags: 'Tech Deep Dives', 'Project Case Studies', 'General', 'Career',
 export async function getStaticPaths() {
   const allPosts = await getCollection('blog');
   const publishedPosts = allPosts.filter(post => !post.data.draft);
