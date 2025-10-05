@@ -8,7 +8,7 @@ export enum Tag {
     General = 'General',
     Career = 'Career',
     System = 'System Design',
-
+    Chinese = 'Chinese',
 }
 
 export async function getAllTags(): Promise<Array<{ tag: Tag; count: number }>> {
