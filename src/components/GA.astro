@@ -1,0 +1,24 @@
+---
+const GA_ID = import.meta.env.PUBLIC_GA_ID;
+const enabled = import.meta.env.PROD && !!GA_ID;
+---
+
+{enabled && (
+        <>
+          <script type="text/partytown"
+            src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
+          ></script>
+          <script
+            type="text/partytown"
+            data-ga-measurement-id={GA_ID}
+            id="ga-init"
+          >
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {
+              dataLayer.push(arguments);
+                }
+        gtag('js', new Date())
+        gtag('config', GA_ID)
+        </script>
+        </>
+)}
