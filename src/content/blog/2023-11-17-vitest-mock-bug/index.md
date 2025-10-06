@@ -6,6 +6,7 @@ description:
 publishedAt: 2023-11-17
 updatedAt: 2023-11-17
 tags: [ 'Tech Deep Dive' ]
+heroImage: 'vitest-run-module.png'
 
 ---
 

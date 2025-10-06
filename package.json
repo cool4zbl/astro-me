@@ -1,6 +1,6 @@
 {
-  "name": "astro-blog-starter",
-  "version": "0.0.1",
+  "name": "astro-me",
+  "version": "0.1.0",
   "type": "module",
   "scripts": {
     "astro": "astro",

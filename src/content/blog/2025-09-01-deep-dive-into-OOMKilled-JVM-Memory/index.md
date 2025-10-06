@@ -4,6 +4,7 @@ title: "OOMKilled Deep Dive: From Alert to JVM Memory Leak"
 description: "An in-depth exploration of a production OOMKilled alert, tracing the issue from JVM memory management to a critical code vulnerability."
 publishedAt: 2025-09-01
 tags: ['Tech Deep Dive']
+heroImage: 'deep-dive-oom-killed-jvm-memory/JVM-Metrics-Datadog-09-02-2025_04_04_PM.png'
 ---
 
 

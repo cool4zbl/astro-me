@@ -3,7 +3,7 @@ title: 'Powerful Features of Astro'
 description: 'Explore the core features and advantages of the Astro framework, and understand why it is an excellent choice for building modern websites.'
 publishedAt: 2024-01-02
 tags: ['astro', 'technology', 'frontend']
-heroImage: '/covers/astro-features.jpg'
+heroImage: 'astro-features.jpg'
 ---
 
 # Powerful Features of Astro

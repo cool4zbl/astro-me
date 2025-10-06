@@ -8,13 +8,7 @@ const { post, lang: langProp } = Astro.props;
 const lang = langProp ?? getLangFromUrl(Astro.url);
 
 const placeholderImage = `/placeholder.svg?height=640&width=640&query=${encodeURIComponent(post.data.title)}`;
-const heroSrc = await import(`../content/blog/${post.slug}/${post.data.heroImage}`).then(
-  (mod) => mod.default
-).catch(() => {
-    console.log(`Failed to load image "${`../content/blog/${post.slug}/${post.data.heroImage}`}" for post: ${post.slug}, using placeholder instead.`);
-    return placeholderImage;
-});
-
+const heroSrc = post.data.heroImage || placeholderImage;
 const postHref = getLocalizedPath(`/blog/${post.slug}/`, lang);
 
 ---
