@@ -40,7 +40,7 @@ npm run dev
 
 \`\`\`bash
 npm run build
-\`\`\`
+\`\`\`git@github.com:cool4zbl/astro-me.git
 
 ## 📁 项目结构
 

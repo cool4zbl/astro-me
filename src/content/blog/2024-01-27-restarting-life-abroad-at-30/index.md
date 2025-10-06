@@ -2,8 +2,8 @@
 title: 'Restarting Life Abroad at 30: A Quest for Choice and Freedom'
 publishedAt: 27 Jan 2024
 description: Reflecting on the journey of moving to the Netherlands at 30, embracing new challenges, and pursuing freedom and choice in life.
-slug: restart-life-abroad-at-30
-authors: [ binliu ]
+slug: 2024-01-27-restarting-life-abroad-at-30
+heroImage: 'hangout-in-dutch-town.png'
 tags: ['General']
 
 ---
