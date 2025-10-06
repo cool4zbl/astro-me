@@ -1,0 +1,23 @@
+---
+import type { CollectionEntry } from "astro:content";
+import BlogCard from "./BlogCard.astro";
+
+interface Props {
+  posts: CollectionEntry<"blog">[];
+  lang?: string;
+  class?: string;
+}
+
+const { posts, lang, class: additionalClass }: Props = Astro.props;
+
+const wrapperClasses = [
+  "space-y-8 lg:space-y-10",
+  additionalClass
+].filter(Boolean);
+---
+
+<div class:list={wrapperClasses}>
+  {posts.map((post) => (
+    <BlogCard post={post} lang={lang} />
+  ))}
+</div>
