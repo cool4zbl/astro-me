@@ -3,7 +3,7 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
-import BlogCard from '../../components/BlogCard.astro';
+import BlogCardList from '../../components/BlogCardList.astro';
 import { getPageMetadata } from '../../utils/metadata';
 
 const allPosts = await getCollection('blog');
@@ -27,11 +27,7 @@ const { title: pageTitle, description: pageDescription } = getPageMetadata('blog
           </p>
         </header>
 
-        <div class="mt-8 space-y-8 lg:mt-10 lg:space-y-10">
-          {publishedPosts.map((post) => (
-            <BlogCard post={post} />
-          ))}
-        </div>
+        <BlogCardList posts={publishedPosts} class="mt-8 lg:mt-10" />
 
         {publishedPosts.length === 0 && (
           <div class="text-center py-16">

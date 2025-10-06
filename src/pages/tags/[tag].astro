@@ -3,7 +3,7 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
-import BlogCard from '../../components/BlogCard.astro';
+import BlogCardList from '../../components/BlogCardList.astro';
 import { getTagPageMetadata } from '../../utils/metadata';
 
 export async function getStaticPaths() {
@@ -57,11 +57,7 @@ const pageDescription = `${baseDescription} ${postCountText}`;
         </header>
 
         {posts.length > 0 ? (
-          <div class="space-y-8 lg:space-y-10">
-            {posts.map((post) => (
-              <BlogCard post={post} />
-            ))}
-          </div>
+          <BlogCardList posts={posts} />
         ) : (
           <div class="text-center py-16">
             <p class="text-muted-foreground">No articles found for this tag</p>
