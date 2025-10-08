@@ -1,7 +1,7 @@
 TODO:
 
--[?] Image for feature work to be correct size
--[] set up comments (disqus, utterances, etc)
+-[x] Image for feature work to be correct size
+-[x] set up comments (disqus, utterances, etc)
 -[] fix line-break in titles
 -[] Image for blog posts
 -[] Links in Experience page
