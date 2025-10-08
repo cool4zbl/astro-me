@@ -1,10 +1,11 @@
 TODO:
 
--[] Image for feature work to be correct size
--[] SSR w/ Vercel or Netlify
+-[?] Image for feature work to be correct size
+-[] fix line-break in titles
 -[] Image for blog posts
+-[] Links in Experience page
+-[] SSR w/ Vercel or Netlify
 -[] Counter for visits, likes, comments
 -[] set up consent modal for cookies
 -[] set up analytics (plausible, simple analytics, etc)
 -[] hotjar or similar for heatmaps
-
