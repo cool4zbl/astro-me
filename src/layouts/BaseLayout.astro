@@ -75,30 +75,10 @@ const htmlLang = lang === "zh" ? "zh-CN" : "en";
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" />
     </noscript>
     <!-- Google Analytics Component -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-K2609HEZYE"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-
-        gtag('config', 'G-K2609HEZYE');
-      </script>
+    <GA />
 
     <!-- Analytics Script -->
     <Analytics />
-    <script is:inline>
-      function sendPageView() {
-        window.gtag?.("event", "page_view", {
-          page_location: location.href,
-          page_path: location.pathname + location.search,
-          page_title: document.title,
-        });
-      }
-
-      // Astro View Transitions events:
-      addEventListener("astro:page-load", sendPageView);
-      addEventListener("astro:after-swap", sendPageView);
-    </script>
 
     <!-- Theme Script -->
     <script is:inline>
