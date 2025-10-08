@@ -4,15 +4,7 @@
 
 @layer base {
   :root {
-    /* Updated theme palette based on #32e6e2 */
-    --ifm-color-primary: #32e6e2;
-    --ifm-color-primary-dark: #1ce3de;
-    --ifm-color-primary-darker: #1ad5d1;
-    --ifm-color-primary-darkest: #16b5b2;
-    --ifm-color-primary-light: #49e9e5;
-    --ifm-color-primary-lighter: #52eae7;
-    --ifm-color-primary-lightest: #69edea;
-    /* Updated theme palette based on #32e6e2 */
+    /* Theme palette based on #32e6e2 */
     --ifm-color-primary: #32e6e2;
     --ifm-color-primary-dark: #1ce3de;
     --ifm-color-primary-darker: #1ad5d1;
@@ -22,46 +14,32 @@
     --ifm-color-primary-lightest: #69edea;
 
     --background: 0 0% 100%;
-    --foreground: 215 25% 18%;
-    --card: 210 40% 96%;
-    --card-foreground: 215 25% 18%;
+    --foreground: 222 47% 12%;
+    --card: 210 36% 96%;
+    --card-foreground: 222 47% 12%;
     --popover: 0 0% 100%;
-    --popover-foreground: 215 25% 18%;
-    --primary: 178.67 78.26% 54.9%;
+    --popover-foreground: 222 47% 12%;
     --primary: 178.67 82% 40%;
     --primary-foreground: 0 0% 100%;
-    --primary-dark: 178.67 78.26% 49.9%;
-    --primary-darker: 178.67 78.26% 46.9%;
-    --primary-darkest: 178.67 78.26% 39.9%;
-    --primary-light: 178.67 78.26% 59.9%;
-    --primary-lighter: 178.67 78.26% 61.9%;
-    --primary-lightest: 178.67 78.26% 66.9%;
     --primary-dark: 178.67 82% 35%;
     --primary-darker: 178.67 82% 31%;
     --primary-darkest: 178.67 82% 26%;
     --primary-light: 178.67 74% 47%;
     --primary-lighter: 178.67 70% 53%;
     --primary-lightest: 178.67 66% 60%;
-    --secondary: 210 40% 96%;
-    --secondary-foreground: 215 25% 27%;
-    --muted: 165 24% 94%;
-    --muted-foreground: 215 20% 35%;
-    --accent: 178.67 78.26% 61.9%;
+    --secondary: 210 40% 95%;
+    --secondary-foreground: 222 33% 20%;
+    --muted: 210 28% 94%;
+    --muted-foreground: 222 22% 32%;
     --accent: 178.67 74% 47%;
-    --accent-foreground: 0 0% 100%;
+    --accent-foreground: 210 40% 98%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
     --border: 220 13% 91%;
     --input: 210 40% 98%;
-    --ring: 178.67 78.26% 54.9% / 0.6;
     --ring: 178.67 82% 40% / 0.6;
     --radius: 0.5rem;
 
-    --chart-1: 178.67 78.26% 54.9%;
-    --chart-2: 178.67 78.26% 61.9%;
-    --chart-3: 178.67 78.26% 49.9%;
-    --chart-4: 178.67 78.26% 59.9%;
-    --chart-5: 178.67 78.26% 46.9%;
     --chart-1: 178.67 82% 40%;
     --chart-2: 178.67 74% 47%;
     --chart-3: 178.67 82% 35%;
@@ -70,11 +48,11 @@
   }
 
   .dark {
-    --background: 215 28% 12%;
+    --background: 215 30% 10%;
     --foreground: 210 40% 98%;
-    --card: 215 28% 15%;
+    --card: 215 30% 14%;
     --card-foreground: 210 40% 98%;
-    --popover: 215 28% 15%;
+    --popover: 215 30% 14%;
     --popover-foreground: 210 40% 98%;
     --primary: 178.67 78.26% 61.9%;
     --primary-foreground: 215 28% 15%;
@@ -84,25 +62,18 @@
     --primary-light: 178.67 78.26% 59.9%;
     --primary-lighter: 178.67 78.26% 61.9%;
     --primary-lightest: 178.67 78.26% 66.9%;
-    --secondary: 215 28% 24%;
+    --secondary: 215 28% 20%;
     --secondary-foreground: 210 40% 98%;
-    --muted: 215 28% 24%;
-    --muted-foreground: 215 20% 65%;
-    --accent: 178.67 78.26% 61.9%;
-    --accent: 178.67 78.26% 61.9%;
-    --accent-foreground: 215 28% 15%;
+    --muted: 215 28% 20%;
+    --muted-foreground: 210 22% 78%;
+    --accent: 178.67 72% 52%;
+    --accent-foreground: 210 40% 98%;
     --destructive: 0 63% 31%;
     --destructive-foreground: 210 40% 98%;
     --border: 215 28% 24%;
     --input: 215 28% 24%;
     --ring: 178.67 78.26% 61.9% / 0.6;
-    --ring: 178.67 78.26% 61.9% / 0.6;
 
-    --chart-1: 178.67 78.26% 61.9%;
-    --chart-2: 178.67 78.26% 66.9%;
-    --chart-3: 178.67 78.26% 49.9%;
-    --chart-4: 178.67 78.26% 59.9%;
-    --chart-5: 178.67 78.26% 46.9%;
     --chart-1: 178.67 78.26% 61.9%;
     --chart-2: 178.67 78.26% 66.9%;
     --chart-3: 178.67 78.26% 49.9%;
@@ -135,7 +106,6 @@
   }
 }
 
-/* Enhanced code block styles with #32e6e2 theme */
 /* Enhanced code block styles with #32e6e2 theme */
 pre {
   @apply rounded-lg border bg-muted/50 p-4 overflow-x-auto backdrop-blur-sm;

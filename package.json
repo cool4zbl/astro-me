@@ -1,6 +1,6 @@
 {
-  "name": "astro-blog-starter",
-  "version": "0.0.1",
+  "name": "astro-me",
+  "version": "0.1.1",
   "type": "module",
   "scripts": {
     "astro": "astro",
@@ -12,6 +12,7 @@
   "dependencies": {
     "@astrojs/check": "^0.9.4",
     "@astrojs/mdx": "latest",
+    "@astrojs/partytown": "^2.1.4",
     "@astrojs/rss": "latest",
     "@astrojs/sitemap": "latest",
     "@astrojs/tailwind": "latest",
@@ -22,9 +23,9 @@
     "geist": "latest",
     "lucide-react": "^0.454.0",
     "minisearch": "^7.1.0",
-    "next-themes": "latest",
     "react": "^19",
     "react-dom": "^19",
+    "sharp": "^0.34.4",
     "tailwind-merge": "^2.5.5",
     "tailwindcss": "^3.4.17",
     "tailwindcss-animate": "^1.0.7",
@@ -40,5 +41,6 @@
   },
   "optionalDependencies": {
     "@rollup/rollup-linux-x64-gnu": "4.9.5"
-  }
+  },
+  "packageManager": "pnpm@10.18.0+sha512.e804f889f1cecc40d572db084eec3e4881739f8dec69c0ff10d2d1beff9a4e309383ba27b5b750059d7f4c149535b6cd0d2cb1ed3aeb739239a4284a68f40cfa"
 }

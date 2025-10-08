@@ -1,39 +1,40 @@
 ---
-// Giscus 评论组件
-// 使用前需要在 GitHub 仓库中启用 Discussions 功能
-// 并在 https://giscus.app 配置相关参数
+// Giscus comment component
+// Enable Discussions in your GitHub repository before use
+// Configure integration details at https://giscus.app
 
 const { class: className } = Astro.props;
 ---
 
 <div id="comments" class={`mt-8 ${className || ''}`}>
-  <h3 class="text-lg font-semibold text-foreground mb-4">评论</h3>
-  
-  <!-- Giscus 评论容器 -->
-  <div 
-    id="giscus-container"
-    class="giscus-container border rounded-lg p-4 bg-card"
-  >
-    <!-- 加载提示 -->
-    <div id="giscus-loading" class="text-center py-8">
-      <div class="inline-block animate-spin rounded-full h-6 w-6 border-b-2 border-primary"></div>
-      <p class="mt-2 text-sm text-muted-foreground">正在加载评论...</p>
+  <h3 class="mb-4 text-lg font-semibold text-foreground">Comments</h3>
+
+  <!-- Giscus container -->
+  <div id="giscus-container" class="giscus-container rounded-lg border bg-card p-4">
+    <!-- Loading state -->
+    <div id="giscus-loading" class="py-8 text-center">
+      <div class="inline-block h-6 w-6 animate-spin rounded-full border-b-2 border-primary"></div>
+      <p class="mt-2 text-sm text-muted-foreground">Loading comments...</p>
     </div>
-    
-    <!-- 配置说明 -->
-    <div id="giscus-config" class="text-center py-8 text-muted-foreground">
+
+    <!-- Configuration guidance -->
+    <div id="giscus-config" class="py-8 text-center text-muted-foreground">
       <div class="mb-4">
         <svg class="mx-auto h-12 w-12 text-muted-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
         </svg>
       </div>
-      <h4 class="text-lg font-medium text-foreground mb-2">配置 Giscus 评论</h4>
-      <div class="text-sm space-y-2 max-w-md mx-auto">
-        <p>要启用评论功能，请按以下步骤配置：</p>
-        <ol class="text-left space-y-1 mt-4">
-          <li>1. 在 GitHub 仓库中启用 Discussions</li>
-          <li>2. 访问 <a href="https://giscus.app" target="_blank" class="text-primary hover:underline">giscus.app</a> 获取配置</li>
-          <li>3. 更新下方的配置参数</li>
+      <h4 class="mb-2 text-lg font-medium text-foreground">Configure Giscus comments</h4>
+      <div class="mx-auto max-w-md space-y-2 text-sm">
+        <p>To enable the comment widget, complete the following steps:</p>
+        <ol class="mt-4 space-y-1 text-left">
+          <li>1. Enable Discussions in your GitHub repository.</li>
+          <li>
+            2. Visit
+            <a href="https://giscus.app" target="_blank" class="text-primary hover:underline">giscus.app</a>
+            to generate the required settings.
+          </li>
+          <li>3. Update the configuration values below.</li>
         </ol>
       </div>
     </div>
@@ -41,44 +42,46 @@ const { class: className } = Astro.props;
 </div>
 
 <script>
-  // Giscus 配置 - 请根据你的 GitHub 仓库信息修改这些参数
+  // Giscus configuration - replace these placeholders with your repository details
   const GISCUS_CONFIG = {
-    repo: 'your-username/your-repo', // 替换为你的 GitHub 仓库
-    repoId: 'your-repo-id', // 从 giscus.app 获取
-    category: 'General', // 讨论分类
-    categoryId: 'your-category-id', // 从 giscus.app 获取
-    mapping: 'pathname', // 页面映射方式
+    repo: 'your-username/your-repo', // GitHub repository
+    repoId: 'your-repo-id', // Obtain from giscus.app
+    category: 'General', // Discussion category
+    categoryId: 'your-category-id', // Obtain from giscus.app
+    mapping: 'pathname', // Mapping strategy
     strict: '0',
     reactionsEnabled: '1',
     emitMetadata: '0',
     inputPosition: 'bottom',
-    lang: 'zh-CN',
+    lang: 'en',
     loading: 'lazy'
   };
-  
-  // 检查配置是否完整
+
+  // Check whether all configuration values have been replaced
   function isConfigured() {
-    return GISCUS_CONFIG.repo !== 'your-username/your-repo' && 
-           GISCUS_CONFIG.repoId !== 'your-repo-id' &&
-           GISCUS_CONFIG.categoryId !== 'your-category-id';
+    return (
+      GISCUS_CONFIG.repo !== 'your-username/your-repo' &&
+      GISCUS_CONFIG.repoId !== 'your-repo-id' &&
+      GISCUS_CONFIG.categoryId !== 'your-category-id'
+    );
   }
-  
-  // 加载 Giscus
+
+  // Load the Giscus widget
   function loadGiscus() {
     const container = document.getElementById('giscus-container');
     const loading = document.getElementById('giscus-loading');
     const config = document.getElementById('giscus-config');
-    
+
     if (!isConfigured()) {
       loading.style.display = 'none';
       config.style.display = 'block';
       return;
     }
-    
-    // 隐藏配置说明
+
+    // Hide the configuration instructions
     config.style.display = 'none';
-    
-    // 创建 Giscus script
+
+    // Create the Giscus script element
     const script = document.createElement('script');
     script.src = 'https://giscus.app/client.js';
     script.setAttribute('data-repo', GISCUS_CONFIG.repo);
@@ -95,22 +98,22 @@ const { class: className } = Astro.props;
     script.setAttribute('data-loading', GISCUS_CONFIG.loading);
     script.crossOrigin = 'anonymous';
     script.async = true;
-    
-    // 监听加载完成
+
+    // Listen for the script load event
     script.onload = () => {
       loading.style.display = 'none';
     };
-    
+
     container.appendChild(script);
   }
-  
-  // 获取当前主题对应的 Giscus 主题
+
+  // Determine the current theme for Giscus
   function getGiscusTheme() {
     const isDark = document.documentElement.classList.contains('dark');
     return isDark ? 'dark' : 'light';
   }
-  
-  // 更新 Giscus 主题
+
+  // Update the embedded Giscus theme
   function updateGiscusTheme() {
     const iframe = document.querySelector('iframe.giscus-frame');
     if (iframe) {
@@ -121,8 +124,8 @@ const { class: className } = Astro.props;
       );
     }
   }
-  
-  // 监听主题变化
+
+  // Observe theme changes so the widget follows
   function observeThemeChange() {
     const observer = new MutationObserver((mutations) => {
       mutations.forEach((mutation) => {
@@ -131,14 +134,14 @@ const { class: className } = Astro.props;
         }
       });
     });
-    
+
     observer.observe(document.documentElement, {
       attributes: true,
       attributeFilter: ['class']
     });
   }
-  
-  // 初始化
+
+  // Initialise the integration
   document.addEventListener('DOMContentLoaded', () => {
     loadGiscus();
     observeThemeChange();
@@ -149,19 +152,19 @@ const { class: className } = Astro.props;
   .giscus-container {
     min-height: 200px;
   }
-  
-  /* 自定义 Giscus 样式 */
+
+  /* Custom Giscus overrides */
   :global(.giscus-frame) {
     width: 100% !important;
   }
-  
-  /* 加载动画 */
+
+  /* Loading animation */
   @keyframes spin {
     to {
       transform: rotate(360deg);
     }
   }
-  
+
   .animate-spin {
     animation: spin 1s linear infinite;
   }

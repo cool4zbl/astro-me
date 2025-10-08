@@ -3,6 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import OptimizedImage from '../components/OptimizedImage.astro';
+import { getPageMetadata } from '../utils/metadata';
 
 const bookshelf = [
   {
@@ -68,12 +69,12 @@ const hobbyPhotos = [
     caption: 'Photography · 喜欢光线与阴影堆叠的瞬间。'
   }
 ];
+
+const { title: pageTitle, description: pageDescription } = getPageMetadata('interests');
+
 ---
 
-<BaseLayout
-  title="Interests · 读书·音乐·生活节奏"
-  description="记录我热爱的书、音乐和日常小爱好，让个人网站更像真实的我。"
->
+<BaseLayout title={pageTitle} description={pageDescription}>
   <Header />
 
   <main class="flex-1">

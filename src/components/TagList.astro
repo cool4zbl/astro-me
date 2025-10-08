@@ -1,15 +1,30 @@
 ---
 import { getLangFromUrl, getLocalizedPath } from '../i18n/config';
 
-const { tags, class: className, lang: langProp } = Astro.props;
+const { tags, class: className, lang: langProp, size = 'base' } = Astro.props;
 const lang = langProp ?? getLangFromUrl(Astro.url);
+
+const sizeStyles = {
+  base: {
+    gap: 'gap-2',
+    padding: 'px-2.5 py-0.5',
+    text: 'text-xs',
+  },
+  lg: {
+    gap: 'gap-3',
+    padding: 'px-3.5 py-1',
+    text: 'text-sm',
+  },
+};
+
+const styles = sizeStyles[size] ?? sizeStyles.base;
 ---
 
-<div class={`flex flex-wrap gap-2 ${className || ''}`}>
+<div class={`flex flex-wrap ${styles.gap} ${className || ''}`}>
   {tags.map((tag) => (
     <a
       href={getLocalizedPath(`/tags/${tag}/`, lang)}
-      class="inline-flex items-center rounded-full bg-secondary px-2.5 py-0.5 text-xs font-medium text-secondary-foreground hover:bg-secondary/80 transition-colors"
+      class={`inline-flex items-center rounded-full bg-secondary ${styles.padding} ${styles.text} font-medium text-secondary-foreground hover:bg-secondary/80 transition-colors`}
     >
       {tag}
     </a>

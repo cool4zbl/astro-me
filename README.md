@@ -106,6 +106,7 @@ title: 'Post title'
 description: 'Post description'
 pubDate: 2024-01-01
 tags: ['tag1', 'tag2']
+
 draft: false
 heroImage: '/images/hero.jpg' # Optional
 ---
@@ -124,6 +125,7 @@ Write your post here...
 - `tags`: Array of tags (optional)
 - `draft`: Marks the post as draft (optional, defaults to false)
 - `heroImage`: Hero image path (optional)
+
 
 ## 🎨 Theme Customization
 

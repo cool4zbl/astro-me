@@ -3,7 +3,8 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
-import BlogCard from '../../components/BlogCard.astro';
+import BlogCardList from '../../components/BlogCardList.astro';
+import { getTagPageMetadata } from '../../utils/metadata';
 
 export async function getStaticPaths() {
   const allPosts = await getCollection('blog');
@@ -17,19 +18,19 @@ export async function getStaticPaths() {
     props: {
       posts: publishedPosts
         .filter(post => post.data.tags.includes(tag))
-        .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+        .sort((a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf())
     }
   }));
 }
 
 const { tag } = Astro.params;
 const { posts } = Astro.props;
+const { title: pageTitle, description: baseDescription } = getTagPageMetadata(tag);
+const postCountText = posts.length === 1 ? '1 post available.' : `${posts.length} posts available.`;
+const pageDescription = `${baseDescription} ${postCountText}`;
 ---
 
-<BaseLayout
-  title={`Tag: ${tag} - My Blog`}
-  description={`Browse all articles tagged with "${tag}", ${posts.length} posts total.`}
->
+<BaseLayout title={pageTitle} description={pageDescription}>
   <Header />
 
   <main class="flex-1">
@@ -56,11 +57,7 @@ const { posts } = Astro.props;
         </header>
 
         {posts.length > 0 ? (
-          <div class="space-y-20 lg:space-y-20">
-            {posts.map((post) => (
-              <BlogCard post={post} />
-            ))}
-          </div>
+          <BlogCardList posts={posts} />
         ) : (
           <div class="text-center py-16">
             <p class="text-muted-foreground">No articles found for this tag</p>

@@ -4,142 +4,13 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import OptimizedImage from '../components/OptimizedImage.astro';
 import { getLangFromUrl, type Language } from '../i18n/config';
+import { getProjectsCopy } from '../i18n/pages/projects';
+import { getPageMetadata } from '../utils/metadata';
 
 const lang: Language = Astro.props?.lang ?? getLangFromUrl(Astro.url);
 
-const translations = {
-  en: {
-    hero: {
-      prefix: 'My',
-      highlight: 'Projects',
-      suffix: '',
-      description:
-        'Case studies from food delivery, mobility, and fintech platforms where I led automation, data, and experimentation initiatives.',
-    },
-    featured: [
-      {
-        image: { src: '/placeholder.svg?height=400&width=600', alt: 'Workflow diagram for help experience orchestration' },
-        badge: { label: 'Operational Excellence', class: 'bg-primary/10 text-primary' },
-        title: 'Help Experience Orchestration Layer',
-        subtitle: 'Just Eat Takeaway',
-        description:
-          'Event-driven automation powering JET’s help chatbot. The orchestration layer coordinates services, state, and playbooks so order issues resolve without manual intervention.',
-        sections: [
-          {
-            title: 'Impact',
-            items: [
-              'Automated resolution flows for millions of annual customer contacts, reducing manual interventions by 60%.',
-              'Improved stability and MTTR with resilient retries, stateful orchestration, and structured observability.',
-            ],
-          },
-          {
-            title: 'What I did',
-            items: [
-              'Owned architecture, API contracts, and rollout strategy across product, operations, and support teams.',
-              'Partnered with ops to codify playbooks into reusable workflows, guardrails, and experimentable policies.',
-            ],
-          },
-        ],
-        stack: ['Java', 'Spring Boot', 'Kafka', 'AWS SQS', 'Redis'],
-        actions: [
-          { label: 'Experience Overview', variant: 'outline', href: '/experience' },
-        ],
-      },
-      {
-        image: { src: '/placeholder.svg?height=400&width=600', alt: 'Screenshot of JETMS operational console' },
-        badge: { label: 'Platform Engineering', class: 'bg-accent/10 text-accent' },
-        title: 'JETMS Operational Platform',
-        subtitle: 'Just Eat Takeaway',
-        description:
-          'Multi-tenant workspace that unifies 20+ internal services for customer support agents. CQRS routing, shared data models, and fine-grained permissions keep teams focused on resolution outcomes.',
-        sections: [
-          {
-            title: 'Impact',
-            items: [
-              'Reduced issue-resolution SLA by ~33% by consolidating fragmented tooling into a single experience.',
-              'Enabled market-specific workflows with tenant-aware routing and flexible schema evolution.',
-            ],
-          },
-          {
-            title: 'What I did',
-            items: [
-              'Design service decomposition, and front-end framework-agnostic architecture.',
-              'Leverage CQRS patterns and governance for integrating partner teams.',
-            ],
-          },
-        ],
-        stack: ['Java', 'TypeScript', 'MySQL', 'CQRS', 'Micro Frontends'],
-        actions: [
-        // TODO:
-          // { label: 'Live Demo', variant: 'primary', href: 'https://jetms.example.com' },
-          { label: 'Experience Overview', variant: 'outline', href: '/experience' },
-        ],
-      },
-      {
-        image: { src: '/placeholder.svg?height=400&width=600', alt: 'Map and geospatial data pipeline illustration' },
-        badge: { label: 'Geo Platforms', class: 'bg-primary/10 text-primary' },
-        title: 'Jarvis Crowdsourcing Platform',
-        subtitle: 'Grab',
-        description:
-          'Crowdsourced geospatial data engine fueling Grab’s mobility and delivery products. Coordinates contributor tasks, validates submissions, and feeds downstream routing services.',
-        sections: [
-          {
-            title: 'Impact',
-            items: [
-              'Scaled to 300K tasks and 400K+ geospatial data points that improved map freshness and trip accuracy.',
-              'Cut geospatial storage costs by 70% via data simplification and tiered retention policies.',
-            ],
-          },
-          {
-            title: 'What I did',
-            items: [
-              'Designed task lifecycle, task modeling, and auditing capabilities across data, ops, and product teams.',
-              'Implemented high-performance services in Go, PostGIS, and Kafka with proactive monitoring and alerting.',
-
-            ],
-          },
-        ],
-        stack: ['Go', 'PostgreSQL', 'PostGIS', 'Kafka', 'ElasticSearch'],
-        actions: [
-          { label: 'Live Demo', variant: 'primary', href: 'https://jarvis.example.com' },
-          { label: 'Experience Overview', variant: 'outline', href: '/experience' },
-
-        ],
-      },
-    ],
-    other: {
-      title: 'Other Projects',
-      description: 'Additional initiatives that strengthened observability, experimentation, and developer velocity.',
-      cards: [
-        {
-          image: { src: '/placeholder.svg?height=200&width=350', alt: 'Streaming logs visualization' },
-          title: 'Centralized Logging Pipeline',
-          description: 'Benthos + Kafka + AWS SQS pipeline processing 50K+ logs/day into OpenSearch, cutting MTTR by 25% and unlocking proactive alerting.',
-          tags: ['Benthos', 'Kafka', 'AWS SQS', 'OpenSearch'],
-        },
-        {
-          image: { src: '/placeholder.svg?height=200&width=350', alt: 'Experiment dashboard mockup' },
-          title: 'Darwin Experimentation Platform',
-          description: 'Re-architected experimentation APIs and SDKs at Ant Group to support 1,000+ annual experiments and drive a 2% conversion lift.',
-
-          tags: ['Java', 'SDK', 'Experimentation'],
-        },
-        // TODO:
-        {
-          image: {
-              src: '/placeholder.svg?height=200&width=350', alt: 'Street-view map tiles'
-          },
-          url: 'https://kartaview.org',
-          title: 'KartaView Street-View Service',
-          description: 'High-performance PostGIS service applying the Douglas–Peucker algorithm to shrink geospatial datasets by 70% for faster queries.',
-          tags: ['Go', 'PostGIS', 'Microservices'],
-        },
-      ],
-    },
-  },
-} as const;
-
-const copy = translations[lang] ?? translations.en;
+const copy = getProjectsCopy(lang);
+const { title: pageTitle, description: pageDescription } = getPageMetadata('projects');
 
 const actionClassMap = {
   primary:
@@ -149,10 +20,7 @@ const actionClassMap = {
 } as const;
 ---
 
-<BaseLayout
-  title="Projects - My Portfolio"
-  description="Explore my full-stack development projects featuring Java backend systems, modern web applications, and cloud-native solutions."
->
+<BaseLayout title={pageTitle} description={pageDescription}>
   <Header />
 
   <main class="flex-1">
@@ -207,7 +75,9 @@ const actionClassMap = {
                 {project.actions && project.actions.length > 0 && (
                   <div class="flex gap-4 flex-wrap">
                     {project.actions.map((action) => (
-                      <a href={action.href ?? '#'} class={actionClassMap[action.variant]}>
+                      <a
+                        target="_blank"
+                        href={action.href ?? '#'} class={actionClassMap[action.variant]}>
                         {action.label}
                       </a>
                     ))}
@@ -215,12 +85,12 @@ const actionClassMap = {
                 )}
               </div>
               <div class={index % 2 === 0 ? 'order-1 lg:order-2' : 'order-1 lg:order-2'}>
-                <div class="aspect-video rounded-xl bg-muted overflow-hidden shadow-2xl">
+                <div class="aspect-auto rounded-xl bg-muted overflow-hidden shadow-2xl">
                   <OptimizedImage
                     src={project.image.src}
                     alt={project.image.alt}
-                    width={600}
-                    height={400}
+                    width={800}
+                    height={600}
                     class="h-full w-full object-cover"
                     loading="lazy"
                   />
@@ -244,16 +114,16 @@ const actionClassMap = {
           </p>
         </div>
 
-        <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-2">
           {copy.other.cards.map((card) => (
             <div class="rounded-xl border bg-card p-6 shadow-sm transition-all duration-200 hover:shadow-md">
-              <div class="aspect-video rounded-lg bg-muted mb-4 overflow-hidden">
+              <div class="aspect-square rounded-lg bg-muted mb-4 overflow-hidden">
                 <OptimizedImage
                   src={card.image.src}
                   alt={card.image.alt}
                   width={350}
                   height={200}
-                  class="h-full w-full object-cover"
+                  class="h-full w-full object-fill"
                   loading="lazy"
                 />
               </div>
@@ -266,9 +136,7 @@ const actionClassMap = {
                   <span class="inline-flex items-center rounded-full bg-secondary px-2 py-1 text-xs font-medium text-secondary-foreground">{tag}</span>
                 ))}
               </div>
-              <a
-                      target="_blank"
-                      href={card.url || '#'} class="text-primary hover:text-accent font-medium text-sm transition-colors">
+              <a target="_blank" href={card.url ?? '#'} class="text-primary hover:text-accent font-medium text-sm transition-colors">
                 View Project →
               </a>
             </div>

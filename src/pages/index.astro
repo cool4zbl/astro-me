@@ -3,18 +3,20 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import BlogCard from '../components/BlogCard.astro';
+import BlogCardList from '../components/BlogCardList.astro';
 import OptimizedImage from '../components/OptimizedImage.astro';
 import { getLangFromUrl, getLocalizedPath, type Language } from '../i18n/config';
 import { getHomeCopy } from '../i18n/pages/home';
+import { getPageMetadata } from '../utils/metadata';
 
 const lang: Language = Astro.props?.lang ?? getLangFromUrl(Astro.url);
 const copy = getHomeCopy(lang);
+const { title: pageTitle, description: pageDescription } = getPageMetadata('home');
 
 const allPosts = await getCollection('blog');
 const publishedPosts = allPosts
   .filter((post) => !post.data.draft)
-  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+  .sort((a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf());
 const recentPosts = publishedPosts.slice(0, 3);
 const totalPostsLabel = copy.latestPosts.totalLabel(publishedPosts.length);
 
@@ -24,20 +26,17 @@ const experienceHref = getLocalizedPath('/experience', lang);
 const projectsHref = getLocalizedPath('/projects', lang);
 const blogHref = getLocalizedPath('/blog', lang);
 
-const profileImage = '/avt1.JPG';
+const profileImage = '/binliuzhang-avt1.JPG';
 ---
 
-<BaseLayout
-  title="Binliu Zhang - Senior Software Engineer"
-  description="Senior Software Engineer with 8+ years building distributed platforms at Just Eat Takeaway, Grab, Ant Group, and Douban. Explore my projects, experience, and writing."
->
+<BaseLayout title={pageTitle} description={pageDescription}>
   <Header />
 
   <main class="flex-1">
     <!-- Hero & About Me Section -->
     <section class="section-padding bg-gradient-to-br from-background via-muted/20 to-background">
       <div class="container-width">
-        <div class="grid items-center gap-8 lg:grid-cols-2 lg:gap-10 xl:gap-12">
+        <div class="grid items-center gap-8 lg:grid-cols-2 lg:gap-8 xl:gap-8">
           <div class="animate-fade-in space-y-6">
             <span class="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2 text-xs font-medium uppercase tracking-[0.25em] text-primary">
               {copy.hero.label}
@@ -81,9 +80,10 @@ const profileImage = '/avt1.JPG';
           </div>
 
           <div class="relative flex justify-center lg:justify-end lg:-ml-8 xl:-ml-12">
-            <div class="absolute -top-8 -right-4 hidden h-28 w-28 rounded-full bg-primary/15 blur-3xl md:block"></div>
-            <div class="absolute -bottom-10 -left-6 hidden h-24 w-24 rounded-full bg-accent/20 blur-3xl lg:block"></div>
-            <div class="relative mx-auto h-36 w-36 overflow-hidden rounded-full shadow-2xl md:h-48 md:w-48 lg:h-64 lg:w-64">
+            <!-- Decorative accent circles with blurred backgrounds that enhance the page’s visual depth without affecting layout -->
+            <div class="absolute -top-8 -right-4 md:block h-28 w-28 rounded-full bg-primary/15 blur-3xl"></div>
+            <div class="absolute -bottom-10 -left-6 block h-24 w-24 rounded-full bg-accent/20 blur-3xl lg:block"></div>
+            <div class="relative mx-auto h-36 w-36 overflow-hidden rounded-full shadow-2xl md:h-48 md:w-48 lg:h-54 lg:w-54">
               <OptimizedImage
                 src={profileImage}
                 alt="binliuzhang Professional developer portrait"
@@ -111,16 +111,16 @@ const profileImage = '/avt1.JPG';
           </p>
         </div>
 
-        <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {copy.projects.items.map((project) => (
-            <div class="group relative rounded-xl border bg-card p-6 shadow-sm transition-all duration-200 hover:shadow-md">
-              <div class="aspect-video overflow-hidden rounded-lg bg-muted mb-4">
+            <div class="group relative rounded-xl border bg-card p-4 shadow-sm transition-all duration-200 hover:shadow-md">
+              <div class="aspect-auto overflow-hidden rounded-lg bg-muted mb-4">
                 <OptimizedImage
                   src={project.image.src}
                   alt={project.image.alt}
-                  width={350}
-                  height={200}
-                  class="h-full w-full object-cover transition-transform duration-200 group-hover:scale-105"
+                  width={1280}
+                  height={720}
+                  class="h-full w-full object-cover object-center transition-transform duration-200 group-hover:scale-105"
                   loading="lazy"
                 />
               </div>
@@ -139,7 +139,7 @@ const profileImage = '/avt1.JPG';
           ))}
         </div>
 
-        <div class="mt-10 text-center">
+        <div class="mt-6 text-center">
           <a
             href={projectsHref}
             class="inline-flex items-center rounded-full border border-secondary px-5 py-2.5 text-sm font-semibold text-secondary-foreground shadow-sm transition hover:bg-secondary"
@@ -165,11 +165,7 @@ const profileImage = '/avt1.JPG';
             {totalPostsLabel}
           </p>
         </div>
-        <div class="space-y-16">
-          {recentPosts.map((post) => (
-            <BlogCard post={post} lang={lang} />
-          ))}
-        </div>
+        <BlogCardList posts={recentPosts} lang={lang} />
         <div class="mt-10 text-center">
           <a
             href={blogHref}

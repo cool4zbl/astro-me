@@ -24,7 +24,6 @@ const {
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const imageURL = new URL(image, Astro.site);
 
-// 生成结构化数据
 const structuredData = {
   "@context": "https://schema.org",
   "@type": article ? "BlogPosting" : "WebSite",

@@ -2,12 +2,12 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import { getPageMetadata } from '../utils/metadata';
+
+const { title: pageTitle, description: pageDescription } = getPageMetadata('search');
 ---
 
-<BaseLayout
-  title="Search - My Blog"
-  description="Search blog articles to quickly find content you're interested in."
->
+<BaseLayout title={pageTitle} description={pageDescription}>
   <Header />
 
   <main class="flex-1">
@@ -97,7 +97,7 @@ import Footer from '../components/Footer.astro';
 
       miniSearch = new MiniSearch({
         fields: ['title', 'description', 'content', 'tags'],
-        storeFields: ['title', 'description', 'slug', 'pubDate', 'tags'],
+        storeFields: ['title', 'description', 'slug', 'publishedAt', 'tags'],
         searchOptions: {
           boost: { title: 2, tags: 1.5 },
           fuzzy: 0.2,
@@ -156,7 +156,7 @@ import Footer from '../components/Footer.astro';
               ${highlightText(result.description, query)}
             </p>
             <div class="flex items-center gap-4 text-sm text-muted-foreground">
-              <time>${formatDate(result.pubDate)}</time>
+              <time>${formatDate(result.publishedAt)}</time>
               ${result.tags.length > 0 ? `
                 <div class="flex gap-1">
                   ${result.tags.slice(0, 3).map(tag => `

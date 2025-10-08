@@ -46,7 +46,7 @@ const homeCopy: Record<Language, HomeCopy> = {
           title: "Hey, I'm Binliu!",
           description: [
               'Senior Software Engineer at Just Eat Takeaway, where I design event-driven automation so customer issues are resolved without human intervention.',
-              'Across 8+ years at Just Eat Takeaway, Grab, Ant Group, and Douban I have scaled backend platforms that support food delivery, mobility, fintech, and consumer communities.',
+              'Across 9+ years at Just Eat Takeaway, Grab, Ant Group, and Douban I have scaled platforms that support food delivery, mobility, fintech, and consumer communities.',
               'I love end-to-end ownership—pairing resilient architecture with data-informed operations to help cross-functional teams ship measurable impact.',
           ],
           primary: { label: 'View Projects', href: '/projects' },
@@ -78,14 +78,14 @@ const homeCopy: Record<Language, HomeCopy> = {
                   description:
                       'Unified multi-tenant tooling that consolidates 20+ internal services into a single workspace with CQRS-based routing and a shared data model, reducing SLA for issue resolution by a third.',
                   tags: ['Java', 'TypeScript', 'MySQL', 'CQRS'],
-                  image: { src: '/placeholder.svg?height=200&width=350', alt: 'Operational platform interface mockup' },
+                  image: { src: '/jetms-feature.png?height=650&width=650', alt: 'Operational platform interface mockup' },
               },
               {
-                  title: 'Jarvis Geospatial Crowdsourcing Platform',
+                  title: 'MapYourCity Crowdsourcing Platform',
                   description:
                       'Crowdsourced task management engine at Grab scaling to 300K tasks and 400K+ geospatial points, boosting the accuracy of maps and on-trip experiences across Southeast Asia.',
                   tags: ['Go', 'PostgreSQL', 'Kafka', 'ElasticSearch'],
-                  image: { src: '/placeholder.svg?height=200&width=350', alt: 'Geospatial data workflow visualization' },
+                  image: { src: '/jarvis-feature-1.png?height=200&width=350', alt: 'Geospatial data workflow visualization' },
               },
           ],
           viewAllLabel: 'View All Projects',

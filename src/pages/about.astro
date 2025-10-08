@@ -4,11 +4,13 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import OptimizedImage from '../components/OptimizedImage.astro';
 import { getLangFromUrl, getLocalizedPath } from '../i18n/config';
+import { getPageMetadata } from '../utils/metadata';
 
 const lang = getLangFromUrl(Astro.url);
-const profileImage = '/avt1.JPG';
+const profileImage = '/binliuzhang-avt1.JPG';
 const blogLink = getLocalizedPath('/blog', lang);
 const resumeLink = '/Binliu Zhang-Senior-Software-Engineer.pdf';
+const { title: pageTitle, description: pageDescription } = getPageMetadata('about');
 
 const contactLinks = [
   {
@@ -29,29 +31,24 @@ const contactLinks = [
 ];
 
 const focusAreas = [
-  'Building large-scale distributed systems',
-  'Exploring new tools and productivity workflows',
-  'Reading about personal growth and deliberate practice'
+  'Designing resilient, large-scale systems',
+  'Sharpening tools and workflows for deep work',
+  'Documenting the lessons worth sharing'
 ];
-
 const wantToDoMore = [
-  'Creating art with code',
-  'Writing about lessons from the trenches',
-  'Speaking and sharing with the community'
+  'Blending art and code',
+  'Writing long-form guides',
+  'Speaking with the community'
 ];
-
 const lifeBeyondCode = [
   'Soundtracking my days with rock, lofi, and electronic playlists',
   'Cooking Chinese comfort food that reminds me of home',
-  'Battling it out (and breaking a sweat) on the gym',
-  'Cycling through Dutch bike lanes whenever the sun shows up'
+  'Pushing for one more rep at the gym',
+  'Cycling Dutch bike lanes whenever the sun shows up'
 ];
 ---
 
-<BaseLayout
-  title="About Me"
-  description="A personal look at my journey through engineering, curiosity, and the tools that keep me learning."
->
+<BaseLayout title={pageTitle} description={pageDescription}>
   <Header />
 
   <main class="flex-1">
@@ -74,10 +71,10 @@ const lifeBeyondCode = [
           <div class="space-y-4">
             <p class="text-sm uppercase tracking-[0.3em] text-primary/70">Hey, I'm Binliu!</p>
             <h1 class="text-4xl sm:text-5xl font-bold text-foreground">
-              This is my corner for engineering deep dives and everyday curiosity
+               Engineering deep dives and everyday curiosity
             </h1>
             <p class="text-lg text-muted-foreground leading-relaxed">
-              I grew up in China, now live in the Netherlands, and spend my days building large-scale systems. I write code in daylight, read books at night, and keep exploring the layers beneath the tools we rely on.
+              Born in China, now based in the Netherlands. Write code during the day, explore ideas at night, jotting notes on what worked, and sharing the takeaways that resonate.
             </p>
             <div class="flex flex-wrap items-center justify-center gap-4 md:justify-start">
               <a
@@ -94,20 +91,6 @@ const lifeBeyondCode = [
               </a>
             </div>
           </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section-padding">
-      <div class="container-width max-w-4xl space-y-8">
-        <div class="rounded-3xl border bg-card/80 p-8 shadow-sm backdrop-blur">
-          <h2 class="text-3xl font-semibold text-foreground">A Bit About Me</h2>
-          <p class="mt-4 text-muted-foreground leading-relaxed">
-            I’m a self-taught software engineer with a soft spot for understanding what happens under the hood—kernels, networks, data stores, the whole stack. Vimer at heart, tool nerd by nature, and forever chasing the next productivity tweak that buys me more focus time.
-          </p>
-          <p class="mt-4 text-muted-foreground leading-relaxed">
-            My work spans customer support automation, geospatial platforms, and experimentation tooling. I keep a notebook close by to log aha-moments, tricky incidents, and the habits that make or break momentum.
-          </p>
         </div>
       </div>
     </section>
