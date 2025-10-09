@@ -22,7 +22,7 @@ const enabled = import.meta.env.PROD && !!GA_ID;
             }
 
             window.__lastGtagPagePath = pagePath;
-            gtag('config', GA_ID, {
+            gtag('event', 'page_view', {
               page_path: pagePath,
               page_location: href,
               page_title: document.title,
