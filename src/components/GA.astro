@@ -1,42 +1,43 @@
----
-const GA_ID = "G-K2609HEZYE";
+const GA_ID = import.meta.env.PUBLIC_GA_ID || "G-K2609HEZYE";
 const enabled = import.meta.env.PROD && !!GA_ID;
+
+const inlineScript = `
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  window.gtag = window.gtag || gtag;
+  gtag('js', new Date());
+  gtag('config', '${GA_ID}', { send_page_view: false });
+
+  const sendPageView = () => {
+    const { pathname, search, href } = window.location;
+    const pagePath = pathname + search;
+
+    if (window.__lastGtagPagePath === pagePath) {
+      return;
+    }
+
+    window.__lastGtagPagePath = pagePath;
+    gtag('event', 'page_view', {
+      page_path: pagePath,
+      page_location: href,
+      page_title: document.title,
+    });
+  };
+
+  if (document.readyState === 'complete') {
+    sendPageView();
+  } else {
+    window.addEventListener('load', sendPageView, { once: true });
+  }
+
+  document.addEventListener('astro:page-load', sendPageView);
+  document.addEventListener('astro:after-swap', sendPageView);
+`;
 ---
 
 {enabled && (
         <>
         <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}></script>
-        <script is:inline>
-          const GA_ID = "${GA_ID}";
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', GA_ID, { send_page_view: false });
-
-          const sendPageView = () => {
-            const { pathname, search, href } = window.location;
-            const pagePath = `${pathname}${search}`;
-
-            if (window.__lastGtagPagePath === pagePath) {
-              return;
-            }
-
-            window.__lastGtagPagePath = pagePath;
-            gtag('config', GA_ID, {
-              page_path: pagePath,
-              page_location: href,
-              page_title: document.title,
-            });
-          };
-
-          if (document.readyState === 'complete') {
-            sendPageView();
-          } else {
-            window.addEventListener('load', sendPageView, { once: true });
-          }
-
-          window.addEventListener('astro:page-load', sendPageView);
-          window.addEventListener('astro:after-swap', sendPageView);
-        </script>
+        <script is:inline>{inlineScript}</script>
         </>
 )}

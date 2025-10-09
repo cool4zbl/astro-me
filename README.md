@@ -30,3 +30,14 @@ npm run build
 
 # preview production build
 npm run preview
+
+
+## Environment Variables
+
+Create a `.env` file (or configure environment variables in your hosting provider) and provide your Google Analytics measurement ID so page views can be reported correctly:
+
+```bash
+PUBLIC_GA_ID=G-XXXXXXXXXX
+```
+
+The value is exposed to the client at build time and used by the Google Analytics integration in `src/components/GA.astro`.
