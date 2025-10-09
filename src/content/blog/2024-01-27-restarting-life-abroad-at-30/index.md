@@ -10,7 +10,7 @@ tags: ['General']
 
 # Restarting Life Abroad at 30: A Quest for Choice and Freedom
 
-![Hangout in a dutch town](./hangout-in-dutch-town.png)
+[//]: # (![Hangout in a dutch town]&#40;./hangout-in-dutch-town.png&#41;)
 
 Time has flown by, and it's already been nine months since I arrived in the Netherlands for work at the end of April 2023. I'm still eagerly awaiting my appointment with the GP and trying to decipher the Dutch signs on the streets. But finally, I can pause to reflect on the early part of 2024.
 

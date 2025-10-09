@@ -1,18 +1,18 @@
 ---
-import { getCollection } from 'astro:content';
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import Header from '../../components/Header.astro';
-import Footer from '../../components/Footer.astro';
-import FormattedDate from '../../components/FormattedDate.astro';
-import TagList from '../../components/TagList.astro';
-import Comments from '../../components/Comments.astro';
-import TableOfContents from '../../components/TableOfContents.astro';
-import RelatedPosts from '../../components/RelatedPosts.astro';
-import OptimizedImage from '../../components/OptimizedImage.astro';
-import { buildPageTitle } from '../../utils/metadata';
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import FormattedDate from "../../components/FormattedDate.astro";
+import TagList from "../../components/TagList.astro";
+import Comments from "../../components/Comments.astro";
+import TableOfContents from "../../components/TableOfContents.astro";
+import RelatedPosts from "../../components/RelatedPosts.astro";
+import OptimizedImage from "../../components/OptimizedImage.astro";
+import { buildPageTitle } from "../../utils/metadata";
 
 export async function getStaticPaths() {
-  const posts = await getCollection('blog');
+  const posts = await getCollection("blog");
   return posts.map((post) => ({
     params: { slug: post.slug },
     props: post,
@@ -41,57 +41,82 @@ const pageDescription = post.data.description;
       <div class="mx-auto max-w-3xl">
         <!-- Main content area -->
         <header class="mb-6 space-y-4">
-          <h1 class="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+          <h1
+            class="text-3xl font-bold tracking-tight text-foreground sm:text-4xl"
+          >
             {post.data.title}
           </h1>
-          <div class="flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
+          <div
+            class="flex flex-wrap items-center gap-4 text-sm text-muted-foreground"
+          >
             <div class="flex items-center gap-1">
-              <span class="font-medium text-muted-foreground italic">Published on</span>
-              <FormattedDate date={post.data.publishedAt} class="text-foreground/80" />
+              <span class="font-medium text-muted-foreground italic"
+                >Published on</span
+              >
+              <FormattedDate
+                date={post.data.publishedAt}
+                class="text-foreground/80"
+              />
             </div>
-            {post.data.updatedAt && (
-              <div class="flex items-center gap-1">
-                  <span class="font-medium text-muted-foreground italic">Updated on</span>
-                  <FormattedDate date={post.data.updatedAt} class="text-foreground/80" />
-              </div>
-            )}
+            {
+              post.data.updatedAt && (
+                <div class="flex items-center gap-1">
+                  <span class="font-medium text-muted-foreground italic">
+                    Updated on
+                  </span>
+                  <FormattedDate
+                    date={post.data.updatedAt}
+                    class="text-foreground/80"
+                  />
+                </div>
+              )
+            }
           </div>
-          {post.data.tags.length > 0 && (
-            <div>
-              <TagList tags={post.data.tags} size="lg" />
-            </div>
-          )}
+          {
+            post.data.tags.length > 0 && (
+              <div>
+                <TagList tags={post.data.tags} size="lg" />
+              </div>
+            )
+          }
         </header>
 
-          {post.data.heroImage && (
-            <div class="mb-8 overflow-hidden rounded-xl border bg-muted/40">
+        {
+          post.data.heroImage && (
+            <div class="aspect-auto mb-8 overflow-hidden rounded-xl border bg-muted/40">
               <OptimizedImage
                 src={post.data.heroImage}
                 alt={post.data.title}
                 width={1280}
                 height={720}
-                class="h-full w-full max-h-80 object-cover"
+                class="h-full w-full max-h-100 object-cover"
                 sizes="(max-width: 1024px) 100vw, 768px"
                 format="webp"
                 priority={true}
               />
             </div>
-          )}
+          )
+        }
 
-        <div class="prose prose-lg text-base mx-auto dark:prose-invert prose-headings:first:mt-0">
+        <div
+          class="prose prose-lg text-base mx-auto dark:prose-invert prose-headings:first:mt-0"
+        >
           <Content />
         </div>
 
         <footer class="mt-12 border-t pt-8">
-            <div class="flex flex-col gap-4 text-sm text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
-                <div class="space-y-2">
-                    <p><span class="italic">Last Updated on</span><FormattedDate
-                            class="text-foreground/80"
-                            date={post.data.publishedAt || post.data.updatedAt} /></p>
-                    {post.data.tags.length > 0 && (
-                            <TagList tags={post.data.tags} />
-                    )}
-                </div>
+          <div
+            class="flex flex-col gap-4 text-sm text-muted-foreground sm:flex-row sm:items-center sm:justify-between"
+          >
+            <div class="space-y-2">
+              <p>
+                <span class="italic">Last Updated on</span><FormattedDate
+                  class="text-foreground/80"
+                  date={post.data.publishedAt || post.data.updatedAt}
+                />
+              </p>
+              {post.data.tags.length > 0 && <TagList tags={post.data.tags} />}
+            </div>
             <a
               href="/blog"
               class="inline-flex items-center text-sm font-medium text-primary hover:text-accent"
@@ -121,23 +146,26 @@ const pageDescription = post.data.description;
   <Footer />
 
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const contentHeadings = document.querySelectorAll('.prose h2[id], .prose h3[id], .prose h4[id], .prose h5[id], .prose h6[id]');
+    document.addEventListener("DOMContentLoaded", () => {
+      const contentHeadings = document.querySelectorAll(
+        ".prose h2[id], .prose h3[id], .prose h4[id], .prose h5[id], .prose h6[id]"
+      );
 
       contentHeadings.forEach((heading) => {
-        if (heading.querySelector('[data-heading-anchor]')) {
+        if (heading.querySelector("[data-heading-anchor]")) {
           return;
         }
 
-        heading.classList.add('has-heading-anchor');
+        heading.classList.add("has-heading-anchor");
 
-        const anchor = document.createElement('a');
+        const anchor = document.createElement("a");
         anchor.href = `#${heading.id}`;
-        anchor.className = 'heading-anchor';
-        anchor.setAttribute('data-heading-anchor', '');
+        anchor.className = "heading-anchor";
+        anchor.setAttribute("data-heading-anchor", "");
         const label = heading.textContent?.trim() || heading.id;
-        anchor.setAttribute('aria-label', `Jump to section ${label}`);
-        anchor.innerHTML = '<span aria-hidden="true">#</span><span class="sr-only">Section link</span>';
+        anchor.setAttribute("aria-label", `Jump to section ${label}`);
+        anchor.innerHTML =
+          '<span aria-hidden="true">#</span><span class="sr-only">Section link</span>';
 
         heading.prepend(anchor);
       });
@@ -168,7 +196,10 @@ const pageDescription = post.data.description;
       text-decoration: none;
       opacity: 0;
       transform: translate(0, -50%);
-      transition: opacity 150ms ease, transform 150ms ease, color 150ms ease;
+      transition:
+        opacity 150ms ease,
+        transform 150ms ease,
+        color 150ms ease;
     }
 
     :global(.prose .heading-anchor:hover),
