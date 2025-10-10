@@ -11,7 +11,7 @@ const enabled = import.meta.env.PROD && !!GA_ID;
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', "G-K2609HEZYE", { send_page_view: false });
+    gtag('config', "G-K2609HEZYE");
     
     const sendPageView = () => {
       const { pathname, search, href } = window.location;
@@ -22,6 +22,7 @@ const enabled = import.meta.env.PROD && !!GA_ID;
       }
 
       window.__lastGtagPagePath = pagePath;
+      gtag('config', "G-K2609HEZYE", { 'page_path': pagePath });
       gtag('event', 'page_view', {
         page_path: pagePath,
         page_location: href,
