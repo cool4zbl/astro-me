@@ -1,64 +1,71 @@
 ---
-import SocialLinks from './SocialLinks.astro';
-import { getLangFromUrl, getTranslations, getLocalizedPath } from '../i18n/config';
+import SocialLinks from "./SocialLinks.astro";
+import {
+  getLangFromUrl,
+  getTranslations,
+  getLocalizedPath,
+} from "../i18n/config";
 
 const currentYear = new Date().getFullYear();
 const lang = getLangFromUrl(Astro.url);
 const t = getTranslations(lang);
 
 const footerLinks = {
-    navigation: [
-        { key: 'home', href: getLocalizedPath('/', lang) },
-        { key: 'blog', href: getLocalizedPath('/blog', lang) },
-        { key: 'projects', href: getLocalizedPath('/projects', lang) },
-        { key: 'experience', href: getLocalizedPath('/experience', lang) }
-    ],
-    resources: [
-        {
-            name: 'RSS',
-            href: '/rss.xml',
-            external: true
-        },
-        {
-            name: 'Sitemap',
-            href: '/sitemap-index.xml',
-            external: true
-        },
-        {
-            name: t('nav.tags'),
-            href: getLocalizedPath('/tags', lang)
-        },
-        {
-            name: t('nav.search'),
-            href: getLocalizedPath('/search', lang)
-        }
-    ]
+  navigation: [
+    { key: "home", href: getLocalizedPath("/", lang) },
+    { key: "blog", href: getLocalizedPath("/blog", lang) },
+    { key: "projects", href: getLocalizedPath("/projects", lang) },
+    { key: "experience", href: getLocalizedPath("/experience", lang) },
+  ],
+  resources: [
+    {
+      name: "RSS",
+      href: "/rss.xml",
+      external: true,
+    },
+    {
+      name: "Sitemap",
+      href: "/sitemap-index.xml",
+      external: true,
+    },
+    {
+      name: t("nav.tags"),
+      href: getLocalizedPath("/tags", lang),
+    },
+    {
+      name: t("nav.search"),
+      href: getLocalizedPath("/search", lang),
+    },
+  ],
 };
 
+// TODO: move to i18n config
 const mottoPool = [
-    {
-        en: 'Stay hungry, stay foolish.',
-        zh: 'Stay hungry, stay foolish.'
-    },
-    {
-        zh: '保持好奇，工具会更新，方法也会。',
-        en: 'Stay curious—tools evolve, so can your approach.'
-    },
-    {
-        en: "Be motivated, be bold, be brave, be you.",
-        zh: 'Be motivated, be bold, be brave, be you.'
-    },
-    {   en: "Leap, and the net will appear.", zh: 'Leap, and the net will appear.'
-    },
-    {   en: "Always ask for the opportunity. Always ask if you want something. And when you’re offered an opportunity, always say yes. And then lastly, practise a growth mindset.",
-        zh: 'Always ask for the opportunity. Always ask if you want something. And when you’re offered an opportunity, always say yes. And then lastly, practise a growth mindset.'
-    },
+  {
+    en: "Stay hungry, stay foolish.",
+    zh: "Stay hungry, stay foolish.",
+  },
+  {
+    zh: "保持好奇，工具会更新，方法也会。",
+    en: "Stay curious—tools evolve, so can your approach.",
+  },
+  {
+    en: "Be useful. Be clear. Ship reliably.",
+    zh: "做有用的事，清晰表达，可靠交付。",
+  },
+  {
+    en: "Leap, and the net will appear.",
+    zh: "Leap, and the net will appear.",
+  },
+  {
+    en: "Always ask for the opportunity. Always ask if you want something. And when you’re offered an opportunity, always say yes. And then lastly, practise a growth mindset.",
+    zh: "Always ask for the opportunity. Always ask if you want something. And when you’re offered an opportunity, always say yes. And then lastly, practise a growth mindset.",
+  },
 
-    {
-        en: "Promise me you'll always remember: You're braver than you believe, and stronger than you seem, and smarter than you think.",
-        zh: "Promise me you'll always remember: You're braver than you believe, and stronger than you seem, and smarter than you think."
-    }
-
+  {
+    en: "Promise me you'll always remember: You're braver than you believe, and stronger than you seem, and smarter than you think.",
+    zh: "Promise me you'll always remember: You're braver than you believe, and stronger than you seem, and smarter than you think.",
+  },
 ];
 
 const mottoTexts = mottoPool.map((item) => item[lang]);
@@ -72,10 +79,12 @@ const initialMotto = mottoTexts[0];
       <!-- Left Column: Logo and Motto -->
       <div>
         <div class="mb-4 flex items-center gap-2">
-          <div class="h-8 w-8 rounded-xl bg-primary flex items-center justify-center shadow-sm">
+          <div
+            class="h-8 w-8 rounded-xl bg-primary flex items-center justify-center shadow-sm"
+          >
             <span class="text-primary-foreground text-sm font-bold">BZ</span>
           </div>
-          <span class="text-xl font-semibold">{t('footer.myWebsite')}</span>
+          <span class="text-xl font-semibold">{t("footer.myWebsite")}</span>
         </div>
 
         <div class="mb-6">
@@ -94,59 +103,80 @@ const initialMotto = mottoTexts[0];
       <!-- Right Column: Navigation and Resources -->
       <div class="grid gap-8 sm:grid-cols-2">
         <div>
-          <h3 class="mb-4 text-sm font-semibold text-foreground uppercase tracking-[0.2em]">
-            {t('footer.navigation')}
+          <h3
+            class="mb-4 text-sm font-semibold text-foreground uppercase tracking-[0.2em]"
+          >
+            {t("footer.navigation")}
           </h3>
           <ul class="space-y-2 text-sm text-muted-foreground">
-            {footerLinks.navigation.map((link) => (
-              <li>
-                <a
-                  href={link.href}
-                  class="transition-colors hover:text-primary"
-                >
-                  {t(`nav.${link.key}`)}
-                </a>
-              </li>
-            ))}
+            {
+              footerLinks.navigation.map((link) => (
+                <li>
+                  <a
+                    href={link.href}
+                    class="transition-colors hover:text-primary"
+                  >
+                    {t(`nav.${link.key}`)}
+                  </a>
+                </li>
+              ))
+            }
           </ul>
         </div>
 
         <div>
-          <h3 class="mb-4 text-sm font-semibold text-foreground uppercase tracking-[0.2em]">
-            {t('footer.resources')}
+          <h3
+            class="mb-4 text-sm font-semibold text-foreground uppercase tracking-[0.2em]"
+          >
+            {t("footer.resources")}
           </h3>
           <ul class="space-y-2 text-sm text-muted-foreground">
-            {footerLinks.resources.map((link) => (
-              <li>
-                <a
-                  href={link.href}
-                  class="transition-colors hover:text-primary"
-                  target={link.external ? "_blank" : undefined}
-                  rel={link.external ? "noreferrer" : undefined}
-                >
-                  {link.name}
-                  {link.external && (
-                    <svg class="ml-1 inline h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                    </svg>
-                  )}
-                </a>
-              </li>
-            ))}
+            {
+              footerLinks.resources.map((link) => (
+                <li>
+                  <a
+                    href={link.href}
+                    class="transition-colors hover:text-primary"
+                    target={link.external ? "_blank" : undefined}
+                    rel={link.external ? "noreferrer" : undefined}
+                  >
+                    {link.name}
+                    {link.external && (
+                      <svg
+                        class="ml-1 inline h-3 w-3"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                        />
+                      </svg>
+                    )}
+                  </a>
+                </li>
+              ))
+            }
           </ul>
         </div>
       </div>
     </div>
 
-    <div class="mt-8 border-t pt-6 text-xs text-muted-foreground sm:text-sm text-center">
-      © {currentYear} {t('footer.poweredByAstro')}
+    <div
+      class="mt-8 border-t pt-6 text-xs text-muted-foreground sm:text-sm text-center"
+    >
+      © {currentYear}
+      {t("footer.poweredByAstro")}
     </div>
   </div>
   <script is:inline define:vars={{ mottoId }}>
     const mottoContainer = document.getElementById(mottoId);
     if (mottoContainer) {
       try {
-        const mottos = JSON.parse(mottoContainer.dataset.mottos || '[]');
+        const mottos = JSON.parse(mottoContainer.dataset.mottos || "[]");
         if (Array.isArray(mottos) && mottos.length > 0) {
           const pick = mottos[Math.floor(Math.random() * mottos.length)];
           if (pick) {
@@ -154,7 +184,7 @@ const initialMotto = mottoTexts[0];
           }
         }
       } catch (error) {
-        console.warn('Failed to parse motto list', error);
+        console.warn("Failed to parse motto list", error);
       }
     }
   </script>
