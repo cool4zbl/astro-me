@@ -1,19 +1,20 @@
 TODO:
 
--[x] Image for feature work to be correct size
--[x] set up comments (disqus, utterances, etc)
+- [x] Image for feature work to be correct size
+- [x] set up comments (disqus, utterances, etc)
 
 Design
--[] images in blogs need to be smaller
--[] Links in Experience page
--[] fix line-break in titles
--[] Image for blog posts
+- [] images in blogs need to be smaller
+- [] Links in Experience page
+- [] fix line-break in titles
+- [] Image for blog posts
+- [] interactive homepage - scrolling-puzzles, emoji shuts out
 
 Feature
--[] fix GA
--[] set up analytics (plausible, simple analytics, etc)
--[] realtime chat (build by myself or use third party)
--[] SSR w/ Vercel or Netlify
--[] Counter for visits, likes, comments
--[] set up consent modal for cookies
--[] hotjar or similar for heatmaps
+- [x] fix GA
+- [] set up analytics (plausible, simple analytics, etc)
+- [] realtime chat (build by myself or use third party)
+- [] SSR w/ Vercel or Netlify
+- [] Counter for visits, likes, comments
+- [] set up consent modal for cookies
+- [] hotjar or similar for heatmaps

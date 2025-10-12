@@ -1,50 +1,53 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import OptimizedImage from '../components/OptimizedImage.astro';
-import { getLangFromUrl, getLocalizedPath } from '../i18n/config';
-import { getPageMetadata } from '../utils/metadata';
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import OptimizedImage from "../components/OptimizedImage.astro";
+import { getLangFromUrl, getLocalizedPath } from "../i18n/config";
+import { getPageMetadata } from "../utils/metadata";
 
 const lang = getLangFromUrl(Astro.url);
-const profileImage = '/binliuzhang-avt1.JPG';
-const blogLink = getLocalizedPath('/blog', lang);
-const resumeLink = '/Binliu Zhang-Senior-Software-Engineer.pdf';
-const { title: pageTitle, description: pageDescription } = getPageMetadata('about');
+const profileImage = "/binliuzhang-avt1.JPG";
+const blogLink = getLocalizedPath("/blog", lang);
+const resumeLink = "/Binliu Zhang-Senior-Software-Engineer.pdf";
+const { title: pageTitle, description: pageDescription } =
+  getPageMetadata("about");
 
 const contactLinks = [
   {
-    title: 'LinkedIn',
-    url: 'https://www.linkedin.com/in/binliu-zhang',
-    description: 'Let’s chat about roles, collaborations, or anything you’re building.'
+    title: "LinkedIn",
+    url: "https://www.linkedin.com/in/binliu-zhang",
+    description:
+      "for work & collaboration opportunities",
   },
   {
-    title: 'GitHub',
-    url: 'https://github.com/cool4zbl',
-    description: 'Most of my experiments, tooling, and open-source notes live here.'
+    title: "GitHub",
+    url: "https://github.com/cool4zbl",
+    description:
+      "for experiments, open source projects, and code snippets",
   },
   {
-    title: 'Email',
-    url: 'mailto:binliu.zhang@gmail.com',
-    description: 'Prefer long-form conversations? Drop me a message anytime.'
-  }
+    title: "Email",
+    url: "mailto:binliu.zhang@gmail.com",
+    description: "for longer conversations",
+  },
 ];
 
 const focusAreas = [
-  'Designing resilient, large-scale systems',
-  'Sharpening tools and workflows for deep work',
-  'Documenting the lessons worth sharing'
+  "Designing resilient, large-scale systems",
+  "Writing tools and docs that outlive me",
+  "Turning operational pain into automation",
 ];
 const wantToDoMore = [
-  'Blending art and code',
-  'Writing long-form guides',
-  'Speaking with the community'
+  "Blending art and code",
+  "Writing long-form guides",
+  "Speaking with the communities that care about craft",
 ];
 const lifeBeyondCode = [
-  'Soundtracking my days with rock, lofi, and electronic playlists',
-  'Cooking Chinese comfort food that reminds me of home',
-  'Pushing for one more rep at the gym',
-  'Cycling Dutch bike lanes whenever the sun shows up'
+  "Soundtracking my days with rock, lofi, and electronic playlists",
+  "Cooking Chinese comfort food that smells like home",
+  "Pushing one more rep at the gym",
+  "Cycling Dutch bike lanes whenever the sun feels generous",
 ];
 ---
 
@@ -52,11 +55,17 @@ const lifeBeyondCode = [
   <Header />
 
   <main class="flex-1">
-    <section class="section-padding bg-gradient-to-br from-background via-muted/30 to-background">
+    <section
+      class="section-padding bg-gradient-to-br from-background via-muted/30 to-background"
+    >
       <div class="container-width max-w-4xl">
-        <div class="flex flex-col items-center gap-8 text-center md:flex-row md:text-left md:items-center">
+        <div
+          class="flex flex-col items-center gap-8 text-center md:flex-row md:text-left md:items-center"
+        >
           <div class="shrink-0">
-            <div class="relative mx-auto h-36 w-36 overflow-hidden rounded-full border-4 border-primary/30 shadow-lg md:mx-0 md:h-40 md:w-40">
+            <div
+              class="relative mx-auto h-36 w-36 overflow-hidden rounded-full border-4 border-primary/30 shadow-lg md:mx-0 md:h-40 md:w-40"
+            >
               <OptimizedImage
                 src={profileImage}
                 alt="Binliu Zhang portrait"
@@ -69,14 +78,20 @@ const lifeBeyondCode = [
             </div>
           </div>
           <div class="space-y-4">
-            <p class="text-sm uppercase tracking-[0.3em] text-primary/70">Hey, I'm Binliu!</p>
+            <p class="text-sm uppercase tracking-[0.3em] text-primary/70">
+              Hey, I'm Binliu!
+            </p>
             <h1 class="text-4xl sm:text-5xl font-bold text-foreground">
-               Engineering deep dives and everyday curiosity
+              Building things, breaking them, and learning in between.
             </h1>
             <p class="text-lg text-muted-foreground leading-relaxed">
-              Born in China, now based in the Netherlands. Write code during the day, explore ideas at night, jotting notes on what worked, and sharing the takeaways that resonate.
+              Born in China, now based in the Netherlands. I write code during
+              the day, chase weird ideas at night, and document the lessons that
+              make it past production.
             </p>
-            <div class="flex flex-wrap items-center justify-center gap-4 md:justify-start">
+            <div
+              class="flex flex-wrap items-center justify-center gap-4 md:justify-start"
+            >
               <a
                 href={resumeLink}
                 class="inline-flex items-center rounded-full bg-primary px-5 py-2 text-sm font-semibold text-primary-foreground shadow-sm transition hover:bg-primary/90"
@@ -90,68 +105,113 @@ const lifeBeyondCode = [
                 Read the Blog
               </a>
             </div>
+            <div
+              class="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,rgba(34,211,238,.12),transparent_60%)]"
+            >
+            </div>
           </div>
         </div>
       </div>
     </section>
 
     <section class="section-padding bg-muted/40">
-      <div class="container-width max-w-4xl space-y-10">
+      <div class="container-width max-w-4xl space-y-6">
         <div class="space-y-4">
-          <span class="inline-flex items-center rounded-full bg-secondary/20 px-4 py-1 text-sm font-medium text-secondary-foreground">My Journey</span>
-          <h2 class="text-3xl font-semibold text-foreground">From curiosity to production impact</h2>
+          <span
+            class="inline-flex items-center rounded-full bg-secondary/20 px-4 py-1 text-sm font-medium text-secondary-foreground"
+            >My Journey</span
+          >
+          <h2 class="text-3xl font-semibold text-foreground">
+            From curiosity to production impact
+          </h2>
         </div>
 
-        <div class="space-y-8 text-muted-foreground leading-relaxed">
+        <div class="space-y-2 text-muted-foreground leading-relaxed">
           <p>
-            My fascination with computers started long before I wrote my first line of production code. Julia Evans summed up my philosophy perfectly:
-          </p>
-          <blockquote class="border-l-4 border-primary/70 bg-background/70 p-4 text-sm italic text-foreground">
-            “Deeply understanding the underlying systems you use... is essential if you want to do technically innovative work and be able to solve hard problems.”
-          </blockquote>
-          <p>
-            I resist neat labels like “just FE” or “just BE.” I want to know how every layer fits together, so I keep digging. That’s why I taught myself web development while studying Electronic Engineering at UESTC—hardware was tough, the web felt magical, and shipping UI to real users hooked me instantly.
+            I’ve always been more interested in <i>why</i> systems work than <i
+              >what</i
+            > they do.
           </p>
           <p>
-            At Douban I learned craftsmanship the hard way: when millions feel every change, you ship with respect. Ant Group pulled me deeper into data—statistics, experimentation, and the pipelines that make insights actionable. Grab flipped my perspective again. Switching into backend engineering meant living in distributed systems, Go, databases, and cloud patterns. It was like discovering a new operating system for my brain.
+            That curiosity led me from studying electronic engineering at
+            UESTC—where hardware was stubborn but honest—to teaching myself web
+            development, which was somehow even more stubborn.
           </p>
           <p>
-            Today at Just Eat Takeaway I’m designing orchestration layers that help a customer support chatbot resolve issues without humans jumping in—cutting manual steps by 60% so far. Along the way I picked up Kotlin, micro-frontends, Kubernetes, and even dove into JVM internals when performance demanded it. Every tour opened another rabbit hole, and I’m still following them.
+            I resist neat labels like “just FE” or “just BE.” I want to know how
+            every layer fits together, so I keep digging. That’s why I taught
+            myself web development while studying Electronic Engineering at
+            UESTC—hardware was tough, the web felt magical, and shipping UI to
+            real users hooked me instantly.
+          </p>
+          <p>
+            At Douban I learned craftsmanship the hard way: when millions feel
+            every change, you ship with respect. 
+            <br />
+
+            At Ant Group, I discovered how data and experimentation fuel
+            smarter products. "If you cannot measure it, you cannot improve it" became my mantra.
+            <br />
+              
+            At Grab, I fell down the rabbit hole of distributed systems -- Go, 
+            databases, all the strange beauty of scale.
+          </p>
+
+          <p>
+            Now at Just Eat Takeaway, I’m building orchestration layers that help our customer chatbots solve issues automatically. 
+            <br />
+
+            It’s a mix of architecture, automation, and the constant reminder that “simple” is never easy.
           </p>
         </div>
       </div>
     </section>
 
     <section class="section-padding">
-      <div class="container-width max-w-4xl space-y-10">
+      <div class="container-width max-w-4xl space-y-6">
         <div class="space-y-4">
-          <span class="inline-flex items-center rounded-full bg-primary/10 px-4 py-1 text-sm font-medium text-primary">Philosophy</span>
-          <h2 class="text-3xl font-semibold text-foreground">Stay hungry, stay foolish, stay curious</h2>
+          <span
+            class="inline-flex items-center rounded-full bg-primary/10 px-4 py-1 text-sm font-medium text-primary"
+            >Philosophy</span
+          >
+          <h2 class="text-3xl font-semibold text-foreground">
+            Stay hungry, stay foolish, stay curious
+          </h2>
         </div>
         <p class="text-muted-foreground leading-relaxed">
-          I chase the “aha!” moment, protect room for play, and trust my intuition when the documentation stops. Exploration beats stagnation. Creativity shows up when I follow the questions that won’t leave me alone.
+          I chase the “aha!” moment. I like questions that refuse to leave me alone,
+          <br />
+          I design for resilience, document what breaks, and keep sharpening tools for deep work.
         </p>
         <div class="grid gap-6 md:grid-cols-2">
           <div class="rounded-2xl border bg-card/80 p-6 shadow-sm">
-            <h3 class="text-lg font-semibold text-foreground">What I’m focusing on</h3>
+            <h3 class="text-lg font-semibold text-foreground">
+              What I’m focusing on
+            </h3>
             <ul class="mt-3 space-y-2 text-sm text-muted-foreground">
-              {focusAreas.map((area) => (
-                <li class="flex items-start gap-2">
-                  <span class="mt-1 h-1.5 w-1.5 rounded-full bg-primary"></span>
-                  <span>{area}</span>
-                </li>
-              ))}
+              {
+                focusAreas.map((area) => (
+                  <li class="flex items-start gap-2">
+                    <span class="mt-1 h-1.5 w-1.5 rounded-full bg-primary" />
+                    <span>{area}</span>
+                  </li>
+                ))
+              }
             </ul>
           </div>
           <div class="rounded-2xl border bg-card/80 p-6 shadow-sm">
-            <h3 class="text-lg font-semibold text-foreground">I’d love to do more of</h3>
+            <h3 class="text-lg font-semibold text-foreground">
+              I’d love to do more of
+            </h3>
             <ul class="mt-3 space-y-2 text-sm text-muted-foreground">
-              {wantToDoMore.map((item) => (
-                <li class="flex items-start gap-2">
-                  <span class="mt-1 h-1.5 w-1.5 rounded-full bg-primary"></span>
-                  <span>{item}</span>
-                </li>
-              ))}
+              {
+                wantToDoMore.map((item) => (
+                  <li class="flex items-start gap-2">
+                    <span class="mt-1 h-1.5 w-1.5 rounded-full bg-primary" />
+                    <span>{item}</span>
+                  </li>
+                ))
+              }
             </ul>
           </div>
         </div>
@@ -159,43 +219,65 @@ const lifeBeyondCode = [
     </section>
 
     <section class="section-padding bg-muted/40">
-      <div class="container-width max-w-4xl space-y-8">
+      <div class="container-width max-w-4xl space-y-6">
         <div class="space-y-4">
-          <span class="inline-flex items-center rounded-full bg-secondary/20 px-4 py-1 text-sm font-medium text-secondary-foreground">Life Beyond Code</span>
-          <h2 class="text-3xl font-semibold text-foreground">The hobbies that recharge me</h2>
+          <span
+            class="inline-flex items-center rounded-full bg-secondary/20 px-4 py-1 text-sm font-medium text-secondary-foreground"
+            >Life Beyond Code</span
+          >
+          <h2 class="text-3xl font-semibold text-foreground">
+            The hobbies that recharge me
+          </h2>
         </div>
         <ul class="grid gap-4 md:grid-cols-2 text-sm text-muted-foreground">
-          {lifeBeyondCode.map((item) => (
-            <li class="rounded-2xl border bg-background p-4 shadow-sm leading-relaxed">{item}</li>
-          ))}
+          {
+            lifeBeyondCode.map((item) => (
+              <li class="rounded-2xl border bg-background p-4 shadow-sm leading-relaxed">
+                {item}
+              </li>
+            ))
+          }
         </ul>
       </div>
     </section>
 
     <section class="section-padding">
-      <div class="container-width max-w-4xl space-y-8">
+      <div class="container-width max-w-4xl space-y-6">
         <div class="space-y-4 text-center">
-          <span class="inline-flex items-center rounded-full bg-primary/10 px-4 py-1 text-sm font-medium text-primary">Contact</span>
-          <h2 class="text-3xl font-semibold text-foreground">Would love to connect</h2>
+          <span
+            class="inline-flex items-center rounded-full bg-primary/10 px-4 py-1 text-sm font-medium text-primary"
+            >Contact</span
+          >
+          <h2 class="text-3xl font-semibold text-foreground">
+            Let's talk about the things we build.
+          </h2>
           <p class="text-muted-foreground leading-relaxed">
-            Curious about something I’ve built? Want to swap book notes? Pick a channel and say hi.
+            Curious about something I’ve shipped or written? Always happy to trade notes or ideas.
           </p>
         </div>
 
         <div class="grid gap-6 md:grid-cols-3">
-          {contactLinks.map((link) => (
-            <a
-              href={link.url}
-              class="group rounded-2xl border bg-card/80 p-6 text-left shadow-sm transition hover:-translate-y-1 hover:shadow-md"
-              target={link.url.startsWith('mailto') ? '_self' : '_blank'}
-              rel={link.url.startsWith('mailto') ? undefined : 'noopener noreferrer'}
-            >
-              <div class="text-lg font-semibold text-foreground group-hover:text-primary">
-                {link.title}
-              </div>
-              <p class="mt-3 text-sm text-muted-foreground leading-relaxed">{link.description}</p>
-            </a>
-          ))}
+          {
+            contactLinks.map((link) => (
+              <a
+                href={link.url}
+                class="group rounded-2xl border bg-card/80 p-6 text-left shadow-sm transition hover:-translate-y-1 hover:shadow-md"
+                target={link.url.startsWith("mailto") ? "_self" : "_blank"}
+                rel={
+                  link.url.startsWith("mailto")
+                    ? undefined
+                    : "noopener noreferrer"
+                }
+              >
+                <div class="text-lg font-semibold text-foreground group-hover:text-primary">
+                  {link.title}
+                </div>
+                <p class="mt-3 text-sm text-muted-foreground leading-relaxed">
+                  {link.description}
+                </p>
+              </a>
+            ))
+          }
         </div>
       </div>
     </section>
