@@ -147,32 +147,32 @@ const { title: pageTitle, description: pageDescription } = getPageMetadata('expe
     <!-- Experience Timeline -->
     <section class="section-padding">
       <div class="container-width">
-        <div class="relative">
+        <div class="relative sm:pl-12">
           <!-- Timeline Line -->
-          <div class="absolute left-8 top-0 bottom-0 w-0.5 bg-border"></div>
+          <div class="hidden sm:block absolute left-8 top-0 bottom-0 w-0.5 bg-border"></div>
 
-          <div class="space-y-12">
+          <div class="space-y-10 sm:space-y-12">
 
             {experiences.map((exp) => (
-              <div class="relative flex items-start space-x-8">
-                <div class="flex-shrink-0">
-                  <div class={`h-16 w-16 rounded-full bg-${exp.theme} flex items-center justify-center shadow-lg`}>
-                    <svg class={`h-8 w-8 text-${exp.theme}-foreground`} viewBox="0 0 24 24" stroke="currentColor">
+              <div class="relative flex flex-col sm:flex-row sm:items-start gap-6 sm:gap-8">
+                <div class="flex-shrink-0 self-center sm:self-auto">
+                  <div class={`h-14 w-14 sm:h-16 sm:w-16 rounded-full bg-${exp.theme} flex items-center justify-center shadow-lg`}>
+                    <svg class={`h-7 w-7 sm:h-8 sm:w-8 text-${exp.theme}-foreground`} viewBox="0 0 24 24" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={getIcon(exp.icon)} />
                     </svg>
                   </div>
                 </div>
-                <div class="flex-1 min-w-0">
-                  <div class="bg-card rounded-xl border p-8 shadow-sm">
-                    <div class="flex items-start justify-between mb-4">
+                <div class="flex-1 min-w-0 w-full">
+                  <div class="bg-card rounded-xl border p-6 sm:p-8 shadow-sm">
+                    <div class="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between mb-4">
                       <div>
-                        <h3 class="text-2xl font-bold text-card-foreground">{exp.title}</h3>
-                        <p class={`text-lg font-semibold ${exp.theme === 'primary' ? 'text-primary' : exp.theme === 'accent' ? 'text-accent' : exp.theme === 'secondary' ? 'text-secondary-foreground' : 'text-muted-foreground'}`}>
+                        <h3 class="text-xl sm:text-2xl font-bold text-card-foreground">{exp.title}</h3>
+                        <p class={`text-base sm:text-lg font-semibold ${exp.theme === 'primary' ? 'text-primary' : exp.theme === 'accent' ? 'text-accent' : exp.theme === 'secondary' ? 'text-secondary-foreground' : 'text-muted-foreground'}`}>
                           {exp.company}{exp.department && ` · ${exp.department}`}
                         </p>
                         {exp.location && <p class="text-sm text-muted-foreground mt-1">{exp.location}</p>}
                       </div>
-                      <div class="text-right">
+                      <div class="text-left sm:text-right">
                         {exp.current && (
                           <span class="inline-flex items-center rounded-full bg-primary/10 px-3 py-1 text-sm font-medium text-primary">
                             Current
@@ -182,14 +182,14 @@ const { title: pageTitle, description: pageDescription } = getPageMetadata('expe
                       </div>
                     </div>
 
-                    <p class="text-muted-foreground mb-6 leading-relaxed">
+                    <p class="text-muted-foreground mb-6 leading-relaxed text-sm sm:text-base">
                       {exp.description}
                     </p>
 
                     <div class="space-y-4 mb-6">
                       <div>
                         <h4 class="font-semibold text-card-foreground mb-2">Highlights:</h4>
-                        <ul class="text-muted-foreground space-y-2 text-sm list-disc pl-6">
+                        <ul class="text-muted-foreground space-y-2 text-sm list-disc pl-5 sm:pl-6">
                           {exp.highlights.map((highlight) => (
                             <li>{highlight}</li>
                           ))}
