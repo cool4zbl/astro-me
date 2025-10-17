@@ -3,6 +3,7 @@ import Analytics from "@vercel/analytics/astro";
 import SpeedInsights from "@vercel/speed-insights/astro";
 import SEO from "../components/SEO.astro";
 import GA from "../components/GA.astro";
+import Baidu from "../components/Baidu.astro";
 import { getLangFromUrl } from "../i18n/config";
 import "../styles/globals.css";
 
@@ -77,10 +78,10 @@ const htmlLang = lang === "zh" ? "zh-CN" : "en";
     </noscript>
     <!-- Google Analytics Component -->
     <GA />
-
     <!-- Analytics Script -->
     <Analytics />
     <SpeedInsights />
+    <Baidu />
 
     <!-- Theme Script -->
     <script is:inline>
