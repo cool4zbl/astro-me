@@ -10,6 +10,7 @@ import TableOfContents from "../../components/TableOfContents.astro";
 import RelatedPosts from "../../components/RelatedPosts.astro";
 import OptimizedImage from "../../components/OptimizedImage.astro";
 import { buildPageTitle } from "../../utils/metadata";
+import LikeButton from "../../components/LikeButton.astro";
 
 export async function getStaticPaths() {
   const posts = await getCollection("blog");
@@ -102,6 +103,7 @@ const pageDescription = post.data.description;
           class="prose prose-lg text-base mx-auto dark:prose-invert prose-headings:first:mt-0"
         >
           <Content />
+          <LikeButton slug={post.slug} />
         </div>
 
         <footer class="mt-12 border-t pt-8">

@@ -1,0 +1,68 @@
+---
+// src/components/LikeButton.astro
+export interface Props {
+  slug: string;
+}
+
+const { slug } = Astro.props;
+const API_URL = import.meta.env.PROD ? 'https://binliuzhang.com' : 'http://localhost:8080';
+const API_ENDPOINT = `${API_URL}/v1/likes/${slug}`;
+
+---
+
+<div class="like-container" data-slug={slug}>
+  <button class="like-button">❤️</button>
+  <span class="like-count">Loading...</span>
+</div>
+
+<script define:vars={{ API_ENDPOINT, slug }}>
+  // This code runs in the browser
+  document.querySelectorAll('.like-container').forEach(container => {
+    const slug = container.dataset.slug;
+    const button = container.querySelector('.like-button');
+    const countSpan = container.querySelector('.like-count');
+
+    // 1. Fetch the initial like count when the page loads
+    async function getInitialLikes() {
+      try {
+        const response = await fetch(`${API_ENDPOINT}`);
+        const data = await response.json();
+        countSpan.textContent = data.likes;
+      } catch (error) {
+        console.error('Failed to fetch likes:', error);
+        countSpan.textContent = '0';
+      }
+    }
+
+    // 2. Add a click event listener to the button
+    button.addEventListener('click', async () => {
+      try {
+        // button.disabled = true; // Prevent multiple clicks
+        const idem = localStorage.getItem(`like-idem-${slug}`) || crypto.randomUUID();
+        localStorage.setItem(`like-idem-${slug}`, idem);
+
+        const response = await fetch(`${API_ENDPOINT}`, {
+          method: 'POST',
+          headers: {
+            'Idempotency-Key': idem,
+          }
+        });
+        const data = await response.json();
+        countSpan.textContent = data.likes;
+      } catch (error) {
+        console.error('Failed to add like:', error);
+        button.disabled = false; // Re-enable if it failed
+      }
+    });
+
+    // Load the likes when the component is ready
+    getInitialLikes();
+  });
+</script>
+
+<style>
+  /* Add some basic styling */
+  .like-container { display: flex; align-items: center; gap: 8px; }
+  .like-button { cursor: pointer; border: none; background: #eee; padding: 8px; border-radius: 50%; }
+  .like-button:disabled { cursor: not-allowed; background: #ddd; }
+</style>
