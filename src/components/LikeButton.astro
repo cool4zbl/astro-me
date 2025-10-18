@@ -11,8 +11,12 @@ const API_ENDPOINT = `${API_URL}/v1/likes/${slug}`;
 ---
 
 <div class="like-container" data-slug={slug}>
-  <button class="like-button">❤️</button>
-  <span class="like-count">Loading...</span>
+  <button class="like-button" type="button" aria-label="Send some love" title="Tap to send some love">
+    <span class="like-icon" aria-hidden="true">💖</span>
+    <span class="sr-only">Like this post</span>
+  </button>
+  <span class="like-count" aria-live="polite">Loading...</span>
+  <span class="like-limit-message" hidden>You reached the 20-like limit ✨</span>
 </div>
 
 <script define:vars={{ API_ENDPOINT, slug }}>
@@ -21,11 +25,22 @@ const API_ENDPOINT = `${API_URL}/v1/likes/${slug}`;
     const slug = container.dataset.slug;
     const button = container.querySelector('.like-button');
     const countSpan = container.querySelector('.like-count');
+    const limitMessage = container.querySelector('.like-limit-message');
+
+    if (!button || !countSpan) {
+      return;
+    }
+
+    const LIKE_LIMIT = 20;
+    const likeCountKey = `like-count-${slug}`;
 
     // 1. Fetch the initial like count when the page loads
     async function getInitialLikes() {
       try {
         const response = await fetch(`${API_ENDPOINT}`);
+        if (!response.ok) {
+          throw new Error(`Failed to fetch likes (${response.status})`);
+        }
         const data = await response.json();
         countSpan.textContent = data.likes;
       } catch (error) {
@@ -34,8 +49,46 @@ const API_ENDPOINT = `${API_URL}/v1/likes/${slug}`;
       }
     }
 
+    function getLocalLikeCount() {
+      return Number(localStorage.getItem(likeCountKey) ?? '0');
+    }
+
+    function setLocalLikeCount(count) {
+      localStorage.setItem(likeCountKey, String(count));
+    }
+
+    function updateLimitState(currentCount = getLocalLikeCount()) {
+      if (currentCount >= LIKE_LIMIT) {
+        button.disabled = true;
+        button.classList.add('limit-reached');
+        button.setAttribute('title', `You've reached the ${LIKE_LIMIT}-like limit`);
+        if (limitMessage) {
+          limitMessage.hidden = false;
+        }
+      } else {
+        button.disabled = false;
+        button.classList.remove('limit-reached');
+        button.setAttribute('title', 'Tap to send some love');
+        if (limitMessage) {
+          limitMessage.hidden = true;
+        }
+      }
+    }
+
+    updateLimitState();
+
+    button.addEventListener('animationend', () => {
+      button.classList.remove('is-animating');
+    });
+
     // 2. Add a click event listener to the button
     button.addEventListener('click', async () => {
+      const existingCount = getLocalLikeCount();
+      if (existingCount >= LIKE_LIMIT) {
+        updateLimitState(existingCount);
+        return;
+      }
+
       try {
         // button.disabled = true; // Prevent multiple clicks
         const idem = localStorage.getItem(`like-idem-${slug}`) || crypto.randomUUID();
@@ -47,8 +100,17 @@ const API_ENDPOINT = `${API_URL}/v1/likes/${slug}`;
             'Idempotency-Key': idem,
           }
         });
+        if (!response.ok) {
+          throw new Error(`Failed to add like (${response.status})`);
+        }
         const data = await response.json();
         countSpan.textContent = data.likes;
+
+        const newCount = Math.min(existingCount + 1, LIKE_LIMIT);
+        setLocalLikeCount(newCount);
+        updateLimitState(newCount);
+
+        button.classList.add('is-animating');
       } catch (error) {
         console.error('Failed to add like:', error);
         button.disabled = false; // Re-enable if it failed
@@ -61,8 +123,92 @@ const API_ENDPOINT = `${API_URL}/v1/likes/${slug}`;
 </script>
 
 <style>
-  /* Add some basic styling */
-  .like-container { display: flex; align-items: center; gap: 8px; }
-  .like-button { cursor: pointer; border: none; background: #eee; padding: 8px; border-radius: 50%; }
-  .like-button:disabled { cursor: not-allowed; background: #ddd; }
+  .like-container {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    justify-content: flex-end;
+    margin-left: auto;
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .like-button {
+    cursor: pointer;
+    border: none;
+    background: linear-gradient(135deg, #ff8a8a, #ff61d2);
+    color: #fff;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 9999px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.75rem;
+    box-shadow: 0 12px 24px rgba(255, 97, 210, 0.35);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+    position: relative;
+  }
+
+  .like-button:hover:not(:disabled) {
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 16px 28px rgba(255, 97, 210, 0.45);
+  }
+
+  .like-button:active:not(:disabled) {
+    transform: scale(0.92);
+  }
+
+  .like-button.is-animating {
+    animation: heart-pop 0.4s ease;
+  }
+
+  .like-button.limit-reached {
+    cursor: not-allowed;
+    filter: grayscale(0.2);
+    opacity: 0.6;
+  }
+
+  .like-button:disabled {
+    cursor: not-allowed;
+  }
+
+  .like-count {
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--theme-text, #333);
+  }
+
+  .like-icon {
+    text-shadow: 0 4px 12px rgba(255, 97, 210, 0.45);
+  }
+
+  .like-limit-message {
+    font-size: 0.85rem;
+    color: var(--theme-muted-text, #888);
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  @keyframes heart-pop {
+    0% {
+      transform: scale(1);
+    }
+    40% {
+      transform: scale(1.3);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
 </style>
