@@ -5,7 +5,8 @@ export interface Props {
 }
 
 const { slug } = Astro.props;
-const API_URL = import.meta.env.PROD ? 'https://binliuzhang.com' : 'http://localhost:8080';
+// TODO:
+const API_URL = import.meta.env.PROD ? 'https://summer-prod.up.railway.app' : 'http://localhost:8080';
 const API_ENDPOINT = `${API_URL}/v1/likes/${slug}`;
 
 ---
