@@ -11,8 +11,11 @@ const API_ENDPOINT = `${API_URL}/v1/likes/${slug}`;
 ---
 
 <div class="like-container" data-slug={slug}>
-  <button class="like-button">❤️</button>
-  <span class="like-count">Loading...</span>
+  <button class="like-button" aria-label="Add a like">
+    <span class="like-icon" aria-hidden="true">💖</span>
+    <span class="like-label">Love it!</span>
+  </button>
+  <span class="like-count" role="status" aria-live="polite">Loading...</span>
 </div>
 
 <script define:vars={{ API_ENDPOINT, slug }}>
@@ -21,6 +24,8 @@ const API_ENDPOINT = `${API_URL}/v1/likes/${slug}`;
     const slug = container.dataset.slug;
     const button = container.querySelector('.like-button');
     const countSpan = container.querySelector('.like-count');
+    const likeCountKey = `like-count-${slug}`;
+    const maxLikes = 20;
 
     // 1. Fetch the initial like count when the page loads
     async function getInitialLikes() {
@@ -34,8 +39,34 @@ const API_ENDPOINT = `${API_URL}/v1/likes/${slug}`;
       }
     }
 
+    function isLimitReached() {
+      const stored = Number(localStorage.getItem(likeCountKey) || '0');
+      return stored >= maxLikes;
+    }
+
+    function updateButtonState() {
+      if (isLimitReached()) {
+        button.disabled = true;
+        button.setAttribute('data-limit-reached', 'true');
+        button.setAttribute('aria-disabled', 'true');
+        button.title = `You reached the limit of ${maxLikes} likes for this post.`;
+      } else {
+        button.disabled = false;
+        button.removeAttribute('data-limit-reached');
+        button.removeAttribute('aria-disabled');
+        button.removeAttribute('title');
+      }
+    }
+
+    updateButtonState();
+
     // 2. Add a click event listener to the button
     button.addEventListener('click', async () => {
+      if (isLimitReached()) {
+        updateButtonState();
+        return;
+      }
+
       try {
         // button.disabled = true; // Prevent multiple clicks
         const idem = localStorage.getItem(`like-idem-${slug}`) || crypto.randomUUID();
@@ -49,6 +80,15 @@ const API_ENDPOINT = `${API_URL}/v1/likes/${slug}`;
         });
         const data = await response.json();
         countSpan.textContent = data.likes;
+
+        const currentCount = Number(localStorage.getItem(likeCountKey) || '0') + 1;
+        localStorage.setItem(likeCountKey, `${currentCount}`);
+        updateButtonState();
+
+        button.classList.remove('is-animating');
+        // Trigger reflow so animation retriggers
+        void button.offsetWidth;
+        button.classList.add('is-animating');
       } catch (error) {
         console.error('Failed to add like:', error);
         button.disabled = false; // Re-enable if it failed
@@ -61,8 +101,73 @@ const API_ENDPOINT = `${API_URL}/v1/likes/${slug}`;
 </script>
 
 <style>
-  /* Add some basic styling */
-  .like-container { display: flex; align-items: center; gap: 8px; }
-  .like-button { cursor: pointer; border: none; background: #eee; padding: 8px; border-radius: 50%; }
-  .like-button:disabled { cursor: not-allowed; background: #ddd; }
+  .like-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-left: auto;
+  }
+
+  .like-button {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    border: none;
+    background: radial-gradient(circle at top left, #ff9ecd, #ff6584);
+    color: #fff;
+    padding: 0.75rem 1.25rem;
+    border-radius: 999px;
+    font-size: 1rem;
+    font-weight: 600;
+    box-shadow: 0 10px 20px rgba(255, 101, 132, 0.35);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .like-button:hover:not(:disabled) {
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 14px 28px rgba(255, 101, 132, 0.45);
+  }
+
+  .like-button:disabled,
+  .like-button[data-limit-reached] {
+    cursor: not-allowed;
+    background: linear-gradient(135deg, #d7d7d7, #bcbcbc);
+    box-shadow: none;
+    opacity: 0.8;
+  }
+
+  .like-icon {
+    font-size: 1.5rem;
+    display: inline-block;
+    transition: transform 0.2s ease;
+  }
+
+  .like-button.is-animating .like-icon {
+    animation: pop 400ms ease;
+  }
+
+  .like-label {
+    font-size: 1rem;
+  }
+
+  .like-count {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--theme-text, #333);
+  }
+
+  @keyframes pop {
+    0% {
+      transform: scale(1);
+    }
+    35% {
+      transform: scale(1.4);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
 </style>
