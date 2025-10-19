@@ -12,33 +12,72 @@ const API_ENDPOINT = `${API_URL}/v1/likes/${slug}`;
 ---
 
 <div class="like-container" data-slug={slug}>
-  <button class="like-button">❤️</button>
-  <span class="like-count">Loading...</span>
+  <button class="like-button" type="button" aria-label="Send a little love">
+    <span class="like-button__icon" aria-hidden="true">💖</span>
+  </button>
+  <span class="like-count" aria-live="polite">Loading...</span>
+  <div class="like-feedback" aria-live="polite"></div>
 </div>
 
 <script define:vars={{ API_ENDPOINT, slug }}>
-  // This code runs in the browser
+  const MAX_LIKES = 20;
+
   document.querySelectorAll('.like-container').forEach(container => {
     const slug = container.dataset.slug;
     const button = container.querySelector('.like-button');
     const countSpan = container.querySelector('.like-count');
+    const feedback = container.querySelector('.like-feedback');
+    const storageKey = `like-count-${slug}`;
 
-    // 1. Fetch the initial like count when the page loads
-    async function getInitialLikes() {
-      try {
-        const response = await fetch(`${API_ENDPOINT}`);
-        const data = await response.json();
-        countSpan.textContent = data.likes;
-      } catch (error) {
-        console.error('Failed to fetch likes:', error);
-        countSpan.textContent = '0';
+    if (!button || !countSpan || !feedback) {
+      return;
+    }
+
+    function showFeedback(message, variant = 'info') {
+      feedback.textContent = message;
+      feedback.dataset.variant = variant;
+      if (message) {
+        feedback.classList.add('is-visible');
+        setTimeout(() => {
+          feedback.classList.remove('is-visible');
+        }, 1600);
       }
     }
 
-    // 2. Add a click event listener to the button
-    button.addEventListener('click', async () => {
+    async function getInitialLikes() {
       try {
-        // button.disabled = true; // Prevent multiple clicks
+        const response = await fetch(`${API_ENDPOINT}`);
+        if (!response.ok) {
+          throw new Error('Unable to fetch likes');
+        }
+        const data = await response.json();
+        countSpan.textContent = data?.likes ?? '0';
+      } catch (error) {
+        console.error('Failed to fetch likes:', error);
+        countSpan.textContent = '0';
+        showFeedback('Looks like likes are snoozing right now.', 'error');
+      }
+    }
+
+    const existingLikes = Number.parseInt(localStorage.getItem(storageKey) ?? '0', 10);
+    if (existingLikes >= MAX_LIKES) {
+      showFeedback(`You have reached the ${MAX_LIKES}-like limit here.`, 'warning');
+    }
+
+    button.addEventListener('click', async () => {
+      const currentLikes = Number.parseInt(localStorage.getItem(storageKey) ?? '0', 10);
+      if (currentLikes >= MAX_LIKES) {
+        button.classList.add('like-button--shake');
+        showFeedback(`Max ${MAX_LIKES} likes per person — thanks for the love!`, 'warning');
+        setTimeout(() => button.classList.remove('like-button--shake'), 600);
+        return;
+      }
+
+      button.disabled = true;
+      button.classList.add('like-button--burst');
+      setTimeout(() => button.classList.remove('like-button--burst'), 600);
+
+      try {
         const idem = localStorage.getItem(`like-idem-${slug}`) || crypto.randomUUID();
         localStorage.setItem(`like-idem-${slug}`, idem);
 
@@ -48,22 +87,123 @@ const API_ENDPOINT = `${API_URL}/v1/likes/${slug}`;
             'Idempotency-Key': idem,
           }
         });
+
+        if (!response.ok) {
+          throw new Error('Unable to register like');
+        }
+
         const data = await response.json();
-        countSpan.textContent = data.likes;
+        countSpan.textContent = data?.likes ?? '0';
+        localStorage.setItem(storageKey, String(currentLikes + 1));
+        showFeedback('Thanks for the love! 💕');
       } catch (error) {
         console.error('Failed to add like:', error);
-        button.disabled = false; // Re-enable if it failed
+        showFeedback('Hmm, that like didn\'t stick. Try again?', 'error');
+      } finally {
+        button.disabled = false;
       }
     });
 
-    // Load the likes when the component is ready
     getInitialLikes();
   });
 </script>
 
 <style>
-  /* Add some basic styling */
-  .like-container { display: flex; align-items: center; gap: 8px; }
-  .like-button { cursor: pointer; border: none; background: #eee; padding: 8px; border-radius: 50%; }
-  .like-button:disabled { cursor: not-allowed; background: #ddd; }
+  .like-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 0.75rem;
+    width: 100%;
+    max-width: 20rem;
+    margin-left: auto;
+  }
+
+  .like-button {
+    --heart-size: 3rem;
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: var(--heart-size);
+    height: var(--heart-size);
+    border: none;
+    border-radius: 9999px;
+    cursor: pointer;
+    background: radial-gradient(circle at 30% 30%, #ff9ad5, #ff5f9c 60%, #ff3b6a);
+    box-shadow: 0 12px 20px rgba(255, 91, 143, 0.35);
+    transition: transform 150ms ease, box-shadow 150ms ease;
+    color: #fff;
+  }
+
+  .like-button__icon {
+    font-size: 1.65rem;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.25));
+  }
+
+  .like-button:hover:not(:disabled),
+  .like-button:focus-visible {
+    transform: scale(1.08);
+    box-shadow: 0 16px 26px rgba(255, 91, 143, 0.45);
+    outline: none;
+  }
+
+  .like-button:active:not(:disabled) {
+    transform: scale(0.95);
+  }
+
+  .like-button:disabled {
+    cursor: not-allowed;
+    opacity: 0.7;
+  }
+
+  .like-count {
+    font-size: 1.1rem;
+    font-weight: 600;
+    min-width: 3ch;
+    text-align: right;
+  }
+
+  .like-feedback {
+    font-size: 0.9rem;
+    color: var(--feedback-color, #666);
+    opacity: 0;
+    transform: translateY(4px);
+    transition: opacity 200ms ease, transform 200ms ease;
+  }
+
+  .like-feedback.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .like-feedback[data-variant="warning"] {
+    --feedback-color: #c77200;
+  }
+
+  .like-feedback[data-variant="error"] {
+    --feedback-color: #c40058;
+  }
+
+  .like-button--burst {
+    animation: like-pop 500ms ease;
+  }
+
+  .like-button--shake {
+    animation: like-shake 500ms ease;
+  }
+
+  @keyframes like-pop {
+    0% { transform: scale(1); }
+    40% { transform: scale(1.25); }
+    60% { transform: scale(0.95); }
+    100% { transform: scale(1); }
+  }
+
+  @keyframes like-shake {
+    0%, 100% { transform: translateX(0); }
+    20% { transform: translateX(-6%); }
+    40% { transform: translateX(6%); }
+    60% { transform: translateX(-4%); }
+    80% { transform: translateX(4%); }
+  }
 </style>
