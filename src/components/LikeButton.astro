@@ -11,8 +11,26 @@ const API_ENDPOINT = `${API_URL}/v1/likes/${slug}`;
 ---
 
 <div class="like-container" data-slug={slug}>
-  <button class="like-button" aria-label="Like this post" title="Send some love">💖</button>
-  <span class="like-count">Loading...</span>
+  <button class="like-button" aria-label="Like this post" title="Send some love">
+    <span class="like-button__border" aria-hidden="true"></span>
+    <span class="like-button__icon" aria-hidden="true">
+      <svg viewBox="0 0 64 64" role="img" focusable="false">
+        <path
+          d="M32 59.5S4 44.2 4 23.9C4 12.6 12.6 4 23.9 4c4.4 0 8.6 1.5 12.1 4.2C39.4 5.5 43.6 4 48 4 59.3 4 68 12.6 68 23.9 68 44.2 40 59.5 40 59.5z"
+          transform="translate(-4 -4)"
+        />
+        <circle class="eye" cx="24" cy="28" r="3.5" />
+        <circle class="eye" cx="40" cy="28" r="3.5" />
+        <path class="smile" d="M22 38c2.2 3 5.3 4.7 10 4.7S39.8 41 42 38" />
+      </svg>
+    </span>
+    <span class="sr-only">Like this post</span>
+  </button>
+  <div class="like-info">
+    <span class="like-count" aria-live="polite">0</span>
+    <span class="like-max-badge" aria-hidden="true">MAX</span>
+    <span class="sr-only like-max-announcement" aria-live="polite"></span>
+  </div>
 </div>
 
 <script define:vars={{ API_ENDPOINT, slug }}>
@@ -28,20 +46,53 @@ const API_ENDPOINT = `${API_URL}/v1/likes/${slug}`;
 
     const storedLikes = parseInt(localStorage.getItem(userLikeKey) || '0', 10);
     let userLikes = Number.isNaN(storedLikes) ? 0 : storedLikes;
+    let pending = false;
 
-    const updateButtonState = () => {
+    const numberFormatter = new Intl.NumberFormat('en-US');
+    const maxAnnouncement = container.querySelector('.like-max-announcement');
+
+    const formatLikes = value => {
+      const numeric = Number(value);
+      const safeValue = Number.isFinite(numeric) ? numeric : 0;
+      return numberFormatter.format(Math.max(0, safeValue));
+    };
+
+    const updateCount = value => {
+      const numeric = Number(value);
+      const safeValue = Number.isFinite(numeric) ? numeric : 0;
+      countSpan.dataset.rawValue = String(safeValue);
+      countSpan.textContent = formatLikes(safeValue);
+    };
+
+    const playAnimation = (className, duration = 600) => {
+      button.classList.add(className);
+      window.setTimeout(() => button.classList.remove(className), duration);
+    };
+
+    const updateMaxState = () => {
       if (userLikes >= MAX_LIKES_PER_USER) {
+        container.classList.add('is-max');
         button.disabled = true;
         button.setAttribute('aria-disabled', 'true');
-        button.title = `You've reached the maximum of ${MAX_LIKES_PER_USER} likes.`;
+        const message = `You've reached the maximum of ${MAX_LIKES_PER_USER} likes.`;
+        button.title = message;
+        button.setAttribute('aria-label', message);
+        if (maxAnnouncement) {
+          maxAnnouncement.textContent = message;
+        }
       } else {
+        container.classList.remove('is-max');
         button.disabled = false;
         button.removeAttribute('aria-disabled');
         button.title = 'Send some love';
+        button.setAttribute('aria-label', 'Like this post');
+        if (maxAnnouncement) {
+          maxAnnouncement.textContent = '';
+        }
       }
     };
 
-    updateButtonState();
+    updateMaxState();
 
     // 1. Fetch the initial like count when the page loads
     async function getInitialLikes() {
@@ -51,25 +102,28 @@ const API_ENDPOINT = `${API_URL}/v1/likes/${slug}`;
           throw new Error(`Request failed with status ${response.status}`);
         }
         const data = await response.json();
-        countSpan.textContent = data.likes;
+        updateCount(data.likes);
       } catch (error) {
         console.error('Failed to fetch likes:', error);
-        countSpan.textContent = '0';
+        updateCount(0);
       }
     }
 
     // 2. Add a click event listener to the button
     button.addEventListener('click', async () => {
-      if (userLikes >= MAX_LIKES_PER_USER) {
-        button.classList.add('shake');
-        setTimeout(() => button.classList.remove('shake'), 400);
+      if (button.disabled || pending) {
         return;
       }
 
-      try {
-        button.classList.add('liked');
-        setTimeout(() => button.classList.remove('liked'), 400);
+      if (userLikes >= MAX_LIKES_PER_USER) {
+        playAnimation('show-limit', 600);
+        return;
+      }
 
+      pending = true;
+      playAnimation('celebrate');
+
+      try {
         const idem = localStorage.getItem(userIdemKey) || crypto.randomUUID();
         localStorage.setItem(userIdemKey, idem);
 
@@ -83,14 +137,16 @@ const API_ENDPOINT = `${API_URL}/v1/likes/${slug}`;
           throw new Error(`Request failed with status ${response.status}`);
         }
         const data = await response.json();
-        countSpan.textContent = data.likes;
+        updateCount(data.likes);
 
         userLikes += 1;
         localStorage.setItem(userLikeKey, String(userLikes));
-        updateButtonState();
+        updateMaxState();
       } catch (error) {
         console.error('Failed to add like:', error);
-        button.classList.remove('liked');
+        playAnimation('show-limit', 400);
+      } finally {
+        pending = false;
       }
     });
 
@@ -101,82 +157,186 @@ const API_ENDPOINT = `${API_URL}/v1/likes/${slug}`;
 
 <style>
   .like-container {
-    display: flex;
+    --heart-gradient: radial-gradient(circle at 30% 20%, #ffedf8, #ff8bc8 45%, #ff2d75 95%);
+    --heart-border: rgba(129, 152, 255, 0.65);
+    --heart-shadow: rgba(255, 45, 117, 0.35);
+    --max-text: rgba(168, 176, 217, 0.95);
+    display: inline-flex;
     align-items: center;
     justify-content: flex-end;
-    gap: 12px;
+    gap: 18px;
     width: 100%;
-  }
-
-  .like-button {
-    cursor: pointer;
-    border: none;
-    background: radial-gradient(circle at top left, #ff9fd4, #ff5c9a 60%, #ff2d75);
-    color: #fff;
-    width: 3.5rem;
-    height: 3.5rem;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.75rem;
-    box-shadow: 0 12px 24px rgba(255, 92, 154, 0.35);
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
     position: relative;
   }
 
-  .like-button:hover:not(:disabled) {
-    transform: translateY(-3px) scale(1.05);
-    box-shadow: 0 16px 28px rgba(255, 92, 154, 0.45);
+  .like-button {
+    position: relative;
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    padding: 0;
+    width: 4.25rem;
+    height: 4.25rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    isolation: isolate;
+    transition: transform 0.2s ease, filter 0.2s ease;
   }
 
-  .like-button:active:not(:disabled) {
+  .like-button__border {
+    position: absolute;
+    inset: -6%;
+    border-radius: 22px;
+    border: 3px solid transparent;
+    transition: border-color 0.3s ease, transform 0.3s ease;
+  }
+
+  .like-button__icon {
+    width: 100%;
+    height: 100%;
+    border-radius: 28px;
+    display: grid;
+    place-items: center;
+    background: var(--heart-gradient);
+    box-shadow: 0 18px 30px var(--heart-shadow);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .like-button svg {
+    width: 70%;
+    height: 70%;
+    fill: none;
+    stroke: none;
+  }
+
+  .like-button svg path:first-of-type {
+    fill: #ff3f93;
+    stroke: rgba(255, 255, 255, 0.45);
+    stroke-width: 1;
+  }
+
+  .like-button svg .eye {
+    fill: #4a154b;
+  }
+
+  .like-button svg .smile {
+    fill: none;
+    stroke: #4a154b;
+    stroke-width: 2.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .like-button:hover:not(:disabled) .like-button__icon {
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 22px 32px rgba(255, 45, 117, 0.45);
+  }
+
+  .like-button:active:not(:disabled) .like-button__icon {
     transform: scale(0.95);
   }
 
   .like-button:disabled,
   .like-button[aria-disabled='true'] {
     cursor: not-allowed;
-    background: #f4b7d1;
-    box-shadow: none;
-    opacity: 0.65;
   }
 
-  .like-button.liked {
-    animation: heart-pop 0.4s ease;
-  }
-
-  .like-button.shake {
-    animation: shake 0.4s ease;
+  .like-info {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    font-weight: 600;
+    color: #ff4fa3;
+    font-size: clamp(1.2rem, 1vw + 1rem, 1.6rem);
   }
 
   .like-count {
-    font-weight: 600;
-    color: var(--theme-text, #ff2d75);
-    font-size: 1.1rem;
+    min-width: 3ch;
+    letter-spacing: 0.01em;
   }
 
-  @keyframes heart-pop {
+  .like-max-badge {
+    opacity: 0;
+    transform: translateY(4px);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    color: var(--max-text);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+
+  .sr-only {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+    white-space: nowrap;
+  }
+
+  .like-button.celebrate .like-button__icon {
+    animation: heart-burst 0.6s ease;
+  }
+
+  .like-button.show-limit .like-button__icon {
+    animation: heart-shake 0.6s ease;
+  }
+
+  .like-container.is-max .like-button__border {
+    border-color: var(--heart-border);
+    transform: scale(1.06);
+  }
+
+  .like-container.is-max .like-button__icon {
+    filter: saturate(0.75) brightness(0.98);
+  }
+
+  .like-container.is-max .like-max-badge {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .like-container.is-max .like-info {
+    color: var(--max-text);
+  }
+
+  @keyframes heart-burst {
     0% {
       transform: scale(1);
+      box-shadow: 0 18px 30px var(--heart-shadow);
     }
-    50% {
-      transform: scale(1.3);
+    40% {
+      transform: scale(1.2);
+      box-shadow: 0 26px 36px rgba(255, 45, 117, 0.55);
+    }
+    70% {
+      transform: scale(0.95);
     }
     100% {
       transform: scale(1);
+      box-shadow: 0 18px 30px var(--heart-shadow);
     }
   }
 
-  @keyframes shake {
+  @keyframes heart-shake {
     0%, 100% {
       transform: translateX(0);
     }
-    25% {
-      transform: translateX(-4px);
+    20% {
+      transform: translateX(-5px) rotate(-3deg);
     }
-    75% {
-      transform: translateX(4px);
+    40% {
+      transform: translateX(4px) rotate(2deg);
+    }
+    60% {
+      transform: translateX(-3px) rotate(-1deg);
+    }
+    80% {
+      transform: translateX(2px) rotate(1deg);
     }
   }
 </style>
