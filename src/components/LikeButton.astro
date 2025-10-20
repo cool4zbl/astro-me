@@ -12,7 +12,6 @@ const API_ENDPOINT = `${API_URL}/v1/likes/${slug}`;
 
 <div class="like-container" data-slug={slug}>
   <button class="like-button" aria-label="Like this post" title="Send some love">
-    <span class="like-button__border" aria-hidden="true"></span>
     <span class="like-button__icon" aria-hidden="true">
       <svg viewBox="0 0 64 64" role="img" focusable="false">
         <path
@@ -163,13 +162,10 @@ const API_ENDPOINT = `${API_URL}/v1/likes/${slug}`;
 
 <style>
   .like-container {
-    --heart-gradient: radial-gradient(circle at 30% 20%, #ffedf8, #ff8bc8 45%, #ff2d75 95%);
-    --heart-border: rgba(129, 152, 255, 0.65);
     --heart-shadow: rgba(255, 45, 117, 0.35);
     --max-text: rgba(168, 176, 217, 0.95);
-    --heart-idle-bg: #f1f5f9;
-    --heart-idle-border: rgba(148, 163, 184, 0.55);
-    --heart-idle-shadow: rgba(15, 23, 42, 0.1);
+    --heart-idle: rgba(248, 250, 252, 0.45);
+    --heart-hover: #ff6aa9;
     display: inline-flex;
     align-items: center;
     justify-content: flex-end;
@@ -189,62 +185,62 @@ const API_ENDPOINT = `${API_URL}/v1/likes/${slug}`;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    isolation: isolate;
-    transition: transform 0.2s ease, filter 0.2s ease;
-  }
-
-  .like-button__border {
-    position: absolute;
-    inset: -6%;
-    border-radius: 22px;
-    border: 3px solid transparent;
-    transition: border-color 0.3s ease, transform 0.3s ease;
+    transition: transform 0.2s ease;
   }
 
   .like-button__icon {
     width: 100%;
     height: 100%;
-    border-radius: 28px;
     display: grid;
     place-items: center;
-    background: var(--heart-idle-bg);
-    box-shadow: 0 14px 24px var(--heart-idle-shadow);
-    border: 2px solid var(--heart-idle-border);
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
   }
 
   .like-button svg {
-    width: 70%;
-    height: 70%;
+    width: 74%;
+    height: 74%;
     fill: none;
     stroke: none;
   }
 
   .like-button svg path:first-of-type {
-    fill: #cbd5f5;
-    stroke: rgba(148, 163, 184, 0.7);
+    fill: var(--heart-idle);
+    stroke: rgba(148, 163, 184, 0.3);
     stroke-width: 1.2;
+    transition: fill 0.35s ease, filter 0.35s ease, transform 0.35s ease;
+    filter: drop-shadow(0 4px 10px rgba(15, 23, 42, 0.08));
   }
 
   .like-button svg .eye {
-    fill: #475569;
+    fill: rgba(71, 85, 105, 0.65);
+    transition: fill 0.3s ease;
   }
 
   .like-button svg .smile {
     fill: none;
-    stroke: #475569;
+    stroke: rgba(71, 85, 105, 0.65);
     stroke-width: 2.5;
     stroke-linecap: round;
     stroke-linejoin: round;
+    transition: stroke 0.3s ease;
   }
 
-  .like-button:hover:not(:disabled) .like-button__icon {
-    transform: translateY(-2px) scale(1.05);
-    box-shadow: 0 18px 26px rgba(15, 23, 42, 0.14);
+  .like-button:hover:not(:disabled) {
+    transform: translateY(-2px);
   }
 
-  .like-button:active:not(:disabled) .like-button__icon {
-    transform: scale(0.95);
+  .like-button:hover:not(:disabled) svg path:first-of-type {
+    fill: var(--heart-hover);
+    filter: drop-shadow(0 12px 18px var(--heart-shadow));
+  }
+
+  .like-button:hover:not(:disabled) svg .eye,
+  .like-button:hover:not(:disabled) svg .smile {
+    fill: #b4236c;
+    stroke: #b4236c;
+  }
+
+  .like-button:active:not(:disabled) {
+    transform: scale(0.94);
   }
 
   .like-button:disabled,
@@ -288,34 +284,35 @@ const API_ENDPOINT = `${API_URL}/v1/likes/${slug}`;
     white-space: nowrap;
   }
 
-  .like-button.celebrate .like-button__icon {
+  .like-button.celebrate svg path:first-of-type {
     animation: heart-burst 0.6s ease;
   }
 
-  .like-button.show-limit .like-button__icon {
+  .like-button.show-limit svg path:first-of-type {
     animation: heart-shake 0.6s ease;
   }
 
-  .like-container.is-max .like-button__border {
-    border-color: var(--heart-border);
-    transform: scale(1.06);
-  }
-
-  .like-container.has-liked .like-button__icon {
-    background: var(--heart-gradient);
-    border-color: transparent;
-    box-shadow: 0 18px 30px var(--heart-shadow);
-  }
-
   .like-container.has-liked .like-button svg path:first-of-type {
-    fill: #ff3f93;
-    stroke: rgba(255, 255, 255, 0.45);
+    fill: #ff2d75;
+    stroke: rgba(255, 255, 255, 0.55);
+    filter: drop-shadow(0 14px 24px var(--heart-shadow));
   }
 
   .like-container.has-liked .like-button svg .eye,
   .like-container.has-liked .like-button svg .smile {
     fill: #4a154b;
     stroke: #4a154b;
+  }
+
+  .like-container.is-max .like-button svg path:first-of-type {
+    opacity: 0.75;
+    filter: drop-shadow(0 8px 16px rgba(148, 163, 184, 0.35));
+  }
+
+  .like-container.is-max .like-button svg .eye,
+  .like-container.is-max .like-button svg .smile {
+    fill: rgba(148, 163, 184, 0.75);
+    stroke: rgba(148, 163, 184, 0.75);
   }
 
   .like-container.is-max .like-max-badge {
@@ -330,18 +327,19 @@ const API_ENDPOINT = `${API_URL}/v1/likes/${slug}`;
   @keyframes heart-burst {
     0% {
       transform: scale(1);
-      box-shadow: 0 18px 30px var(--heart-shadow);
+      filter: drop-shadow(0 12px 18px rgba(255, 45, 117, 0.35));
     }
     40% {
-      transform: scale(1.2);
-      box-shadow: 0 26px 36px rgba(255, 45, 117, 0.55);
+      transform: scale(1.18);
+      filter: drop-shadow(0 20px 28px rgba(255, 45, 117, 0.55));
     }
     70% {
-      transform: scale(0.95);
+      transform: scale(0.96);
+      filter: drop-shadow(0 14px 20px rgba(255, 45, 117, 0.4));
     }
     100% {
       transform: scale(1);
-      box-shadow: 0 18px 30px var(--heart-shadow);
+      filter: drop-shadow(0 12px 18px rgba(255, 45, 117, 0.35));
     }
   }
 
