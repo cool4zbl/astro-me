@@ -6,7 +6,7 @@ export interface Props {
 
 const { slug } = Astro.props;
 // TODO:
-const API_URL = import.meta.env.PROD ? 'https://summer-prod.up.railway.app' : 'http://localhost:8080';
+const API_URL = import.meta.env.PROD ? 'https://api.binliuzhang.com' : 'http://localhost:8080';
 const API_ENDPOINT = `${API_URL}/v1/likes/${slug}`;
 
 ---
@@ -14,7 +14,7 @@ const API_ENDPOINT = `${API_URL}/v1/likes/${slug}`;
 <div class="like-container" data-slug={slug}>
   <button class="like-button" aria-label="Like this post" title="Send some love">
     <span class="like-button__icon" aria-hidden="true">
-      <svg viewBox="0 0 64 64" role="img" focusable="false">
+      <svg viewBox="0 0 70 70" role="img" focusable="false">
         <path
           d="M32 59.5S4 44.2 4 23.9C4 12.6 12.6 4 23.9 4c4.4 0 8.6 1.5 12.1 4.2C39.4 5.5 43.6 4 48 4 59.3 4 68 12.6 68 23.9 68 44.2 40 59.5 40 59.5z"
           transform="translate(-4 -4)"
@@ -126,7 +126,6 @@ const API_ENDPOINT = `${API_URL}/v1/likes/${slug}`;
       }
 
       pending = true;
-      playAnimation('celebrate');
 
       try {
         const idem = localStorage.getItem(userIdemKey) || crypto.randomUUID();
@@ -144,6 +143,8 @@ const API_ENDPOINT = `${API_URL}/v1/likes/${slug}`;
         const data = await response.json();
         updateCount(data.likes);
 
+        // Only update user state and play animation if request succeeded
+        playAnimation('celebrate');
         userLikes += 1;
         localStorage.setItem(userLikeKey, String(userLikes));
         syncLikedState();
@@ -151,6 +152,7 @@ const API_ENDPOINT = `${API_URL}/v1/likes/${slug}`;
       } catch (error) {
         console.error('Failed to add like:', error);
         playAnimation('show-limit', 400);
+        // Don't update user likes or state on error
       } finally {
         pending = false;
       }
@@ -187,6 +189,21 @@ const API_ENDPOINT = `${API_URL}/v1/likes/${slug}`;
     align-items: center;
     justify-content: center;
     transition: transform 0.2s ease;
+    outline: none !important;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .like-button:focus,
+  .like-button:focus-visible,
+  .like-button:active {
+    outline: none !important;
+    box-shadow: none !important;
+  }
+
+  .like-button *,
+  .like-button *:focus,
+  .like-button *:active {
+    outline: none !important;
   }
 
   .like-button__icon {
@@ -194,6 +211,7 @@ const API_ENDPOINT = `${API_URL}/v1/likes/${slug}`;
     height: 100%;
     display: grid;
     place-items: center;
+    outline: none;
   }
 
   .like-button svg {
@@ -201,6 +219,7 @@ const API_ENDPOINT = `${API_URL}/v1/likes/${slug}`;
     height: 74%;
     fill: none;
     stroke: none;
+    outline: none;
   }
 
   .like-button svg path:first-of-type {

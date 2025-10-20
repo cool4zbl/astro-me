@@ -3,8 +3,11 @@ TODO:
 - [x] Image for feature work to be correct size
 - [x] set up comments (disqus, utterances, etc)
 
+- [ ] Replace API URL
+
 Design
 - [] images in blogs need to be smaller
+- [] prettier code blocks
 - [] Links in Experience page
 - [] fix line-break in titles
 - [] Image for blog posts
@@ -12,10 +15,10 @@ Design
 
 Feature
 - [x] fix GA
+- [] Counter for visits, likes, comments
 - [] set up analytics (plausible, simple analytics, etc)
 - [] realtime chat (build by myself or use third party)
 - [] SSR w/ Vercel or Netlify
-- [] Counter for visits, likes, comments
 - [] set up consent modal for cookies
 - [] hotjar or similar for heatmaps
 - [] Translate Chinese ver to EN dynamically
