@@ -12,35 +12,125 @@ const API_ENDPOINT = `${API_URL}/v1/likes/${slug}`;
 ---
 
 <div class="like-container" data-slug={slug}>
-  <button class="like-button">❤️</button>
-  <span class="like-count">Loading...</span>
+  <button class="like-button" aria-label="Like this post" title="Send some love">
+    <span class="like-button__icon" aria-hidden="true">
+      <svg viewBox="0 0 64 64" role="img" focusable="false">
+        <path
+          d="M32 59.5S4 44.2 4 23.9C4 12.6 12.6 4 23.9 4c4.4 0 8.6 1.5 12.1 4.2C39.4 5.5 43.6 4 48 4 59.3 4 68 12.6 68 23.9 68 44.2 40 59.5 40 59.5z"
+          transform="translate(-4 -4)"
+        />
+        <circle class="eye" cx="24" cy="28" r="3.5" />
+        <circle class="eye" cx="40" cy="28" r="3.5" />
+        <path class="smile" d="M22 38c2.2 3 5.3 4.7 10 4.7S39.8 41 42 38" />
+      </svg>
+    </span>
+    <span class="sr-only">Like this post</span>
+  </button>
+  <div class="like-info">
+    <span class="like-count" aria-live="polite">0</span>
+    <span class="like-max-badge" aria-hidden="true">MAX</span>
+    <span class="sr-only like-max-announcement" aria-live="polite"></span>
+  </div>
 </div>
 
 <script define:vars={{ API_ENDPOINT, slug }}>
   // This code runs in the browser
+  const MAX_LIKES_PER_USER = 20;
+
   document.querySelectorAll('.like-container').forEach(container => {
     const slug = container.dataset.slug;
     const button = container.querySelector('.like-button');
     const countSpan = container.querySelector('.like-count');
+    const userLikeKey = `like-count-${slug}`;
+    const userIdemKey = `like-idem-${slug}`;
+
+    const storedLikes = parseInt(localStorage.getItem(userLikeKey) || '0', 10);
+    let userLikes = Number.isNaN(storedLikes) ? 0 : storedLikes;
+    let pending = false;
+
+    const numberFormatter = new Intl.NumberFormat('en-US');
+    const maxAnnouncement = container.querySelector('.like-max-announcement');
+
+    const syncLikedState = () => {
+      container.classList.toggle('has-liked', userLikes > 0);
+    };
+
+    const formatLikes = value => {
+      const numeric = Number(value);
+      const safeValue = Number.isFinite(numeric) ? numeric : 0;
+      return numberFormatter.format(Math.max(0, safeValue));
+    };
+
+    const updateCount = value => {
+      const numeric = Number(value);
+      const safeValue = Number.isFinite(numeric) ? numeric : 0;
+      countSpan.dataset.rawValue = String(safeValue);
+      countSpan.textContent = formatLikes(safeValue);
+    };
+
+    const playAnimation = (className, duration = 600) => {
+      button.classList.add(className);
+      window.setTimeout(() => button.classList.remove(className), duration);
+    };
+
+    const updateMaxState = () => {
+      if (userLikes >= MAX_LIKES_PER_USER) {
+        container.classList.add('is-max');
+        button.disabled = true;
+        button.setAttribute('aria-disabled', 'true');
+        const message = `You've reached the maximum of ${MAX_LIKES_PER_USER} likes.`;
+        button.title = message;
+        button.setAttribute('aria-label', message);
+        if (maxAnnouncement) {
+          maxAnnouncement.textContent = message;
+        }
+      } else {
+        container.classList.remove('is-max');
+        button.disabled = false;
+        button.removeAttribute('aria-disabled');
+        button.title = 'Send some love';
+        button.setAttribute('aria-label', 'Like this post');
+        if (maxAnnouncement) {
+          maxAnnouncement.textContent = '';
+        }
+      }
+    };
+
+    syncLikedState();
+    updateMaxState();
 
     // 1. Fetch the initial like count when the page loads
     async function getInitialLikes() {
       try {
         const response = await fetch(`${API_ENDPOINT}`);
+        if (!response.ok) {
+          throw new Error(`Request failed with status ${response.status}`);
+        }
         const data = await response.json();
-        countSpan.textContent = data.likes;
+        updateCount(data.likes);
       } catch (error) {
         console.error('Failed to fetch likes:', error);
-        countSpan.textContent = '0';
+        updateCount(0);
       }
     }
 
     // 2. Add a click event listener to the button
     button.addEventListener('click', async () => {
+      if (button.disabled || pending) {
+        return;
+      }
+
+      if (userLikes >= MAX_LIKES_PER_USER) {
+        playAnimation('show-limit', 600);
+        return;
+      }
+
+      pending = true;
+      playAnimation('celebrate');
+
       try {
-        // button.disabled = true; // Prevent multiple clicks
-        const idem = localStorage.getItem(`like-idem-${slug}`) || crypto.randomUUID();
-        localStorage.setItem(`like-idem-${slug}`, idem);
+        const idem = localStorage.getItem(userIdemKey) || crypto.randomUUID();
+        localStorage.setItem(userIdemKey, idem);
 
         const response = await fetch(`${API_ENDPOINT}`, {
           method: 'POST',
@@ -48,11 +138,21 @@ const API_ENDPOINT = `${API_URL}/v1/likes/${slug}`;
             'Idempotency-Key': idem,
           }
         });
+        if (!response.ok) {
+          throw new Error(`Request failed with status ${response.status}`);
+        }
         const data = await response.json();
-        countSpan.textContent = data.likes;
+        updateCount(data.likes);
+
+        userLikes += 1;
+        localStorage.setItem(userLikeKey, String(userLikes));
+        syncLikedState();
+        updateMaxState();
       } catch (error) {
         console.error('Failed to add like:', error);
-        button.disabled = false; // Re-enable if it failed
+        playAnimation('show-limit', 400);
+      } finally {
+        pending = false;
       }
     });
 
@@ -62,8 +162,203 @@ const API_ENDPOINT = `${API_URL}/v1/likes/${slug}`;
 </script>
 
 <style>
-  /* Add some basic styling */
-  .like-container { display: flex; align-items: center; gap: 8px; }
-  .like-button { cursor: pointer; border: none; background: #eee; padding: 8px; border-radius: 50%; }
-  .like-button:disabled { cursor: not-allowed; background: #ddd; }
+  .like-container {
+    --heart-shadow: rgba(255, 45, 117, 0.35);
+    --max-text: rgba(168, 176, 217, 0.95);
+    --heart-idle: rgba(248, 250, 252, 0.45);
+    --heart-hover: #ff6aa9;
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 18px;
+    width: 100%;
+    position: relative;
+  }
+
+  .like-button {
+    position: relative;
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    padding: 0;
+    width: 4.25rem;
+    height: 4.25rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease;
+  }
+
+  .like-button__icon {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    place-items: center;
+  }
+
+  .like-button svg {
+    width: 74%;
+    height: 74%;
+    fill: none;
+    stroke: none;
+  }
+
+  .like-button svg path:first-of-type {
+    fill: var(--heart-idle);
+    stroke: rgba(148, 163, 184, 0.3);
+    stroke-width: 1.2;
+    transition: fill 0.35s ease, filter 0.35s ease, transform 0.35s ease;
+    filter: drop-shadow(0 4px 10px rgba(15, 23, 42, 0.08));
+  }
+
+  .like-button svg .eye {
+    fill: rgba(71, 85, 105, 0.65);
+    transition: fill 0.3s ease;
+  }
+
+  .like-button svg .smile {
+    fill: none;
+    stroke: rgba(71, 85, 105, 0.65);
+    stroke-width: 2.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transition: stroke 0.3s ease;
+  }
+
+  .like-button:hover:not(:disabled) {
+    transform: translateY(-2px);
+  }
+
+  .like-button:hover:not(:disabled) svg path:first-of-type {
+    fill: var(--heart-hover);
+    filter: drop-shadow(0 12px 18px var(--heart-shadow));
+  }
+
+  .like-button:hover:not(:disabled) svg .eye,
+  .like-button:hover:not(:disabled) svg .smile {
+    fill: #b4236c;
+    stroke: #b4236c;
+  }
+
+  .like-button:active:not(:disabled) {
+    transform: scale(0.94);
+  }
+
+  .like-button:disabled,
+  .like-button[aria-disabled='true'] {
+    cursor: not-allowed;
+  }
+
+  .like-info {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    font-weight: 600;
+    color: #ff4fa3;
+    font-size: clamp(1.2rem, 1vw + 1rem, 1.6rem);
+  }
+
+  .like-count {
+    min-width: 3ch;
+    letter-spacing: 0.01em;
+  }
+
+  .like-max-badge {
+    opacity: 0;
+    transform: translateY(4px);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    color: var(--max-text);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+
+  .sr-only {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+    white-space: nowrap;
+  }
+
+  .like-button.celebrate svg path:first-of-type {
+    animation: heart-burst 0.6s ease;
+  }
+
+  .like-button.show-limit svg path:first-of-type {
+    animation: heart-shake 0.6s ease;
+  }
+
+  .like-container.has-liked .like-button svg path:first-of-type {
+    fill: #ff2d75;
+    stroke: rgba(255, 255, 255, 0.55);
+    filter: drop-shadow(0 14px 24px var(--heart-shadow));
+  }
+
+  .like-container.has-liked .like-button svg .eye,
+  .like-container.has-liked .like-button svg .smile {
+    fill: #4a154b;
+    stroke: #4a154b;
+  }
+
+  .like-container.is-max .like-button svg path:first-of-type {
+    opacity: 0.75;
+    filter: drop-shadow(0 8px 16px rgba(148, 163, 184, 0.35));
+  }
+
+  .like-container.is-max .like-button svg .eye,
+  .like-container.is-max .like-button svg .smile {
+    fill: rgba(148, 163, 184, 0.75);
+    stroke: rgba(148, 163, 184, 0.75);
+  }
+
+  .like-container.is-max .like-max-badge {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .like-container.is-max .like-info {
+    color: var(--max-text);
+  }
+
+  @keyframes heart-burst {
+    0% {
+      transform: scale(1);
+      filter: drop-shadow(0 12px 18px rgba(255, 45, 117, 0.35));
+    }
+    40% {
+      transform: scale(1.18);
+      filter: drop-shadow(0 20px 28px rgba(255, 45, 117, 0.55));
+    }
+    70% {
+      transform: scale(0.96);
+      filter: drop-shadow(0 14px 20px rgba(255, 45, 117, 0.4));
+    }
+    100% {
+      transform: scale(1);
+      filter: drop-shadow(0 12px 18px rgba(255, 45, 117, 0.35));
+    }
+  }
+
+  @keyframes heart-shake {
+    0%, 100% {
+      transform: translateX(0);
+    }
+    20% {
+      transform: translateX(-5px) rotate(-3deg);
+    }
+    40% {
+      transform: translateX(4px) rotate(2deg);
+    }
+    60% {
+      transform: translateX(-3px) rotate(-1deg);
+    }
+    80% {
+      transform: translateX(2px) rotate(1deg);
+    }
+  }
 </style>
