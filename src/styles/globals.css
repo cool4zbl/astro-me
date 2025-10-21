@@ -181,11 +181,27 @@ button,
   @apply transition-colors duration-200;
 }
 
-/* Added focus styles for accessibility */
-.prose a:focus,
+/* Remove outlines from all interactive elements */
+a,
+a:focus,
+a:focus-visible,
+button,
 button:focus,
-[role="button"]:focus {
-  @apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-background;
+button:focus-visible,
+[role="button"],
+[role="button"]:focus,
+[role="button"]:focus-visible,
+input:focus,
+textarea:focus,
+select:focus {
+  @apply outline-none;
+}
+
+/* Remove focus ring styles */
+*:focus,
+*:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
 }
 
 /* Added utility classes for consistent spacing */
