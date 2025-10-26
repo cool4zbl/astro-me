@@ -1,0 +1,87 @@
+---
+/**
+ * Example: Using Site Configuration
+ *
+ * This file demonstrates various ways to use the site configuration
+ * in your Astro components and pages.
+ */
+
+import { siteConfig, getApiEndpoint, isFeatureEnabled } from '@/config';
+
+// Example 1: Environment-aware API calls
+const fetchComments = async () => {
+  const endpoint = getApiEndpoint('comments');
+  // In development: http://localhost:3000/api/comments
+  // In production: https://api.binliuzhang.com/comments
+
+  try {
+    const response = await fetch(endpoint);
+    return await response.json();
+  } catch (error) {
+    console.error('Failed to fetch comments:', error);
+    return [];
+  }
+};
+
+// Example 2: Conditional feature rendering
+const shouldShowAnalytics = isFeatureEnabled('analytics');
+const shouldShowComments = isFeatureEnabled('comments');
+
+// Example 3: Access site metadata
+const { site, social } = siteConfig;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>{site.title}</title>
+  <meta name="description" content={site.description} />
+  <link rel="canonical" href={site.url} />
+</head>
+<body>
+  <header>
+    <h1>{site.name}</h1>
+
+    <!-- Social Links using config -->
+    <nav>
+      <a href={social.github}>GitHub</a>
+      <a href={social.linkedin}>LinkedIn</a>
+      <a href={social.twitter}>Twitter</a>
+      <a href={`mailto:${social.email}`}>Email</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Welcome to my site!</h2>
+
+    <!-- Conditional rendering based on feature flags -->
+    {shouldShowComments && (
+      <section id="comments">
+        <h3>Comments</h3>
+        <!-- Comments component would go here -->
+      </section>
+    )}
+  </main>
+
+  <footer>
+    <p>&copy; {new Date().getFullYear()} {site.author}</p>
+
+    <!-- Environment indicator (dev only) -->
+    {siteConfig.env.isDev && (
+      <div style="background: yellow; padding: 10px;">
+        ⚠️ Development Mode - Site URL: {site.url}
+      </div>
+    )}
+  </footer>
+
+  <!-- Conditional analytics script -->
+  {shouldShowAnalytics && siteConfig.services.googleAnalytics.measurementId && (
+    <script
+      is:inline
+      async
+      src={`https://www.googletagmanager.com/gtag/js?id=${siteConfig.services.googleAnalytics.measurementId}`}
+    ></script>
+  )}
+</body>
+</html>
+

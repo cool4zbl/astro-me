@@ -1,18 +1,19 @@
 ---
-const GA_ID = "G-K2609HEZYE";
-const enabled = import.meta.env.PROD && !!GA_ID;
+import { siteConfig } from '@/config';
+
+const { enabled, measurementId } = siteConfig.services.googleAnalytics;
 ---
 
-{ enabled && <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`
+{ enabled && <script async src={`https://www.googletagmanager.com/gtag/js?id=${measurementId}`
 }></script> }
 
 { enabled && (
-  <script is:inline>
+  <script is:inline define:vars={{ measurementId }}>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', "G-K2609HEZYE");
-    
+    gtag('config', measurementId);
+
     const sendPageView = () => {
       const { pathname, search, href } = window.location;
       const pagePath = pathname + search;
@@ -22,7 +23,7 @@ const enabled = import.meta.env.PROD && !!GA_ID;
       }
 
       window.__lastGtagPagePath = pagePath;
-      gtag('config', "G-K2609HEZYE", { 'page_path': pagePath });
+      gtag('config', measurementId, { 'page_path': pagePath });
       gtag('event', 'page_view', {
         page_path: pagePath,
         page_location: href,

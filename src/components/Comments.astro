@@ -3,6 +3,7 @@
 // Enable Discussions in your GitHub repository before use
 // Configure integration details at https://giscus.app
 
+import { siteConfig } from "@/config";
 const { class: className } = Astro.props;
 ---
 
@@ -41,13 +42,13 @@ const { class: className } = Astro.props;
   </div>
 </div>
 
-<script>
-  // Giscus configuration - replace these placeholders with your repository details
+<script define:vars={{ giscusConfig: siteConfig.services.giscus }}>
+  // Giscus configuration from centralized config
   const GISCUS_CONFIG = {
-    repo: 'cool4zbl/astro-me', // GitHub repository
-    repoId: 'R_kgDOPzqEJQ', // Obtain from giscus.app
-    category: 'General', // Discussion category
-    categoryId: 'DIC_kwDOPzqEJc4CwZ_v', // Obtain from giscus.app
+    repo: giscusConfig.repo,
+    repoId: giscusConfig.repoId,
+    category: giscusConfig.category,
+    categoryId: giscusConfig.categoryId,
     mapping: 'pathname', // Mapping strategy
     strict: '0',
     reactionsEnabled: '1',

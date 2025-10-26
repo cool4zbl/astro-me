@@ -1,13 +1,11 @@
 ---
-// src/components/LikeButton.astro
+import { getApiEndpoint } from "@/config";
 export interface Props {
   slug: string;
 }
 
 const { slug } = Astro.props;
-// TODO:
-const API_URL = import.meta.env.PROD ? 'https://api.binliuzhang.com' : 'http://localhost:8080';
-const API_ENDPOINT = `${API_URL}/v1/likes/${slug}`;
+const API_ENDPOINT = `${getApiEndpoint('likes')}/${slug}`;
 
 ---
 
@@ -38,7 +36,6 @@ const API_ENDPOINT = `${API_URL}/v1/likes/${slug}`;
   const MAX_LIKES_PER_USER = 20;
 
   document.querySelectorAll('.like-container').forEach(container => {
-    const slug = container.dataset.slug;
     const button = container.querySelector('.like-button');
     const countSpan = container.querySelector('.like-count');
     const userLikeKey = `like-count-${slug}`;

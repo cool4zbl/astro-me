@@ -1,7 +1,10 @@
 ---
-const enabled = import.meta.env.PROD;
+import { siteConfig } from '@/config';
+
+const { enabled, siteId } = siteConfig.services.baiduAnalytics;
 ---
 
-{ enabled &&
-<script async src="https://hm.baidu.com/hm.js?f42a71719d9466b0a17dc5b8a1650b38">
-</script> }
+{ enabled && (
+  <script is:inline async src={`https://hm.baidu.com/hm.js?${siteId}`}>
+  </script>
+) }

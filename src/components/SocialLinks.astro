@@ -1,19 +1,21 @@
 ---
 import { getLocalizedPath, getTranslations } from '../i18n/config';
+import { siteConfig } from '@/config';
 
 const { size = 'sm', showLabels = false, lang = 'en' } = Astro.props;
 const t = getTranslations(lang);
+const { social } = siteConfig;
 
 const socialLinks = [
   {
     name: 'GitHub',
-    url: 'https://github.com/cool4zbl',
+    url: social.github,
     icon: 'github',
     label: t('social.github')
   },
   {
     name: 'LinkedIn',
-    url: 'https://www.linkedin.com/in/binliu-zhang',
+    url: social.linkedin,
     icon: 'linkedin',
     label: t('social.linkedin')
   },
@@ -25,7 +27,7 @@ const socialLinks = [
   },
   {
     name: 'Email',
-    url: 'mailto:binliu.zhang@gmail.com',
+    url: `mailto:${social.email}`,
     icon: 'email',
     label: t('social.email')
   }
