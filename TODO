@@ -16,8 +16,11 @@ Design
 
 Feature
 - [x] fix GA
-- [] Counter for visits, likes, comments
+- [x] Counter for likes
+- [] Counter for visits
+- [] counter for comments
 - [] set up analytics (plausible, simple analytics, etc)
+- [] "now" section to show what I'm doing currently
 - [] realtime chat (build by myself or use third party)
 - [] SSR w/ Vercel or Netlify
 - [] set up consent modal for cookies

@@ -8,7 +8,6 @@ export default defineConfig({
     integrations: [mdx(), sitemap(), tailwind({
         applyBaseStyles: true,
     }),
-    // partytown({ config: { forward: ['dataLayer.push'] } }),
     ],
     markdown: {
         shikiConfig: {
