@@ -28,8 +28,7 @@ const {
   tags = [],
 } = Astro.props;
 
-const lang = getLangFromUrl(Astro.url);
-const htmlLang = lang === "zh" ? "zh-CN" : "en";
+const htmlLang = getLangFromUrl(Astro.url);
 ---
 
 <!doctype html>

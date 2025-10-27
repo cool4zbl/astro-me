@@ -5,6 +5,7 @@ import {
   getLangFromUrl,
   getTranslations,
   getLocalizedPath,
+  ui,
 } from "../i18n/config";
 import { siteConfig } from "@/config";
 
@@ -125,7 +126,7 @@ const initialMotto = mottoTexts[0];
                     href={link.href}
                     class="transition-colors hover:text-primary"
                   >
-                    {t(`nav.${link.key}`)}
+                    {t(`nav.${link.key}` as keyof typeof ui[typeof lang])}
                   </a>
                 </li>
               ))

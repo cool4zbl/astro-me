@@ -39,15 +39,15 @@
 </button>
 
 <script>
-  // 主题管理类
   class ThemeManager {
+    private button: HTMLButtonElement | null;
+
     constructor() {
-      this.button = document.getElementById('theme-toggle');
+      this.button = document.getElementById('theme-toggle') as HTMLButtonElement;
       this.init();
     }
 
     init() {
-      // 绑定点击事件
       this.button?.addEventListener('click', () => this.toggleTheme());
 
       // 监听系统主题变化

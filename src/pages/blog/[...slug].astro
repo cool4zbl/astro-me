@@ -29,7 +29,11 @@ const pageDescription = post.data.description;
 <BaseLayout
   title={pageTitle}
   description={pageDescription}
-  image={post.data.heroImage}
+  image={
+    typeof post.data.heroImage === "string"
+      ? post.data.heroImage
+      : post.data.heroImage?.src
+  }
   article={true}
   publishedTime={post.data.publishedAt}
   modifiedTime={post.data.updatedAt}

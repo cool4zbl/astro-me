@@ -130,6 +130,11 @@ const { title: pageTitle, description: pageDescription } = getPageMetadata('sear
     const searchCount = document.getElementById('search-count');
     const resultsContainer = document.getElementById('results-container');
 
+    if (!searchResults || !noResults || !initialState || !searchCount || !resultsContainer) {
+      console.warn('Search UI elements are missing.');
+      return;
+    }
+
     initialState.classList.add('hidden');
 
     if (results.length === 0) {
@@ -172,12 +177,19 @@ const { title: pageTitle, description: pageDescription } = getPageMetadata('sear
       </article>
     `).join('');
   }
-
-  // Show initial state
+  
   function showInitialState() {
-    document.getElementById('search-results').classList.add('hidden');
-    document.getElementById('no-results').classList.add('hidden');
-    document.getElementById('initial-state').classList.remove('hidden');
+    const searchResults = document.getElementById('search-results');
+    const noResults = document.getElementById('no-results');
+    const initialState = document.getElementById('initial-state');
+
+    if (!searchResults || !noResults || !initialState) {
+      return;
+    }
+
+    searchResults.classList.add('hidden');
+    noResults.classList.add('hidden');
+    initialState.classList.remove('hidden');
   }
 
   // Highlight search keywords
@@ -216,10 +228,14 @@ const { title: pageTitle, description: pageDescription } = getPageMetadata('sear
     initSearch();
 
     const searchInput = document.getElementById('search-input');
+    if (!(searchInput instanceof HTMLInputElement)) return;
+
     const debouncedSearch = debounce((query) => performSearch(query), 300);
 
-    searchInput.addEventListener('input', (e) => {
-      debouncedSearch(e.target.value);
+    searchInput.addEventListener('input', (event) => {
+      const target = event.target;
+      if (!(target instanceof HTMLInputElement)) return;
+      debouncedSearch(target.value);
     });
 
     // From URL parameters get search query
