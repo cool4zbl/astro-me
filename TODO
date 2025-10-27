@@ -2,12 +2,12 @@ TODO:
 
 - [x] Image for feature work to be correct size
 - [x] set up comments (disqus, utterances, etc)
-
-- [ ] Replace API URL
+- [x] Replace API URL
 
 Design
-- [] add favicon "Spark"
 - [] images in blogs need to be smaller
+- [] font family
+- [] add favicon "Spark"
 - [] prettier code blocks
 - [] Links in Experience page
 - [] fix line-break in titles
@@ -17,10 +17,10 @@ Design
 Feature
 - [x] fix GA
 - [x] Counter for likes
-- [] Counter for visits
-- [] counter for comments
 - [] set up analytics (plausible, simple analytics, etc)
 - [] "now" section to show what I'm doing currently
+- [] Counter for visits
+- [] counter for comments
 - [] realtime chat (build by myself or use third party)
 - [] SSR w/ Vercel or Netlify
 - [] set up consent modal for cookies

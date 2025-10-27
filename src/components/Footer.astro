@@ -1,10 +1,12 @@
 ---
 import SocialLinks from "./SocialLinks.astro";
+import Logo from "./Logo.astro";
 import {
   getLangFromUrl,
   getTranslations,
   getLocalizedPath,
 } from "../i18n/config";
+import { siteConfig } from "@/config";
 
 const currentYear = new Date().getFullYear();
 const lang = getLangFromUrl(Astro.url);
@@ -90,13 +92,8 @@ const initialMotto = mottoTexts[0];
     <div class="grid gap-8 md:grid-cols-2">
       <!-- Left Column: Logo and Motto -->
       <div>
-        <div class="mb-4 flex items-center gap-2">
-          <div
-            class="h-8 w-8 rounded-xl bg-primary flex items-center justify-center shadow-sm"
-          >
-            <span class="text-primary-foreground text-sm font-bold">BZ</span>
-          </div>
-          <span class="text-xl font-semibold">{t("footer.myWebsite")}</span>
+        <div class="mb-4">
+          <Logo lang={lang} variant="footer" />
         </div>
 
         <div class="mb-6">
@@ -180,9 +177,17 @@ const initialMotto = mottoTexts[0];
     <div
       class="mt-8 border-t pt-6 text-xs text-muted-foreground sm:text-sm text-center"
     >
-      © {currentYear}
+      &copy; {currentYear} {siteConfig.site.name}.
       {t("footer.poweredByAstro")}
     </div>
+      <footer>
+          <!-- Environment indicator (dev only) -->
+          {siteConfig.env.isDev && (
+              <div style="background: yellow; padding: 10px; color: black; text-align: center; margin-top: 10px; font-weight: bold;">
+                  ⚠️ Development Mode - Site URL: {siteConfig.site.url}
+              </div>
+          )}
+      </footer>
   </div>
   <script is:inline define:vars={{ mottoId }}>
     const mottoContainer = document.getElementById(mottoId);
