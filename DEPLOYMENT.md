@@ -27,12 +27,44 @@ Vercel 是 Astro 的官方推荐部署平台，提供最佳的性能和开发体
 }
 \`\`\`
 
-### 环境变量
+### 环境变量配置 ⚠️ 重要
 
-在 Vercel 项目设置中添加环境变量：
+**在 Vercel Dashboard 中配置环境变量：**
 
-- \`SITE_URL\`: 你的网站 URL
-- 其他自定义环境变量
+1. 进入你的项目 → Settings → Environment Variables
+2. 添加以下所有环境变量（参考 `.env.example` 文件）：
+
+```bash
+# Analytics
+PUBLIC_GA_MEASUREMENT_ID=G-K2609HEZYE
+PUBLIC_BAIDU_SITE_ID=f42a71719d9466b0a17dc5b8a1650b38
+
+# Comments (Giscus)
+PUBLIC_ENABLE_COMMENTS=true
+PUBLIC_GISCUS_REPO=cool4zbl/astro-me
+PUBLIC_GISCUS_REPO_ID=R_kgDOPzqEJQ
+PUBLIC_GISCUS_CATEGORY=General
+PUBLIC_GISCUS_CATEGORY_ID=DIC_kwDOPzqEJc4CwZ_v
+
+# Feature Flags
+PUBLIC_ENABLE_SEARCH=true
+PUBLIC_ENABLE_RSS=true
+PUBLIC_ENABLE_SITEMAP=true
+
+# Site Config
+PUBLIC_SITE_URL=https://binliuzhang.com
+PUBLIC_API_BASE_URL=https://api.binliuzhang.com
+
+# Social
+PUBLIC_GITHUB_URL=https://github.com/cool4zbl
+PUBLIC_LINKEDIN_URL=https://www.linkedin.com/in/binliu-zhang
+PUBLIC_EMAIL=binliu.zhang@gmail.com
+```
+
+3. 环境选择：选择 **Production, Preview, Development** 全部勾选
+4. 保存后重新部署（Deployments → 最新部署 → Redeploy）
+
+**注意：** 所有以 `PUBLIC_` 开头的变量会在客户端可见，不要放敏感信息！
 
 ## 🌐 Netlify
 
