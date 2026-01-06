@@ -47,7 +47,7 @@ const homeCopy: Record<Language, HomeCopy> = {
       label: "SOFTWARE ENGINEERING · PERSONAL NOTES",
       title: "I turn caffeine into code that scales",
       subtitle:
-        "Event-driven automations, pragmatic data pipelines, and systems that stay boring in production",
+        "Builder. Solver. Collaborator.",
       description: [
         "I’m a Senior Software Engineer with 9+ years across Just Eat Takeaway, Grab, Ant Group, and Douban. I obsess over end-to-end ownership: from architecture and data models to on-call runbooks and post-incident learning. When I’m not reducing MTTR, I’m over-optimizing pour-over coffee and taking long walks with questionable ideas.",
         // "Senior Software Engineer at Just Eat Takeaway, where I design event-driven automation so customer issues are resolved without human intervention.",

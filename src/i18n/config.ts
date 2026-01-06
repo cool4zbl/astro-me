@@ -74,7 +74,7 @@ export const ui = {
     },
     en: {
         "site.logoText": "BZ",
-        "site.title": "Binliu Zhang's Doodles",
+        "site.title": "Binliu's Doodles",
         "nav.home": "Hello from Binliu",
         "nav.blog": "Blog",
         "nav.projects": "Projects",
