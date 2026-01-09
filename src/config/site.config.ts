@@ -97,6 +97,7 @@ export const siteConfig = {
     linkedin: getEnv('PUBLIC_LINKEDIN_URL', 'https://www.linkedin.com/in/binliu-zhang'),
     twitter: getEnv('PUBLIC_TWITTER_URL', ''),
     email: getEnv('PUBLIC_EMAIL', 'binliu.zhang@gmail.com'),
+    unsplash: getEnv('PUBLIC_UNSPLASH_URL', 'https://unsplash.com/@binliu'),
   },
 
   // Blog configuration
