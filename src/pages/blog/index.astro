@@ -3,40 +3,235 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
-import BlogCardList from '../../components/BlogCardList.astro';
+import FormattedDate from '../../components/FormattedDate.astro';
+import OptimizedImage from '../../components/OptimizedImage.astro';
+import { getLocalizedPath, getLangFromUrl } from '../../i18n/config';
 import { getPageMetadata } from '../../utils/metadata';
 
+const lang = getLangFromUrl(Astro.url);
 const allPosts = await getCollection('blog');
 const publishedPosts = allPosts
-  .filter(post => !post.data.draft)
+  .filter((post) => !post.data.draft)
   .sort((a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf());
 const { title: pageTitle, description: pageDescription } = getPageMetadata('blog');
 ---
 
 <BaseLayout title={pageTitle} description={pageDescription}>
   <Header />
-  <main class="flex-1">
-    <div class="container-width py-16">
-      <div class="mx-auto max-w-2xl lg:max-w-4xl">
-        <header class="text-center">
-          <h1 class="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
-            Blog Posts
-          </h1>
-          <p class="mt-2 text-lg leading-8 text-muted-foreground">
-            {publishedPosts.length} posts in total
-          </p>
-        </header>
+  <main class="writing-index flex-1">
+    <section class="writing-hero">
+      <div class="writing-container hero-grid">
+        <div>
+          <p class="writing-eyebrow">The notebook</p>
+          <h1>Writing</h1>
+        </div>
+        <div class="hero-note">
+          <p>Notes on software, systems, learning, and the parts of life that resist a tidy summary.</p>
+          <span>{publishedPosts.length} published {publishedPosts.length === 1 ? 'note' : 'notes'}</span>
+        </div>
+      </div>
+    </section>
 
-        <BlogCardList posts={publishedPosts} class="mt-8 lg:mt-10" />
-
-        {publishedPosts.length === 0 && (
-          <div class="text-center py-16">
-            <p class="text-muted-foreground">No posts published yet</p>
-          </div>
+    <section class="writing-list-section" aria-label="Published writing">
+      <div class="writing-container">
+        {publishedPosts.length > 0 ? (
+          <ol class="writing-list">
+            {publishedPosts.map((post, index) => {
+              const postHref = getLocalizedPath(`/blog/${post.id}/`, lang);
+              const firstTag = post.data.tags[0];
+              return (
+                <li>
+                  <article class={post.data.heroImage ? 'has-thumbnail' : undefined}>
+                    <span class="post-number" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+                    <div class="post-date"><FormattedDate date={post.data.publishedAt} /></div>
+                    <div class="post-copy">
+                      <h2><a href={postHref}>{post.data.title}</a></h2>
+                      <p>{post.data.description}</p>
+                      {firstTag && <a class="post-tag" href={getLocalizedPath(`/tags/${firstTag}/`, lang)}>{firstTag}</a>}
+                    </div>
+                    {post.data.heroImage && (
+                      <a class="post-thumbnail" href={postHref} aria-label={`Read ${post.data.title}`}>
+                        <OptimizedImage
+                          src={post.data.heroImage}
+                          alt=""
+                          width={480}
+                          height={360}
+                          sizes="(max-width: 760px) 108px, 200px"
+                          format="webp"
+                          class="post-thumbnail-image"
+                          loading="lazy"
+                        />
+                      </a>
+                    )}
+                    <span class="post-arrow" aria-hidden="true">↗</span>
+                  </article>
+                </li>
+              );
+            })}
+          </ol>
+        ) : (
+          <p class="empty-state">No notes published yet.</p>
         )}
       </div>
-    </div>
+    </section>
   </main>
-
   <Footer />
 </BaseLayout>
+
+<style>
+  .writing-index {
+    --page-ink: hsl(var(--foreground));
+    --page-muted: hsl(var(--muted-foreground));
+    --page-rule: hsl(var(--border));
+    --page-accent: hsl(var(--primary-darkest));
+    background: hsl(var(--background));
+    color: var(--page-ink);
+  }
+
+  :global(.dark) .writing-index { --page-accent: hsl(var(--primary)); }
+
+  .writing-container { width: min(100% - 2rem, 74rem); margin-inline: auto; }
+
+  .writing-hero { padding: clamp(5rem, 11vw, 9rem) 0 clamp(4rem, 8vw, 6.5rem); }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(18rem, 0.75fr);
+    align-items: end;
+    gap: clamp(3rem, 9vw, 9rem);
+  }
+
+  .writing-eyebrow {
+    color: var(--page-accent);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  h1, h2 { font-family: Georgia, 'Times New Roman', serif; font-weight: 400; }
+
+  h1 {
+    margin-top: 1rem;
+    font-size: clamp(4.5rem, 10vw, 8rem);
+    line-height: 0.9;
+    letter-spacing: -0.05em;
+  }
+
+  .hero-note { color: var(--page-muted); font-size: clamp(1rem, 1.5vw, 1.1rem); }
+
+  .hero-note span {
+    display: block;
+    margin-top: 1.25rem;
+    color: var(--page-accent);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .writing-list-section {
+    border-top: 1px solid var(--page-rule);
+    background: hsl(var(--card));
+    padding: clamp(3rem, 7vw, 6rem) 0;
+  }
+
+  .writing-list { border-top: 1px solid var(--page-rule); }
+  .writing-list > li { border-bottom: 1px solid var(--page-rule); }
+
+  .writing-list article {
+    display: grid;
+    grid-template-columns: 2.5rem 9rem minmax(0, 1fr) auto;
+    align-items: start;
+    gap: 1.5rem;
+    padding: 2rem 0;
+  }
+
+  .writing-list article.has-thumbnail {
+    grid-template-columns: 2.5rem 8rem minmax(0, 1fr) 12.5rem auto;
+  }
+
+  .post-number, .post-date {
+    color: var(--page-muted);
+    font-size: 0.7rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .post-number { color: var(--page-accent); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+
+  .post-copy h2 { font-size: clamp(1.55rem, 3vw, 2.35rem); line-height: 1.12; }
+
+  .post-copy h2 a {
+    color: var(--page-ink);
+    text-decoration: underline;
+    text-decoration-color: color-mix(in srgb, var(--page-accent) 45%, transparent);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.18em;
+    transition: color 160ms ease, text-decoration-color 160ms ease;
+  }
+  .writing-list article:hover h2 a {
+    color: var(--page-accent);
+    text-decoration-color: var(--page-accent);
+  }
+
+  .post-copy > p { max-width: 48rem; margin-top: 0.75rem; color: var(--page-muted); font-size: 0.92rem; }
+
+  .post-tag {
+    display: inline-block;
+    margin-top: 1rem;
+    color: var(--page-accent);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .post-arrow { color: var(--page-accent); }
+
+  .post-thumbnail {
+    display: block;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    border: 1px solid var(--page-rule);
+    border-radius: 0.35rem;
+    background: hsl(var(--muted));
+  }
+
+  :global(.post-thumbnail-image) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: saturate(0.84) contrast(0.96);
+    transition: filter 180ms ease;
+  }
+
+  .writing-list article:hover :global(.post-thumbnail-image) {
+    filter: saturate(1) contrast(1);
+  }
+
+  .empty-state { border-block: 1px solid var(--page-rule); color: var(--page-muted); padding: 2rem 0; }
+
+  .writing-index a:focus-visible {
+    border-radius: 0.2rem;
+    box-shadow: 0 0 0 3px hsl(var(--card)), 0 0 0 5px var(--page-accent) !important;
+  }
+
+  @media (max-width: 760px) {
+    .hero-grid { grid-template-columns: 1fr; }
+    .writing-list article { grid-template-columns: 2rem minmax(0, 1fr); gap: 0.75rem 1rem; }
+    .writing-list article.has-thumbnail { grid-template-columns: 6.75rem minmax(0, 1fr); }
+    .post-date { grid-column: 2; grid-row: 1; }
+    .post-number { grid-column: 1; grid-row: 1; }
+    .post-copy { grid-column: 1 / -1; grid-row: 2; }
+    .has-thumbnail .post-copy { grid-column: 2; grid-row: 2; }
+    .post-thumbnail { grid-column: 1; grid-row: 2; }
+    .post-arrow { display: none; }
+    .post-copy > p { font-size: 0.84rem; line-height: 1.55; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    :global(.post-thumbnail-image) { transition: none; }
+  }
+</style>

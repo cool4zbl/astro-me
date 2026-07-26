@@ -1,124 +1,69 @@
 ---
 import { getCollection } from 'astro:content';
 import FormattedDate from './FormattedDate.astro';
-import OptimizedImage from './OptimizedImage.astro';
-import TagList from './TagList.astro';
 import { getLocalizedPath } from '../i18n/config';
 
 const { currentSlug, currentTags, lang = 'zh' } = Astro.props;
-
-// 获取所有博客文章
 const allPosts = await getCollection('blog');
-
-// 过滤掉当前文章，并根据标签相似度排序
 const relatedPosts = allPosts
-  .filter(post => post.slug !== currentSlug)
-  .map(post => {
-    const commonTags = post.data.tags.filter(tag => currentTags.includes(tag));
-    return {
-      ...post,
-      similarity: commonTags.length
-    };
-  })
-  .filter(post => post.similarity > 0)
+  .filter((post) => post.id !== currentSlug && !post.data.draft)
+  .map((post) => ({
+    ...post,
+    similarity: post.data.tags.filter((tag) => currentTags.includes(tag)).length,
+  }))
+  .filter((post) => post.similarity > 0)
   .sort((a, b) => b.similarity - a.similarity)
   .slice(0, 3);
 
 const texts = {
-  zh: {
-    title: '相关文章',
-    readMore: '阅读更多',
-    noRelated: '暂无相关文章'
-  },
-  en: {
-    title: 'Related Posts',
-    readMore: 'Read More',
-    noRelated: 'No related posts found'
-  }
+  zh: { title: '相关文章' },
+  en: { title: 'Related writing' },
 };
-
-const t = texts[lang];
+const t = texts[lang] ?? texts.en;
 ---
 
 {relatedPosts.length > 0 && (
-  <section class="mt-16 border-t pt-16">
-    <div class="mb-8">
-      <h2 class="text-2xl font-bold text-foreground mb-2 flex items-center">
-        <svg class="mr-3 h-6 w-6 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
-        </svg>
-        {t.title}
-      </h2>
-      <div class="h-1 w-16 bg-primary rounded-full"></div>
-    </div>
-
-    <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+  <section class="related-editorial">
+    <p class="related-eyebrow">Keep reading</p>
+    <h2>{t.title}</h2>
+    <ol>
       {relatedPosts.map((post) => (
-        <article class="group bg-card border rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-200">
-          {post.data.heroImage && (
-            <div class="aspect-video overflow-hidden">
-              <OptimizedImage
-                src={post.data.heroImage}
-                alt={post.data.title}
-                width={640}
-                height={360}
-                class="w-full h-full object-cover transition-transform duration-200 group-hover:scale-105"
-                sizes="(max-width: 1024px) 100vw, 320px"
-                format="webp"
-                loading="lazy"
-              />
+        <li>
+          <article>
+            <FormattedDate date={post.data.publishedAt} />
+            <div>
+              <h3><a href={getLocalizedPath(`/blog/${post.id}/`, lang)}>{post.data.title}</a></h3>
+              <p>{post.data.description}</p>
             </div>
-          )}
-          <div class="p-6">
-            <div class="flex flex-wrap items-center gap-2 text-xs text-muted-foreground mb-3">
-              <FormattedDate date={post.data.publishedAt} class="text-muted-foreground" />
-              {post.data.tags.length > 0 && (
-                <TagList
-                  tags={post.data.tags.slice(0, 2)}
-                  lang={lang}
-                  class="text-muted-foreground"
-                />
-              )}
-            </div>
-            <h3 class="text-lg font-semibold text-card-foreground mb-2 transition-colors line-clamp-2">
-              <a
-                href={getLocalizedPath(`/blog/${post.slug}/`, lang)}
-                class="inline-flex focus:outline-none focus-visible:rounded-md focus-visible:ring-2 focus-visible:ring-primary group-hover:text-primary"
-              >
-                {post.data.title}
-              </a>
-            </h3>
-            <p class="text-sm text-muted-foreground mb-4 line-clamp-3">
-              {post.data.description}
-            </p>
-            <a
-              href={getLocalizedPath(`/blog/${post.slug}/`, lang)}
-              class="inline-flex items-center text-sm font-medium text-primary hover:text-accent transition-colors"
-            >
-              {t.readMore}
-              <svg class="ml-1 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-              </svg>
-            </a>
-          </div>
-        </article>
+            <span aria-hidden="true">↗</span>
+          </article>
+        </li>
       ))}
-    </div>
+    </ol>
   </section>
 )}
 
 <style>
-  .line-clamp-2 {
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+  .related-editorial { margin-top: 4rem; border-top: 1px solid hsl(var(--border)); padding-top: 3rem; }
+  .related-eyebrow { color: hsl(var(--primary)); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; }
+  .related-editorial > h2 { margin-top: 0.6rem; font-family: Georgia, 'Times New Roman', serif; font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight: 400; }
+  .related-editorial ol { border-top: 1px solid hsl(var(--border)); margin-top: 1.5rem; }
+  .related-editorial li { border-bottom: 1px solid hsl(var(--border)); }
+  .related-editorial article { display: grid; grid-template-columns: 8rem minmax(0, 1fr) auto; gap: 1.25rem; padding: 1.5rem 0; }
+  .related-editorial time { color: hsl(var(--muted-foreground)); font-size: 0.7rem; text-transform: uppercase; }
+  .related-editorial h3 { font-family: Georgia, 'Times New Roman', serif; font-size: 1.25rem; font-weight: 400; line-height: 1.2; }
+  .related-editorial h3 a {
+    color: hsl(var(--foreground));
+    text-decoration: underline;
+    text-decoration-color: color-mix(in srgb, hsl(var(--primary)) 45%, transparent);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.18em;
   }
-
-  .line-clamp-3 {
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+  .related-editorial article:hover h3 a { color: hsl(var(--primary)); text-decoration-color: hsl(var(--primary)); }
+  .related-editorial article p { margin-top: 0.45rem; color: hsl(var(--muted-foreground)); font-size: 0.84rem; }
+  .related-editorial article > span { color: hsl(var(--primary)); }
+  @media (max-width: 560px) {
+    .related-editorial article { grid-template-columns: 1fr auto; }
+    .related-editorial time { grid-column: 1 / -1; }
   }
 </style>

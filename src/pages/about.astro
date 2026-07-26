@@ -1,287 +1,485 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
-import Header from "../components/Header.astro";
-import Footer from "../components/Footer.astro";
-import OptimizedImage from "../components/OptimizedImage.astro";
-import { getLangFromUrl, getLocalizedPath } from "../i18n/config";
-import { getPageMetadata } from "../utils/metadata";
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { getLangFromUrl, getLocalizedPath } from '../i18n/config';
+import { getPageMetadata } from '../utils/metadata';
 
 const lang = getLangFromUrl(Astro.url);
-const profileImage = "/binliuzhang-avt1.JPG";
-const blogLink = getLocalizedPath("/blog", lang);
-const resumeLink = "/Binliu Zhang-Senior-Software-Engineer.pdf";
-const { title: pageTitle, description: pageDescription } =
-  getPageMetadata("about");
+const blogLink = getLocalizedPath('/blog', lang);
+const { title: pageTitle, description: pageDescription } = getPageMetadata('about');
+
+const journey = [
+  {
+    place: 'UESTC',
+    title: 'Electronics led me to the web',
+    description: 'I studied electronic engineering, but kept pulling at the thread of how software turns an idea into something people can actually use. Teaching myself web development became the start of everything else.',
+  },
+  {
+    place: 'Douban',
+    title: 'Craft matters when people notice every change',
+    description: 'Working on a product used by millions taught me to respect details, understand the system around my code, and ship changes with care.',
+  },
+  {
+    place: 'Ant Group',
+    title: 'Measure before guessing',
+    description: 'Data and experimentation changed how I thought about product decisions. “If you cannot measure it, you cannot improve it” became a habit rather than a slogan.',
+  },
+  {
+    place: 'Grab',
+    title: 'The strange beauty of systems at scale',
+    description: 'Geospatial pipelines, Go, databases, and distributed systems pulled me deeper into the backend—and into the trade-offs that only appear in the real world.',
+  },
+  {
+    place: 'Just Eat Takeaway',
+    title: 'Making complicated support systems feel simple',
+    description: 'I build orchestration and operational tooling that helps customer-support journeys resolve problems more reliably. The work keeps reminding me that simple experiences usually sit on top of careful engineering.',
+  },
+];
+
+const principles = [
+  {
+    title: 'Follow the whole problem',
+    description: 'I resist labels like “just frontend” or “just backend.” I want to understand how the layers, people, and constraints fit together.',
+  },
+  {
+    title: 'Leave a useful trail',
+    description: 'Good documentation, observable systems, and honest post-incident notes help the next person move with more confidence.',
+  },
+  {
+    title: 'Prefer durable simplicity',
+    description: 'I like solutions that a team can explain, operate, and change—not cleverness that only survives while its author is nearby.',
+  },
+];
+
+const lifeNotes = [
+  ['Listening', 'Rock, lofi, and electronic playlists that make ordinary days feel cinematic.'],
+  ['Cooking', 'Chinese comfort food—the kind that makes a kitchen smell like home.'],
+  ['Moving', 'Lifting at the gym and cycling Dutch bike lanes whenever the sun is generous.'],
+  ['Exploring', 'Long-form writing, the overlap of art and code, and questions that refuse to leave me alone.'],
+];
 
 const contactLinks = [
-  {
-    title: "LinkedIn",
-    url: "https://www.linkedin.com/in/binliu-zhang",
-    description:
-      "for work & collaboration opportunities",
-  },
-  {
-    title: "GitHub",
-    url: "https://github.com/cool4zbl",
-    description:
-      "for experiments, open source projects, and code snippets",
-  },
-  {
-    title: "Email",
-    url: "mailto:binliu.zhang@gmail.com",
-    description: "for longer conversations",
-  },
-];
-
-const focusAreas = [
-  "Designing resilient, large-scale systems",
-  "Writing tools and docs that outlive me",
-  "Turning operational pain into automation",
-];
-const wantToDoMore = [
-  "Blending art and code",
-  "Writing long-form guides",
-  "Speaking with the communities that care about craft",
-];
-const lifeBeyondCode = [
-  "Soundtracking my days with rock, lofi, and electronic playlists",
-  "Cooking Chinese comfort food that smells like home",
-  "Pushing one more rep at the gym",
-  "Cycling Dutch bike lanes whenever the sun feels generous",
+  { title: 'Email', url: 'mailto:binliu.zhang@gmail.com', note: 'For a longer conversation' },
+  { title: 'GitHub', url: 'https://github.com/cool4zbl', note: 'Code, experiments, and open source' },
+  { title: 'LinkedIn', url: 'https://www.linkedin.com/in/binliu-zhang', note: 'Work and collaboration' },
 ];
 ---
 
 <BaseLayout title={pageTitle} description={pageDescription}>
   <Header />
 
-  <main class="flex-1">
-    <section
-      class="section-padding bg-gradient-to-br from-background via-muted/30 to-background"
-    >
-      <div class="container-width max-w-4xl">
-        <div
-          class="flex flex-col items-center gap-8 text-center md:flex-row md:text-left md:items-center"
-        >
-          <div class="shrink-0">
-            <div
-              class="relative mx-auto h-36 w-36 overflow-hidden rounded-full border-4 border-primary/30 shadow-lg md:mx-0 md:h-40 md:w-40"
-            >
-              <OptimizedImage
-                src={profileImage}
-                alt="Binliu Zhang portrait"
-                width={320}
-                height={320}
-                class="h-full w-full object-cover"
-                style="width: 100%; height: 100%;"
-                loading="lazy"
-              />
-            </div>
+  <main class="about-editorial flex-1">
+    <section class="about-hero">
+      <div class="about-container hero-grid">
+        <div>
+          <p class="about-eyebrow">A little more about me</p>
+          <h1>Curiosity has been the thread through all of it.</h1>
+        </div>
+        <div class="hero-intro">
+          <p>Born in China and currently living in the Netherlands, I’m a software engineer who has never been very good at staying inside one neat box.</p>
+          <p>I’m interested in why systems work, why they fail, and how the people around them make sense of both. This site is where I document some of what I find.</p>
+          <div class="about-actions">
+            <a class="about-link primary" href={blogLink}>Read my notes <span aria-hidden="true">→</span></a>
+            <a class="about-link" href="mailto:binliu.zhang@gmail.com">Say hello <span aria-hidden="true">↗</span></a>
           </div>
-          <div class="space-y-4">
-            <p class="text-sm uppercase tracking-[0.3em] text-primary/70">
-              Hey, I'm Binliu!
-            </p>
-            <h1 class="text-4xl sm:text-5xl font-bold text-foreground">
-              Building things, breaking them, and learning in between.
-            </h1>
-            <p class="text-lg text-muted-foreground leading-relaxed">
-              Born in China, now based in the Netherlands. I write code during
-              the day, chase weird ideas at night, and document the lessons that
-              make it past production.
-            </p>
-            <div
-              class="flex flex-wrap items-center justify-center gap-4 md:justify-start"
-            >
-              <a
-                href={resumeLink}
-                class="inline-flex items-center rounded-full bg-primary px-5 py-2 text-sm font-semibold text-primary-foreground shadow-sm transition hover:bg-primary/90"
-              >
-                Download Resume
+        </div>
+      </div>
+    </section>
+
+    <section class="about-section journey-section" aria-labelledby="journey-title">
+      <div class="about-container editorial-grid">
+        <header class="section-heading">
+          <p class="about-eyebrow">The path here</p>
+          <h2 id="journey-title">From curious tinkering to production systems</h2>
+          <p>The technologies changed. Wanting to understand the whole picture did not.</p>
+        </header>
+
+        <ol class="journey-list">
+          {journey.map((chapter, index) => (
+            <li>
+              <div class="journey-meta">
+                <span>{String(index + 1).padStart(2, '0')}</span>
+                <p>{chapter.place}</p>
+              </div>
+              <div>
+                <h3>{chapter.title}</h3>
+                <p>{chapter.description}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+
+    <section class="about-section principles-section" aria-labelledby="principles-title">
+      <div class="about-container">
+        <header class="principles-intro">
+          <p class="about-eyebrow">How I approach the work</p>
+          <h2 id="principles-title">Build with care. Learn in public. Stay curious.</h2>
+          <blockquote>“Simple” is rarely easy—but it should still feel simple to the person using it.</blockquote>
+        </header>
+
+        <ol class="principles-list">
+          {principles.map((principle, index) => (
+            <li>
+              <span>{String(index + 1).padStart(2, '0')}</span>
+              <h3>{principle.title}</h3>
+              <p>{principle.description}</p>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+
+    <section class="about-section life-section" aria-labelledby="life-title">
+      <div class="about-container editorial-grid">
+        <header class="section-heading">
+          <p class="about-eyebrow">Away from the keyboard</p>
+          <h2 id="life-title">The things that put energy back in</h2>
+        </header>
+
+        <dl class="life-list">
+          {lifeNotes.map(([term, description]) => (
+            <div>
+              <dt>{term}</dt>
+              <dd>{description}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    </section>
+
+    <section class="about-section contact-section" aria-labelledby="contact-title">
+      <div class="about-container contact-grid">
+        <div>
+          <p class="about-eyebrow">Keep in touch</p>
+          <h2 id="contact-title">Let’s trade notes.</h2>
+          <p>Curious about something I’ve built or written? I’m always happy to have a thoughtful conversation.</p>
+        </div>
+        <ul>
+          {contactLinks.map((link) => (
+            <li>
+              <a href={link.url} target={link.url.startsWith('http') ? '_blank' : undefined} rel={link.url.startsWith('http') ? 'noopener noreferrer' : undefined}>
+                <span>{link.title}</span>
+                <small>{link.note}</small>
+                <b aria-hidden="true">↗</b>
               </a>
-              <a
-                href={blogLink}
-                class="inline-flex items-center rounded-full border border-primary/60 px-5 py-2 text-sm font-semibold text-primary transition hover:bg-primary/10"
-              >
-                Read the Blog
-              </a>
-            </div>
-            <div
-              class="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,rgba(34,211,238,.12),transparent_60%)]"
-            >
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section-padding bg-muted/40">
-      <div class="container-width max-w-4xl space-y-6">
-        <div class="space-y-4">
-          <span
-            class="inline-flex items-center rounded-full bg-secondary/20 px-4 py-1 text-sm font-medium text-secondary-foreground"
-            >My Journey</span
-          >
-          <h2 class="text-3xl font-semibold text-foreground">
-            From curiosity to production impact
-          </h2>
-        </div>
-
-        <div class="space-y-2 text-muted-foreground leading-relaxed">
-          <p>
-            I’ve always been more interested in <i>why</i> systems work than <i
-              >what</i
-            > they do.
-          </p>
-          <p>
-            That curiosity led me from studying electronic engineering at
-            UESTC—where hardware was stubborn but honest—to teaching myself web
-            development, which was somehow even more stubborn.
-          </p>
-          <p>
-            I resist neat labels like “just FE” or “just BE.” I want to know how
-            every layer fits together, so I keep digging. That’s why I taught
-            myself web development while studying Electronic Engineering at
-            UESTC—hardware was tough, the web felt magical, and shipping UI to
-            real users hooked me instantly.
-          </p>
-          <p>
-            At Douban I learned craftsmanship the hard way: when millions feel
-            every change, you ship with respect. 
-            <br />
-
-            At Ant Group, I discovered how data and experimentation fuel
-            smarter products. "If you cannot measure it, you cannot improve it" became my mantra.
-            <br />
-              
-            At Grab, I fell down the rabbit hole of distributed systems -- Go, 
-            databases, all the strange beauty of scale.
-          </p>
-
-          <p>
-            Now at Just Eat Takeaway, I’m building orchestration layers that help our customer chatbots solve issues automatically. 
-            <br />
-
-            It’s a mix of architecture, automation, and the constant reminder that “simple” is never easy.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <section class="section-padding">
-      <div class="container-width max-w-4xl space-y-6">
-        <div class="space-y-4">
-          <span
-            class="inline-flex items-center rounded-full bg-primary/10 px-4 py-1 text-sm font-medium text-primary"
-            >Philosophy</span
-          >
-          <h2 class="text-3xl font-semibold text-foreground">
-            Stay hungry, stay foolish, stay curious
-          </h2>
-        </div>
-        <p class="text-muted-foreground leading-relaxed">
-          I chase the “aha!” moment. I like questions that refuse to leave me alone,
-          <br />
-          I design for resilience, document what breaks, and keep sharpening tools for deep work.
-        </p>
-        <div class="grid gap-6 md:grid-cols-2">
-          <div class="rounded-2xl border bg-card/80 p-6 shadow-sm">
-            <h3 class="text-lg font-semibold text-foreground">
-              What I’m focusing on
-            </h3>
-            <ul class="mt-3 space-y-2 text-sm text-muted-foreground">
-              {
-                focusAreas.map((area) => (
-                  <li class="flex items-start gap-2">
-                    <span class="mt-1 h-1.5 w-1.5 rounded-full bg-primary" />
-                    <span>{area}</span>
-                  </li>
-                ))
-              }
-            </ul>
-          </div>
-          <div class="rounded-2xl border bg-card/80 p-6 shadow-sm">
-            <h3 class="text-lg font-semibold text-foreground">
-              I’d love to do more of
-            </h3>
-            <ul class="mt-3 space-y-2 text-sm text-muted-foreground">
-              {
-                wantToDoMore.map((item) => (
-                  <li class="flex items-start gap-2">
-                    <span class="mt-1 h-1.5 w-1.5 rounded-full bg-primary" />
-                    <span>{item}</span>
-                  </li>
-                ))
-              }
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section-padding bg-muted/40">
-      <div class="container-width max-w-4xl space-y-6">
-        <div class="space-y-4">
-          <span
-            class="inline-flex items-center rounded-full bg-secondary/20 px-4 py-1 text-sm font-medium text-secondary-foreground"
-            >Life Beyond Code</span
-          >
-          <h2 class="text-3xl font-semibold text-foreground">
-            The hobbies that recharge me
-          </h2>
-        </div>
-        <ul class="grid gap-4 md:grid-cols-2 text-sm text-muted-foreground">
-          {
-            lifeBeyondCode.map((item) => (
-              <li class="rounded-2xl border bg-background p-4 shadow-sm leading-relaxed">
-                {item}
-              </li>
-            ))
-          }
+            </li>
+          ))}
         </ul>
-      </div>
-    </section>
-
-    <section class="section-padding">
-      <div class="container-width max-w-4xl space-y-6">
-        <div class="space-y-4 text-center">
-          <span
-            class="inline-flex items-center rounded-full bg-primary/10 px-4 py-1 text-sm font-medium text-primary"
-            >Contact</span
-          >
-          <h2 class="text-3xl font-semibold text-foreground">
-            Let's talk about the things we build.
-          </h2>
-          <p class="text-muted-foreground leading-relaxed">
-            Curious about something I’ve shipped or written? Always happy to trade notes or ideas.
-          </p>
-        </div>
-
-        <div class="grid gap-6 md:grid-cols-3">
-          {
-            contactLinks.map((link) => (
-              <a
-                href={link.url}
-                class="group rounded-2xl border bg-card/80 p-6 text-left shadow-sm transition hover:-translate-y-1 hover:shadow-md"
-                target={link.url.startsWith("mailto") ? "_self" : "_blank"}
-                rel={
-                  link.url.startsWith("mailto")
-                    ? undefined
-                    : "noopener noreferrer"
-                }
-              >
-                <div class="text-lg font-semibold text-foreground group-hover:text-primary">
-                  {link.title}
-                </div>
-                <p class="mt-3 text-sm text-muted-foreground leading-relaxed">
-                  {link.description}
-                </p>
-              </a>
-            ))
-          }
-        </div>
       </div>
     </section>
   </main>
 
   <Footer />
 </BaseLayout>
+
+<style>
+  .about-editorial {
+    --page-ink: hsl(var(--foreground));
+    --page-muted: hsl(var(--muted-foreground));
+    --page-rule: hsl(var(--border));
+    --page-accent: hsl(var(--primary-darkest));
+    background: hsl(var(--background));
+    color: var(--page-ink);
+  }
+
+  :global(.dark) .about-editorial {
+    --page-accent: hsl(var(--primary));
+  }
+
+  .about-container {
+    width: min(100% - 2rem, 74rem);
+    margin-inline: auto;
+  }
+
+  .about-hero {
+    padding: clamp(5rem, 11vw, 9rem) 0 clamp(4.5rem, 9vw, 7rem);
+  }
+
+  .hero-grid,
+  .editorial-grid,
+  .contact-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(18rem, 0.85fr);
+    gap: clamp(3rem, 9vw, 9rem);
+  }
+
+  .about-eyebrow {
+    color: var(--page-accent);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  h1,
+  h2,
+  h3,
+  blockquote {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-weight: 400;
+  }
+
+  h1 {
+    max-width: 13ch;
+    margin-top: 1.2rem;
+    font-size: clamp(3.1rem, 6.5vw, 6rem);
+    line-height: 0.98;
+    letter-spacing: -0.045em;
+  }
+
+  .hero-intro {
+    align-self: end;
+    color: var(--page-muted);
+    font-size: clamp(1rem, 1.5vw, 1.12rem);
+  }
+
+  .hero-intro p + p {
+    margin-top: 1rem;
+  }
+
+  .about-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem 2rem;
+    margin-top: 2rem;
+  }
+
+  .about-link {
+    display: inline-flex;
+    gap: 0.5rem;
+    border-bottom: 1px solid var(--page-accent);
+    color: var(--page-accent);
+    font-size: 0.88rem;
+    font-weight: 650;
+    padding-bottom: 0.2rem;
+  }
+
+  .about-link:hover,
+  .about-link.primary {
+    border-color: var(--page-accent);
+    color: var(--page-accent);
+  }
+
+  .about-link:hover {
+    border-bottom-width: 2px;
+  }
+
+  .about-section {
+    border-top: 1px solid var(--page-rule);
+    padding: clamp(4rem, 8vw, 7rem) 0;
+  }
+
+  .journey-section,
+  .life-section {
+    background: hsl(var(--card));
+  }
+
+  .section-heading h2,
+  .principles-intro h2,
+  .contact-grid h2 {
+    margin-top: 0.9rem;
+    font-size: clamp(2.25rem, 4.5vw, 3.8rem);
+    line-height: 1.04;
+    letter-spacing: -0.035em;
+  }
+
+  .section-heading > p:last-child,
+  .contact-grid > div > p:last-child {
+    margin-top: 1.25rem;
+    color: var(--page-muted);
+    font-size: 0.95rem;
+  }
+
+  .journey-list {
+    border-top: 1px solid var(--page-rule);
+  }
+
+  .journey-list li {
+    display: grid;
+    grid-template-columns: 8rem minmax(0, 1fr);
+    gap: 1.5rem;
+    border-bottom: 1px solid var(--page-rule);
+    padding: 1.65rem 0;
+  }
+
+  .journey-meta {
+    color: var(--page-accent);
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .journey-meta p {
+    margin-top: 0.35rem;
+  }
+
+  .journey-list h3,
+  .principles-list h3 {
+    font-size: clamp(1.25rem, 2vw, 1.55rem);
+    line-height: 1.2;
+  }
+
+  .journey-list li > div:last-child > p,
+  .principles-list p {
+    margin-top: 0.6rem;
+    color: var(--page-muted);
+    font-size: 0.9rem;
+    line-height: 1.65;
+  }
+
+  .principles-intro {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(18rem, 0.75fr);
+    gap: clamp(3rem, 9vw, 9rem);
+    align-items: end;
+  }
+
+  .principles-intro .about-eyebrow {
+    grid-column: 1 / -1;
+  }
+
+  .principles-intro blockquote {
+    border-left: 2px solid var(--page-accent);
+    color: var(--page-muted);
+    font-size: clamp(1.25rem, 2.3vw, 1.85rem);
+    line-height: 1.4;
+    padding-left: 1.5rem;
+  }
+
+  .principles-list {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    border-block: 1px solid var(--page-rule);
+    margin-top: clamp(3rem, 6vw, 5rem);
+  }
+
+  .principles-list li {
+    padding: 2rem;
+  }
+
+  .principles-list li + li {
+    border-left: 1px solid var(--page-rule);
+  }
+
+  .principles-list li > span {
+    display: block;
+    margin-bottom: 2rem;
+    color: var(--page-accent);
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.7rem;
+  }
+
+  .life-list {
+    border-top: 1px solid var(--page-rule);
+  }
+
+  .life-list > div {
+    display: grid;
+    grid-template-columns: 8rem minmax(0, 1fr);
+    gap: 1.5rem;
+    border-bottom: 1px solid var(--page-rule);
+    padding: 1.5rem 0;
+  }
+
+  .life-list dt {
+    color: var(--page-accent);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .life-list dd {
+    color: var(--page-muted);
+    font-size: 0.92rem;
+  }
+
+  .contact-grid {
+    align-items: start;
+  }
+
+  .contact-grid ul {
+    border-top: 1px solid var(--page-rule);
+  }
+
+  .contact-grid li {
+    border-bottom: 1px solid var(--page-rule);
+  }
+
+  .contact-grid li a {
+    display: grid;
+    grid-template-columns: 5rem minmax(0, 1fr) auto;
+    gap: 1rem;
+    align-items: center;
+    color: var(--page-ink);
+    padding: 1.25rem 0;
+  }
+
+  .contact-grid li a:hover {
+    color: var(--page-accent);
+  }
+
+  .contact-grid li a > span:first-child,
+  .contact-grid li a > b:last-child {
+    color: var(--page-accent);
+  }
+
+  .contact-grid li a > span:first-child {
+    text-decoration: underline;
+    text-decoration-color: color-mix(in srgb, var(--page-accent) 45%, transparent);
+    text-underline-offset: 0.18em;
+  }
+
+  .contact-grid small {
+    color: var(--page-muted);
+    font-size: 0.8rem;
+  }
+
+  .about-editorial :is(a, button):focus-visible {
+    border-radius: 0.2rem;
+    box-shadow: 0 0 0 3px hsl(var(--background)), 0 0 0 5px var(--page-accent) !important;
+  }
+
+  @media (max-width: 760px) {
+    .hero-grid,
+    .editorial-grid,
+    .contact-grid,
+    .principles-intro {
+      grid-template-columns: 1fr;
+    }
+
+    .principles-intro .about-eyebrow {
+      grid-column: auto;
+    }
+
+    .principles-list {
+      grid-template-columns: 1fr;
+    }
+
+    .principles-list li {
+      padding: 1.75rem 0;
+    }
+
+    .principles-list li + li {
+      border-top: 1px solid var(--page-rule);
+      border-left: 0;
+    }
+
+    .principles-list li > span {
+      margin-bottom: 1rem;
+    }
+
+    .journey-list li,
+    .life-list > div {
+      grid-template-columns: 1fr;
+      gap: 0.75rem;
+    }
+
+    .contact-grid li a {
+      grid-template-columns: 4rem minmax(0, 1fr) auto;
+    }
+  }
+</style>

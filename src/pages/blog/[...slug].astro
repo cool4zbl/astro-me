@@ -1,5 +1,5 @@
 ---
-import { getCollection } from "astro:content";
+import { getCollection, render } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Header from "../../components/Header.astro";
 import Footer from "../../components/Footer.astro";
@@ -15,13 +15,13 @@ import LikeButton from "../../components/LikeButton.astro";
 export async function getStaticPaths() {
   const posts = await getCollection("blog");
   return posts.map((post) => ({
-    params: { slug: post.slug },
+    params: { slug: post.id },
     props: post,
   }));
 }
 
 const post = Astro.props;
-const { Content, headings } = await post.render();
+const { Content, headings } = await render(post);
 const pageTitle = buildPageTitle(post.data.title);
 const pageDescription = post.data.description;
 ---
@@ -41,18 +41,17 @@ const pageDescription = post.data.description;
 >
   <Header />
 
-  <main class="flex-1">
-    <article class="container-width py-12 lg:py-16">
-      <div class="mx-auto max-w-3xl">
+  <main class="article-editorial flex-1">
+    <article class="article-shell">
+      <div class="article-column">
         <!-- Main content area -->
-        <header class="mb-6 space-y-4">
-          <h1
-            class="text-3xl font-bold tracking-tight text-foreground sm:text-4xl"
-          >
+        <header class="article-header">
+          <p class="article-eyebrow">From the notebook</p>
+          <h1>
             {post.data.title}
           </h1>
           <div
-            class="flex flex-wrap items-center gap-4 text-sm text-muted-foreground"
+            class="article-meta"
           >
             <div class="flex items-center gap-1">
               <span class="font-medium text-muted-foreground italic"
@@ -88,7 +87,7 @@ const pageDescription = post.data.description;
 
         {
           post.data.heroImage && (
-            <div class="aspect-auto mb-8 overflow-hidden rounded-xl border bg-muted/40">
+            <div class="article-hero">
               <OptimizedImage
                 src={post.data.heroImage}
                 alt={post.data.title}
@@ -104,13 +103,13 @@ const pageDescription = post.data.description;
         }
 
         <div
-          class="prose prose-lg text-base mx-auto dark:prose-invert prose-headings:first:mt-0"
+          class="article-prose prose prose-lg text-base mx-auto dark:prose-invert prose-headings:first:mt-0"
         >
           <Content />
-          <LikeButton slug={post.slug} />
+          <LikeButton slug={post.id} />
         </div>
 
-        <footer class="mt-12 border-t pt-8">
+        <footer class="article-footer">
           <div
             class="flex flex-col gap-4 text-sm text-muted-foreground sm:flex-row sm:items-center sm:justify-between"
           >
@@ -134,7 +133,7 @@ const pageDescription = post.data.description;
 
         <div class="mt-12">
           <RelatedPosts
-            currentSlug={post.slug}
+            currentSlug={post.id}
             currentTags={post.data.tags}
             lang="en"
           />
@@ -179,6 +178,43 @@ const pageDescription = post.data.description;
   </script>
 
   <style>
+    .article-editorial {
+      --article-ink: hsl(var(--foreground));
+      --article-muted: hsl(var(--muted-foreground));
+      --article-rule: hsl(var(--border));
+      --article-accent: hsl(var(--primary-darkest));
+      background: hsl(var(--background));
+      color: var(--article-ink);
+    }
+
+    :global(.dark) .article-editorial { --article-accent: hsl(var(--primary)); }
+
+    .article-shell { width: min(100% - 2rem, 74rem); margin-inline: auto; padding: clamp(4rem, 8vw, 7rem) 0; }
+    .article-column { width: min(100%, 48rem); margin-inline: auto; }
+
+    .article-header { margin-bottom: clamp(2.5rem, 5vw, 4rem); }
+    .article-eyebrow { color: var(--article-accent); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; }
+    .article-header h1 { margin-top: 1rem; font-family: Georgia, 'Times New Roman', serif; font-size: clamp(2.8rem, 6.5vw, 5.4rem); font-weight: 400; line-height: 0.98; letter-spacing: -0.045em; text-wrap: balance; }
+    .article-meta { display: flex; flex-wrap: wrap; gap: 0.75rem 1.5rem; margin-top: 1.75rem; color: var(--article-muted); font-size: 0.76rem; }
+    .article-header > div:last-child { margin-top: 1.25rem; }
+    .article-header :global(.rounded-full) { border-radius: 0; background: transparent; color: var(--article-accent); padding-inline: 0; text-transform: uppercase; letter-spacing: 0.07em; }
+
+    .article-hero { margin-bottom: clamp(2.5rem, 5vw, 4rem); overflow: hidden; border: 1px solid var(--article-rule); border-radius: 0.75rem; background: hsl(var(--card)); }
+
+    :global(.article-prose) { color: var(--article-muted); font-size: 1.03rem; line-height: 1.82; }
+    :global(.article-prose > p:first-of-type) { color: var(--article-ink); font-family: Georgia, 'Times New Roman', serif; font-size: clamp(1.2rem, 2vw, 1.45rem); line-height: 1.6; }
+    :global(.article-prose :where(h2, h3, h4)) { color: var(--article-ink); font-family: Georgia, 'Times New Roman', serif; font-weight: 400; letter-spacing: -0.025em; }
+    :global(.article-prose h2) { margin-top: 3.5rem; font-size: clamp(2rem, 4vw, 2.8rem); }
+    :global(.article-prose h3) { margin-top: 2.5rem; font-size: clamp(1.5rem, 3vw, 2rem); }
+    :global(.article-prose p) { color: var(--article-muted); }
+    :global(.article-prose a) { color: var(--article-accent); text-decoration-color: color-mix(in srgb, var(--article-accent) 35%, transparent); }
+    :global(.article-prose blockquote) { border-color: var(--article-accent); border-radius: 0; background: hsl(var(--card)); color: var(--article-muted); }
+    :global(.article-prose :not(pre) > code) { overflow-wrap: anywhere; word-break: break-word; }
+
+    .article-footer { margin-top: 4rem; border-top: 1px solid var(--article-rule); padding-top: 2rem; }
+
+    .article-editorial a:focus-visible { border-radius: 0.2rem; box-shadow: 0 0 0 3px hsl(var(--background)), 0 0 0 5px var(--article-accent) !important; }
+
     :global(.prose > h1:first-child) {
       display: none;
     }
@@ -218,6 +254,10 @@ const pageDescription = post.data.description;
     :global(.prose .heading-anchor:focus-visible) {
       opacity: 1;
       transform: translate(0, -50%);
+    }
+
+    @media (max-width: 760px) {
+      :global(.prose .heading-anchor) { display: none; }
     }
   </style>
 </BaseLayout>

@@ -9,111 +9,79 @@ type HomeCopy = {
   hero: {
     label: string;
     title: string;
-    subtitle?: string;
     description: string[];
     primary: CTA;
     secondary: CTA;
   };
-  about: {
+  writing: {
+    eyebrow: string;
     title: string;
-    paragraphs: string[];
-    experienceLinkLabel: string;
+    description: string;
+    viewAllLabel: string;
+    emptyLabel: string;
   };
-  projects: {
+  personal: {
+    eyebrow: string;
+    title: string;
+    description: string;
+    link: CTA;
+  };
+  work: {
+    eyebrow: string;
     title: string;
     description: string;
     items: {
       title: string;
       description: string;
-      tags: string[];
-      impact?: string;
-      image: { src: string; alt: string };
     }[];
     viewAllLabel: string;
-  };
-  latestPosts: {
-    title: string;
-    description: string;
-    viewAllLabel: string;
-    emptyLabel: string;
-    totalLabel: (count: number) => string;
   };
 };
 
 const homeCopy: Record<Language, HomeCopy> = {
   en: {
-    // TODO: rewrite
     hero: {
-      label: "SOFTWARE ENGINEERING · PERSONAL NOTES",
-      title: "I turn caffeine into code that scales",
-      subtitle:
-        "Builder. Solver. Collaborator.",
+      label: "Hi, I’m Binliu.",
+      title: "I build software, explore ideas, and write to understand them better.",
       description: [
-        "I’m a Senior Software Engineer with 9+ years across Just Eat Takeaway, Grab, Ant Group, and Douban. I obsess over end-to-end ownership: from architecture and data models to on-call runbooks and post-incident learning. When I’m not reducing MTTR, I’m over-optimizing pour-over coffee and taking long walks with questionable ideas.",
-        // "Senior Software Engineer at Just Eat Takeaway, where I design event-driven automation so customer issues are resolved without human intervention.",
-        // "Across 9+ years at Just Eat Takeaway, Grab, Ant Group, and Douban I have scaled platforms that support food delivery, mobility, fintech, and consumer communities.",
-        // "I love end-to-end ownership—pairing resilient architecture with data-informed operations to help cross-functional teams ship measurable impact.",
+        "I’m a software engineer living in the Netherlands. This is my corner of the internet for notes on software systems, engineering craft, life abroad, and the choices and questions that shape a life.",
+        "Some ideas begin at work; others emerge from music, cities, conversations, or ordinary moments. Writing helps me connect them, clarify what I think, and share something useful along the way.",
       ],
-      primary: { label: "View Projects", href: "/projects" },
-      secondary: { label: "Read the Blog", href: "/blog" },
+      primary: { label: "Read the latest notes", href: "#writing" },
+      secondary: { label: "More about me", href: "/about" },
     },
-    about: {
-      title: "What I Do",
-      paragraphs: [
-        "I partner with product, operations, and support teams to turn messy service workflows into reliable automation. Recent work includes the orchestration layer behind JET’s customer help chatbot and the operational tools that keep millions of orders moving.",
-        "Before JET I worked at Grab and Ant Group, building geospatial pipelines, experimentation frameworks, and developer tooling that power real-world experiences for riders, drivers, and merchants.",
-        "I mentor engineers, document trade-offs, and lean on observability to keep systems stable. Outside of work I volunteer with Women in Tech and recharge by curating playlists or exploring new training plans.",
-      ],
-      experienceLinkLabel: "View My Experience",
+    writing: {
+      eyebrow: "From the notebook",
+      title: "Recent writing",
+      description: "Notes on software, learning, and the parts of life that resist a tidy summary.",
+      viewAllLabel: "View all writing",
+      emptyLabel: "No notes published yet.",
     },
-    projects: {
-      title: "Featured Work",
-      description:
-        "Selected engagements that show how I approach complex operational platforms, automation, and data pipelines in high-scale environments.",
+    personal: {
+      eyebrow: "Beyond the keyboard",
+      title: "There’s more to a life than the work.",
+      description: "Living between China and the Netherlands has made me curious about how people build a sense of home, identity, and possibility in unfamiliar places. Outside work, I spend my time cooking, listening to music, exploring cities, and writing about choices, change, and life abroad—often beginning with small observations that lead to much larger questions.",
+      link: { label: "Meet the person behind the work", href: "/about" },
+    },
+    work: {
+      eyebrow: "Selected work",
+      title: "A few things I’ve helped build",
+      description: "A small selection of systems and tools shaped by real operational problems.",
       items: [
         {
-          title: "Help Experience Orchestration Layer",
-          description:
-            "Automated issue triage for the customer chatbot using event-driven coordination. ",
-          tags: ["Java", "Spring Boot", "Kafka", "AWS SQS", "Redis"],
-          impact: "Impact: 60% fewer manual interventions, faster resolutions for millions of users. ",
-          image: {
-            src: "/help-orchestration.png?height=200&width=350",
-            alt: "Architecture diagram for orchestration layer",
-          },
+          title: "Help Experience Orchestration",
+          description: "An event-driven coordination layer that helps customer support journeys resolve routine issues automatically.",
         },
         {
           title: "JETMS Operational Platform",
-          description:
-            "Unified 20+ internal tools behind one workspace with CORS-aware routing and a shared data model",
-          impact: "Reduced SLA for issue resolution by ~33%, consolidated ops workflows.",
-          tags: ["TypeScript", "Java", "MySQL", "CQRS"],
-          image: {
-            src: "/jetms-feature.png?height=650&width=650",
-            alt: "Operational platform interface mockup",
-          },
+          description: "A shared workspace that brought a fragmented collection of internal operational tools into one coherent system.",
         },
         {
-          title: "MapYourCity Crowdsourcing Platform",
-          description:
-          "Task engine handling 300K+ jobs and 400K+ geo points to improve on-trip map accuracy.",
-          impact: "Higher map precision across SEA markets; better rider & driver outcomes.",
-          tags: ["Go", "PostgreSQL", "Kafka", "ElasticSearch"],
-          image: {
-            src: "/jarvis-feature-1.png?height=200&width=350",
-            alt: "Geospatial data workflow visualization",
-          },
+          title: "MapYourCity",
+          description: "A crowdsourcing platform for collecting and reviewing geospatial data used to improve on-trip map accuracy.",
         },
       ],
-      viewAllLabel: "View All Projects",
-    },
-    latestPosts: {
-      title: "Latest Notes from the Debugging Zone",
-      description:
-        "Short write-ups on scaling, incident deep-dives, and the human side of reliability.",
-      viewAllLabel: "View All Posts",
-      emptyLabel: "No posts published yet",
-      totalLabel: (count: number) => `${count} posts in total`,
+      viewAllLabel: "See selected projects",
     },
   },
 };

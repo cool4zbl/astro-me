@@ -26,7 +26,7 @@ const navItems = [
 
 ];
 ---
-<header class="sticky top-0 z-40 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+<header class="sticky top-0 z-40 w-full border-b bg-card/95 backdrop-blur supports-[backdrop-filter]:bg-card/85">
   <div class="container-width flex h-16 items-center justify-between">
     <div class="flex items-center space-x-2">
       <Logo lang={lang} variant="header" />
@@ -93,7 +93,7 @@ const navItems = [
   </div>
 
   <!-- 添加移动端菜单 -->
-  <div class="md:hidden border-t bg-background/95 backdrop-blur hidden" id="mobile-menu">
+  <div class="md:hidden border-t bg-card/95 backdrop-blur hidden" id="mobile-menu">
     <div class="container-width py-4 space-y-4">
       {navItems.map((item) => (
         <a
