@@ -6,10 +6,8 @@ export async function GET() {
 
   const searchData = await Promise.all(
     publishedPosts.map(async (post) => {
-      const { Content } = await post.render()
-
       // 简单提取文本内容（移除 HTML 标签）
-      const content = post.body
+      const content = (post.body ?? "")
         .replace(/---[\s\S]*?---/, "") // 移除 frontmatter
         .replace(/```[\s\S]*?```/g, "") // 移除代码块
         .replace(/`[^`]*`/g, "") // 移除行内代码
@@ -19,11 +17,11 @@ export async function GET() {
         .substring(0, 500) // 限制内容长度
 
       return {
-        id: post.slug,
+        id: post.id,
         title: post.data.title,
         description: post.data.description,
         content,
-        slug: post.slug,
+        slug: post.id,
         publishedAt: post.data.publishedAt.toISOString(),
         tags: post.data.tags,
       }

@@ -9,7 +9,7 @@ const lang = langProp ?? getLangFromUrl(Astro.url);
 
 const placeholderImage = `/placeholder.svg?height=640&width=640&query=${encodeURIComponent(post.data.title)}`;
 const heroSrc = post.data.heroImage || placeholderImage;
-const postHref = getLocalizedPath(`/blog/${post.slug}/`, lang);
+const postHref = getLocalizedPath(`/blog/${post.id}/`, lang);
 
 ---
 
